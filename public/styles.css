@@ -39,14 +39,22 @@ main {
     grid-column-start: col1;
     border: 2px solid #72727283;
   }
-  #monsterImage {
+  .monsterImage {
+    display: grid;
     border-radius: 15px;
-    height: 97%;
-    width: 80vw;
-    background-color: #5fb3ac;
-    margin-left: 10px;
-    grid-column-start: col1;
+    height: 85%;
+    width: 70vw;
+    background-color: #ffffff6c;
+    background-image: url(/public/images/monsters/1x/theEye.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    margin-left: 18px;
+    margin-TOP: 18px;
+
   }
+
+  
   
   #colorsMain {
     display: flex;
@@ -103,8 +111,7 @@ main {
 
 #monsterSettings {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   background-color: #BEEEEB;
   margin-top: 10px;
@@ -113,5 +120,16 @@ main {
   align-items: center;
   justify-self: center;
 
+}
 
+.sliders {
+  display: flex;
+  flex-direction: column;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
 }

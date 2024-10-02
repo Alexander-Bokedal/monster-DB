@@ -54,8 +54,9 @@ const monsters = [
 ];
 
 const doneButton = document.getElementById("done-button");
-doneButton.addEventListener("click", (event) => {
-  event.preventDefault();
+
+doneButton.addEventListener("click", () => {
+  console.log("Done button clicked!");
   renderMonsters();
 });
 

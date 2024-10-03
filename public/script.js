@@ -47,11 +47,19 @@ const monsters = [
     monsterEyes: 4,
     monsterTentacles: 3,
   },
+  {
+    name: "Affe Baffe",
+    monsterType: "Wow",
+    monsterHorns: 6,
+    monsterLegs: 2,
+    monsterEyes: 4,
+    monsterTentacles: 3,
+  },
 ];
 
 const doneButton = document.getElementById("done-button");
 doneButton.addEventListener("click", (event) => {
-  event.preventDefault();
+  console.log("hello world");
   renderMonsters();
 });
 
@@ -73,6 +81,7 @@ const addMonsterToArray = () => {
   };
 
   monsters.push(newMonster);
+  renderMonsters();
 };
 
 ///////////////////////////////////////////////////////
@@ -93,22 +102,22 @@ const renderMonsters = () => {
   const monsterGallery = document.getElementById("monsterGallery");
   monsterGallery.innerHTML = "";
 
-  monsters.forEach((monster) => {
-    const monsterGalleryHtml = `
-    <div class="addForm">
-      <div class="carInfo">
-        <h2 class="carTitle">${monster.name}</h2>
-        <p class="carYear">Year: ${monster.monsterType}</p>
-        <p class="carMilage">Milage: ${monster.monsterHorns} KM</p>
-        <p class="carPrice">Price: $${monster.monsterLegs}</p>
-        <p class="carColor">Color: ${monster.monsterEyes}</p>
-        
-      </div>
+  const monsterGalleryHtmlArray = monsters.map((monster) => {
+    return `
+      <div class="monsterCard">
+        <div class="monsterInfo">
+          <h2 class="monsterName">${monster.name}</h2>
+          <p class="monsterType">Monster Type: ${monster.monsterType}</p>
+          <p class="monsterHorns">Horns: ${monster.monsterHorns}</p>
+          <p class="monsterLegs">Legs: ${monster.monsterLegs}</p>
+          <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
+        </div>
       </div>
     `;
-    monsterGallery.innerHTML += monsterGalleryHtml;
   });
-  console.log(1);
+
+  console.log("hello world");
+  monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
 };
 
 ///////////////////////////////////////////////////////

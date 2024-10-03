@@ -10,6 +10,8 @@
 //SÖKORD:
 // addMonster
 // renderMonsters
+// monsterType 
+// monsterSettings
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -107,7 +109,6 @@ const renderMonsters = () => {
         <p class="carMilage">Milage: ${monster.monsterHorns} KM</p>
         <p class="carPrice">Price: $${monster.monsterLegs}</p>
         <p class="carColor">Color: ${monster.monsterEyes}</p>
-        
       </div>
       </div>
     `;
@@ -122,3 +123,62 @@ const renderMonsters = () => {
 //////  SÖKORD: renderMonsters               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD för att visa MONSTERYPES          /////////
+//////  SÖKORD: monsterType                  //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+let dietSelect = document.getElementById('monsterDietSelect');
+let monsterDietTypes = ["🥩Flesh-Muncher", "🥬Leaf-Cruncher", "🗑️Non-Pesky-Omnivore"];
+const monsterTypeIcons = ["🥬","🥩","🗑️"];
+
+for(let i = 0; i < monsterDietTypes.length; i++) {
+  let choice = monsterDietTypes[i];
+  
+  let dropRows = document.createElement('option');
+  dropRows.text = choice;
+  dropRows.value = choice;
+  dietSelect.appendChild(dropRows);
+}
+
+let typeSelect = document.getElementById('monsterTypeSelect');
+let monsterTypes = ["Humanoid", "Fungal", "Titam", "Insectiod", "Troll"];
+
+for (let i = 0; i < monsterTypes.length; i++) {
+  let choice = monsterTypes[i];
+  
+  let dropRow = document.createElement('option');
+  dropRow.text = choice;
+  dropRow.value = choice;
+  
+  typeSelect.appendChild(dropRow);
+}
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD för att visa MONSTERSLIDER        /////////
+//////  SÖKORD: monsterSliders               //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+function updateSliderValue(sliderId, valueId) {
+  let slider = document.getElementById(sliderId);
+  let valueDisplay = document.getElementById(valueId);
+
+  valueDisplay.textContent = slider.value;
+
+  slider.addEventListener('input', () => {
+      valueDisplay.textContent = slider.value;
+  });
+}
+
+updateSliderValue('hornsSlider', 'hornsValue');
+updateSliderValue('legsSlider', 'legsValue');
+updateSliderValue('eyesSlider', 'eyesValue');
+updateSliderValue('tentaclesSlider', 'tentaclesValue');
+
+
+
+

@@ -12,6 +12,13 @@
 // renderMonsters
 // monsterType
 // monsterSettings
+// filterMonsterList
+// editMonster
+// Allmänt
+// removeMonster (funktion inte gjord än)
+
+// Det här är sökordet om man vill hitta saker att jobba med i koden
+// VAD SOM BEHÖVER GÖRAS:
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -63,14 +70,26 @@ const monsters = [
   },
 ];
 
+// Lista med förutbestämda monster
+// Den här är till för att lättare kunna arbeta med innehållet på hemsidan
+// Kommentera ut det här om du vill ha bort listan med monster
+onload = () => {
+  renderMonsters();
+};
+
 const doneButton = document.getElementById("done-button");
 
+// KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
 doneButton.addEventListener("click", () => {
-  console.log("Done button clicked!");
   renderMonsters();
 });
 
+// FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = () => {
+  //SKAPA BEHÅLLARE MED INNEHÅLL FRÅN INPUTFORM!
+  // VAD SOM BEHÖVER GÖRAS:
+  // Se över denna kod så att den matchar inputform
+  // Skapa kod som tillåter det här att redigeras på ett ställe (VG NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I HELA PROJEKTET (ELLER SÅ ÄR DET JAG SOM ÄR KORKAD))
   const monsterName = document.getElementById("monsterName").value;
   const monsterType = document.getElementById("monsterType").value;
   const monsterHorns = document.getElementById("monsterHorns").value;
@@ -78,6 +97,7 @@ const addMonsterToArray = () => {
   const monsterEyes = document.getElementById("monsterEyes").value;
   const monsterTentacles = document.getElementById("monsterTentacles").value;
 
+  // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
     name: monsterName,
     monsterType: monsterType,
@@ -87,7 +107,12 @@ const addMonsterToArray = () => {
     monsterTentacles: monsterTentacles,
   };
 
+  // LÄGG TILL MONSTRET I VÅR ARRAY
   monsters.push(newMonster);
+  // VAD SOM BEHÖVER GÖRAS:
+  // EN FUNKTION FÖR ATT RENSA FORMULÄRET
+
+  // FUNKTION FÖR ATT VISA MONSTER I LISTAN
   renderMonsters();
 };
 
@@ -106,6 +131,9 @@ const addMonsterToArray = () => {
 ///////////////////////////////////////////////////////
 
 const renderMonsters = () => {
+  // VAD SOM BEHÖVER GÖRAS:
+  // ANPASSA SÅ ATT KODEN GÅR ATT REDIGERA FRÅN ETT STÄLLE (VG-NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I PROJEKTET (ELLER SÅ ÄR JAG BARA KORKAD))
+
   const monsterGallery = document.getElementById("monsterGallery");
   monsterGallery.innerHTML = "";
 
@@ -122,9 +150,12 @@ const renderMonsters = () => {
       </div>
     `;
   });
-
-  console.log("hello world");
   monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
+
+  // VAD SOM BEHÖVER GÖRAS:
+  // SKAPA KNAPPAR PÅ ALLA MONSTER I LISTAN SOM GÖR ATT DE GÅR ATT TA BORT
+  // DET ÄR MÖJLIIGT ATT EN SÅDAN FUNKTION GÅR ATT GÖRA DIREKT I OBJEKTET
+  // BEHÖVER SE ÖVER DET OM VI VILL HA VG
 };
 
 ///////////////////////////////////////////////////////
@@ -170,6 +201,14 @@ for (let i = 0; i < monsterTypes.length; i++) {
 
   typeSelect.appendChild(dropRow);
 }
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD för att visa MONSTERYPES /////////
+//////  SÖKORD: monsterType                  //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD för att visa MONSTERSLIDER        /////////
@@ -192,3 +231,55 @@ updateSliderValue("hornsSlider", "hornsValue");
 updateSliderValue("legsSlider", "legsValue");
 updateSliderValue("eyesSlider", "eyesValue");
 updateSliderValue("tentaclesSlider", "tentaclesValue");
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD för att visa MONSTERSLIDER/////////
+//////  SÖKORD: monsterSliders               //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
+//////  SÖKORD: filterMonsterList          //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+//VAD SOM BEHÖVER GÖRAS:
+// Skapa containers för checkboxes
+// Kod som visar hur många av varje typ som finns. T.ex bredvid en checkbox som säger "röd" så ska det visas hur många röda det finns
+// Lägg till eventListerners som kollar om checkbox är "checked"
+// Skapa en funktion som skriver ut monster beroende på vilken checkbox som har "checked"
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
+//////  SÖKORD: filterMonsterList                       //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT REDIGERA MONSTER         /////////
+//////  SÖKORD: editMonster                 //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// VAD SOM BEHÖVER GÖRAS:
+// Skapa en eventListener som lyssnar på att man klickar redigera
+// Skapa en funktion som hämtar nya värden från det man redigerat
+// Uppdatera arrayen med det nya monstret och presentera det
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+////// SLUT PÅ KOD FÖR ATT REDIGERA MONSTER /////////
+//////  SÖKORD: editMonster                 //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// Allmänt
+// VAD SOM BEHÖVER GÖRAS:
+// Fundera på vilken funktionalitet som kan ligga i objekt (för VG-nivå)
+// Lista ut om varje monster ska ha en knapp för redigering eller om de ska vara en övergripande funktion
+//

@@ -1,135 +1,135 @@
 body {
-  box-sizing:content-box;
-  margin: 0%;
-  background-color: rgb(172, 172, 172);
-  height: 300vh;
-  width: 100vw;
-  overflow-x: hidden;
-}
-
-main {
-  display: grid;
-}
-
-
-#monsterPreviewMain {
-  display: grid;
-  justify-self: center;
-  margin-top: 10px;
-  grid-template-columns: [col1]80vw [col2]20vw;
-  grid-template-rows: 
-  [monsterCreationView]1fr;
-  background-color: #BEEEEB;
-  border-radius: 15px;
-  height: 70dvh;
-  width: 95%;
-  align-items: center;
-  
-  .monsterNameMain {
-      text-align: center;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
-    }
-
-  #monsterImageMain {
-    border-radius: 15px;
-    height: 97%;
-    width: 80vw;
-    background-color: #E4FCFA;
-    margin-left: 5px;
-    grid-column-start: col1;
-    border: 2px solid #72727283;
+    box-sizing:content-box;
+    margin: 0%;
+    background-color: rgb(172, 172, 172);
+    height: 300vh;
+    width: 100vw;
+    overflow-x: hidden;
   }
-  .monsterImage {
+  
+  main {
     display: grid;
-    border-radius: 15px;
-    height: 85%;
-    width: 70vw;
-    background-color: #ffffff6c;
-    background-image: url(/public/images/monsters/1x/theEye.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 60%;
-    margin-left: 18px;
-    margin-TOP: 18px;
-
   }
-
   
   
-  #colorsMain {
-    display: flex;
-    flex-direction: column-reverse;
+  #monsterPreviewMain {
+    display: grid;
     justify-self: center;
-    align-self: end;
-    grid-column-start: col2;
-    width: 20%;
-    gap: 10px;
-    margin-right: 35px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    grid-template-columns: [col1]80vw [col2]20vw;
+    grid-template-rows: 
+    [monsterCreationView]1fr;
+    background-color: #BEEEEB;
+    border-radius: 15px;
+    height: 70dvh;
+    width: 95%;
+    align-items: center;
+    
+    .monsterNameMain {
+        text-align: center;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
+      }
+  
+    #monsterImageMain {
+      border-radius: 15px;
+      height: 97%;
+      width: 80vw;
+      background-color: #E4FCFA;
+      margin-left: 5px;
+      grid-column-start: col1;
+      border: 2px solid #72727283;
+    }
+    .monsterImage {
+      display: grid;
+      border-radius: 15px;
+      height: 85%;
+      width: 70vw;
+      background-color: #ffffff6c;
+      background-image: url(/public/images/monsters/1x/theEye.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60%;
+      margin-left: 18px;
+      margin-TOP: 18px;
+  
+    }
   
     
     
-    .colorBox {
-      height: 35px;
-      width: 35px;
+    #colorsMain {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-self: center;
+      align-self: end;
+      grid-column-start: col2;
+      width: 20%;
+      gap: 10px;
+      margin-right: 35px;
+      margin-bottom: 10px;
+    
       
+      
+      .colorBox {
+        height: 35px;
+        width: 35px;
+        
+      }
+  
+      .A {
+        background-color: #FF9B42;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+      .B {
+        background-color: #74C4C4;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+      .C {
+        background-color: #EDDEA4;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+      .D {
+        background-color: #D9E5D6;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+      .E {
+        background-color: #F7A072;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+      .F {
+        background-color: #0FA3B1;
+        border: 2px solid #727272;
+        border-radius: 50%;
+      }
+  
     }
-
-    .A {
-      background-color: #FF9B42;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-    .B {
-      background-color: #74C4C4;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-    .C {
-      background-color: #EDDEA4;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-    .D {
-      background-color: #D9E5D6;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-    .E {
-      background-color: #F7A072;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-    .F {
-      background-color: #0FA3B1;
-      border: 2px solid #727272;
-      border-radius: 50%;
-    }
-
   }
-}
-
-#monsterSettings {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  background-color: #BEEEEB;
-  margin-top: 10px;
-  border-radius: 15px;
-  width: 95%;
-  align-items: center;
-  justify-self: center;
-
-}
-
-.sliders {
-  display: flex;
-  flex-direction: column;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
-}
+  
+  #monsterSettings {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #BEEEEB;
+    margin-top: 10px;
+    border-radius: 15px;
+    width: 95%;
+    align-items: center;
+    justify-self: center;
+  
+  }
+  
+  .sliders {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+  }

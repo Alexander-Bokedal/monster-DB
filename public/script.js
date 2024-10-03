@@ -7,6 +7,12 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+//SÖKORD:
+// addMonster
+// renderMonsters
+// monsterType
+// monsterSettings
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
@@ -58,8 +64,9 @@ const monsters = [
 ];
 
 const doneButton = document.getElementById("done-button");
-doneButton.addEventListener("click", (event) => {
-  console.log("hello world");
+
+doneButton.addEventListener("click", () => {
+  console.log("Done button clicked!");
   renderMonsters();
 });
 
@@ -126,3 +133,62 @@ const renderMonsters = () => {
 //////  SÖKORD: renderMonsters               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD för att visa MONSTERYPES          /////////
+//////  SÖKORD: monsterType                  //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+let dietSelect = document.getElementById("monsterDietSelect");
+let monsterDietTypes = [
+  "🥩Flesh-Muncher",
+  "🥬Leaf-Cruncher",
+  "🗑️Non-Pesky-Omnivore",
+];
+const monsterTypeIcons = ["🥬", "🥩", "🗑️"];
+
+for (let i = 0; i < monsterDietTypes.length; i++) {
+  let choice = monsterDietTypes[i];
+
+  let dropRows = document.createElement("option");
+  dropRows.text = choice;
+  dropRows.value = choice;
+  dietSelect.appendChild(dropRows);
+}
+
+let typeSelect = document.getElementById("monsterTypeSelect");
+let monsterTypes = ["Humanoid", "Fungal", "Titam", "Insectiod", "Troll"];
+
+for (let i = 0; i < monsterTypes.length; i++) {
+  let choice = monsterTypes[i];
+
+  let dropRow = document.createElement("option");
+  dropRow.text = choice;
+  dropRow.value = choice;
+
+  typeSelect.appendChild(dropRow);
+}
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD för att visa MONSTERSLIDER        /////////
+//////  SÖKORD: monsterSliders               //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+function updateSliderValue(sliderId, valueId) {
+  let slider = document.getElementById(sliderId);
+  let valueDisplay = document.getElementById(valueId);
+
+  valueDisplay.textContent = slider.value;
+
+  slider.addEventListener("input", () => {
+    valueDisplay.textContent = slider.value;
+  });
+}
+
+updateSliderValue("hornsSlider", "hornsValue");
+updateSliderValue("legsSlider", "legsValue");
+updateSliderValue("eyesSlider", "eyesValue");
+updateSliderValue("tentaclesSlider", "tentaclesValue");

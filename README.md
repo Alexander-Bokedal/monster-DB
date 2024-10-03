@@ -8,7 +8,7 @@ Alexander Bokedal
 Alfred Erlandsson
 Dennis Winther
 Henrik Cederlöf
-Khan 
+Khan Hosseini
 
 ### How to work in this project:
 

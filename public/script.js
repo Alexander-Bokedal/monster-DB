@@ -16,6 +16,7 @@
 // editMonster
 // Allmänt
 // removeMonster (funktion inte gjord än)
+// Optimera
 
 // Det här är sökordet om man vill hitta saker att jobba med i koden
 // VAD SOM BEHÖVER GÖRAS:
@@ -172,13 +173,14 @@ const renderMonsters = () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-let dietSelect = document.getElementById("monsterDietSelect");
-let monsterDietTypes = [
+const dietSelect = document.getElementById("monsterDietSelect");
+const monsterDietTypes = [
   "🥩Flesh-Muncher",
   "🥬Leaf-Cruncher",
   "🗑️Non-Pesky-Omnivore",
 ];
-const monsterTypeIcons = ["🥬", "🥩", "🗑️"];
+
+const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
 
 for (let i = 0; i < monsterDietTypes.length; i++) {
   let choice = monsterDietTypes[i];
@@ -201,6 +203,19 @@ for (let i = 0; i < monsterTypes.length; i++) {
 
   typeSelect.appendChild(dropRow);
 }
+const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
+// Optimera om vi har tid
+dietSelect.addEventListener("change", () => {
+  monsterTypeIcon.innerHTML = "";
+
+  if (dietSelect.value === "🥩Flesh-Muncher") {
+    monsterTypeIcon.innerHTML = "🥩";
+  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
+    monsterTypeIcon.innerHTML = "🥬";
+  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
+    monsterTypeIcon.innerHTML = "🗑️";
+  }
+});
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

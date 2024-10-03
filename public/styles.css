@@ -28,6 +28,13 @@ body {
     .monsterNameMain {
         text-align: center;
         background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
+      
+       
+      }
+      .monsterTypeIcon {
+        
+       align-self: flex-end;
+       
       }
   
     #monsterImageMain {
@@ -38,6 +45,9 @@ body {
       margin-left: 5px;
       grid-column-start: col1;
       border: 2px solid #72727283;
+      
+    
+  
     }
     .monsterImage {
       display: grid;
@@ -53,7 +63,7 @@ body {
       margin-TOP: 18px;
   
     }
-  
+
     
     
     #colorsMain {

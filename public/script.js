@@ -147,6 +147,7 @@ const renderMonsters = () => {
           <p class="monsterHorns">Horns: ${monster.monsterHorns}</p>
           <p class="monsterLegs">Legs: ${monster.monsterLegs}</p>
           <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
+          <p class="monsterTentacles">Tentacles: ${monster.monsterTentacles}</p>
         </div>
       </div>
     `;

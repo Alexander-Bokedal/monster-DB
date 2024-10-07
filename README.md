@@ -3,9 +3,15 @@ School project for learning basic HTML, JS and CSS
 
 This project is a simple webpage to practice inputing data via forms and handling that data.
 
-##
+## Contributors
+Alexander Bokedal
+Alfred Erlandsson
+Dennis Winther
+Henrik Cederlöf
+Khan Hosseini
 
-How to work in this project:
+### How to work in this project:
+
 In CMD
 1. Use "git clone https://github.com/Alexander-Bokedal/monster-DB" on your computer to create a local repo
 2. Use "git checkout -b "name-of-branch"" to create a new branch where you work on features

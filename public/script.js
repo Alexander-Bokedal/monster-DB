@@ -10,8 +10,16 @@
 //SÖKORD:
 // addMonster
 // renderMonsters
-// monsterType 
+// monsterType
 // monsterSettings
+// filterMonsterList
+// editMonster
+// Allmänt
+// removeMonster
+// Optimera
+
+// Det här är sökordet om man vill hitta saker att jobba med i koden
+// VAD SOM BEHÖVER GÖRAS:
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -28,6 +36,14 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 10,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
   },
   {
     name: "Boke Dale",
@@ -36,6 +52,14 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 2,
     monsterTentacles: 7,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
   },
   {
     name: "Khani Bani",
@@ -44,6 +68,14 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 1,
     monsterTentacles: 17,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
   },
   {
     name: "Denni Penni",
@@ -52,24 +84,64 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 3,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
+  },
+  {
+    name: "Affe Baffe",
+    monsterType: "Wow",
+    monsterHorns: 6,
+    monsterLegs: 2,
+    monsterEyes: 4,
+    monsterTentacles: 3,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
   },
 ];
 
+// Lista med förutbestämda monster
+// Den här är till för att lättare kunna arbeta med innehållet på hemsidan
+// Kommentera ut det här om du vill ha bort listan med monster
+onload = () => {
+  renderMonsters();
+};
+
 const doneButton = document.getElementById("done-button");
 
-doneButton.addEventListener("click", () => {
-  console.log("Done button clicked!");
-  renderMonsters();
-});
-
+// FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = () => {
-  const monsterName = document.getElementById("monsterName").value;
+  //SKAPA BEHÅLLARE MED INNEHÅLL FRÅN INPUTFORM!
+  // VAD SOM BEHÖVER GÖRAS:
+  // Se över denna kod så att den matchar inputform
+  // Skapa kod som tillåter det här att redigeras på ett ställe (VG NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I HELA PROJEKTET (ELLER SÅ ÄR DET JAG SOM ÄR KORKAD))
+  /*  const monsterName = document.getElementById("monsterName").value;
   const monsterType = document.getElementById("monsterType").value;
   const monsterHorns = document.getElementById("monsterHorns").value;
   const monsterLegs = document.getElementById("monsterLegs").value;
   const monsterEyes = document.getElementById("monsterEyes").value;
-  const monsterTentacles = document.getElementById("monsterTentacles").value;
+  const monsterTentacles = document.getElementById("monsterTentacles").value; */
 
+  const monsterType = "test";
+  const monsterName = "test";
+
+  const monsterHorns = "test";
+  const monsterEyes = "test";
+  const monsterLegs = "test";
+  const monsterTentacles = "test";
+
+  // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
     name: monsterName,
     monsterType: monsterType,
@@ -77,10 +149,30 @@ const addMonsterToArray = () => {
     monsterLegs: monsterLegs,
     monsterEyes: monsterEyes,
     monsterTentacles: monsterTentacles,
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        renderMonsters();
+      }
+    },
   };
 
+  // LÄGG TILL MONSTRET I VÅR ARRAY
   monsters.push(newMonster);
+  console.log(monsters);
+  // VAD SOM BEHÖVER GÖRAS:
+  // EN FUNKTION FÖR ATT RENSA FORMULÄRET
+
+  // FUNKTION FÖR ATT VISA MONSTER I LISTAN
+  renderMonsters();
 };
+
+// KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
+doneButton.addEventListener("click", () => {
+  addMonsterToArray();
+});
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -97,24 +189,35 @@ const addMonsterToArray = () => {
 ///////////////////////////////////////////////////////
 
 const renderMonsters = () => {
+  // VAD SOM BEHÖVER GÖRAS:
+  // ANPASSA SÅ ATT KODEN GÅR ATT REDIGERA FRÅN ETT STÄLLE (VG-NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I PROJEKTET (ELLER SÅ ÄR JAG BARA KORKAD))
+
   const monsterGallery = document.getElementById("monsterGallery");
   monsterGallery.innerHTML = "";
 
-  monsters.forEach((monster) => {
-    const monsterGalleryHtml = `
-    <div class="addForm">
-      <div class="carInfo">
-        <h2 class="carTitle">${monster.name}</h2>
-        <p class="carYear">Year: ${monster.monsterType}</p>
-        <p class="carMilage">Milage: ${monster.monsterHorns} KM</p>
-        <p class="carPrice">Price: $${monster.monsterLegs}</p>
-        <p class="carColor">Color: ${monster.monsterEyes}</p>
-      </div>
+  const monsterGalleryHtmlArray = monsters.map((monster) => {
+    return `
+      <div class="monsterCard">
+        <div class="monsterInfo">
+          <h2 class="monsterName">${monster.name}</h2>
+          <p class="monsterType">Monster Type: ${monster.monsterType}</p>
+          <p class="monsterHorns">Horns: ${monster.monsterHorns}</p>
+          <p class="monsterLegs">Legs: ${monster.monsterLegs}</p>
+          <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
+          <p class="monsterTentacles">Tentacles: ${monster.monsterTentacles}</p>
+          <button class="deleteButton"> Delete </button>
+        </div>
       </div>
     `;
-    monsterGallery.innerHTML += monsterGalleryHtml;
   });
-  console.log(1);
+
+  monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  deleteButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      monsters[index].removeMonster();
+    });
+  });
 };
 
 ///////////////////////////////////////////////////////
@@ -131,14 +234,19 @@ const renderMonsters = () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-let dietSelect = document.getElementById('monsterDietSelect');
-let monsterDietTypes = ["🥩Flesh-Muncher", "🥬Leaf-Cruncher", "🗑️Non-Pesky-Omnivore"];
-const monsterTypeIcons = ["🥬","🥩","🗑️"];
+const dietSelect = document.getElementById("monsterDietSelect");
+const monsterDietTypes = [
+  "🥩Flesh-Muncher",
+  "🥬Leaf-Cruncher",
+  "🗑️Non-Pesky-Omnivore",
+];
 
-for(let i = 0; i < monsterDietTypes.length; i++) {
+const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
+
+for (let i = 0; i < monsterDietTypes.length; i++) {
   let choice = monsterDietTypes[i];
-  
-  let dropRows = document.createElement('option');
+
+  let dropRows = document.createElement("option");
   dropRows.text = choice;
   dropRows.value = choice;
   dietSelect.appendChild(dropRows);
@@ -147,15 +255,17 @@ for(let i = 0; i < monsterDietTypes.length; i++) {
 let typeSelect = document.getElementById('monsterTypeSelect');
 let monsterTypes = ["🐒Humanoid", "🍄Fungal", "🪨Titan", "🪳Insectiod", "🧌Troll"];
 
+
 for (let i = 0; i < monsterTypes.length; i++) {
   let choice = monsterTypes[i];
-  
-  let dropRow = document.createElement('option');
+
+  let dropRow = document.createElement("option");
   dropRow.text = choice;
   dropRow.value = choice;
-  
+
   typeSelect.appendChild(dropRow);
 }
+
 
 let sizeSelect = document.getElementById('monsterSizeSelect');
 let monsterSize = 
@@ -174,6 +284,28 @@ for (let i = 0; i < monsterSize.length; i++) {
   
   sizeSelect.appendChild(dropRow);
 }
+
+const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
+// Optimera om vi har tid
+dietSelect.addEventListener("change", () => {
+  monsterTypeIcon.innerHTML = "";
+
+  if (dietSelect.value === "🥩Flesh-Muncher") {
+    monsterTypeIcon.innerHTML = "🥩";
+  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
+    monsterTypeIcon.innerHTML = "🥬";
+  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
+    monsterTypeIcon.innerHTML = "🗑️";
+  }
+});
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD för att visa MONSTERYPES /////////
+//////  SÖKORD: monsterType                  //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD för att visa MONSTERSLIDER        /////////
@@ -187,16 +319,64 @@ function updateSliderValue(sliderId, valueId) {
 
   valueDisplay.textContent = slider.value;
 
-  slider.addEventListener('input', () => {
-      valueDisplay.textContent = slider.value;
+  slider.addEventListener("input", () => {
+    valueDisplay.textContent = slider.value;
   });
 }
 
-updateSliderValue('hornsSlider', 'hornsValue');
-updateSliderValue('legsSlider', 'legsValue');
-updateSliderValue('eyesSlider', 'eyesValue');
-updateSliderValue('tentaclesSlider', 'tentaclesValue');
+updateSliderValue("hornsSlider", "hornsValue");
+updateSliderValue("legsSlider", "legsValue");
+updateSliderValue("eyesSlider", "eyesValue");
+updateSliderValue("tentaclesSlider", "tentaclesValue");
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD för att visa MONSTERSLIDER/////////
+//////  SÖKORD: monsterSliders               //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
+//////  SÖKORD: filterMonsterList          //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
+//VAD SOM BEHÖVER GÖRAS:
+// Skapa containers för checkboxes
+// Kod som visar hur många av varje typ som finns. T.ex bredvid en checkbox som säger "röd" så ska det visas hur många röda det finns
+// Lägg till eventListerners som kollar om checkbox är "checked"
+// Skapa en funktion som skriver ut monster beroende på vilken checkbox som har "checked"
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
+//////  SÖKORD: filterMonsterList                       //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT REDIGERA MONSTER         /////////
+//////  SÖKORD: editMonster                 //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// VAD SOM BEHÖVER GÖRAS:
+// Skapa en eventListener som lyssnar på att man klickar redigera
+// Skapa en funktion som hämtar nya värden från det man redigerat
+// Uppdatera arrayen med det nya monstret och presentera det
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+////// SLUT PÅ KOD FÖR ATT REDIGERA MONSTER /////////
+//////  SÖKORD: editMonster                 //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+// Allmänt
+// VAD SOM BEHÖVER GÖRAS:
+// Fundera på vilken funktionalitet som kan ligga i objekt (för VG-nivå)
+// Lista ut om varje monster ska ha en knapp för redigering eller om de ska vara en övergripande funktion
+//

@@ -5,10 +5,13 @@ body {
     height: 300vh;
     width: 100vw;
     overflow-x: hidden;
+
+    
   }
   
   main {
     display: grid;
+
   }
 
   @media (min-width: 768px) {
@@ -44,6 +47,13 @@ body {
     .monsterNameMain {
         text-align: center;
         background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
+      
+       
+      }
+      .monsterTypeIcon {
+        
+       align-self: flex-end;
+       
       }
     
     #monsterImageMain {
@@ -56,6 +66,9 @@ body {
       grid-row-start: row1;
       grid-row-end: row4;
       border: 2px solid #72727283;
+      
+    
+  
     }
     .monsterImage {
       display: grid;
@@ -70,7 +83,7 @@ body {
       margin-TOP: 18px;
       
     }
-    
+
     
     
     #colorsMain {
@@ -149,7 +162,85 @@ body {
     align-items: end;
   }
 
+
 #monsterSettingsDropdowns {
   display: flex;
   flex-wrap: wrap;
 }
+
+
+  #monsterGallery {
+     
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+      justify-items: center;
+      padding: 10px;
+      margin-top: 10px;
+      @media (min-width: 600px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+  }
+
+  .monsterCard {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    border: solid 1px #e0e0e0;
+    padding: 10px;
+    width: 70%;
+     min-height: 150px;
+    align-self: center;
+    font-size: 1.5em;
+    border-radius: 8%;
+    background-color: #BEEEEB;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 
+              0 1px 3px rgba(0, 0, 0, 0.5); 
+  }
+
+  .monsterName {
+
+   text-align: center;
+    
+
+  }
+
+  .monsterType {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+    
+  
+  }
+
+  .monsterHorns {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+   
+  }
+
+  .monsterLegs {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+
+    
+  
+  }
+
+  .monsterEyes {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  
+  }
+
+
+  .monsterTentacles {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+

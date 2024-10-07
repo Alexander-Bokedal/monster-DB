@@ -214,7 +214,7 @@ const renderMonsters = () => {
   const deleteButton = document.querySelectorAll(".deleteButton");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      monsters[index].deleteSelf();
+      monsters[index].removeMonster();
     });
   });
 };

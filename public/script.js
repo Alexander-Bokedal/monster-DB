@@ -135,6 +135,7 @@ const addMonsterToArray = () => {
 
   const monsterType = "test";
   const monsterName = "test";
+
   const monsterHorns = "test";
   const monsterEyes = "test";
   const monsterLegs = "test";

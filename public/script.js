@@ -187,14 +187,14 @@ doneButton.addEventListener("click", () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const renderMonsters = () => {
+const renderMonsters = (filteredMonsters = monsters) => {
   // VAD SOM BEHÖVER GÖRAS:
   // ANPASSA SÅ ATT KODEN GÅR ATT REDIGERA FRÅN ETT STÄLLE (VG-NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I PROJEKTET (ELLER SÅ ÄR JAG BARA KORKAD))
 
   const monsterGallery = document.getElementById("monsterGallery");
   monsterGallery.innerHTML = "";
 
-  const monsterGalleryHtmlArray = monsters.map((monster) => {
+  const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
     return `
       <div class="monsterCard">
         <div class="monsterInfo">
@@ -326,6 +326,10 @@ updateSliderValue("tentaclesSlider", "tentaclesValue");
 // Kod som visar hur många av varje typ som finns. T.ex bredvid en checkbox som säger "röd" så ska det visas hur många röda det finns
 // Lägg till eventListerners som kollar om checkbox är "checked"
 // Skapa en funktion som skriver ut monster beroende på vilken checkbox som har "checked"
+
+// Vi har 5 färger och tre typer
+// Det kan bara vara två unika värden för filtrering
+// En funktion ska ta in värdena och mapa ut en ny lista beroende på värdena.
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

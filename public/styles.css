@@ -10,6 +10,20 @@ body {
   main {
     display: grid;
   }
+
+  @media (min-width: 768px) {
+    #monsterPreviewMain {
+         grid-template-columns: 60vw 40vw; 
+         grid-template-rows: auto;    
+       }
+ }
+ 
+ @media (min-width: 1024px) {
+     #monsterPreviewMain {
+         grid-template-columns: 50vw 50vw; 
+         grid-template-rows: auto; 
+     }
+   }
   
   
   #monsterPreviewMain {
@@ -18,7 +32,9 @@ body {
     margin-top: 10px;
     grid-template-columns: [col1]80vw [col2]20vw;
     grid-template-rows: 
-    [monsterCreationView]1fr;
+    [row1]1fr
+    [row2]1fr
+    [row3]1fr;
     background-color: #BEEEEB;
     border-radius: 15px;
     height: 70dvh;
@@ -29,31 +45,32 @@ body {
         text-align: center;
         background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
       }
-  
+    
     #monsterImageMain {
       border-radius: 15px;
       height: 97%;
-      width: 80vw;
+      width: 100%;
       background-color: #E4FCFA;
       margin-left: 5px;
       grid-column-start: col1;
+      grid-row-start: row1;
+      grid-row-end: row4;
       border: 2px solid #72727283;
     }
     .monsterImage {
       display: grid;
       border-radius: 15px;
-      height: 85%;
+      height: 80%;
       width: 70vw;
       background-color: #ffffff6c;
       background-image: url(/public/images/monsters/1x/theEye.png);
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 60%;
       margin-left: 18px;
       margin-TOP: 18px;
-  
+      
     }
-  
+    
     
     
     #colorsMain {
@@ -62,13 +79,12 @@ body {
       justify-self: center;
       align-self: end;
       grid-column-start: col2;
+      grid-row-start: row3;
       width: 20%;
       gap: 10px;
       margin-right: 35px;
       margin-bottom: 10px;
     
-      
-      
       .colorBox {
         height: 35px;
         width: 35px;
@@ -105,7 +121,6 @@ body {
         border: 2px solid #727272;
         border-radius: 50%;
       }
-  
     }
   }
   
@@ -119,7 +134,7 @@ body {
     width: 95%;
     align-items: center;
     justify-self: center;
-  
+    text-align: center;
   }
   
   .sliders {
@@ -133,3 +148,8 @@ body {
     justify-content: end;
     align-items: end;
   }
+
+#monsterSettingsDropdowns {
+  display: flex;
+  flex-wrap: wrap;
+}

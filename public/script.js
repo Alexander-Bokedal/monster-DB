@@ -145,7 +145,7 @@ for(let i = 0; i < monsterDietTypes.length; i++) {
 }
 
 let typeSelect = document.getElementById('monsterTypeSelect');
-let monsterTypes = ["Humanoid", "Fungal", "Titam", "Insectiod", "Troll"];
+let monsterTypes = ["🐒Humanoid", "🍄Fungal", "🪨Titan", "🪳Insectiod", "🧌Troll"];
 
 for (let i = 0; i < monsterTypes.length; i++) {
   let choice = monsterTypes[i];
@@ -155,6 +155,24 @@ for (let i = 0; i < monsterTypes.length; i++) {
   dropRow.value = choice;
   
   typeSelect.appendChild(dropRow);
+}
+
+let sizeSelect = document.getElementById('monsterSizeSelect');
+let monsterSize = 
+["🤏Pinky-Small", 
+  "🦒Long-Legs", 
+  "🐓Average-bin", 
+  "🌋Crippled-Mountain", 
+  "🌿Tree-Twig"];
+
+for (let i = 0; i < monsterSize.length; i++) {
+  let choice = monsterSize[i];
+  
+  let dropRow = document.createElement('option');
+  dropRow.text = choice;
+  dropRow.value = choice;
+  
+  sizeSelect.appendChild(dropRow);
 }
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

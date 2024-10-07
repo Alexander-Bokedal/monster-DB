@@ -15,7 +15,7 @@
 // filterMonsterList
 // editMonster
 // Allmänt
-// removeMonster (funktion inte gjord än)
+// removeMonster
 // Optimera
 
 // Det här är sökordet om man vill hitta saker att jobba med i koden
@@ -36,7 +36,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 10,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -52,7 +52,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 2,
     monsterTentacles: 7,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -68,7 +68,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 1,
     monsterTentacles: 17,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -84,7 +84,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 3,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -100,7 +100,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 3,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -135,6 +135,7 @@ const addMonsterToArray = () => {
 
   const monsterType = "test";
   const monsterName = "test";
+
   const monsterHorns = "test";
   const monsterEyes = "test";
   const monsterLegs = "test";
@@ -148,7 +149,7 @@ const addMonsterToArray = () => {
     monsterLegs: monsterLegs,
     monsterEyes: monsterEyes,
     monsterTentacles: monsterTentacles,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -214,9 +215,12 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const deleteButton = document.querySelectorAll(".deleteButton");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      monsters[index].deleteSelf();
+      monsters[index].removeMonster();
     });
   });
+
+  // VAD SOM BEHÖVER GÖRAS:
+  // Lägg till editknappar också
 };
 
 ///////////////////////////////////////////////////////
@@ -251,8 +255,16 @@ for (let i = 0; i < monsterDietTypes.length; i++) {
   dietSelect.appendChild(dropRows);
 }
 
+// Optimera
+// Slå ihop funktionerna i det här stycket
 let typeSelect = document.getElementById("monsterTypeSelect");
-let monsterTypes = ["Humanoid", "Fungal", "Titam", "Insectiod", "Troll"];
+let monsterTypes = [
+  "🐒Humanoid",
+  "🍄Fungal",
+  "🪨Titan",
+  "🪳Insectiod",
+  "🧌Troll",
+];
 
 for (let i = 0; i < monsterTypes.length; i++) {
   let choice = monsterTypes[i];
@@ -263,8 +275,29 @@ for (let i = 0; i < monsterTypes.length; i++) {
 
   typeSelect.appendChild(dropRow);
 }
+
+let sizeSelect = document.getElementById("monsterSizeSelect");
+let monsterSize = [
+  "🤏Pinky-Small",
+  "🦒Long-Legs",
+  "🐓Average-bin",
+  "🌋Crippled-Mountain",
+  "🌿Tree-Twig",
+];
+
+for (let i = 0; i < monsterSize.length; i++) {
+  let choice = monsterSize[i];
+
+  let dropRow = document.createElement("option");
+  dropRow.text = choice;
+  dropRow.value = choice;
+
+  sizeSelect.appendChild(dropRow);
+}
+
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 // Optimera om vi har tid
+// Fixa så att det inte är en ful if-sats
 dietSelect.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 
@@ -290,6 +323,9 @@ dietSelect.addEventListener("change", () => {
 //////  SÖKORD: monsterSliders               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
+
+// Optimera
+// Lista ut hur det här fungerar för egen del
 
 function updateSliderValue(sliderId, valueId) {
   let slider = document.getElementById(sliderId);

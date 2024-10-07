@@ -15,7 +15,7 @@
 // filterMonsterList
 // editMonster
 // Allmänt
-// removeMonster (funktion inte gjord än)
+// removeMonster
 // Optimera
 
 // Det här är sökordet om man vill hitta saker att jobba med i koden
@@ -36,7 +36,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 10,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -52,7 +52,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 2,
     monsterTentacles: 7,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -68,7 +68,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 1,
     monsterTentacles: 17,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -84,7 +84,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 3,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -100,7 +100,7 @@ const monsters = [
     monsterLegs: 2,
     monsterEyes: 4,
     monsterTentacles: 3,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);
@@ -148,7 +148,7 @@ const addMonsterToArray = () => {
     monsterLegs: monsterLegs,
     monsterEyes: monsterEyes,
     monsterTentacles: monsterTentacles,
-    deleteSelf() {
+    removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
         monsters.splice(index, 1);

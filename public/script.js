@@ -17,21 +17,27 @@
 // Allmänt
 // removeMonster
 // Optimera
+// Globala
 
 // Det här är sökordet om man vill hitta saker att jobba med i koden
 // VAD SOM BEHÖVER GÖRAS:
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  GLOBALA VARIABLER                    //////////
+/////   SÖKORD: Globala                      //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
-//////  SÖKORD: addMonster                //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
+let activeFilters = {
+  types: [],
+  colors: [],
+};
 
 const monsters = [
   {
     name: "Henke Penke",
     monsterType: "Strong",
+    monsterColor: "White",
     monsterHorns: 17,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -41,13 +47,14 @@ const monsters = [
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   },
   {
     name: "Boke Dale",
     monsterType: "Weak",
+    monsterColor: "Blue",
     monsterHorns: 5,
     monsterLegs: 2,
     monsterEyes: 2,
@@ -57,13 +64,14 @@ const monsters = [
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   },
   {
     name: "Khani Bani",
     monsterType: "Strong",
+    monsterColor: "Red",
     monsterHorns: 3,
     monsterLegs: 2,
     monsterEyes: 1,
@@ -73,13 +81,14 @@ const monsters = [
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   },
   {
     name: "Denni Penni",
     monsterType: "Anime",
+    monsterColor: "Black",
     monsterHorns: 6,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -89,13 +98,14 @@ const monsters = [
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   },
   {
     name: "Affe Baffe",
     monsterType: "Wow",
+    monsterColor: "Yellow",
     monsterHorns: 6,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -105,11 +115,25 @@ const monsters = [
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   },
 ];
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ GLOBALA VARIABLER             //////////
+/////   SÖKORD: Globala                      //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
+//////  SÖKORD: addMonster                //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
@@ -135,7 +159,7 @@ const addMonsterToArray = () => {
 
   const monsterType = "test";
   const monsterName = "test";
-
+  const monsterColor = "test";
   const monsterHorns = "test";
   const monsterEyes = "test";
   const monsterLegs = "test";
@@ -145,6 +169,7 @@ const addMonsterToArray = () => {
   const newMonster = {
     name: monsterName,
     monsterType: monsterType,
+    monsterColor: monsterColor,
     monsterHorns: monsterHorns,
     monsterLegs: monsterLegs,
     monsterEyes: monsterEyes,
@@ -154,7 +179,7 @@ const addMonsterToArray = () => {
       if (index > -1) {
         monsters.splice(index, 1);
 
-        renderMonsters();
+        applyFilter();
       }
     },
   };
@@ -201,6 +226,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monsterInfo">
           <h2 class="monsterName">${monster.name}</h2>
           <p class="monsterType">Monster Type: ${monster.monsterType}</p>
+          <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
           <p class="monsterHorns">Horns: ${monster.monsterHorns}</p>
           <p class="monsterLegs">Legs: ${monster.monsterLegs}</p>
           <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
@@ -215,7 +241,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const deleteButton = document.querySelectorAll(".deleteButton");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      monsters[index].removeMonster();
+      filteredMonsters[index].removeMonster();
     });
   });
 
@@ -357,6 +383,72 @@ updateSliderValue("tentaclesSlider", "tentaclesValue");
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+// Optimera
+// Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
+const applyFilter = () => {
+  const filteredMonsters = monsters.filter((monster) => {
+    const matchesType =
+      activeFilters.types.length === 0 ||
+      activeFilters.types.includes(monster.monsterType);
+
+    const matchesColor =
+      activeFilters.colors.length === 0 ||
+      activeFilters.colors.includes(monster.monsterColor);
+
+    return matchesType && matchesColor;
+  });
+
+  renderMonsters(filteredMonsters);
+};
+
+const strongFilter = document.querySelector("#strong");
+strongFilter.addEventListener("change", () => {
+  if (strongFilter.checked) {
+    activeFilters.types.push("Strong");
+  } else {
+    activeFilters.types = activeFilters.types.filter(
+      (filter) => filter !== "Strong"
+    );
+  }
+  applyFilter();
+});
+
+const animeFilter = document.querySelector("#anime");
+animeFilter.addEventListener("change", () => {
+  if (animeFilter.checked) {
+    activeFilters.types.push("Anime");
+  } else {
+    activeFilters.types = activeFilters.types.filter(
+      (filter) => filter !== "Anime"
+    );
+  }
+  applyFilter();
+});
+
+const redFilter = document.querySelector("#red");
+redFilter.addEventListener("change", () => {
+  if (redFilter.checked) {
+    activeFilters.colors.push("Red");
+  } else {
+    activeFilters.colors = activeFilters.colors.filter(
+      (filter) => filter !== "Red"
+    );
+  }
+  applyFilter();
+});
+
+// Koden går även att skriva såhär
+// Jag lämnar den här i fall vi kommer på att det här är bättre
+/* const animeFilter = document.querySelector("#anime");
+animeFilter.addEventListener("change", () => {
+  if (animeFilter.checked) {
+    activeFilter = (monster) => monster.monsterType === "Anime";
+    applyFilter();
+  } else {
+    activeFilter = null;
+    applyFilter();
+  }
+}); */
 //VAD SOM BEHÖVER GÖRAS:
 // Skapa containers för checkboxes
 // Kod som visar hur många av varje typ som finns. T.ex bredvid en checkbox som säger "röd" så ska det visas hur många röda det finns

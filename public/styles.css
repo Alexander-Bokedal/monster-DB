@@ -1,92 +1,121 @@
+* {
+  box-sizing: content-box;
+}
+
 body {
-    box-sizing:content-box;
-    margin: 0%;
-    background-color: rgb(172, 172, 172);
-    height: 300vh;
-    width: 100vw;
-    overflow-x: hidden;
+  /*  Flyttade denna till * 
+      box-sizing:content-box; */
+  margin: 0%;
+  background-color: rgb(172, 172, 172);
+  /*  Vet inte om dessa behövs nu när jag fixade grid  
+      height: 300vh;
+      width: 100vw;
+      overflow-x: hidden; */
+}
 
-    
-  }
-  
-  main {
-    display: grid;
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30vh 30vh 30vh 1fr;
+  grid-template-areas:
+    "monsterPreviewMain"
+    "monsterSettings"
+    "monsterFilter"
+    "monster-gallery-container";
+}
 
-  }
-
+/* Editade ut tillfälligt 
   @media (min-width: 768px) {
     #monsterPreviewMain {
-         grid-template-columns: 60vw 40vw; 
-         grid-template-rows: auto;    
-       }
- }
- 
- @media (min-width: 1024px) {
-     #monsterPreviewMain {
-         grid-template-columns: 50vw 50vw; 
-         grid-template-rows: auto; 
-     }
-   }
+      grid-template-columns: 60vw 40vw;
+      grid-template-rows: auto;
+    }
+  }
   
-  
-  #monsterPreviewMain {
+  @media (min-width: 1024px) {
+    #monsterPreviewMain {
+      grid-template-columns: 50vw 50vw;
+      grid-template-rows: auto;
+    }
+  } */
+
+@media (min-width: 600px) {
+  main {
     display: grid;
-    justify-self: center;
-    margin-top: 10px;
-    grid-template-columns: [col1]80vw [col2]20vw;
-    grid-template-rows: 
-    [row1]1fr
-    [row2]1fr
-    [row3]1fr;
-    background-color: #BEEEEB;
+    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "monsterPreviewMain monsterFilter"
+      "monsterPreviewMain monster-gallery-container"
+      "monsterPreviewMain monster-gallery-container"
+      "monsterSettings monster-gallery-container"
+      "monsterSettings monster-gallery-container";
+  }
+}
+
+#monsterPreviewMain {
+  display: grid;
+  grid-area: monsterPreviewMain;
+  justify-self: center;
+  margin-top: 10px;
+  /*  Dessa fuckar upp min grid
+      grid-template-columns: [col1]80vw [col2]20vw;
+      grid-template-rows:
+      [row1]1fr
+      [row2]1fr
+      [row3]1fr; */
+  background-color: #beeeeb;
+  border-radius: 15px;
+  /*  Tror inte behövs 
+    height: 70dvh; */
+  width: 95%;
+  align-items: center;
+
+  .monsterNameMain {
+    text-align: center;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0),
+      #f7a072,
+      rgba(255, 255, 255, 0)
+    );
+  }
+  .monsterTypeIcon {
+    align-self: flex-end;
+  }
+
+  #monsterImageMain {
     border-radius: 15px;
-    height: 70dvh;
-    width: 95%;
-    align-items: center;
-    
-    .monsterNameMain {
-        text-align: center;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
-      
-       
-      }
-      .monsterTypeIcon {
-        
-       align-self: flex-end;
-       
-      }
-    
-    #monsterImageMain {
-      border-radius: 15px;
-      height: 97%;
-      width: 100%;
-      background-color: #E4FCFA;
-      margin-left: 5px;
+    height: 97%;
+    /*  Tror inte behövs   
+      width: 100%; */
+    background-color: #e4fcfa;
+    /*  Tror inte behövs
+      margin-left: 5px; */
+    /*  Fuckar upp min grid   
       grid-column-start: col1;
       grid-row-start: row1;
-      grid-row-end: row4;
-      border: 2px solid #72727283;
-      
-    
-  
-    }
-    .monsterImage {
-      display: grid;
-      border-radius: 15px;
-      height: 80%;
-      width: 70vw;
-      background-color: #ffffff6c;
-      background-image: url(/public/images/monsters/1x/theEye.png);
-      background-repeat: no-repeat;
-      background-position: center;
+      grid-row-end: row4; */
+    border: 2px solid #72727283;
+  }
+  .monsterImage {
+    /*  Tror inte behövs
+      display: grid; */
+    border-radius: 15px;
+    height: 100%;
+    /*   Tror inte behövs. Height var 80% innan
+      width: 70vw; */
+    background-color: #ffffff6c;
+    background-image: url(/public/images/monsters/1x/theEye.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    /*  Tror inte behövs
       margin-left: 18px;
-      margin-TOP: 18px;
-      
-    }
+      margin-TOP: 18px; */
+  }
 
-    
-    
-    #colorsMain {
+  /*     #colorsMain {
       display: flex;
       flex-direction: column-reverse;
       justify-self: center;
@@ -97,150 +126,156 @@ body {
       gap: 10px;
       margin-right: 35px;
       margin-bottom: 10px;
-    
+  
       .colorBox {
         height: 35px;
         width: 35px;
-        
       }
   
       .A {
-        background-color: #FF9B42;
+        background-color: #ff9b42;
         border: 2px solid #727272;
         border-radius: 50%;
       }
       .B {
-        background-color: #74C4C4;
+        background-color: #74c4c4;
         border: 2px solid #727272;
         border-radius: 50%;
       }
       .C {
-        background-color: #EDDEA4;
+        background-color: #eddea4;
         border: 2px solid #727272;
         border-radius: 50%;
       }
       .D {
-        background-color: #D9E5D6;
+        background-color: #d9e5d6;
         border: 2px solid #727272;
         border-radius: 50%;
       }
       .E {
-        background-color: #F7A072;
+        background-color: #f7a072;
         border: 2px solid #727272;
         border-radius: 50%;
       }
       .F {
-        background-color: #0FA3B1;
+        background-color: #0fa3b1;
         border: 2px solid #727272;
         border-radius: 50%;
       }
-    }
-  }
-  
-  #monsterSettings {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    background-color: #BEEEEB;
-    margin-top: 10px;
-    border-radius: 15px;
-    width: 95%;
-    align-items: center;
-    justify-self: center;
-    text-align: center;
-  }
-  
-  .sliders {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
-  }
+    } */
+}
 
+#monsterSettings {
+  display: flex;
+  grid-area: monsterSettings;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #beeeeb;
+  margin-top: 10px;
+  border-radius: 15px;
+  width: 95%;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.sliders {
+  display: flex;
+  flex-direction: column;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
 
 #monsterSettingsDropdowns {
   display: flex;
   flex-wrap: wrap;
 }
 
+#monsterFilter {
+  display: flex;
+  grid-area: monsterFilter;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+  background-color: #beeeeb;
+  margin-top: 10px;
+  border-radius: 15px;
+  width: 95%;
+}
 
-  #monsterGallery {
-     
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-      justify-items: center;
-      padding: 10px;
-      margin-top: 10px;
-      @media (min-width: 600px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-  }
+#monster-gallery-container {
+  border: solid;
+  grid-area: monster-gallery-container;
+}
 
-  .monsterCard {
-    display: flex;
-    flex-direction: column;
-    
-    justify-content: center;
-    border: solid 1px #e0e0e0;
+#monsterGallery {
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  justify-items: center;
+  /* Tror inte behövs. ändrade gap till 5 istället för 10px. La till flex-wrap.
     padding: 10px;
-    width: 70%;
-     min-height: 150px;
-    align-self: center;
-    font-size: 1.5em;
-    border-radius: 8%;
-    background-color: #BEEEEB;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 
-              0 1px 3px rgba(0, 0, 0, 0.5); 
+    margin-top: 10px; */
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  .monsterName {
+.monsterCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-   text-align: center;
-    
+  border: solid 1px #e0e0e0;
+  /*Tror inte behövs, ändrade width från 70%     
+    padding: 10px; */
+  width: 90%;
+  min-height: 150px;
+  align-self: center;
+  font-size: 1.5em;
+  border-radius: 8%;
+  background-color: #beeeeb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
 
+.monsterName {
+  text-align: center;
+}
+
+.monsterType {
+  @media screen and (max-width: 600px) {
+    display: none;
   }
+}
 
-  .monsterType {
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
-    
-  
+.monsterHorns {
+  @media screen and (max-width: 600px) {
+    display: none;
   }
+}
 
-  .monsterHorns {
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
-   
+.monsterLegs {
+  @media screen and (max-width: 600px) {
+    display: none;
   }
+}
 
-  .monsterLegs {
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
-
-    
-  
+.monsterEyes {
+  @media screen and (max-width: 600px) {
+    display: none;
   }
+}
 
-  .monsterEyes {
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
-  
+.monsterTentacles {
+  @media screen and (max-width: 600px) {
+    display: none;
   }
-
-
-  .monsterTentacles {
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
-  }
-
+}

@@ -327,18 +327,53 @@ for (let i = 0; i < monsterSize.length; i++) {
 
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 // Optimera om vi har tid
-// Fixa så att det inte är en ful if-sats
-dietSelect.addEventListener("change", () => {
+typeSelect.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 
-  if (dietSelect.value === "🥩Flesh-Muncher") {
-    monsterTypeIcon.innerHTML = "🥩";
-  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
-    monsterTypeIcon.innerHTML = "🥬";
-  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
-    monsterTypeIcon.innerHTML = "🗑️";
+  if (typeSelect.value === "🐒Humanoid") {
+    monsterTypeIcon.innerHTML = "🐒";
+  } else if (typeSelect.value === "🍄Fungal") {
+    monsterTypeIcon.innerHTML = "🍄";
+  } else if (typeSelect.value === "🪨Titan") {
+    monsterTypeIcon.innerHTML = "🪨";
+  } else if (typeSelect.value = "🪳Insectiod") {
+    monsterTypeIcon.innerHTML = "🪳";
+  } else if (typeSelect.value = "🧌Troll") {
+    monsterTypeIcon.innerHTML = "🧌";
   }
 });
+
+const monsterDietIcon = document.querySelector(".monsterDietIcon");
+// Optimera om vi har tid
+dietSelect.addEventListener("change", () => {
+  monsterDietIcon.innerHTML = "";
+
+  if (dietSelect.value === "🥩Flesh-Muncher") {
+    monsterDietIcon.innerHTML = "🥩";
+  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
+    monsterDietIcon.innerHTML = "🥬";
+  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
+    monsterDietIcon.innerHTML = "🗑️";
+  }
+});
+
+
+const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
+ sizeSelect.addEventListener("change", () => {
+  monsterSizeIcon.innerHTML = "";
+
+  if (sizeSelect.value === "🤏Pinky-Small") {
+    monsterSizeIcon.innerHTML = "🤏";
+  } else if (sizeSelect.value === "🦒Long-Legs") {
+    monsterSizeIcon.innerHTML = "🦒";
+  } else if (sizeSelect.value === "🐓Average-Bin") {
+    monsterSizeIcon.innerHTML = "🐓";
+  } else if (sizeSelect.value === "🌋Crippled-Mountain") {
+    monsterSizeIcon.innerHTML = "🌋";
+  } else if (sizeSelect.value === "🌿Tree-Twig") {
+    monsterSizeIcon.innerHTML = "🌿";
+  }
+ })
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

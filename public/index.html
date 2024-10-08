@@ -12,27 +12,33 @@
       <div id="monsterPreviewMain">
         <div id="monsterImageMain">
           <div class="monsterImage">
-            <div class="monsterTypeIcon"></div>
+            <div id="monsterTypes">
+              <div class="monsterTypeIcon">X</div>
+              <div class="monsterDietIcon">X</div>
+              <div class="monsterSizeIcon">X</div>
+          
+            </div>
+            </div>
+ 
+            <div class="monsterNameMain">
+              <h3>"Monster Name"</h3>
+            </div>
           </div>
-          <div class="monsterNameMain">
-            <h3>"Monster Name"</h3>
+
+        </div>
+        <!--MONSTER MAIN WINDOW ENDS HERE-->
+        <div id="monsterSettings">
+          <div id="colorsMain">
+            <div class="colorBox A"></div>
+            <div class="colorBox B"></div>
+            <div class="colorBox C"></div>
+            <div class="colorBox D"></div>
+            <div class="colorBox E"></div>
           </div>
-        </div>
-        <div id="colorsMain">
-          <div class="colorBox A"></div>
-          <div class="colorBox B"></div>
-          <div class="colorBox C"></div>
-          <div class="colorBox D"></div>
-          <div class="colorBox E"></div>
-          <div class="colorBox F"></div>
-        </div>
-      </div>
-      <!--MONSTER MAIN WINDOW ENDS HERE-->
-      <div id="monsterSettings">
-        <div id="sliders">
-          <div class="slider">
-            <label for="horns">Horns</label>
-            <br />
+          <div id="sliders">
+            <div class="slider">
+              <label for="horns">Horns</label>
+              <br />
             <input type="range" id="hornsSlider" min="0" max="6" />
             <span id="hornsValue">5</span>
           </div>
@@ -62,71 +68,45 @@
             <select id="monsterTypeSelect">
               <option value="" disabled selected>Default</option>
             </select>
-            <br /><br /><br /><br />
           </div>
           <div id="monsterDiet">
             <p>Monster Diet</p>
             <select id="monsterDietSelect">
               <option value="" disabled selected>Default</option>
             </select>
-            <br /><br /><br /><br />
           </div>
           <div id="monsterSizeOptions">
             <p>Monster Size</p>
             <select id="monsterSizeSelect">
               <option value="" disabled selected>Default</option>
             </select>
-            <br /><br /><br /><br />
+            
           </div>
+          
           <div>
             <button id="done-button">Done?</button>
           </div>
         </div>
       </div>
+      
       <!--MONSTER STTING ENDS HERE-->
 
       <!--FILTER STARTS HERE-->
       <div id="monsterFilter">
-        <div id="monsterSettings">
-          <div id="sliders"></div>
+        
+        <input type="checkbox" id="strong" name="strong" />
+        <label for="strong"> Strong </label>
 
-          <div id="monsterSettingsDropdowns">
-            <div id="monsterTypeOptions">
-              <p>Monster Type</p>
-              <select id="monsterTypeSelect">
-                <option value="" disabled selected>Default</option>
-              </select>
-              <br /><br /><br /><br />
+        <input type="checkbox" id="anime" name="anime" />
+        <label for="anime"> Anime </label>
 
-              <input type="checkbox" id="strong" name="strong" />
-              <label for="strong"> Strong </label>
+        <input type="checkbox" id="red" name="red" />
+        <label for="red"> Red </label>
+      
 
-              <input type="checkbox" id="anime" name="anime" />
-              <label for="anime"> Anime </label>
-
-              <input type="checkbox" id="red" name="red" />
-              <label for="red"> Red </label>
-            </div>
-            <div id="monsterDiet">
-              <p>Monster Diet</p>
-              <select id="monsterDietSelect">
-                <option value="" disabled selected>Default</option>
-              </select>
-              <br /><br /><br /><br />
-            </div>
-            <div id="monsterSizeOptions">
-              <p>Monster Size</p>
-              <select id="monsterSizeSelect">
-                <option value="" disabled selected>Default</option>
-              </select>
-              <br /><br /><br /><br />
-            </div>
-            <div>
-              <button id="done-button">Done?</button>
-            </div>
-          </div>
         </div>
-      </div>
+      
+      
       <!--FILTER ENDS HERE-->
       <!--ADDED A CONTAINER FOR MONSTER GALLERY-->
       <div id="monster-gallery-container">

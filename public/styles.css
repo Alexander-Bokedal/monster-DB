@@ -5,7 +5,7 @@
 body {
   margin: 0%;
   background-color: rgb(172, 172, 172);
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 main {
@@ -19,7 +19,6 @@ main {
     "monsterFilter"
     "monster-gallery-container";
 }
-
 
 @media (min-width: 600px) {
   main {
@@ -43,7 +42,7 @@ main {
   margin-top: 10px;
   background-color: #beeeeb;
   border-radius: 15px;
-  height: 75dvh; 
+  height: 75dvh;
   width: 95%;
   align-items: center;
 
@@ -73,23 +72,19 @@ main {
     align-items: center;
     border-radius: 15px;
     height: 70dvh;
-    width: 90%; 
+    width: 90%;
     background-color: #e4fcfa;
     border: 2px solid #72727283;
-    
   }
   .monsterImage {
     border-radius: 15px;
     height: 100%;
-    width: 70vw; 
+    width: 70vw;
     background-color: #ffffff6c;
     background-image: url(/public/images/monsters/1x/theEye.png);
     background-repeat: no-repeat;
     background-position: center;
-
   }
-
-
 }
 
 #colorsMain {
@@ -110,7 +105,7 @@ main {
   }
 
   .A:hover {
-    transition: .8s;
+    transition: 0.8s;
     cursor: pointer;
     transform: scale(1.3);
   }
@@ -120,7 +115,7 @@ main {
     border-radius: 50%;
   }
   .B:hover {
-    transition: .8s;
+    transition: 0.8s;
     cursor: pointer;
     transform: scale(1.3);
   }
@@ -130,7 +125,7 @@ main {
     border-radius: 50%;
   }
   .C:hover {
-    transition: .8s;
+    transition: 0.8s;
     cursor: pointer;
     transform: scale(1.3);
   }
@@ -140,7 +135,7 @@ main {
     border-radius: 50%;
   }
   .D:hover {
-    transition: .8s;
+    transition: 0.8s;
     cursor: pointer;
     transform: scale(1.3);
   }
@@ -150,17 +145,16 @@ main {
     border-radius: 50%;
   }
   .E:hover {
-    transition: .8s;
+    transition: 0.8s;
     cursor: pointer;
     transform: scale(1.3);
   }
-
-} 
+}
 
 #monsterSettings {
   display: flex;
   flex-wrap: wrap;
-  background-color: #BEEEEB;
+  background-color: #beeeeb;
   border-radius: 15px;
   width: 95%;
   justify-content: space-evenly;
@@ -169,7 +163,9 @@ main {
   text-align: center;
 }
 
-#monsterTypeSelect, #monsterDietSelect, #monsterSizeSelect {
+#monsterTypeSelect,
+#monsterDietSelect,
+#monsterSizeSelect {
   display: flex;
   flex-wrap: wrap;
   width: 100px;
@@ -202,7 +198,6 @@ main {
 }
 
 #monster-gallery-container {
-
   grid-area: monster-gallery-container;
   display: grid;
   margin-top: 10px;
@@ -210,54 +205,63 @@ main {
   gap: 10px;
   justify-items: center;
 
-
-@media (min-width: 1024px) {
-  #monster-gallery-container  {
-
-    grid-template-columns: repeat(3, 1fr);
-    min-height: 100%;
-    max-height: 650px;
-    overflow-y: auto;
+  @media (min-width: 1024px) {
+    #monster-gallery-container {
+      grid-template-columns: repeat(3, 1fr);
+      min-height: 100%;
+      max-height: 650px;
+      overflow-y: auto;
+    }
   }
-}
 
+  .monsterCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-.monsterCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    align-items: center;
 
-  align-items: center;
+    border: solid 1px #e0e0e0;
+    width: 90%;
+    min-height: 150px;
+    max-height: 300px;
+    align-self: center;
 
-  border: solid 1px #e0e0e0;
-  width: 90%;
-  min-height: 150px;
-  max-height: 300px;
-  align-self: center;
+    font-size: 1em;
+    border-radius: 8%;
 
-  font-size: 1em;
-  border-radius: 8%;
+    background-color: #beeeeb;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
 
-  background-color: #beeeeb;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+  .deleteButton {
+    border: solid;
+    width: 50px;
+  }
 
-.deleteButton {
-  border: solid;
-  width: 50px;
-}
+  .editButton {
+    border: solid;
+    width: 50px;
+  }
 
-.editButton {
-  border: solid;
-  width: 50px;
-}
+  .monsterName,
+  .monsterType,
+  .monsterColor,
+  .monsterHorns,
+  .monsterLegs,
+  .monsterEyes,
+  .monsterTentacles {
+    text-align: center;
+  }
 
-.monsterName, .monsterType, .monsterColor, .monsterHorns, .monsterLegs, .monsterEyes, .monsterTentacles {
-  text-align: center;
-}
-
-@media screen and (max-width: 600px) {
-  .monsterType, .monsterColor, .monsterHorns, .monsterLegs, .monsterEyes, .monsterTentacles {
-    display: none;
+  @media screen and (max-width: 600px) {
+    .monsterType,
+    .monsterColor,
+    .monsterHorns,
+    .monsterLegs,
+    .monsterEyes,
+    .monsterTentacles {
+      display: none;
+    }
   }
 }

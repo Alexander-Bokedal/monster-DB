@@ -360,24 +360,26 @@ monsterDietSelectSettings.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🥬";
   } else if (monsterDietSelectSettings.value === "🗑️Non-Pesky-Omnivore") {
     monsterTypeIcon.innerHTML = "🗑️";
-
-typeSelect.addEventListener("change", () => {
-  monsterTypeIcon.innerHTML = "";
-
-  if (typeSelect.value === "🐒Humanoid") {
-    monsterTypeIcon.innerHTML = "🐒";
-  } else if (typeSelect.value === "🍄Fungal") {
-    monsterTypeIcon.innerHTML = "🍄";
-  } else if (typeSelect.value === "🪨Titan") {
-    monsterTypeIcon.innerHTML = "🪨";
-  } else if (typeSelect.value = "🪳Insectiod") {
-    monsterTypeIcon.innerHTML = "🪳";
-  } else if (typeSelect.value = "🧌Troll") {
-    monsterTypeIcon.innerHTML = "🧌";
-
   }
 });
 
+monsterTypeSelectSettings.addEventListener("change", () => {
+  monsterTypeIcon.innerHTML = "";
+
+  if (monsterTypeSelectSettings.value === "🐒Humanoid") {
+    monsterTypeIcon.innerHTML = "🐒";
+  } else if (monsterTypeSelectSettings.value === "🍄Fungal") {
+    monsterTypeIcon.innerHTML = "🍄";
+  } else if (monsterTypeSelectSettings.value === "🪨Titan") {
+    monsterTypeIcon.innerHTML = "🪨";
+  } else if ((monsterTypeSelectSettings.value = "🪳Insectiod")) {
+    monsterTypeIcon.innerHTML = "🪳";
+  } else if ((monsterTypeSelectSettings.value = "🧌Troll")) {
+    monsterTypeIcon.innerHTML = "🧌";
+  }
+});
+
+/* Tror inte vi behöver denna. Finns redan 2 funktioner upp 
 const monsterDietIcon = document.querySelector(".monsterDietIcon");
 // Optimera om vi har tid
 dietSelect.addEventListener("change", () => {
@@ -390,25 +392,24 @@ dietSelect.addEventListener("change", () => {
   } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
     monsterDietIcon.innerHTML = "🗑️";
   }
-});
-
+}); */
 
 const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
- sizeSelect.addEventListener("change", () => {
+monsterSizeSelectSetting.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";
 
-  if (sizeSelect.value === "🤏Pinky-Small") {
+  if (monsterSizeSelectSetting.value === "🤏Pinky-Small") {
     monsterSizeIcon.innerHTML = "🤏";
-  } else if (sizeSelect.value === "🦒Long-Legs") {
+  } else if (monsterSizeSelectSetting.value === "🦒Long-Legs") {
     monsterSizeIcon.innerHTML = "🦒";
-  } else if (sizeSelect.value === "🐓Average-Bin") {
+  } else if (monsterSizeSelectSetting.value === "🐓Average-Bin") {
     monsterSizeIcon.innerHTML = "🐓";
-  } else if (sizeSelect.value === "🌋Crippled-Mountain") {
+  } else if (monsterSizeSelectSetting.value === "🌋Crippled-Mountain") {
     monsterSizeIcon.innerHTML = "🌋";
-  } else if (sizeSelect.value === "🌿Tree-Twig") {
+  } else if (monsterSizeSelectSetting.value === "🌿Tree-Twig") {
     monsterSizeIcon.innerHTML = "🌿";
   }
- })
+});
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

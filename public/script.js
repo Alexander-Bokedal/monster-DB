@@ -179,6 +179,10 @@ const addMonsterToArray = () => {
       if (index > -1) {
         monsters.splice(index, 1);
 
+        // Apply filter innehåller funktionen renderMonsters()
+        // Om det finns aktiva filter, så kommer applyFilter() ge en lista utifrån filtrerna
+        // Annars ger den en lista utifrån arryen monsters
+        // Apply filter ligger här för att man ska kunna ta bort monster från en filtrerad och sen få en uppdaterad lista som fortfarande är filtrerad
         applyFilter();
       }
     },
@@ -383,17 +387,25 @@ updateSliderValue("tentaclesSlider", "tentaclesValue");
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-// Optimera
-// Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
+// Applyfilter kollar om det finns aktiva filter och returnerar monster utifrån de filtrerna
+// Finns det inga aktiva filter kommer alla monster att returneras och därför mapas ut med renderMonsters()
+// Koden är gjord för att man ska kunna filtrera på flera sätt åt gången, dvs typ och färg
 const applyFilter = () => {
   const filteredMonsters = monsters.filter((monster) => {
     const matchesType =
+      // Om "types" är lika med 0 så finns det inga filter, och det här villkoret blir sant
+      // Om "types" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
       activeFilters.types.length === 0 ||
       activeFilters.types.includes(monster.monsterType);
 
+    // Om "colors" är lika med 0 så finns det inga filter, och det här villkoret blir sant
+    // Om "color" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
     const matchesColor =
       activeFilters.colors.length === 0 ||
       activeFilters.colors.includes(monster.monsterColor);
+
+    // Monstret returneras bara om både matchesType och matchesColor är lika med true.
+    // I ett fall där det inte finns några filter kommer båda villkoren alltid vara sanna och därför returnera all monster
 
     return matchesType && matchesColor;
   });
@@ -401,7 +413,17 @@ const applyFilter = () => {
   renderMonsters(filteredMonsters);
 };
 
+// Optimera
+// Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
+
+// Skapar en behåller för id strong, som är en checkbox i vår html
 const strongFilter = document.querySelector("#strong");
+
+// Lyssnar på om status på checkbox ändras
+// Om strongFilter === checked efter change så lägger vi till ett filter i vår filter array
+// Om den inte är checked efter change tar vi istället bort filtret från vår array
+// Sen körs applyFilter, vilket renderar ut monster utifrån filter OM det finns filter
+// Annars körs renderMonsters(), som ligger inuti funktionen applyFilter.
 strongFilter.addEventListener("change", () => {
   if (strongFilter.checked) {
     activeFilters.types.push("Strong");
@@ -437,23 +459,8 @@ redFilter.addEventListener("change", () => {
   applyFilter();
 });
 
-// Koden går även att skriva såhär
-// Jag lämnar den här i fall vi kommer på att det här är bättre
-/* const animeFilter = document.querySelector("#anime");
-animeFilter.addEventListener("change", () => {
-  if (animeFilter.checked) {
-    activeFilter = (monster) => monster.monsterType === "Anime";
-    applyFilter();
-  } else {
-    activeFilter = null;
-    applyFilter();
-  }
-}); */
 //VAD SOM BEHÖVER GÖRAS:
-// Skapa containers för checkboxes
-// Kod som visar hur många av varje typ som finns. T.ex bredvid en checkbox som säger "röd" så ska det visas hur många röda det finns
-// Lägg till eventListerners som kollar om checkbox är "checked"
-// Skapa en funktion som skriver ut monster beroende på vilken checkbox som har "checked"
+// Skriva ut info om hur många av varje typ det finns bredvid checkboxes
 
 // Vi har 5 färger och tre typer
 // Det kan bara vara två unika värden för filtrering

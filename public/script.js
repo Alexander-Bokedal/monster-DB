@@ -267,7 +267,10 @@ const renderMonsters = (filteredMonsters = monsters) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const dietSelect = document.getElementById("monsterDietSelect");
+const monsterDietSelectSettings = document.querySelector("#monsterDietSelect");
+const monsterDietSelectFilter = document.querySelector(
+  "#monsterDietSelectFilter"
+);
 const monsterDietTypes = [
   "🥩Flesh-Muncher",
   "🥬Leaf-Cruncher",
@@ -275,19 +278,26 @@ const monsterDietTypes = [
 ];
 
 const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
+function dietDropdown(dietSelect) {
+  for (let i = 0; i < monsterDietTypes.length; i++) {
+    let choice = monsterDietTypes[i];
 
-for (let i = 0; i < monsterDietTypes.length; i++) {
-  let choice = monsterDietTypes[i];
-
-  let dropRows = document.createElement("option");
-  dropRows.text = choice;
-  dropRows.value = choice;
-  dietSelect.appendChild(dropRows);
+    let dropRow = document.createElement("option");
+    dropRow.text = choice;
+    dropRow.value = choice;
+    dietSelect.appendChild(dropRow);
+  }
 }
+
+dietDropdown(monsterDietSelectSettings);
+dietDropdown(monsterDietSelectFilter);
 
 // Optimera
 // Slå ihop funktionerna i det här stycket
-let typeSelect = document.getElementById("monsterTypeSelect");
+const monsterTypeSelectSettings = document.querySelector("#monsterTypeSelect");
+const mosterTypeSelectFilter = document.querySelector(
+  "#monsterTypeSelectFilter"
+);
 let monsterTypes = [
   "🐒Humanoid",
   "🍄Fungal",
@@ -295,18 +305,24 @@ let monsterTypes = [
   "🪳Insectiod",
   "🧌Troll",
 ];
+function typeDropdown(typeSelect) {
+  for (let i = 0; i < monsterTypes.length; i++) {
+    let choice = monsterTypes[i];
 
-for (let i = 0; i < monsterTypes.length; i++) {
-  let choice = monsterTypes[i];
+    let dropRow = document.createElement("option");
+    dropRow.text = choice;
+    dropRow.value = choice;
 
-  let dropRow = document.createElement("option");
-  dropRow.text = choice;
-  dropRow.value = choice;
-
-  typeSelect.appendChild(dropRow);
+    typeSelect.appendChild(dropRow);
+  }
 }
+typeDropdown(monsterTypeSelectSettings);
+typeDropdown(mosterTypeSelectFilter);
 
-let sizeSelect = document.getElementById("monsterSizeSelect");
+const monsterSizeSelectSetting = document.querySelector("#monsterSizeSelect");
+const monsterSizeSelectFilter = document.querySelector(
+  "#monsterSizeSelectFilter"
+);
 let monsterSize = [
   "🤏Pinky-Small",
   "🦒Long-Legs",
@@ -315,27 +331,32 @@ let monsterSize = [
   "🌿Tree-Twig",
 ];
 
-for (let i = 0; i < monsterSize.length; i++) {
-  let choice = monsterSize[i];
+function sizeDropdown(sizeSelect) {
+  for (let i = 0; i < monsterSize.length; i++) {
+    let choice = monsterSize[i];
 
-  let dropRow = document.createElement("option");
-  dropRow.text = choice;
-  dropRow.value = choice;
+    let dropRow = document.createElement("option");
+    dropRow.text = choice;
+    dropRow.value = choice;
 
-  sizeSelect.appendChild(dropRow);
+    sizeSelect.appendChild(dropRow);
+  }
 }
+
+sizeDropdown(monsterSizeSelectSetting);
+sizeDropdown(monsterSizeSelectFilter);
 
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 // Optimera om vi har tid
 // Fixa så att det inte är en ful if-sats
-dietSelect.addEventListener("change", () => {
+monsterDietSelectSettings.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 
-  if (dietSelect.value === "🥩Flesh-Muncher") {
+  if (monsterDietSelectSettings.value === "🥩Flesh-Muncher") {
     monsterTypeIcon.innerHTML = "🥩";
-  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
+  } else if (monsterDietSelectSettings.value === "🥬Leaf-Cruncher") {
     monsterTypeIcon.innerHTML = "🥬";
-  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
+  } else if (monsterDietSelectSettings.value === "🗑️Non-Pesky-Omnivore") {
     monsterTypeIcon.innerHTML = "🗑️";
   }
 });

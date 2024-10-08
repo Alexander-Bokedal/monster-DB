@@ -221,7 +221,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
   // VAD SOM BEHÖVER GÖRAS:
   // ANPASSA SÅ ATT KODEN GÅR ATT REDIGERA FRÅN ETT STÄLLE (VG-NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I PROJEKTET (ELLER SÅ ÄR JAG BARA KORKAD))
 
-  const monsterGallery = document.getElementById("monsterGallery");
+  const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
@@ -236,6 +236,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
           <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
           <p class="monsterTentacles">Tentacles: ${monster.monsterTentacles}</p>
           <button class="deleteButton"> Delete </button>
+          <button class="editButton"> Edit </button>
         </div>
       </div>
     `;
@@ -348,6 +349,7 @@ sizeDropdown(monsterSizeSelectFilter);
 
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 // Optimera om vi har tid
+
 // Fixa så att det inte är en ful if-sats
 monsterDietSelectSettings.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
@@ -358,8 +360,55 @@ monsterDietSelectSettings.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🥬";
   } else if (monsterDietSelectSettings.value === "🗑️Non-Pesky-Omnivore") {
     monsterTypeIcon.innerHTML = "🗑️";
+
+typeSelect.addEventListener("change", () => {
+  monsterTypeIcon.innerHTML = "";
+
+  if (typeSelect.value === "🐒Humanoid") {
+    monsterTypeIcon.innerHTML = "🐒";
+  } else if (typeSelect.value === "🍄Fungal") {
+    monsterTypeIcon.innerHTML = "🍄";
+  } else if (typeSelect.value === "🪨Titan") {
+    monsterTypeIcon.innerHTML = "🪨";
+  } else if (typeSelect.value = "🪳Insectiod") {
+    monsterTypeIcon.innerHTML = "🪳";
+  } else if (typeSelect.value = "🧌Troll") {
+    monsterTypeIcon.innerHTML = "🧌";
+
   }
 });
+
+const monsterDietIcon = document.querySelector(".monsterDietIcon");
+// Optimera om vi har tid
+dietSelect.addEventListener("change", () => {
+  monsterDietIcon.innerHTML = "";
+
+  if (dietSelect.value === "🥩Flesh-Muncher") {
+    monsterDietIcon.innerHTML = "🥩";
+  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
+    monsterDietIcon.innerHTML = "🥬";
+  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
+    monsterDietIcon.innerHTML = "🗑️";
+  }
+});
+
+
+const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
+ sizeSelect.addEventListener("change", () => {
+  monsterSizeIcon.innerHTML = "";
+
+  if (sizeSelect.value === "🤏Pinky-Small") {
+    monsterSizeIcon.innerHTML = "🤏";
+  } else if (sizeSelect.value === "🦒Long-Legs") {
+    monsterSizeIcon.innerHTML = "🦒";
+  } else if (sizeSelect.value === "🐓Average-Bin") {
+    monsterSizeIcon.innerHTML = "🐓";
+  } else if (sizeSelect.value === "🌋Crippled-Mountain") {
+    monsterSizeIcon.innerHTML = "🌋";
+  } else if (sizeSelect.value === "🌿Tree-Twig") {
+    monsterSizeIcon.innerHTML = "🌿";
+  }
+ })
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -517,4 +566,3 @@ redFilter.addEventListener("change", () => {
 // VAD SOM BEHÖVER GÖRAS:
 // Fundera på vilken funktionalitet som kan ligga i objekt (för VG-nivå)
 // Lista ut om varje monster ska ha en knapp för redigering eller om de ska vara en övergripande funktion
-//

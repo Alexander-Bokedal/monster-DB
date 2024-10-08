@@ -221,7 +221,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
   // VAD SOM BEHÖVER GÖRAS:
   // ANPASSA SÅ ATT KODEN GÅR ATT REDIGERA FRÅN ETT STÄLLE (VG-NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I PROJEKTET (ELLER SÅ ÄR JAG BARA KORKAD))
 
-  const monsterGallery = document.getElementById("monsterGallery");
+  const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
@@ -236,6 +236,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
           <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
           <p class="monsterTentacles">Tentacles: ${monster.monsterTentacles}</p>
           <button class="deleteButton"> Delete </button>
+          <button class="editButton"> Edit </button>
         </div>
       </div>
     `;

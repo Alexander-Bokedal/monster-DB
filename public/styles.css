@@ -2,10 +2,9 @@ body {
     box-sizing:content-box;
     margin: 0%;
     background-color: rgb(172, 172, 172);
-    height: 300vh;
+      height: 300vh;
     width: 100vw;
     overflow-x: hidden;
-
     
   }
   
@@ -14,12 +13,7 @@ body {
 
   }
 
-  @media (min-width: 768px) {
-    #monsterPreviewMain {
-         grid-template-columns: 60vw 40vw; 
-         grid-template-rows: auto;    
-       }
- }
+ 
  
  @media (min-width: 1024px) {
      #monsterPreviewMain {
@@ -45,30 +39,40 @@ body {
     align-items: center;
     
     .monsterNameMain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 20px;
         text-align: center;
         background: linear-gradient(to right, rgba(255, 255, 255, 0), #F7A072, rgba(255, 255, 255, 0));
       
        
       }
-      .monsterTypeIcon {
-        
-       align-self: flex-end;
-       
-      }
-    
-    #monsterImageMain {
-      border-radius: 15px;
-      height: 97%;
-      width: 100%;
-      background-color: #E4FCFA;
-      margin-left: 5px;
-      grid-column-start: col1;
-      grid-row-start: row1;
-      grid-row-end: row4;
-      border: 2px solid #72727283;
       
-    
-  
+      #monsterImageMain {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 15px;
+        height: 97%;
+        width: 100%;
+        background-color: #E4FCFA;
+        margin-left: 5px;
+        grid-column-start: col1;
+        grid-row-start: row1;
+        grid-row-end: row4;
+        border: 2px solid #72727283;
+        
+        
+        .monsterTypeIcon, .monsterDietIcon, .monsterSizeIcon {
+          margin-left: 15px;
+          margin-top: 15px;
+         transform: scale(1.5);
+         height: 32px;
+         width: 32px;
+         
+        }
+        
     }
     .monsterImage {
       display: grid;
@@ -80,7 +84,7 @@ body {
       background-repeat: no-repeat;
       background-position: center;
       margin-left: 18px;
-      margin-TOP: 18px;
+      margin-top: 18px;
       
     }
 
@@ -139,34 +143,29 @@ body {
   
   #monsterSettings {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     background-color: #BEEEEB;
     margin-top: 10px;
     border-radius: 15px;
     width: 95%;
+    justify-content: space-around;
     align-items: center;
     justify-self: center;
     text-align: center;
   }
-  
-  .sliders {
+
+  #monsterTypeSelect, #monsterDietSelect, #monsterSizeSelect {
     display: flex;
-    flex-direction: column;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: end;
+    flex-wrap: wrap;
+    width: 100px;
   }
 
+  #done-button {
+    margin-top: 10px;
+    display: flex;
+    justify-self: end;
+  }
 
-#monsterSettingsDropdowns {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 
   #monsterGallery {

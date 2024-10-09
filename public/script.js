@@ -150,30 +150,32 @@ const addMonsterToArray = () => {
   // VAD SOM BEHÖVER GÖRAS:
   // Se över denna kod så att den matchar inputform
   // Skapa kod som tillåter det här att redigeras på ett ställe (VG NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I HELA PROJEKTET (ELLER SÅ ÄR DET JAG SOM ÄR KORKAD))
-  /*  const monsterName = document.getElementById("monsterName").value;
-  const monsterType = document.getElementById("monsterType").value;
-  const monsterHorns = document.getElementById("monsterHorns").value;
-  const monsterLegs = document.getElementById("monsterLegs").value;
-  const monsterEyes = document.getElementById("monsterEyes").value;
-  const monsterTentacles = document.getElementById("monsterTentacles").value; */
+  /*   const monsterName = document.getElementById("monsterName").value; */
 
-  const monsterType = "test";
-  const monsterName = "test";
-  const monsterColor = "test";
-  const monsterHorns = "test";
-  const monsterEyes = "test";
-  const monsterLegs = "test";
-  const monsterTentacles = "test";
+  // 9/10 - Nya värden som funkar bra vvvvvvvv
+  const newmonsterDiet = monsterDiet.value;
+  const newmonsterType = monsterType.value;
+  const newmonsterSize = monsterSize.value;
+  const tentaclesSlider = document.querySelector("#tentaclesSlider");
+  const hornsSlider = document.querySelector("#hornsSlider");
+  const legsSlider = document.querySelector("#legsSlider");
+  const eyesSlider = document.querySelector("#eyesSlider");
+  const monsterTentacle = tentaclesSlider.value;
+  const monsterHorn = hornsSlider.value;
+  const monsterLegs = legsSlider.value;
+  const monsterEyes = eyesSlider.value;
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
-    name: monsterName,
-    monsterType: monsterType,
-    monsterColor: monsterColor,
-    monsterHorns: monsterHorns,
+    /*     name: monsterName, */
+    monsterType: newmonsterType,
+    /*     monsterColor: monsterColor, */
+    monsterDiet: newmonsterDiet,
+    monsterSize: newmonsterSize,
+    monsterHorns: monsterHorn,
     monsterLegs: monsterLegs,
     monsterEyes: monsterEyes,
-    monsterTentacles: monsterTentacles,
+    monsterTentacles: monsterTentacle,
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -190,7 +192,7 @@ const addMonsterToArray = () => {
 
   // LÄGG TILL MONSTRET I VÅR ARRAY
   monsters.push(newMonster);
-  console.log(monsters);
+  console.log(newMonster);
   // VAD SOM BEHÖVER GÖRAS:
   // EN FUNKTION FÖR ATT RENSA FORMULÄRET
 
@@ -268,63 +270,29 @@ const renderMonsters = (filteredMonsters = monsters) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const monsterDietSelectSettings = document.querySelector("#monsterDietSelect");
-const monsterDietSelectFilter = document.querySelector(
-  "#monsterDietSelectFilter"
-);
-const monsterDietTypes = [
+// 9/10 - Ändrat om här, vet inte om vi vill ha det såhär  vvvvvvvvvvvvvvv
+const monsterDiet = document.querySelector("#monsterDietSelect");
+const monsterDietFilter = document.querySelector("#monsterDietSelectFilter");
+const monsterType = document.querySelector("#monsterTypeSelect");
+const mosterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
+
+const monsterSize = document.querySelector("#monsterSizeSelect");
+const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
+const monsterDiets = [
   "🥩Flesh-Muncher",
   "🥬Leaf-Cruncher",
   "🗑️Non-Pesky-Omnivore",
 ];
 
-const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
-function dietDropdown(dietSelect) {
-  for (let i = 0; i < monsterDietTypes.length; i++) {
-    let choice = monsterDietTypes[i];
-
-    let dropRow = document.createElement("option");
-    dropRow.text = choice;
-    dropRow.value = choice;
-    dietSelect.appendChild(dropRow);
-  }
-}
-
-dietDropdown(monsterDietSelectSettings);
-dietDropdown(monsterDietSelectFilter);
-
-// Optimera
-// Slå ihop funktionerna i det här stycket
-const monsterTypeSelectSettings = document.querySelector("#monsterTypeSelect");
-const mosterTypeSelectFilter = document.querySelector(
-  "#monsterTypeSelectFilter"
-);
-let monsterTypes = [
+const monsterTypes = [
   "🐒Humanoid",
   "🍄Fungal",
   "🪨Titan",
   "🪳Insectiod",
   "🧌Troll",
 ];
-function typeDropdown(typeSelect) {
-  for (let i = 0; i < monsterTypes.length; i++) {
-    let choice = monsterTypes[i];
 
-    let dropRow = document.createElement("option");
-    dropRow.text = choice;
-    dropRow.value = choice;
-
-    typeSelect.appendChild(dropRow);
-  }
-}
-typeDropdown(monsterTypeSelectSettings);
-typeDropdown(mosterTypeSelectFilter);
-
-const monsterSizeSelectSetting = document.querySelector("#monsterSizeSelect");
-const monsterSizeSelectFilter = document.querySelector(
-  "#monsterSizeSelectFilter"
-);
-let monsterSize = [
+const monsterSizes = [
   "🤏Pinky-Small",
   "🦒Long-Legs",
   "🐓Average-bin",
@@ -332,49 +300,73 @@ let monsterSize = [
   "🌿Tree-Twig",
 ];
 
-function sizeDropdown(sizeSelect) {
-  for (let i = 0; i < monsterSize.length; i++) {
-    let choice = monsterSize[i];
+const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
 
-    let dropRow = document.createElement("option");
-    dropRow.text = choice;
-    dropRow.value = choice;
-
-    sizeSelect.appendChild(dropRow);
+/* New updated "for of" loop instead of normal "for" loops. Looks cleaner*/
+function dietDropdown(dietSelect) {
+  for (const diet of monsterDiets) {
+    const newMonsterDiet = document.createElement("option");
+    newMonsterDiet.innerHTML = diet;
+    newMonsterDiet.value = diet;
+    dietSelect.appendChild(newMonsterDiet);
   }
 }
 
-sizeDropdown(monsterSizeSelectSetting);
-sizeDropdown(monsterSizeSelectFilter);
+function typeDropdown(typeSelect) {
+  for (const type of monsterTypes) {
+    const newMonsterType = document.createElement("option");
+    newMonsterType.innerHTML = type;
+    newMonsterType.value = type;
+    typeSelect.appendChild(newMonsterType);
+  }
+}
+
+function sizeDropdown(sizeSelect) {
+  for (const size of monsterSizes) {
+    const newMonsterSize = document.createElement("option");
+    newMonsterSize.text = size;
+    newMonsterSize.value = size;
+    sizeSelect.appendChild(newMonsterSize);
+  }
+}
+
+dietDropdown(monsterDiet);
+dietDropdown(monsterDietFilter);
+typeDropdown(monsterType);
+typeDropdown(mosterTypeFilter);
+sizeDropdown(monsterSize);
+sizeDropdown(monsterSizeFilter);
+
+//Ändrat om tills hit ^^^^^^^^^^^^
 
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 // Optimera om vi har tid
 
 // Fixa så att det inte är en ful if-sats
-monsterDietSelectSettings.addEventListener("change", () => {
+monsterDiet.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 
-  if (monsterDietSelectSettings.value === "🥩Flesh-Muncher") {
+  if (monsterDiet.value === "🥩Flesh-Muncher") {
     monsterTypeIcon.innerHTML = "🥩";
-  } else if (monsterDietSelectSettings.value === "🥬Leaf-Cruncher") {
+  } else if (monsterDiet.value === "🥬Leaf-Cruncher") {
     monsterTypeIcon.innerHTML = "🥬";
-  } else if (monsterDietSelectSettings.value === "🗑️Non-Pesky-Omnivore") {
+  } else if (monsterDiet.value === "🗑️Non-Pesky-Omnivore") {
     monsterTypeIcon.innerHTML = "🗑️";
   }
 });
 
-monsterTypeSelectSettings.addEventListener("change", () => {
+monsterType.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 
-  if (monsterTypeSelectSettings.value === "🐒Humanoid") {
+  if (monsterType.value === "🐒Humanoid") {
     monsterTypeIcon.innerHTML = "🐒";
-  } else if (monsterTypeSelectSettings.value === "🍄Fungal") {
+  } else if (monsterType.value === "🍄Fungal") {
     monsterTypeIcon.innerHTML = "🍄";
-  } else if (monsterTypeSelectSettings.value === "🪨Titan") {
+  } else if (monsterType.value === "🪨Titan") {
     monsterTypeIcon.innerHTML = "🪨";
-  } else if ((monsterTypeSelectSettings.value = "🪳Insectiod")) {
+  } else if ((monsterType.value = "🪳Insectiod")) {
     monsterTypeIcon.innerHTML = "🪳";
-  } else if ((monsterTypeSelectSettings.value = "🧌Troll")) {
+  } else if ((monsterType.value = "🧌Troll")) {
     monsterTypeIcon.innerHTML = "🧌";
   }
 });
@@ -395,18 +387,18 @@ dietSelect.addEventListener("change", () => {
 }); */
 
 const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
-monsterSizeSelectSetting.addEventListener("change", () => {
+monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";
 
-  if (monsterSizeSelectSetting.value === "🤏Pinky-Small") {
+  if (monsterSize.value === "🤏Pinky-Small") {
     monsterSizeIcon.innerHTML = "🤏";
-  } else if (monsterSizeSelectSetting.value === "🦒Long-Legs") {
+  } else if (monsterSize.value === "🦒Long-Legs") {
     monsterSizeIcon.innerHTML = "🦒";
-  } else if (monsterSizeSelectSetting.value === "🐓Average-Bin") {
+  } else if (monsterSize.value === "🐓Average-Bin") {
     monsterSizeIcon.innerHTML = "🐓";
-  } else if (monsterSizeSelectSetting.value === "🌋Crippled-Mountain") {
+  } else if (monsterSize.value === "🌋Crippled-Mountain") {
     monsterSizeIcon.innerHTML = "🌋";
-  } else if (monsterSizeSelectSetting.value === "🌿Tree-Twig") {
+  } else if (monsterSize.value === "🌿Tree-Twig") {
     monsterSizeIcon.innerHTML = "🌿";
   }
 });

@@ -121,6 +121,15 @@ const monsters = [
   },
 ];
 
+const colors = ["red", "black", "blue", "yellow", "green"];
+
+const colorsHtml = colors.map(
+  (color) =>
+    `<button class="color-box" style="background-color: ${color};"></button>`
+);
+
+let colorSelection = null;
+
 const editableValues = ["Tentacles", "Horns", "Eyes", "Legs"];
 
 const editableObjects = editableValues.map((value, index) => ({
@@ -142,8 +151,8 @@ const editableObjects = editableValues.map((value, index) => ({
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-//////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
-//////  SÖKORD: addMonster                //////////
+//////  FUNKTIONER ON LOAD                    //////////
+/////   SÖKORD: onLoad                       //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
@@ -153,18 +162,45 @@ const updateMonsterSliders = () => {
   monsterSliders.innerHTML = editableObjects.map((obj) => obj.html).join("");
 };
 
+const colorsToChooseFrom = document.querySelector("#colors-main");
+const updateColors = () => {
+  colorsToChooseFrom.innerHTML = colorsHtml.join("");
+  const colorDivs = document.querySelectorAll(".color-box");
+
+  colorDivs.forEach((div) => {
+    div.addEventListener("click", () => {
+      colorSelection = div.style.backgroundColor;
+      console.log(colorSelection);
+    });
+  });
+};
+
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
 window.onload = () => {
   renderMonsters();
   updateMonsterSliders();
-
+  updateColors();
   updateSliderValue("slider1", "value1");
   updateSliderValue("slider2", "value2");
   updateSliderValue("slider3", "value3");
   updateSliderValue("slider4", "value4");
 };
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ FUNKTIONER ON LOAD           //////////
+/////   SÖKORD: onLoad                       //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
+//////  SÖKORD: addMonster                //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 const doneButton = document.getElementById("done-button");
 
@@ -189,7 +225,7 @@ const addMonsterToArray = () => {
   const newMonster = {
     /*     name: monsterName, */
     monsterType: newmonsterType,
-    /*     monsterColor: monsterColor, */
+    monsterColor: colorSelection,
     monsterDiet: newmonsterDiet,
     monsterSize: newmonsterSize,
     monsterValueOne: sliderNumberOne,
@@ -218,6 +254,9 @@ const addMonsterToArray = () => {
 
   // FUNKTION FÖR ATT VISA MONSTER I LISTAN
   renderMonsters();
+
+  // Städa upp form
+  colorSelection = null;
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN

@@ -430,21 +430,6 @@ monsterType.addEventListener("change", () => {
   }
 });
 
-/* Tror inte vi behöver denna. Finns redan 2 funktioner upp 
-const monsterDietIcon = document.querySelector(".monsterDietIcon");
-// Optimera om vi har tid
-dietSelect.addEventListener("change", () => {
-  monsterDietIcon.innerHTML = "";
-
-  if (dietSelect.value === "🥩Flesh-Muncher") {
-    monsterDietIcon.innerHTML = "🥩";
-  } else if (dietSelect.value === "🥬Leaf-Cruncher") {
-    monsterDietIcon.innerHTML = "🥬";
-  } else if (dietSelect.value === "🗑️Non-Pesky-Omnivore") {
-    monsterDietIcon.innerHTML = "🗑️";
-  }
-}); */
-
 const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
 monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";

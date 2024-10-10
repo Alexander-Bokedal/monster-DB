@@ -121,6 +121,18 @@ const monsters = [
   },
 ];
 
+const editableValues = ["Tentacles", "Horns", "Eyes", "Legs"];
+
+const editableObjects = editableValues.map((value, index) => ({
+  name: value,
+  html: `<div class="slider">
+    <label for="${value}">${value}</label>
+    <br />
+    <input type="range" id="slider${index + 1}" min="0" max="6" />
+    <span id="value${index + 1}"></span>
+  </div>`,
+}));
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ GLOBALA VARIABLER             //////////
@@ -135,11 +147,23 @@ const monsters = [
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+const monsterSliders = document.querySelector("#sliders");
+
+const updateMonsterSliders = () => {
+  monsterSliders.innerHTML = editableObjects.map((obj) => obj.html).join("");
+};
+
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
-onload = () => {
+window.onload = () => {
   renderMonsters();
+  updateMonsterSliders();
+
+  updateSliderValue("slider1", "value1");
+  updateSliderValue("slider2", "value2");
+  updateSliderValue("slider3", "value3");
+  updateSliderValue("slider4", "value4");
 };
 
 const doneButton = document.getElementById("done-button");
@@ -156,10 +180,10 @@ const addMonsterToArray = () => {
   const newmonsterDiet = monsterDiet.value;
   const newmonsterType = monsterType.value;
   const newmonsterSize = monsterSize.value;
-  const monsterTentacle = document.querySelector("#tentaclesSlider").value;
-  const monsterHorn = document.querySelector("#hornsSlider").value;
-  const monsterLegs = document.querySelector("#legsSlider").value;
-  const monsterEyes = document.querySelector("#eyesSlider").value;
+  const sliderNumberOne = document.querySelector("#slider1").value;
+  const sliderNumberTwo = document.querySelector("#slider2").value;
+  const sliderNumberThree = document.querySelector("#slider3").value;
+  const sliderNumberFour = document.querySelector("#slider4").value;
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
@@ -168,10 +192,10 @@ const addMonsterToArray = () => {
     /*     monsterColor: monsterColor, */
     monsterDiet: newmonsterDiet,
     monsterSize: newmonsterSize,
-    monsterHorns: monsterHorn,
-    monsterLegs: monsterLegs,
-    monsterEyes: monsterEyes,
-    monsterTentacles: monsterTentacle,
+    monsterValueOne: sliderNumberOne,
+    monsterValueTwo: sliderNumberTwo,
+    monsterValueThree: sliderNumberThree,
+    monsterValueFour: sliderNumberFour,
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -229,10 +253,10 @@ const renderMonsters = (filteredMonsters = monsters) => {
           <h2 class="monsterName">${monster.name}</h2>
           <p class="monsterType">Monster Type: ${monster.monsterType}</p>
           <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
-          <p class="monsterHorns">Horns: ${monster.monsterHorns}</p>
-          <p class="monsterLegs">Legs: ${monster.monsterLegs}</p>
-          <p class="monsterEyes">Eyes: ${monster.monsterEyes}</p>
-          <p class="monsterTentacles">Tentacles: ${monster.monsterTentacles}</p>
+          <p class="editableValueOne">${editableValues[0]}: ${monster.monsterValueOne}</p>
+          <p class="editableValueTwo">${editableValues[1]}: ${monster.monsterValueTwo}</p>
+          <p class="editableValueThree">${editableValues[2]}: ${monster.monsterValueThree}</p>
+          <p class="editableValueFour">${editableValues[3]}: ${monster.monsterValueFour}</p>
           <button class="deleteButton"> Delete </button>
           <button class="editButton"> Edit </button>
         </div>
@@ -426,11 +450,6 @@ function updateSliderValue(sliderId, valueId) {
     valueDisplay.textContent = slider.value;
   });
 }
-
-updateSliderValue("hornsSlider", "hornsValue");
-updateSliderValue("legsSlider", "legsValue");
-updateSliderValue("eyesSlider", "eyesValue");
-updateSliderValue("tentaclesSlider", "tentaclesValue");
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

@@ -247,20 +247,20 @@ main {
   .monsterName,
   .monsterType,
   .monsterColor,
-  .monsterHorns,
-  .monsterLegs,
-  .monsterEyes,
-  .monsterTentacles {
+  .editableValueOne,
+  .editableValueTwo,
+  .editableValueThree,
+  .editableValueFour {
     text-align: center;
   }
 
   @media screen and (max-width: 600px) {
     .monsterType,
     .monsterColor,
-    .monsterHorns,
-    .monsterLegs,
-    .monsterEyes,
-    .monsterTentacles {
+    .editableValueOne,
+    .editableValueTwo,
+    .editableValueThree,
+    .editableValueFour {
       display: none;
     }
   }

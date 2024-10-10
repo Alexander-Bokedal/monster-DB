@@ -156,14 +156,10 @@ const addMonsterToArray = () => {
   const newmonsterDiet = monsterDiet.value;
   const newmonsterType = monsterType.value;
   const newmonsterSize = monsterSize.value;
-  const tentaclesSlider = document.querySelector("#tentaclesSlider");
-  const hornsSlider = document.querySelector("#hornsSlider");
-  const legsSlider = document.querySelector("#legsSlider");
-  const eyesSlider = document.querySelector("#eyesSlider");
-  const monsterTentacle = tentaclesSlider.value;
-  const monsterHorn = hornsSlider.value;
-  const monsterLegs = legsSlider.value;
-  const monsterEyes = eyesSlider.value;
+  const monsterTentacle = document.querySelector("#tentaclesSlider").value;
+  const monsterHorn = document.querySelector("#hornsSlider").value;
+  const monsterLegs = document.querySelector("#legsSlider").value;
+  const monsterEyes = document.querySelector("#eyesSlider").value;
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {

@@ -28,16 +28,35 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+// Globala arryer för att kunna applicera multipla filter
 let activeFilters = {
   types: [],
   colors: [],
 };
 
+// Array med färger som går att ändra till valfria färger
+// Tänk på att färgen du ändrar till måste vara en färg som css accepterar
+// Än så länge så behöver färgen skrivas i klar text, dvs inte #fffff
+// Optimera: Ordna så att färgen kan skrivas som #fffff
+// För att optimera behöver den göras till en array av objekt
+
+const colors = ["red", "black", "blue", "yellow", "green"];
+
+const colorsHtml = colors.map(
+  (color) =>
+    `<button class="color-box" style="background-color: ${color};"></button>`
+);
+
+let colorSelection = null;
+
+// Lista med förutbestämda monster
+// Den här är till för att lättare kunna arbeta med innehållet på hemsidan
+// Kommentera ut det här om du vill ha bort listan med monster
 const monsters = [
   {
     name: "Henke Penke",
     monsterType: "Strong",
-    monsterColor: "White",
+    monsterColor: colors[0],
     monsterHorns: 17,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -54,7 +73,7 @@ const monsters = [
   {
     name: "Boke Dale",
     monsterType: "Weak",
-    monsterColor: "Blue",
+    monsterColor: colors[1],
     monsterHorns: 5,
     monsterLegs: 2,
     monsterEyes: 2,
@@ -71,7 +90,7 @@ const monsters = [
   {
     name: "Khani Bani",
     monsterType: "Strong",
-    monsterColor: "Red",
+    monsterColor: colors[2],
     monsterHorns: 3,
     monsterLegs: 2,
     monsterEyes: 1,
@@ -88,7 +107,7 @@ const monsters = [
   {
     name: "Denni Penni",
     monsterType: "Anime",
-    monsterColor: "Black",
+    monsterColor: colors[3],
     monsterHorns: 6,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -105,7 +124,7 @@ const monsters = [
   {
     name: "Affe Baffe",
     monsterType: "Wow",
-    monsterColor: "Yellow",
+    monsterColor: colors[4],
     monsterHorns: 6,
     monsterLegs: 2,
     monsterEyes: 4,
@@ -120,15 +139,6 @@ const monsters = [
     },
   },
 ];
-
-const colors = ["red", "black", "blue", "yellow", "green"];
-
-const colorsHtml = colors.map(
-  (color) =>
-    `<button class="color-box" style="background-color: ${color};"></button>`
-);
-
-let colorSelection = null;
 
 const editableValues = ["Tentacles", "Horns", "Eyes", "Legs"];
 
@@ -168,20 +178,23 @@ const updateColors = () => {
   const colorDivs = document.querySelectorAll(".color-box");
 
   colorDivs.forEach((div) => {
-    div.addEventListener("click", () => {
+    div.addEventListener("click", (event) => {
+      event.preventDefault();
       colorSelection = div.style.backgroundColor;
+      document.querySelector(
+        ".show-color-selection"
+      ).innerHTML = `<p style="color: ${colorSelection}">${colorSelection}</p>`;
       console.log(colorSelection);
     });
   });
 };
 
-// Lista med förutbestämda monster
-// Den här är till för att lättare kunna arbeta med innehållet på hemsidan
-// Kommentera ut det här om du vill ha bort listan med monster
+// Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
   renderMonsters();
   updateMonsterSliders();
   updateColors();
+  updateColorFilters();
   updateSliderValue("slider1", "value1");
   updateSliderValue("slider2", "value2");
   updateSliderValue("slider3", "value3");
@@ -198,14 +211,17 @@ window.onload = () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
-//////  SÖKORD: addMonster                //////////
+//////  SÖKORD: addMonster                ////
+//////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
 const doneButton = document.getElementById("done-button");
 
 // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
-const addMonsterToArray = () => {
+const addMonsterToArray = (event) => {
+  event.preventDefault();
+
   //SKAPA BEHÅLLARE MED INNEHÅLL FRÅN INPUTFORM!
   // VAD SOM BEHÖVER GÖRAS:
   // Se över denna kod så att den matchar inputform
@@ -256,12 +272,17 @@ const addMonsterToArray = () => {
   renderMonsters();
 
   // Städa upp form
+  document.querySelector("#monsterSettings").reset();
   colorSelection = null;
+  updateSliderValue("slider1", "value1");
+  updateSliderValue("slider2", "value2");
+  updateSliderValue("slider3", "value3");
+  updateSliderValue("slider4", "value4");
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
-doneButton.addEventListener("click", () => {
-  addMonsterToArray();
+doneButton.addEventListener("click", (event) => {
+  addMonsterToArray(event);
 });
 
 ///////////////////////////////////////////////////////
@@ -337,11 +358,7 @@ const mosterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
 
 const monsterSize = document.querySelector("#monsterSizeSelect");
 const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
-const monsterDiets = [
-  "🥩Flesh-Muncher",
-  "🥬Leaf-Cruncher",
-  "🗑️Non-Pesky-Omnivore",
-];
+const monsterDiets = ["Flesh-Muncher", "Leaf-Cruncher", "Non-Pesky-Omnivore"];
 
 const monsterTypes = [
   "🐒Humanoid",
@@ -468,6 +485,9 @@ function updateSliderValue(sliderId, valueId) {
   let slider = document.getElementById(sliderId);
   let valueDisplay = document.getElementById(valueId);
 
+  if (!slider || !valueDisplay) {
+    return;
+  }
   valueDisplay.textContent = slider.value;
 
   slider.addEventListener("input", () => {
@@ -515,18 +535,57 @@ const applyFilter = () => {
   renderMonsters(filteredMonsters);
 };
 
+const updateColorFilters = () => {
+  const colorFilters = document.querySelector(".color-filters");
+  const colorFiltersHtml = colors.map((color) => {
+    return `<input type="checkbox" class="color-to-filter-by" id="${color}" name="${color}" />
+    <label for="${color}">${color}</label>`;
+  });
+
+  colorFilters.innerHTML = colorFiltersHtml.join("");
+
+  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
+
+  colorFilterDivs.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        activeFilters.colors.push(checkbox.id);
+        console.log(activeFilters.colors);
+      } else {
+        activeFilters.colors = activeFilters.colors.filter(
+          (filter) => filter !== checkbox.id
+        );
+        console.log(activeFilters.colors);
+      }
+      applyFilter();
+    });
+  });
+};
+
+/* const redFilter = document.querySelector("#red");
+redFilter.addEventListener("change", () => {
+  if (redFilter.checked) {
+    activeFilters.colors.push("Red");
+  } else {
+    activeFilters.colors = activeFilters.colors.filter(
+      (filter) => filter !== "Red"
+    );
+  }
+  applyFilter();
+}); */
+
 // Optimera
 // Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
 
 // Skapar en behåller för id strong, som är en checkbox i vår html
-const strongFilter = document.querySelector("#strong");
+/* const strongFilter = document.querySelector("#strong"); */
 
 // Lyssnar på om status på checkbox ändras
 // Om strongFilter === checked efter change så lägger vi till ett filter i vår filter array
 // Om den inte är checked efter change tar vi istället bort filtret från vår array
 // Sen körs applyFilter, vilket renderar ut monster utifrån filter OM det finns filter
 // Annars körs renderMonsters(), som ligger inuti funktionen applyFilter.
-strongFilter.addEventListener("change", () => {
+/* strongFilter.addEventListener("change", () => {
   if (strongFilter.checked) {
     activeFilters.types.push("Strong");
   } else {
@@ -547,19 +606,7 @@ animeFilter.addEventListener("change", () => {
     );
   }
   applyFilter();
-});
-
-const redFilter = document.querySelector("#red");
-redFilter.addEventListener("change", () => {
-  if (redFilter.checked) {
-    activeFilters.colors.push("Red");
-  } else {
-    activeFilters.colors = activeFilters.colors.filter(
-      (filter) => filter !== "Red"
-    );
-  }
-  applyFilter();
-});
+}); */
 
 //VAD SOM BEHÖVER GÖRAS:
 // Skriva ut info om hur många av varje typ det finns bredvid checkboxes
@@ -596,5 +643,3 @@ redFilter.addEventListener("change", () => {
 
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
-// Fundera på vilken funktionalitet som kan ligga i objekt (för VG-nivå)
-// Lista ut om varje monster ska ha en knapp för redigering eller om de ska vara en övergripande funktion

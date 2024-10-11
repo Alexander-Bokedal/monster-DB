@@ -27,15 +27,17 @@
 
         </div>
         <!--MONSTER MAIN WINDOW ENDS HERE-->
-        <div id="monsterSettings">
+        <form id="monsterSettings">
+          
           <div id="colors-main">
             
           </div>
+          <div class="show-color-selection">None</div>
           <div id="sliders">
            
         </div>
 
-        <div id="monsterSettingsDropdowns">
+        <form id="monsterSettingsDropdowns">
           <div id="monsterTypeOptions">
             <p>Monster Type</p>
             <select id="monsterTypeSelect">
@@ -59,8 +61,8 @@
           <div>
             <button id="done-button">Done?</button>
           </div>
-        </div>
-      </div>
+        </form>
+      </form>
       
       <!--MONSTER STTING ENDS HERE-->
 
@@ -77,14 +79,11 @@
               </select>
               <br /><br /><br /><br />
 
-              <input type="checkbox" id="strong" name="strong" />
-              <label for="strong"> Strong </label>
+    
+            </div>
 
-        <input type="checkbox" id="anime" name="anime" />
-        <label for="anime"> Anime </label>
+            <div class="color-filters">
 
-              <input type="checkbox" id="red" name="red" />
-              <label for="red"> Red </label>
             </div>
             <div id="monsterDiet">
               <p>Monster Diet</p>

@@ -135,7 +135,24 @@ const editableSliders = editableSliderNames.map((value, index) => ({
     <input type="range" id="slider${index + 1}" min="0" max="6" />
     <span id="value${index + 1}"></span>
   </div>`,
+  updateSliderValue() {
+    let slider = document.querySelector(`#slider${index + 1}`);
+
+    let valueDisplay = document.querySelector(`#value${index + 1}`);
+
+    valueDisplay.textContent = slider.value;
+
+    slider.addEventListener("input", (event) => {
+      valueDisplay.textContent = event.target.value;
+    });
+  },
 }));
+
+const initalizeSliders = () => {
+  editableSliders.forEach((slider) => {
+    slider.updateSliderValue();
+  });
+};
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -162,10 +179,10 @@ const updateColors = () => {
   colorsToChooseFrom.innerHTML = colorsHtml.join("");
   const colorDivs = document.querySelectorAll(".color-box");
 
-  colorDivs.forEach((div) => {
-    div.addEventListener("click", (event) => {
+  colorDivs.forEach((button) => {
+    button.addEventListener("click", (event) => {
       event.preventDefault();
-      colorSelection = div.style.backgroundColor;
+      colorSelection = button.style.backgroundColor;
       document.querySelector(
         ".show-color-selection"
       ).innerHTML = `<p style="color: ${colorSelection}">${colorSelection}</p>`;
@@ -180,10 +197,7 @@ window.onload = () => {
   updateMonsterSliders();
   updateColors();
   updateColorFilters();
-  updateSliderValue("slider1", "value1");
-  updateSliderValue("slider2", "value2");
-  updateSliderValue("slider3", "value3");
-  updateSliderValue("slider4", "value4");
+  initalizeSliders();
 };
 
 ///////////////////////////////////////////////////////
@@ -262,10 +276,7 @@ const addMonsterToArray = (event) => {
   document.querySelector("#monsterSettings").reset();
   colorSelection = null;
   document.querySelector(".show-color-selection").innerHTML = "None";
-  updateSliderValue("slider1", "value1");
-  updateSliderValue("slider2", "value2");
-  updateSliderValue("slider3", "value3");
-  updateSliderValue("slider4", "value4");
+  initalizeSliders();
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
@@ -487,20 +498,6 @@ monsterSize.addEventListener("change", () => {
 
 // Optimera
 // Lista ut hur det här fungerar för egen del
-
-function updateSliderValue(sliderId, valueId) {
-  let slider = document.getElementById(sliderId);
-  let valueDisplay = document.getElementById(valueId);
-
-  if (!slider || !valueDisplay) {
-    return;
-  }
-  valueDisplay.textContent = slider.value;
-
-  slider.addEventListener("input", () => {
-    valueDisplay.textContent = slider.value;
-  });
-}
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

@@ -30,7 +30,7 @@
 
 // Globala arryer för att kunna applicera multipla filter
 let activeFilters = {
-  types: [],
+  types: "",
   colors: [],
 };
 
@@ -229,9 +229,9 @@ const addMonsterToArray = (event) => {
   /*   const monsterName = document.getElementById("monsterName").value; */
 
   // 9/10 - Nya värden som funkar bra vvvvvvvv
-  const newmonsterDiet = monsterDiet.value;
-  const newmonsterType = monsterType.value;
-  const newmonsterSize = monsterSize.value;
+  const newMonsterDiet = monsterDiet.value;
+  const newMonsterType = monsterType.value;
+  const newMonsterSize = monsterSize.value;
   const sliderNumberOne = document.querySelector("#slider1").value;
   const sliderNumberTwo = document.querySelector("#slider2").value;
   const sliderNumberThree = document.querySelector("#slider3").value;
@@ -240,10 +240,10 @@ const addMonsterToArray = (event) => {
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
     /*     name: monsterName, */
-    monsterType: newmonsterType,
+    monsterType: newMonsterType,
     monsterColor: colorSelection,
-    monsterDiet: newmonsterDiet,
-    monsterSize: newmonsterSize,
+    monsterDiet: newMonsterDiet,
+    monsterSize: newMonsterSize,
     monsterValueOne: sliderNumberOne,
     monsterValueTwo: sliderNumberTwo,
     monsterValueThree: sliderNumberThree,
@@ -269,11 +269,12 @@ const addMonsterToArray = (event) => {
   // EN FUNKTION FÖR ATT RENSA FORMULÄRET
 
   // FUNKTION FÖR ATT VISA MONSTER I LISTAN
-  renderMonsters();
+  applyFilter();
 
   // Städa upp form
   document.querySelector("#monsterSettings").reset();
   colorSelection = null;
+  document.querySelector(".show-color-selection").innerHTML = "None";
   updateSliderValue("slider1", "value1");
   updateSliderValue("slider2", "value2");
   updateSliderValue("slider3", "value3");
@@ -311,7 +312,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
       <div class="monsterCard">
         <div class="monsterInfo">
           <h2 class="monsterName">${monster.name}</h2>
-          <p class="monsterType">Monster Type: ${monster.monsterType}</p>
+          <p class="monsterType">Monster Type: ${monster.newMonsterDiet}</p>
           <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
           <p class="editableValueOne">${editableValues[0]}: ${monster.monsterValueOne}</p>
           <p class="editableValueTwo">${editableValues[1]}: ${monster.monsterValueTwo}</p>
@@ -358,7 +359,11 @@ const mosterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
 
 const monsterSize = document.querySelector("#monsterSizeSelect");
 const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
-const monsterDiets = ["Flesh-Muncher", "Leaf-Cruncher", "Non-Pesky-Omnivore"];
+const monsterDiets = [
+  "🥩Flesh-Muncher",
+  "🥬Leaf-Cruncher",
+  "🗑️Non-Pesky-Omnivore",
+];
 
 const monsterTypes = [
   "🐒Humanoid",
@@ -517,8 +522,7 @@ const applyFilter = () => {
     const matchesType =
       // Om "types" är lika med 0 så finns det inga filter, och det här villkoret blir sant
       // Om "types" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
-      activeFilters.types.length === 0 ||
-      activeFilters.types.includes(monster.monsterType);
+      activeFilters.types === "" || activeFilters.types === monster.monsterDiet;
 
     // Om "colors" är lika med 0 så finns det inga filter, och det här villkoret blir sant
     // Om "color" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
@@ -534,6 +538,15 @@ const applyFilter = () => {
 
   renderMonsters(filteredMonsters);
 };
+
+const dietSelectFilter = document.querySelector("#monsterDietSelectFilter");
+
+dietSelectFilter.addEventListener("change", () => {
+  activeFilters.types = dietSelectFilter.value;
+  console.log(dietSelectFilter.value);
+  console.log(activeFilters.types);
+  applyFilter();
+});
 
 const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
@@ -557,6 +570,7 @@ const updateColorFilters = () => {
         );
         console.log(activeFilters.colors);
       }
+
       applyFilter();
     });
   });

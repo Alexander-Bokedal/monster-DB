@@ -218,20 +218,14 @@ main {
   .monsterName,
   .monsterType,
   .monsterColor,
-  .editableValueOne,
-  .editableValueTwo,
-  .editableValueThree,
-  .editableValueFour {
+  .editable-value {
     text-align: center;
   }
 
   @media screen and (max-width: 600px) {
     .monsterType,
     .monsterColor,
-    .editableValueOne,
-    .editableValueTwo,
-    .editableValueThree,
-    .editableValueFour {
+    .editable-value {
       display: none;
     }
   }

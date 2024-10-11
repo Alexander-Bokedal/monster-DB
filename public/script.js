@@ -57,10 +57,7 @@ const monsters = [
     name: "Henke Penke",
     monsterType: "Strong",
     monsterColor: colors[0],
-    monsterHorns: 17,
-    monsterLegs: 2,
-    monsterEyes: 4,
-    monsterTentacles: 10,
+    monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -74,10 +71,7 @@ const monsters = [
     name: "Boke Dale",
     monsterType: "Weak",
     monsterColor: colors[1],
-    monsterHorns: 5,
-    monsterLegs: 2,
-    monsterEyes: 2,
-    monsterTentacles: 7,
+    monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -91,10 +85,7 @@ const monsters = [
     name: "Khani Bani",
     monsterType: "Strong",
     monsterColor: colors[2],
-    monsterHorns: 3,
-    monsterLegs: 2,
-    monsterEyes: 1,
-    monsterTentacles: 17,
+    monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -108,10 +99,7 @@ const monsters = [
     name: "Denni Penni",
     monsterType: "Anime",
     monsterColor: colors[3],
-    monsterHorns: 6,
-    monsterLegs: 2,
-    monsterEyes: 4,
-    monsterTentacles: 3,
+    monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -125,10 +113,7 @@ const monsters = [
     name: "Affe Baffe",
     monsterType: "Wow",
     monsterColor: colors[4],
-    monsterHorns: 6,
-    monsterLegs: 2,
-    monsterEyes: 4,
-    monsterTentacles: 3,
+    monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -140,9 +125,9 @@ const monsters = [
   },
 ];
 
-const editableValues = ["Tentacles", "Horns", "Eyes", "Legs"];
+const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
 
-const editableObjects = editableValues.map((value, index) => ({
+const editableSliders = editableSliderNames.map((value, index) => ({
   name: value,
   html: `<div class="slider">
     <label for="${value}">${value}</label>
@@ -169,7 +154,7 @@ const editableObjects = editableValues.map((value, index) => ({
 const monsterSliders = document.querySelector("#sliders");
 
 const updateMonsterSliders = () => {
-  monsterSliders.innerHTML = editableObjects.map((obj) => obj.html).join("");
+  monsterSliders.innerHTML = editableSliders.map((obj) => obj.html).join("");
 };
 
 const colorsToChooseFrom = document.querySelector("#colors-main");
@@ -232,10 +217,15 @@ const addMonsterToArray = (event) => {
   const newMonsterDiet = monsterDiet.value;
   const newMonsterType = monsterType.value;
   const newMonsterSize = monsterSize.value;
-  const sliderNumberOne = document.querySelector("#slider1").value;
-  const sliderNumberTwo = document.querySelector("#slider2").value;
-  const sliderNumberThree = document.querySelector("#slider3").value;
-  const sliderNumberFour = document.querySelector("#slider4").value;
+  const sliderValuesToAddToMonsterObject = [];
+  const arrayOfAllSliders = document.querySelectorAll(".slider");
+  const amountOfSliders = arrayOfAllSliders.length;
+
+  for (let i = 0; i < amountOfSliders; i++) {
+    sliderValuesToAddToMonsterObject.push(
+      document.querySelector(`#slider${i + 1}`).value
+    );
+  }
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
@@ -244,10 +234,7 @@ const addMonsterToArray = (event) => {
     monsterColor: colorSelection,
     monsterDiet: newMonsterDiet,
     monsterSize: newMonsterSize,
-    monsterValueOne: sliderNumberOne,
-    monsterValueTwo: sliderNumberTwo,
-    monsterValueThree: sliderNumberThree,
-    monsterValueFour: sliderNumberFour,
+    monsterValues: sliderValuesToAddToMonsterObject,
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -308,21 +295,36 @@ const renderMonsters = (filteredMonsters = monsters) => {
   monsterGallery.innerHTML = "";
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
+    const objectsWithValuesToPresentInHtml = [];
+    let count = 0;
+    for (const element of editableSliderNames) {
+      let monsterAttribute = element;
+      let attributeValue = monster.monsterValues[count];
+      count++;
+      objectsWithValuesToPresentInHtml.push({
+        attribute: monsterAttribute,
+        value: attributeValue,
+      });
+    }
+
+    const valuesToPresentInHtml = objectsWithValuesToPresentInHtml
+      .map((obj) => {
+        return `<p class="editable-value">${obj.attribute}: ${obj.value}</p>`;
+      })
+      .join("");
+
     return `
-      <div class="monsterCard">
-        <div class="monsterInfo">
-          <h2 class="monsterName">${monster.name}</h2>
-          <p class="monsterType">Monster Type: ${monster.newMonsterDiet}</p>
-          <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
-          <p class="editableValueOne">${editableValues[0]}: ${monster.monsterValueOne}</p>
-          <p class="editableValueTwo">${editableValues[1]}: ${monster.monsterValueTwo}</p>
-          <p class="editableValueThree">${editableValues[2]}: ${monster.monsterValueThree}</p>
-          <p class="editableValueFour">${editableValues[3]}: ${monster.monsterValueFour}</p>
-          <button class="deleteButton"> Delete </button>
-          <button class="editButton"> Edit </button>
+        <div class="monsterCard">
+          <div class="monsterInfo">
+            <h2 class="monsterName">${monster.name}</h2>
+            <p class="monsterType">Monster Type: ${monster.newMonsterDiet}</p>
+            <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
+            ${valuesToPresentInHtml}
+            <button class="deleteButton"> Delete </button>
+            <button class="editButton"> Edit </button>
+          </div>
         </div>
-      </div>
-    `;
+      `;
   });
 
   monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");

@@ -35,17 +35,22 @@ let activeFilters = {
 };
 
 // Array med färger som går att ändra till valfria färger
-// Tänk på att färgen du ändrar till måste vara en färg som css accepterar
-// Än så länge så behöver färgen skrivas i klar text, dvs inte #fffff
-// Optimera: Ordna så att färgen kan skrivas som #fffff
-// För att optimera behöver den göras till en array av objekt
-
-const colors = ["red", "black", "blue", "yellow", "green"];
+// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
+// exempel "name: "White", color: "#fff""
+const colors = [
+  { name: "Red", color: "red" },
+  { name: "Black", color: "black" },
+  { name: "Blue", color: "blue" },
+  { name: "Yellow", color: "yellow" },
+  { name: "Green", color: "green" },
+];
 
 const colorsHtml = colors.map(
   (color) =>
-    `<button class="color-box" style="background-color: ${color};"></button>`
+    `<button class="color-box" id="${color.name}" style="background-color: ${color.color};"></button>`
 );
+
+const colorsNames = colors.map((color) => color.name);
 
 let colorSelection = null;
 
@@ -148,12 +153,6 @@ const editableSliders = editableSliderNames.map((value, index) => ({
   },
 }));
 
-const initalizeSliders = () => {
-  editableSliders.forEach((slider) => {
-    slider.updateSliderValue();
-  });
-};
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ GLOBALA VARIABLER             //////////
@@ -174,6 +173,12 @@ const updateMonsterSliders = () => {
   monsterSliders.innerHTML = editableSliders.map((obj) => obj.html).join("");
 };
 
+const initalizeSliders = () => {
+  editableSliders.forEach((slider) => {
+    slider.updateSliderValue();
+  });
+};
+
 const colorsToChooseFrom = document.querySelector("#colors-main");
 const updateColors = () => {
   colorsToChooseFrom.innerHTML = colorsHtml.join("");
@@ -183,9 +188,10 @@ const updateColors = () => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       colorSelection = button.style.backgroundColor;
+      let colorName = button.id;
       document.querySelector(
         ".show-color-selection"
-      ).innerHTML = `<p style="color: ${colorSelection}">${colorSelection}</p>`;
+      ).innerHTML = `<p style="color: ${colorSelection}">${colorName}</p>`;
       console.log(colorSelection);
     });
   });

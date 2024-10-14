@@ -15,7 +15,8 @@ body {
 main {
   display: grid;
   gap: 0px 10px;
-  margin: 0px 10px;
+  margin: 10px 10px;
+  gap: 10px 10px;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-template-areas:
@@ -29,26 +30,28 @@ main {
   main {
     display: grid;
     flex-wrap: wrap;
-    grid-template-columns: 1fr 1fr;
+    margin: 10px 15%;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
+    gap: 10px 10px;
     grid-template-areas:
-      "monsterPreviewMain monsterFilter"
-      "monsterPreviewMain monster-gallery-container"
-      "monsterPreviewMain monster-gallery-container"
-      "monsterSettings monster-gallery-container"
-      "monsterSettings monster-gallery-container";
+      "monsterPreviewMain monsterFilter monsterFilter"
+      "monsterPreviewMain monster-gallery-container monster-gallery-container "
+      "monsterSettings  monster-gallery-container monster-gallery-container"
+      "monsterSettings  monster-gallery-container monster-gallery-container"
+ 
+      ;
   }
 }
 
 #monsterPreviewMain {
   display: grid;
   grid-area: monsterPreviewMain;
-  justify-self: center;
+  justify-self: star;
   background-color: #beeeeb;
-  margin: 10px;
   border-radius: 15px;
   width: 100%;
-  height: 75dvh;
+  height: 55dvh;
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
@@ -94,12 +97,11 @@ main {
   }
 }
 
-#colors-main {
+#colors-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
-
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px 0;
   
   }
 
@@ -137,11 +139,13 @@ main {
 
 
 #monsterSettings {
-  display: flex;
+  display: grid;
+  flex-direction: row;
   flex-wrap: wrap;
   background-color: #beeeeb;
   border-radius: 15px;
   width: 100%;
+  margin: 0px 10px;
   justify-content: space-evenly;
   align-items: center;
   justify-self: center;
@@ -150,26 +154,62 @@ main {
 
 }
 
+#monster-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#monster-name {
+  width: 95%;
+  height: 25px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
+}
+
 #monsterTypeSelect,
 #monsterDietSelect,
 #monsterSizeSelect {
   display: flex;
   flex-wrap: wrap;
+  
   width: 100px;
+  margin-top: 10px;
+  border-radius: 20px;
   margin-right: 5px;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 }
 
 #done-button {
+  width: 95%;
+  height: 25px;
   margin-top: 10px;
   margin-bottom: 10px;
-  display: flex;
-  justify-self: end;
+  border-radius: 20px;
+  border: none;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 }
 
-#sliders {
+#slider-container {
   display: flex;
-  flex-direction: column;
+  width: 350px;
+
+  #sliders {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: end;
+    flex-direction: row;
+  }
 }
+
 
 
 #monsterFilter {
@@ -178,8 +218,7 @@ main {
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  margin: 10px;
-
+  margin: 0px 10px;
   align-items: center;
   justify-self: center;
   text-align: center;
@@ -187,19 +226,24 @@ main {
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
+
+}
+@media (min-width: 600px) {
+  #monsterFilter {
+    margin: 0px;
+
+  }
 }
 
 .monsterCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  min-height: 256px;
-  max-height: 100%;
+  min-height: 320px;
   width: 48%;
   font-size: 1em;
   border-radius: 20px;
-  background-color: #beeeeb;
+  background-color: #e4fcfa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   
   
@@ -208,12 +252,18 @@ main {
 @media (min-width: 600px) {
   .monsterCard {
     grid-template-columns: repeat(2, 1fr);
-    width: 28%;    
-    height: 50%;  
+    width: 20cap;    
+    height: 256px;  
     overflow: scroll;
     overflow: hidden;
     padding: 10px;
+
     
+  }
+  .monsterCard:hover {
+    transition: 1s;
+    transform: scale(1.2);
+    background-color: #ffffff;
   }
   .monsterCard:focus {
     overflow-y: scroll;
@@ -257,26 +307,32 @@ main {
   grid-area: monster-gallery-container;
   display: flex;
   flex-direction: row;
+  padding: 10px;
+  background-color: #beeeeb;
+  border-radius: 20px;
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 }
 
-  @media (min-width: 600px) {
-    #monster-gallery-container {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 5px;
-      min-height: 100%;
-      max-height: 650px;
-     overflow: hidden;
-    }
+@media (min-width: 600px) {
+  #monster-gallery-container {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    gap: 5px;
+    overflow: hidden;
   }
-  @media (min-width: 1024px) {
-    #monster-gallery-container {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      min-height: 100%;
-      max-height: 6200px; 
+}
+@media (min-width: 1024px) {
+  #monster-gallery-container {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    gap: 5px;
+    overflow: hidden;
+    max-height: 2fr;
+
 
     }
     #monster-gallery-container:hover {

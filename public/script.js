@@ -61,7 +61,7 @@ const monsters = [
   {
     name: "Henke Penke",
     monsterType: "Strong",
-    monsterColor: colors[0],
+    monsterColor: colors[0].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -75,7 +75,7 @@ const monsters = [
   {
     name: "Boke Dale",
     monsterType: "Weak",
-    monsterColor: colors[1],
+    monsterColor: colors[1].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -89,7 +89,7 @@ const monsters = [
   {
     name: "Khani Bani",
     monsterType: "Strong",
-    monsterColor: colors[2],
+    monsterColor: colors[2].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -103,7 +103,7 @@ const monsters = [
   {
     name: "Denni Penni",
     monsterType: "Anime",
-    monsterColor: colors[3],
+    monsterColor: colors[3].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -117,7 +117,7 @@ const monsters = [
   {
     name: "Affe Baffe",
     monsterType: "Wow",
-    monsterColor: colors[4],
+    monsterColor: colors[4].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -556,8 +556,8 @@ dietSelectFilter.addEventListener("change", () => {
 const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
   const colorFiltersHtml = colors.map((color) => {
-    return `<input type="checkbox" class="color-to-filter-by" id="${color}" name="${color}" />
-    <label for="${color}">${color}</label>`;
+    return `<input type="checkbox" class="color-to-filter-by" id="${color.color}" name="${color.color}" />
+    <label for="${color.name}">${color.name}</label>`;
   });
 
   colorFilters.innerHTML = colorFiltersHtml.join("");

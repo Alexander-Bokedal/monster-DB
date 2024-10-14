@@ -256,30 +256,41 @@ const addMonsterToArray = (event) => {
     );
   }
 
+  // Kod för att formatera namn
+
+  const formatText = (string) => {
+    let formattedText = "";
+    const splitArray = string.split(" ");
+    for (const element of splitArray) {
+      formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
+    }
+    return formattedText;
+  };
+
   // Kod för att förhindra submit om fields är tomma
   const checkIfFormFilled = document.querySelector(".check-if-form-filled");
   if (monsterName === "") {
-    checkIfFormFilled.innerHTML = "Please enter a name!";
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please enter a name! </p>`;
     return;
   } else if (newMonsterDiet === "") {
-    checkIfFormFilled.innerHTML = "Please selet a diet!";
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a diet! </p>`;
     return;
   } else if (newMonsterType === "") {
-    checkIfFormFilled.innerHTML = "Please selet a type!";
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a type! </p>`;
     return;
   } else if (newMonsterSize === "") {
-    checkIfFormFilled.innerHTML = "Please selet a size!";
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a size! </p>`;
     return;
   } else if (colorSelection === null) {
-    checkIfFormFilled.innerHTML = "Please selet a color!";
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a color! </p>`;
     return;
   }
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
-    name: monsterName,
+    name: formatText(monsterName),
     monsterType: newMonsterType,
-    monsterColor: colorSelection,
+    monsterColor: formatText(colorSelection),
     monsterDiet: newMonsterDiet,
     monsterSize: newMonsterSize,
     monsterValues: sliderValuesToAddToMonsterObject,

@@ -240,8 +240,6 @@ const addMonsterToArray = (event) => {
 
   //SKAPA BEHÅLLARE MED INNEHÅLL FRÅN INPUTFORM!
   // VAD SOM BEHÖVER GÖRAS:
-  // Se över denna kod så att den matchar inputform
-  // Skapa kod som tillåter det här att redigeras på ett ställe (VG NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I HELA PROJEKTET (ELLER SÅ ÄR DET JAG SOM ÄR KORKAD))
 
   // 9/10 - Nya värden som funkar bra vvvvvvvv
   const monsterName = monsterNameInputField.value;
@@ -256,6 +254,25 @@ const addMonsterToArray = (event) => {
     sliderValuesToAddToMonsterObject.push(
       document.querySelector(`#slider${i + 1}`).value
     );
+  }
+
+  // Kod för att förhindra submit om fields är tomma
+  const checkIfFormFilled = document.querySelector(".check-if-form-filled");
+  if (monsterName === "") {
+    checkIfFormFilled.innerHTML = "Please enter a name!";
+    return;
+  } else if (newMonsterDiet === "") {
+    checkIfFormFilled.innerHTML = "Please selet a diet!";
+    return;
+  } else if (newMonsterType === "") {
+    checkIfFormFilled.innerHTML = "Please selet a type!";
+    return;
+  } else if (newMonsterSize === "") {
+    checkIfFormFilled.innerHTML = "Please selet a size!";
+    return;
+  } else if (colorSelection === null) {
+    checkIfFormFilled.innerHTML = "Please selet a color!";
+    return;
   }
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
@@ -294,6 +311,7 @@ const addMonsterToArray = (event) => {
   colorSelection = null;
   document.querySelector(".show-color-selection").innerHTML = "";
   initalizeSliders();
+  checkIfFormFilled.innerHTML = "";
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN

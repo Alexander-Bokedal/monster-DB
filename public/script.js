@@ -216,14 +216,25 @@ window.onload = () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
-//////  SÖKORD: addMonster                ////
-//////
+//////  SÖKORD: addMonster                   ////
+//////                                       /////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
 const doneButton = document.getElementById("done-button");
+const monsterNameInputField = document.getElementById("monster-name");
+const checkNameLength = document.querySelector(".check-name-length");
 
-// FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
+monsterNameInputField.addEventListener("input", () => {
+  if (monsterNameInputField.value.length > 28) {
+    checkNameLength.innerHTML = "";
+    checkNameLength.innerHTML = `<p style="color:red">Name is too long!</p>`;
+    doneButton.disabled = true;
+  } else {
+    checkNameLength.innerHTML = "";
+    doneButton.disabled = false;
+  }
+}); // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = (event) => {
   event.preventDefault();
 
@@ -231,9 +242,9 @@ const addMonsterToArray = (event) => {
   // VAD SOM BEHÖVER GÖRAS:
   // Se över denna kod så att den matchar inputform
   // Skapa kod som tillåter det här att redigeras på ett ställe (VG NIVÅ - MÖJLIGTVIS DEN SVÅRASTE PUNKTEN I HELA PROJEKTET (ELLER SÅ ÄR DET JAG SOM ÄR KORKAD))
-  /*   const monsterName = document.getElementById("monsterName").value; */
 
   // 9/10 - Nya värden som funkar bra vvvvvvvv
+  const monsterName = monsterNameInputField.value;
   const newMonsterDiet = monsterDiet.value;
   const newMonsterType = monsterType.value;
   const newMonsterSize = monsterSize.value;
@@ -249,7 +260,7 @@ const addMonsterToArray = (event) => {
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
-    /*     name: monsterName, */
+    name: monsterName,
     monsterType: newMonsterType,
     monsterColor: colorSelection,
     monsterDiet: newMonsterDiet,
@@ -334,7 +345,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monsterCard" tabindex="0">
           <div class="monsterInfo">
             <h2 class="monsterName">${monster.name}</h2>
-            <p class="monsterType">Monster Type: ${monster.newMonsterDiet}</p>
+            <p class="monsterType">Monster Type: ${monster.monsterDiet}</p>
             <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
             ${valuesToPresentInHtml}
             <button class="deleteButton"> Delete </button>
@@ -445,7 +456,7 @@ const monsterDietIcon = document.querySelector(".monsterDietIcon");
 // Fixa så att det inte är en ful if-sats
 monsterDiet.addEventListener("change", () => {
   monsterDietIcon.innerHTML = "";
-  
+
   if (monsterDiet.value === "🥩Flesh-Muncher") {
     monsterDietIcon.innerHTML = "🥩";
   } else if (monsterDiet.value === "🥬Leaf-Cruncher") {

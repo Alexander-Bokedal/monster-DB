@@ -13,9 +13,9 @@
         <div id="monsterImageMain">
           <div class="monsterImage">
             <div id="monsterTypes">
-              <div class="monsterTypeIcon">X</div>
-              <div class="monsterDietIcon">X</div>
-              <div class="monsterSizeIcon">X</div>
+              <div class="monsterTypeIcon"></div>
+              <div class="monsterDietIcon"></div>
+              <div class="monsterSizeIcon"></div>
             
               <div class="show-color-selection"></div>
           
@@ -32,40 +32,36 @@
 
         <!--MONSTER SETTINGS STARTS HERE-->
         <form id="monsterSettings">
-          
-          <div id="colors-main">
-            
-          </div>
-          
-          <div id="sliders">
-           
-        </div>
-
-        <div id="monsterSettingsDropdowns">
-
+          <label for="monster-name">
+        <input id="monster-name" placeholder="Monster Name" type="text"></label>
+        <div id="monster-dropdown-container">
           <div id="monsterTypeOptions">
-            <p>Monster Type</p>
             <select id="monsterTypeSelect">
-              <option value="" disabled selected>Default</option>
+              <option value="" disabled selected>Type</option>
             </select>
           </div>
           <div id="monsterDietOptions">
-            <p>Monster Diet</p>
             <select id="monsterDietSelect">
-              <option value="" disabled selected>Default</option>
+              <option value="" disabled selected>Diet</option>
             </select>
           </div>
           <div id="monsterSizeOptions">
-            <p>Monster Size</p>
             <select id="monsterSizeSelect">
-              <option value="" disabled selected>Default</option>
+              <option value="" disabled selected>Size</option>
             </select>
-            
+          </div>  
+        </div>
+               
+        <div id="colors-container">
+        </div>
+        
+        <div id="slider-container">
+          <div id="sliders">
           </div>
-          
-          <div>
-            <button id="done-button">Done?</button>
-          </div>
+       </div>
+
+        <div>
+          <button id="done-button">Add</button>
         </div>
       </form>
       
@@ -105,7 +101,7 @@
       
       <!--FILTER ENDS HERE-->
       <!--ADDED A CONTAINER FOR MONSTER GALLERY-->
-      <div id="monster-gallery-container">
+      <div id="monster-gallery-container" tabindex="0">
         
       </div>
     </main>

@@ -179,7 +179,7 @@ const initalizeSliders = () => {
   });
 };
 
-const colorsToChooseFrom = document.querySelector("#colors-main");
+const colorsToChooseFrom = document.querySelector("#colors-container");
 const updateColors = () => {
   colorsToChooseFrom.innerHTML = colorsHtml.join("");
   const colorDivs = document.querySelectorAll(".color-box");
@@ -281,7 +281,7 @@ const addMonsterToArray = (event) => {
   // Städa upp form
   document.querySelector("#monsterSettings").reset();
   colorSelection = null;
-  document.querySelector(".show-color-selection").innerHTML = "None";
+  document.querySelector(".show-color-selection").innerHTML = "";
   initalizeSliders();
 };
 
@@ -439,22 +439,23 @@ sizeDropdown(monsterSizeFilter);
 
 //Ändrat om tills hit ^^^^^^^^^^^^
 
-const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
+const monsterDietIcon = document.querySelector(".monsterDietIcon");
 // Optimera om vi har tid
 
 // Fixa så att det inte är en ful if-sats
 monsterDiet.addEventListener("change", () => {
-  monsterTypeIcon.innerHTML = "";
-
+  monsterDietIcon.innerHTML = "";
+  
   if (monsterDiet.value === "🥩Flesh-Muncher") {
-    monsterTypeIcon.innerHTML = "🥩";
+    monsterDietIcon.innerHTML = "🥩";
   } else if (monsterDiet.value === "🥬Leaf-Cruncher") {
-    monsterTypeIcon.innerHTML = "🥬";
+    monsterDietIcon.innerHTML = "🥬";
   } else if (monsterDiet.value === "🗑️Non-Pesky-Omnivore") {
-    monsterTypeIcon.innerHTML = "🗑️";
+    monsterDietIcon.innerHTML = "🗑️";
   }
 });
 
+const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 monsterType.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
 

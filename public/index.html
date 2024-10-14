@@ -16,6 +16,8 @@
               <div class="monsterTypeIcon">X</div>
               <div class="monsterDietIcon">X</div>
               <div class="monsterSizeIcon">X</div>
+            
+              <div class="show-color-selection"></div>
           
             </div>
             </div>
@@ -27,24 +29,27 @@
 
         </div>
         <!--MONSTER MAIN WINDOW ENDS HERE-->
+
+        <!--MONSTER SETTINGS STARTS HERE-->
         <form id="monsterSettings">
           
           <div id="colors-main">
             
           </div>
-          <div class="show-color-selection">None</div>
+          
           <div id="sliders">
            
         </div>
 
-        <form id="monsterSettingsDropdowns">
+        <div id="monsterSettingsDropdowns">
+
           <div id="monsterTypeOptions">
             <p>Monster Type</p>
             <select id="monsterTypeSelect">
               <option value="" disabled selected>Default</option>
             </select>
           </div>
-          <div id="monsterDiet">
+          <div id="monsterDietOptions">
             <p>Monster Diet</p>
             <select id="monsterDietSelect">
               <option value="" disabled selected>Default</option>
@@ -61,50 +66,42 @@
           <div>
             <button id="done-button">Done?</button>
           </div>
-        </form>
+        </div>
       </form>
       
-      <!--MONSTER STTING ENDS HERE-->
+      <!--MONSTER SETTINGS ENDS HERE-->
 
       <!--FILTER STARTS HERE-->
       <div id="monsterFilter">
-        <div id="monsterSettings">
-          <div id="sliders"></div>
 
-          <div id="monsterSettingsDropdowns">
+          <div id="monsterFilterDropdowns">
             <div id="monsterTypeOptions">
               <p>Monster Type</p>
               <select id="monsterTypeSelectFilter">
                 <option value="" disabled selected>Default</option>
               </select>
-              <br /><br /><br /><br />
-
-    
             </div>
-
             <div class="color-filters">
-
             </div>
             <div id="monsterDiet">
               <p>Monster Diet</p>
               <select id="monsterDietSelectFilter">
                 <option value=""  selected>Default</option>
               </select>
-              <br /><br /><br /><br />
             </div>
             <div id="monsterSizeOptions">
               <p>Monster Size</p>
               <select id="monsterSizeSelectFilter">
                 <option value="" disabled selected>Default</option>
               </select>
-              <br /><br /><br /><br />
             </div>
             <div>
               <button id="done-button">Done?</button>
             </div>
           </div>
         </div>
-      
+        </div>
+          
       
       <!--FILTER ENDS HERE-->
       <!--ADDED A CONTAINER FOR MONSTER GALLERY-->

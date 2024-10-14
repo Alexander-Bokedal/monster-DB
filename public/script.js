@@ -59,7 +59,7 @@ let colorSelection = null;
 // Kommentera ut det här om du vill ha bort listan med monster
 const monsters = [
   {
-    name: "Henke Penke",
+    name: "Henke Penke Bennke Krenke",
     monsterType: "Strong",
     monsterColor: colors[0].color,
     monsterValues: [1, 2, 3, 4],
@@ -191,7 +191,7 @@ const updateColors = () => {
       let colorName = button.id;
       document.querySelector(
         ".show-color-selection"
-      ).innerHTML = `<p style="color: ${colorSelection}">${colorName}</p>`;
+      ).innerHTML = `<div class="show-color-selection" style="background-color: ${colorSelection}"></div>`;
       console.log(colorSelection);
     });
   });
@@ -331,7 +331,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
       .join("");
 
     return `
-        <div class="monsterCard">
+        <div class="monsterCard" tabindex="0">
           <div class="monsterInfo">
             <h2 class="monsterName">${monster.name}</h2>
             <p class="monsterType">Monster Type: ${monster.newMonsterDiet}</p>

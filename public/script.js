@@ -47,7 +47,7 @@ const colors = [
 
 const colorsHtml = colors.map(
   (color) =>
-    `<button class="color-box" id="${color.name}" style="background-color: ${color.color};"></button>`
+    `<button class="color-box" id="${color.name}-button" style="background-color: ${color.color};"></button>`
 );
 
 const colorsNames = colors.map((color) => color.name);
@@ -556,8 +556,8 @@ dietSelectFilter.addEventListener("change", () => {
 const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
   const colorFiltersHtml = colors.map((color) => {
-    return `<input type="checkbox" class="color-to-filter-by" id="${color.color}" name="${color.color}" />
-    <label for="${color.name}">${color.name}</label>`;
+    return `<input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}" />
+    <label for="${color.color}">${color.name}</label>`;
   });
 
   colorFilters.innerHTML = colorFiltersHtml.join("");

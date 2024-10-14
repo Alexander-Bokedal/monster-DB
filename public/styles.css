@@ -1,8 +1,12 @@
 * {
   box-sizing: content-box;
+
+
 }
 
+
 body {
+  
   margin: 0%;
   background-color: rgb(172, 172, 172);
   overflow-x: hidden;
@@ -10,10 +14,8 @@ body {
 
 main {
   display: grid;
-  gap: 10px;
-  margin-top: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
+  gap: 0px 10px;
+  margin: 0px 10px;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-template-areas:
@@ -43,10 +45,13 @@ main {
   grid-area: monsterPreviewMain;
   justify-self: center;
   background-color: #beeeeb;
+  margin: 10px;
   border-radius: 15px;
   width: 100%;
   height: 75dvh;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 
   .monsterNameMain {
     display: flex;
@@ -141,7 +146,8 @@ main {
   align-items: center;
   justify-self: center;
   text-align: center;
-  border: 2px solid rgb(0, 255, 0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 }
 
 #monsterTypeSelect,
@@ -161,7 +167,6 @@ main {
 }
 
 #sliders {
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
 }
@@ -173,22 +178,22 @@ main {
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
+  margin: 10px;
+
   align-items: center;
   justify-self: center;
   text-align: center;
   background-color: #beeeeb;
   border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+
 }
-
-
-  
 
 .monsterCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: solid 1px #ff0000;
   min-height: 256px;
   max-height: 100%;
   width: 48%;
@@ -203,10 +208,8 @@ main {
 @media (min-width: 600px) {
   .monsterCard {
     grid-template-columns: repeat(2, 1fr);
-    width: 28%;
-    
-    border: 2px solid red;
-    height: 50%;
+    width: 28%;    
+    height: 50%;  
     overflow: scroll;
     overflow: hidden;
     padding: 10px;
@@ -218,11 +221,8 @@ main {
 }
 
 .monsterInfo {
-  border: solid 1px #b5d30a;
   width: 100%;
 }
-
-
 
 .deleteButton {
   border: solid;
@@ -241,6 +241,10 @@ main {
   color: black;
 }
 
+.monsterName {
+  text-align: center;
+}
+
 @media screen and (max-width: 600px) {
   .monsterType,
   .monsterColor,
@@ -255,9 +259,7 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
   justify-content: space-between;
-  border: 2px solid red;
 }
 
   @media (min-width: 600px) {
@@ -267,7 +269,6 @@ main {
       min-height: 100%;
       max-height: 650px;
      overflow: hidden;
-      border: 2px solid red;
     }
   }
   @media (min-width: 1024px) {
@@ -275,12 +276,11 @@ main {
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
       min-height: 100%;
-      max-height: 650px;
-      
-      border: 2px solid red;
+      max-height: 6200px; 
 
     }
     #monster-gallery-container:hover {
       overflow-y: scroll;
     }
   }
+

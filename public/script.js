@@ -361,6 +361,8 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   // VAD SOM BEHÖVER GÖRAS:
   // Lägg till editknappar också
+  // 15/10 Updaterar hur många monster som är i monster arrayen
+  updateMonsterCount();
 };
 
 ///////////////////////////////////////////////////////
@@ -695,3 +697,11 @@ const monsters = [
     },
   },
 ];
+
+// 15/10 Funktion för att räkna och visa antal monster
+function updateMonsterCount() {
+  const monsterCounter = document.querySelector("#monster-counter");
+  const monsterCounterText = `Monsters: ${monsters.length}`;
+  monsterCounter.textContent = monsterCounterText;
+  console.log(monsterCounterText);
+}

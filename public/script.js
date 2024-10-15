@@ -146,7 +146,7 @@ const monsters = [
   },
 ];
 
-const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
+const editableSliderNames = ["Tentacles", "Horns", "Fredrik", "Legs"];
 
 const editableSliders = editableSliderNames.map((value, index) => ({
   name: value,
@@ -632,8 +632,8 @@ dietSelectFilter.addEventListener("change", () => {
 const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
   const colorFiltersHtml = colors.map((color) => {
-    return `<input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}" />
-    <label for="${color.color}">${color.name}</label>`;
+    return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}"  >
+    <label for="${color.color}">${color.name}</label> </span>`;
   });
 
   colorFilters.innerHTML = colorFiltersHtml.join("");

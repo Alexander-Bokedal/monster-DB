@@ -47,7 +47,13 @@ const colors = [
 
 const colorsHtml = colors.map(
   (color) =>
-    `<button class="color-box" id="${color.name}-button" style="background-color: ${color.color};"></button>`
+    `<div class="color-container">
+      <button class="color-box" 
+      id="${color.name}-button" 
+      style="background-color: ${color.color};"></button>
+      <p>${color.name}</p>
+      </div>`
+  
 );
 
 const colorsNames = colors.map((color) => color.name);
@@ -400,9 +406,11 @@ const renderMonsters = (filteredMonsters = monsters) => {
             <p class="monsterDiet">Monster Diet: ${monster.monsterDiet}</p>
             <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
             ${valuesToPresentInHtml}
+            </div>
+            <div class="monster-info-btns">
             <button class="deleteButton"> Delete </button>
             <button class="editButton"> Edit </button>
-          </div>
+            </div>
         </div>
       `;
   });

@@ -60,6 +60,17 @@ const colorsNames = colors.map((color) => color.name);
 
 let colorSelection = null;
 
+// Kod för att formatera namn
+
+const formatText = (string) => {
+  let formattedText = "";
+  const splitArray = string.split(" ");
+  for (const element of splitArray) {
+    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
+  }
+  return formattedText;
+};
+
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
@@ -67,7 +78,7 @@ const monsters = [
   {
     name: "Henke Penke Bennke Krenke",
     monsterDiet: "Strong",
-    monsterColor: colors[0].color,
+    monsterColor: formatText(colors[0].color),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -81,7 +92,7 @@ const monsters = [
   {
     name: "Boke Dale",
     monsterDiet: "Weak",
-    monsterColor: colors[1].color,
+    monsterColor: formatText(colors[1].color),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -95,7 +106,7 @@ const monsters = [
   {
     name: "Khani Bani",
     monsterDiet: "Strong",
-    monsterColor: colors[2].color,
+    monsterColor: formatText(colors[2].color),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -109,7 +120,7 @@ const monsters = [
   {
     name: "Denni Penni",
     monsterDiet: "Anime",
-    monsterColor: colors[3].color,
+    monsterColor: formatText(colors[3].color),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -123,7 +134,7 @@ const monsters = [
   {
     name: "Affe Baffe",
     monsterDiet: "Wow",
-    monsterColor: colors[4].color,
+    monsterColor: formatText(colors[4].color),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -158,17 +169,6 @@ const editableSliders = editableSliderNames.map((value, index) => ({
     });
   },
 }));
-
-// Kod för att formatera namn
-
-const formatText = (string) => {
-  let formattedText = "";
-  const splitArray = string.split(" ");
-  for (const element of splitArray) {
-    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
-  }
-  return formattedText;
-};
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -463,9 +463,9 @@ const monsterDiet = document.querySelector("#monsterDietSelect");
 const monsterDietFilter = document.querySelector("#monsterDietSelectFilter");
 const monsterType = document.querySelector("#monsterTypeSelect");
 const monsterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
-
 const monsterSize = document.querySelector("#monsterSizeSelect");
 const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
+
 const monsterDiets = [
   "🥩Flesh-Muncher",
   "🥬Leaf-Cruncher",
@@ -479,7 +479,6 @@ const monsterTypes = [
   "🪳Insectiod",
   "🧌Troll",
 ];
-
 const monsterSizes = [
   "🤏Pinky-Small",
   "🦒Long-Legs",
@@ -487,7 +486,6 @@ const monsterSizes = [
   "🌋Crippled-Mountain",
   "🌿Tree-Twig",
 ];
-
 const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
 
 /* New updated "for of" loop instead of normal "for" loops. Looks cleaner*/
@@ -508,7 +506,6 @@ function typeDropdown(typeSelect) {
     typeSelect.appendChild(newMonsterType);
   }
 }
-
 function sizeDropdown(sizeSelect) {
   for (const size of monsterSizes) {
     const newMonsterSize = document.createElement("option");
@@ -517,13 +514,11 @@ function sizeDropdown(sizeSelect) {
     sizeSelect.appendChild(newMonsterSize);
   }
 }
-
 dietDropdown(monsterDiet);
 dietDropdown(monsterDietFilter);
 typeDropdown(monsterType);
-typeDropdown(monsterTypeFilter);
+
 sizeDropdown(monsterSize);
-sizeDropdown(monsterSizeFilter);
 
 //Ändrat om tills hit ^^^^^^^^^^^^
 
@@ -542,11 +537,9 @@ monsterDiet.addEventListener("change", () => {
     monsterDietIcon.innerHTML = "🗑️";
   }
 });
-
 const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
 monsterType.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
-
   if (monsterType.value === "🐒Humanoid") {
     monsterTypeIcon.innerHTML = "🐒";
   } else if (monsterType.value === "🍄Fungal") {
@@ -559,11 +552,9 @@ monsterType.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🧌";
   }
 });
-
 const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
 monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";
-
   if (monsterSize.value === "🤏Pinky-Small") {
     monsterSizeIcon.innerHTML = "🤏";
   } else if (monsterSize.value === "🦒Long-Legs") {
@@ -576,7 +567,6 @@ monsterSize.addEventListener("change", () => {
     monsterSizeIcon.innerHTML = "🌿";
   }
 });
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ KOD för att visa MONSTERYPES /////////
@@ -656,11 +646,11 @@ const updateColorFilters = () => {
   colorFilterDivs.forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
       if (checkbox.checked) {
-        activeFilters.colors.push(checkbox.id);
+        activeFilters.colors.push(formatText(checkbox.id));
         console.log(activeFilters.colors);
       } else {
         activeFilters.colors = activeFilters.colors.filter(
-          (filter) => filter !== checkbox.id
+          (filter) => filter !== formatText(checkbox.id)
         );
         console.log(activeFilters.colors);
       }
@@ -669,52 +659,6 @@ const updateColorFilters = () => {
     });
   });
 };
-
-/* const redFilter = document.querySelector("#red");
-redFilter.addEventListener("change", () => {
-  if (redFilter.checked) {
-    activeFilters.colors.push("Red");
-  } else {
-    activeFilters.colors = activeFilters.colors.filter(
-      (filter) => filter !== "Red"
-    );
-  }
-  applyFilter();
-}); */
-
-// Optimera
-// Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
-
-// Skapar en behåller för id strong, som är en checkbox i vår html
-/* const strongFilter = document.querySelector("#strong"); */
-
-// Lyssnar på om status på checkbox ändras
-// Om strongFilter === checked efter change så lägger vi till ett filter i vår filter array
-// Om den inte är checked efter change tar vi istället bort filtret från vår array
-// Sen körs applyFilter, vilket renderar ut monster utifrån filter OM det finns filter
-// Annars körs renderMonsters(), som ligger inuti funktionen applyFilter.
-/* strongFilter.addEventListener("change", () => {
-  if (strongFilter.checked) {
-    activeFilters.types.push("Strong");
-  } else {
-    activeFilters.types = activeFilters.types.filter(
-      (filter) => filter !== "Strong"
-    );
-  }
-  applyFilter();
-});
-
-const animeFilter = document.querySelector("#anime");
-animeFilter.addEventListener("change", () => {
-  if (animeFilter.checked) {
-    activeFilters.types.push("Anime");
-  } else {
-    activeFilters.types = activeFilters.types.filter(
-      (filter) => filter !== "Anime"
-    );
-  }
-  applyFilter();
-}); */
 
 //VAD SOM BEHÖVER GÖRAS:
 // Skriva ut info om hur många av varje typ det finns bredvid checkboxes

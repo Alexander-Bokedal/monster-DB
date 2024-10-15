@@ -73,78 +73,6 @@ const formatText = (string) => {
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
-const monsters = [
-  {
-    name: "Henke Penke Bennke Krenke",
-    monsterDiet: "Strong",
-    monsterColor: formatText(colors[0].color),
-    monsterValues: [1, 2, 3, 4],
-    removeMonster() {
-      const index = monsters.indexOf(this);
-      if (index > -1) {
-        monsters.splice(index, 1);
-
-        applyFilter();
-      }
-    },
-  },
-  {
-    name: "Boke Dale",
-    monsterDiet: "Weak",
-    monsterColor: formatText(colors[1].color),
-    monsterValues: [1, 2, 3, 4],
-    removeMonster() {
-      const index = monsters.indexOf(this);
-      if (index > -1) {
-        monsters.splice(index, 1);
-
-        applyFilter();
-      }
-    },
-  },
-  {
-    name: "Khani Bani",
-    monsterDiet: "Strong",
-    monsterColor: formatText(colors[2].color),
-    monsterValues: [1, 2, 3, 4],
-    removeMonster() {
-      const index = monsters.indexOf(this);
-      if (index > -1) {
-        monsters.splice(index, 1);
-
-        applyFilter();
-      }
-    },
-  },
-  {
-    name: "Denni Penni",
-    monsterDiet: "Anime",
-    monsterColor: formatText(colors[3].color),
-    monsterValues: [1, 2, 3, 4],
-    removeMonster() {
-      const index = monsters.indexOf(this);
-      if (index > -1) {
-        monsters.splice(index, 1);
-
-        applyFilter();
-      }
-    },
-  },
-  {
-    name: "Affe Baffe",
-    monsterDiet: "Wow",
-    monsterColor: formatText(colors[4].color),
-    monsterValues: [1, 2, 3, 4],
-    removeMonster() {
-      const index = monsters.indexOf(this);
-      if (index > -1) {
-        monsters.splice(index, 1);
-
-        applyFilter();
-      }
-    },
-  },
-];
 
 const editableSliderNames = ["Tentacles", "Horns", "Fredrik", "Legs"];
 
@@ -247,10 +175,17 @@ testButton.addEventListener("click", (e) => {
   monsters.push({
     name: "Test Monster",
     monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
+    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(
       colors[Math.floor(Math.random() * colors.length)].color
     ),
-    monsterValues: [1, 2, 3, 4],
+    monsterValues: [
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+    ],
     removeMonster() {
       const index = monsters.indexOf(this);
       if (index > -1) {
@@ -695,3 +630,69 @@ const updateColorFilters = () => {
 
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
+const monsters = [
+  {
+    name: "Henke Penke Bennke Krenke",
+    monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
+    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
+    monsterColor: formatText(colors[0].color),
+    monsterValues: [
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+    ],
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        applyFilter();
+      }
+    },
+  },
+  {
+    name: "Boke Dale",
+    monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
+    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
+    monsterColor: formatText(colors[1].color),
+    monsterValues: [
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+    ],
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        applyFilter();
+      }
+    },
+  },
+
+  {
+    name: "Denni Penni",
+    monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
+    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
+    monsterColor: formatText(colors[3].color),
+    monsterValues: [
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 6),
+    ],
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        applyFilter();
+      }
+    },
+  },
+];

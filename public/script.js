@@ -662,52 +662,6 @@ const updateColorFilters = () => {
   });
 };
 
-/* const redFilter = document.querySelector("#red");
-redFilter.addEventListener("change", () => {
-  if (redFilter.checked) {
-    activeFilters.colors.push("Red");
-  } else {
-    activeFilters.colors = activeFilters.colors.filter(
-      (filter) => filter !== "Red"
-    );
-  }
-  applyFilter();
-}); */
-
-// Optimera
-// Går det att göra en funktion som skriver ut alla filter istället för att hardkoda?
-
-// Skapar en behåller för id strong, som är en checkbox i vår html
-/* const strongFilter = document.querySelector("#strong"); */
-
-// Lyssnar på om status på checkbox ändras
-// Om strongFilter === checked efter change så lägger vi till ett filter i vår filter array
-// Om den inte är checked efter change tar vi istället bort filtret från vår array
-// Sen körs applyFilter, vilket renderar ut monster utifrån filter OM det finns filter
-// Annars körs renderMonsters(), som ligger inuti funktionen applyFilter.
-/* strongFilter.addEventListener("change", () => {
-  if (strongFilter.checked) {
-    activeFilters.types.push("Strong");
-  } else {
-    activeFilters.types = activeFilters.types.filter(
-      (filter) => filter !== "Strong"
-    );
-  }
-  applyFilter();
-});
-
-const animeFilter = document.querySelector("#anime");
-animeFilter.addEventListener("change", () => {
-  if (animeFilter.checked) {
-    activeFilters.types.push("Anime");
-  } else {
-    activeFilters.types = activeFilters.types.filter(
-      (filter) => filter !== "Anime"
-    );
-  }
-  applyFilter();
-}); */
-
 //VAD SOM BEHÖVER GÖRAS:
 // Skriva ut info om hur många av varje typ det finns bredvid checkboxes
 

@@ -204,7 +204,7 @@ const updateColors = () => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       colorSelection = button.style.backgroundColor;
-      let colorName = button.id;
+
       document.querySelector(
         ".show-color-selection"
       ).innerHTML = `<div class="show-color-selection" style="background-color: ${colorSelection}"></div>`;

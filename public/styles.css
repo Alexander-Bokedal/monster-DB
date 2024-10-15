@@ -269,8 +269,7 @@ main {
     grid-template-columns: repeat(2, 1fr);
     width: 20cap;    
     height: 256px;  
-    overflow: scroll;
-    overflow: hidden;
+   
     padding: 10px;
 
     
@@ -280,13 +279,25 @@ main {
     transform: scale(1.05);
     background-color: #ffffff;
   }
-  .monsterCard:focus {
-    overflow-y: scroll;
-  } 
+  
 }
 
 .monsterInfo {
   width: 100%;
+  
+ 
+}
+
+@media (min-width: 600px) {
+  .monsterInfo {
+    width: 100%;
+    overflow: scroll;
+    overflow: hidden;
+   
+  }
+  .monsterInfo:focus {
+    overflow-y: scroll;
+  } 
 }
 
 .monster-info-btns {
@@ -294,6 +305,8 @@ main {
   flex-direction: row;
   justify-content: space-around;
 }
+
+
 
 .deleteButton {
   border: none;
@@ -323,7 +336,7 @@ main {
 }
 
 .monsterName,
-.monsterType,
+.monsterDiet,
 .monsterColor,
 .editable-value {
   color: black;
@@ -334,7 +347,7 @@ main {
 }
 
 @media screen and (max-width: 600px) {
-  .monsterType,
+  .monsterDiet,
   .monsterColor,
   .editable-value {
     display: none;

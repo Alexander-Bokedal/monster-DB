@@ -146,7 +146,20 @@ const monsters = [
   },
 ];
 
-const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
+const editableSliderNames = [
+  "Tentacles",
+  "Horns",
+  "Eyes",
+  "Legs",
+  "Tentacles",
+  "Horns",
+  "Eyes",
+  "Legs",
+  "Tentacles",
+  "Horns",
+  "Eyes",
+  "Legs",
+];
 
 const editableSliders = editableSliderNames.map((value, index) => ({
   name: value,
@@ -400,7 +413,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
     return `
         <div class="monsterCard" tabindex="0">
-          <div class="monsterInfo">
+          <div class="monsterInfo" tabindex="0">
             <h2 class="monsterName">${monster.name}</h2>
             <p class="monsterDiet">Monster Diet: ${monster.monsterDiet}</p>
             <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>

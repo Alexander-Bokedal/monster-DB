@@ -60,7 +60,7 @@ let colorSelection = null;
 const monsters = [
   {
     name: "Henke Penke Bennke Krenke",
-    monsterType: "Strong",
+    monsterDiet: "Strong",
     monsterColor: colors[0].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
@@ -74,7 +74,7 @@ const monsters = [
   },
   {
     name: "Boke Dale",
-    monsterType: "Weak",
+    monsterDiet: "Weak",
     monsterColor: colors[1].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
@@ -88,7 +88,7 @@ const monsters = [
   },
   {
     name: "Khani Bani",
-    monsterType: "Strong",
+    monsterDiet: "Strong",
     monsterColor: colors[2].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
@@ -102,7 +102,7 @@ const monsters = [
   },
   {
     name: "Denni Penni",
-    monsterType: "Anime",
+    monsterDiet: "Anime",
     monsterColor: colors[3].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
@@ -116,7 +116,7 @@ const monsters = [
   },
   {
     name: "Affe Baffe",
-    monsterType: "Wow",
+    monsterDiet: "Wow",
     monsterColor: colors[4].color,
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
@@ -222,8 +222,29 @@ window.onload = () => {
 ///////////////////////////////////////////////////////
 
 const doneButton = document.getElementById("done-button");
+const testButton = document.getElementById("test-button");
 const monsterNameInputField = document.getElementById("monster-name");
 const checkNameLength = document.querySelector(".check-name-length");
+
+testButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  monsters.push({
+    name: "Test Monster",
+    monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterColor: colors[Math.floor(Math.random() * colors.length)].color,
+    monsterValues: [1, 2, 3, 4],
+    removeMonster() {
+      const index = monsters.indexOf(this);
+      if (index > -1) {
+        monsters.splice(index, 1);
+
+        applyFilter();
+      }
+    },
+  });
+  console.log(monsters);
+  applyFilter();
+});
 
 monsterNameInputField.addEventListener("input", () => {
   if (monsterNameInputField.value.length > 28) {
@@ -374,7 +395,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monsterCard" tabindex="0">
           <div class="monsterInfo">
             <h2 class="monsterName">${monster.name}</h2>
-            <p class="monsterType">Monster Type: ${monster.monsterDiet}</p>
+            <p class="monsterDiet">Monster Diet: ${monster.monsterDiet}</p>
             <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
             ${valuesToPresentInHtml}
             <button class="deleteButton"> Delete </button>
@@ -567,11 +588,11 @@ const applyFilter = () => {
   const filteredMonsters = monsters.filter((monster) => {
     const matchesType =
       // Om "types" är lika med 0 så finns det inga filter, och det här villkoret blir sant
-      // Om "types" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
+      // Om "types" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
       activeFilters.types === "" || activeFilters.types === monster.monsterDiet;
 
     // Om "colors" är lika med 0 så finns det inga filter, och det här villkoret blir sant
-    // Om "color" har filter i sig returneras monstret bara om dess monsterType matchar det som finns i flitret.
+    // Om "color" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
     const matchesColor =
       activeFilters.colors.length === 0 ||
       activeFilters.colors.includes(monster.monsterColor);

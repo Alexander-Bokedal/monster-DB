@@ -278,7 +278,8 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra vvvvvvvv
   const monsterName = monsterNameInputField.value;
   const newMonsterDiet = monsterDiet.value;
-
+  const newMonsterType = monsterType.value;
+  const newMonsterSize = monsterSize.value;
   const sliderValuesToAddToMonsterObject = [];
   const arrayOfAllSliders = document.querySelectorAll(".slider");
   const amountOfSliders = arrayOfAllSliders.length;
@@ -297,6 +298,12 @@ const addMonsterToArray = (event) => {
   } else if (newMonsterDiet === "") {
     checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a diet! </p>`;
     return;
+  } else if (newMonsterType === "") {
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a type! </p>`;
+    return;
+  } else if (newMonsterSize === "") {
+    checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a size! </p>`;
+    return;
   } else if (colorSelection === null) {
     checkIfFormFilled.innerHTML = `<p style="color:red">Please selet a color! </p>`;
     return;
@@ -305,10 +312,10 @@ const addMonsterToArray = (event) => {
   // SKAPA ETT MONSTER SOM ETT OBJEKT
   const newMonster = {
     name: formatText(monsterName),
-
+    monsterType: newMonsterType,
     monsterColor: formatText(colorSelection),
     monsterDiet: newMonsterDiet,
-
+    monsterSize: newMonsterSize,
     monsterValues: sliderValuesToAddToMonsterObject,
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -431,7 +438,8 @@ clearFilterButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   monsterDietFilter.value = "";
-
+  monsterTypeFilter.value = "";
+  monsterSizeFilter.value = "";
   const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
   colorFilterDivs.forEach((checkbox) => {
     checkbox.checked = false;
@@ -445,6 +453,10 @@ clearFilterButton.addEventListener("click", (e) => {
 // 9/10 - Ändrat om här, vet inte om vi vill ha det såhär  vvvvvvvvvvvvvvv
 const monsterDiet = document.querySelector("#monsterDietSelect");
 const monsterDietFilter = document.querySelector("#monsterDietSelectFilter");
+const monsterType = document.querySelector("#monsterTypeSelect");
+const monsterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
+const monsterSize = document.querySelector("#monsterSizeSelect");
+const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
 
 const monsterDiets = [
   "🥩Flesh-Muncher",
@@ -452,6 +464,20 @@ const monsterDiets = [
   "🗑️Non-Pesky-Omnivore",
 ];
 
+const monsterTypes = [
+  "🐒Humanoid",
+  "🍄Fungal",
+  "🪨Titan",
+  "🪳Insectiod",
+  "🧌Troll",
+];
+const monsterSizes = [
+  "🤏Pinky-Small",
+  "🦒Long-Legs",
+  "🐓Average-bin",
+  "🌋Crippled-Mountain",
+  "🌿Tree-Twig",
+];
 const monsterTypeIcons = ["🥩", "🥬", "🗑️"];
 
 /* New updated "for of" loop instead of normal "for" loops. Looks cleaner*/
@@ -464,8 +490,27 @@ function dietDropdown(dietSelect) {
   }
 }
 
+function typeDropdown(typeSelect) {
+  for (const type of monsterTypes) {
+    const newMonsterType = document.createElement("option");
+    newMonsterType.innerHTML = type;
+    newMonsterType.value = type;
+    typeSelect.appendChild(newMonsterType);
+  }
+}
+function sizeDropdown(sizeSelect) {
+  for (const size of monsterSizes) {
+    const newMonsterSize = document.createElement("option");
+    newMonsterSize.text = size;
+    newMonsterSize.value = size;
+    sizeSelect.appendChild(newMonsterSize);
+  }
+}
 dietDropdown(monsterDiet);
 dietDropdown(monsterDietFilter);
+typeDropdown(monsterType);
+
+sizeDropdown(monsterSize);
 
 //Ändrat om tills hit ^^^^^^^^^^^^
 
@@ -484,7 +529,36 @@ monsterDiet.addEventListener("change", () => {
     monsterDietIcon.innerHTML = "🗑️";
   }
 });
-
+const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
+monsterType.addEventListener("change", () => {
+  monsterTypeIcon.innerHTML = "";
+  if (monsterType.value === "🐒Humanoid") {
+    monsterTypeIcon.innerHTML = "🐒";
+  } else if (monsterType.value === "🍄Fungal") {
+    monsterTypeIcon.innerHTML = "🍄";
+  } else if (monsterType.value === "🪨Titan") {
+    monsterTypeIcon.innerHTML = "🪨";
+  } else if ((monsterType.value = "🪳Insectiod")) {
+    monsterTypeIcon.innerHTML = "🪳";
+  } else if ((monsterType.value = "🧌Troll")) {
+    monsterTypeIcon.innerHTML = "🧌";
+  }
+});
+const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
+monsterSize.addEventListener("change", () => {
+  monsterSizeIcon.innerHTML = "";
+  if (monsterSize.value === "🤏Pinky-Small") {
+    monsterSizeIcon.innerHTML = "🤏";
+  } else if (monsterSize.value === "🦒Long-Legs") {
+    monsterSizeIcon.innerHTML = "🦒";
+  } else if (monsterSize.value === "🐓Average-Bin") {
+    monsterSizeIcon.innerHTML = "🐓";
+  } else if (monsterSize.value === "🌋Crippled-Mountain") {
+    monsterSizeIcon.innerHTML = "🌋";
+  } else if (monsterSize.value === "🌿Tree-Twig") {
+    monsterSizeIcon.innerHTML = "🌿";
+  }
+});
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ KOD för att visa MONSTERYPES /////////

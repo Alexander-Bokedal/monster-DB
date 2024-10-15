@@ -53,7 +53,6 @@ const colorsHtml = colors.map(
       style="background-color: ${color.color};"></button>
       <p>${color.name}</p>
       </div>`
-  
 );
 
 const colorsNames = colors.map((color) => color.name);
@@ -446,8 +445,6 @@ clearFilterButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   monsterDietFilter.value = "";
-  monsterTypeFilter.value = "";
-  monsterSizeFilter.value = "";
   const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
   colorFilterDivs.forEach((checkbox) => {
     checkbox.checked = false;

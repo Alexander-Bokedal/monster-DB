@@ -146,20 +146,7 @@ const monsters = [
   },
 ];
 
-const editableSliderNames = [
-  "Tentacles",
-  "Horns",
-  "Eyes",
-  "Legs",
-  "Tentacles",
-  "Horns",
-  "Eyes",
-  "Legs",
-  "Tentacles",
-  "Horns",
-  "Eyes",
-  "Legs",
-];
+const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
 
 const editableSliders = editableSliderNames.map((value, index) => ({
   name: value,

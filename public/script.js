@@ -402,8 +402,11 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monsterCard" tabindex="0">
           <div class="monsterInfo" tabindex="0">
             <h2 class="monsterName">${monster.name}</h2>
-            <p class="monsterDiet">Monster Diet: ${monster.monsterDiet}</p>
             <p class="monsterColor">Monster Color: ${monster.monsterColor}</p>
+            <p class="monsterDiet">Monster Diet: ${monster.monsterDiet}</p>
+            
+            <p class="monsterDiet">Monster Type: ${monster.monsterType}</p>
+            <p class="monsterColor">Monster Size: ${monster.monsterSize}</p>
             ${valuesToPresentInHtml}
             </div>
             <div class="monster-info-btns">

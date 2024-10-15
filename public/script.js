@@ -81,13 +81,13 @@ const editableSliders = editableSliderNames.map((value, index) => ({
   html: `<div class="slider">
     <label for="${value}">${value}</label>
     <br />
-    <input type="range" id="slider${index + 1}" min="0" max="6" />
-    <span id="value${index + 1}"></span>
+    <input type="range" id="slider${index}" min="0" max="6" />
+    <span id="value${index}"></span>
   </div>`,
   updateSliderValue() {
-    let slider = document.querySelector(`#slider${index + 1}`);
+    let slider = document.querySelector(`#slider${index}`);
 
-    let valueDisplay = document.querySelector(`#value${index + 1}`);
+    let valueDisplay = document.querySelector(`#value${index}`);
 
     valueDisplay.textContent = slider.value;
 
@@ -222,11 +222,10 @@ const addMonsterToArray = (event) => {
   const newMonsterSize = monsterSize.value;
   const sliderValuesToAddToMonsterObject = [];
   const arrayOfAllSliders = document.querySelectorAll(".slider");
-  const amountOfSliders = arrayOfAllSliders.length;
 
-  for (let i = 0; i < amountOfSliders; i++) {
+  for (let i = 0; i < arrayOfAllSliders.length; i++) {
     sliderValuesToAddToMonsterObject.push(
-      document.querySelector(`#slider${i + 1}`).value
+      document.querySelector(`#slider${i}`).value
     );
   }
 

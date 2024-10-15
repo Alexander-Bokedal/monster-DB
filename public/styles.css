@@ -34,12 +34,12 @@ main {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;
+    
     grid-template-areas:
       "monsterPreviewMain monsterFilter monsterFilter"
       "monsterPreviewMain monster-gallery-container monster-gallery-container "
       "monsterSettings  monster-gallery-container monster-gallery-container"
       "monsterSettings  monster-gallery-container monster-gallery-container"
- 
       ;
   }
 }
@@ -361,6 +361,7 @@ main {
     justify-content: space-between;
     gap: 5px;
     overflow: hidden;
+    max-height: 100vh;
   }
 }
 
@@ -370,7 +371,7 @@ main {
     justify-content: center;
     gap: 5px;
     overflow: hidden;
-    max-height: 2fr;
+    
 
 
     }

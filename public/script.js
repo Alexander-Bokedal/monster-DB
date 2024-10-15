@@ -153,6 +153,17 @@ const editableSliders = editableSliderNames.map((value, index) => ({
   },
 }));
 
+// Kod för att formatera namn
+
+const formatText = (string) => {
+  let formattedText = "";
+  const splitArray = string.split(" ");
+  for (const element of splitArray) {
+    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
+  }
+  return formattedText;
+};
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ GLOBALA VARIABLER             //////////
@@ -231,7 +242,9 @@ testButton.addEventListener("click", (e) => {
   monsters.push({
     name: "Test Monster",
     monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
-    monsterColor: colors[Math.floor(Math.random() * colors.length)].color,
+    monsterColor: formatText(
+      colors[Math.floor(Math.random() * colors.length)].color
+    ),
     monsterValues: [1, 2, 3, 4],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -276,17 +289,6 @@ const addMonsterToArray = (event) => {
       document.querySelector(`#slider${i + 1}`).value
     );
   }
-
-  // Kod för att formatera namn
-
-  const formatText = (string) => {
-    let formattedText = "";
-    const splitArray = string.split(" ");
-    for (const element of splitArray) {
-      formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
-    }
-    return formattedText;
-  };
 
   // Kod för att förhindra submit om fields är tomma
   const checkIfFormFilled = document.querySelector(".check-if-form-filled");
@@ -431,11 +433,28 @@ const renderMonsters = (filteredMonsters = monsters) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+const clearFilterButton = document.querySelector("#clear-filter-button");
+clearFilterButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  monsterDietFilter.value = "";
+  monsterTypeFilter.value = "";
+  monsterSizeFilter.value = "";
+  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
+  colorFilterDivs.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+
+  activeFilters.colors = [];
+  activeFilters.types = "";
+  applyFilter();
+});
+
 // 9/10 - Ändrat om här, vet inte om vi vill ha det såhär  vvvvvvvvvvvvvvv
 const monsterDiet = document.querySelector("#monsterDietSelect");
 const monsterDietFilter = document.querySelector("#monsterDietSelectFilter");
 const monsterType = document.querySelector("#monsterTypeSelect");
-const mosterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
+const monsterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
 
 const monsterSize = document.querySelector("#monsterSizeSelect");
 const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
@@ -494,7 +513,7 @@ function sizeDropdown(sizeSelect) {
 dietDropdown(monsterDiet);
 dietDropdown(monsterDietFilter);
 typeDropdown(monsterType);
-typeDropdown(mosterTypeFilter);
+typeDropdown(monsterTypeFilter);
 sizeDropdown(monsterSize);
 sizeDropdown(monsterSizeFilter);
 

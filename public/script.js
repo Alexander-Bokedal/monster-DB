@@ -68,7 +68,7 @@ const formatText = (string) => {
   for (const element of splitArray) {
     // Loop itererar över varje element (ord) i arrayen
     formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
-    // För varje element (ord) i arrayen blir index 0 stor bokstav, fr om index [1] splice
+    // För varje element (ord) i arrayen blir index 0 stor bokstav, fr o m index [1] splice
   }
   return formattedText;
   // Returnera
@@ -190,9 +190,9 @@ const updateColors = () => {
 // Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
   renderMonsters();
+  updateColorFilters(); 
   updateMonsterSliders();
   updateColors();
-  updateColorFilters();
   initalizeSliders();
 };
 
@@ -290,7 +290,7 @@ monsterNameInputField.addEventListener("input", () => {
 });
 
 
-// FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
+  // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = (event) => { 
   // Definiera en funktion som tar ett event som parameter
   event.preventDefault(); 
@@ -419,6 +419,29 @@ doneButton.addEventListener("click", (event) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+
+const storeCheckboxState = () => {
+  const state = {};
+  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
+
+  colorFilterDivs.forEach((checkbox) => {
+    state[checkbox.id] = checkbox.checked;
+  });
+
+  return state;
+};
+
+
+const restoreCheckboxState = (state) => {
+  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
+
+  colorFilterDivs.forEach((checkbox) => {
+    if (state.hasOwnProperty(checkbox.id)) {
+      checkbox.checked = state[checkbox.id];
+    }
+  });
+};
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD för att visa MONSTER             /////////
@@ -426,100 +449,87 @@ doneButton.addEventListener("click", (event) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const renderMonsters = (filteredMonsters = monsters) => { 
-  // Definiera en funktion för att rendera monster. Om inget filter ges, använd hela "monsters"-arrayen.
-  const monsterGallery = document.getElementById("monster-gallery-container"); 
-  // Hämta elementet där monster-galleriet ska visas.
-  monsterGallery.innerHTML = ""; 
-  // Rensa tidigare innehåll i monster-galleriet.
+const renderMonsters = (filteredMonsters = monsters) => {
+  const monsterGallery = document.getElementById("monster-gallery-container");
+  monsterGallery.innerHTML = "";
 
-  // Skapa en array av HTML-strängar för varje monster i den filtrerade listan
-  const monsterGalleryHtmlArray = filteredMonsters.map((monster) => { 
-    // Loopar genom varje monster och returnerar en HTML-sträng för varje.
-    const objectsWithValuesToPresentInHtml = []; 
-    // Skapa en tom array för att lagra attributen och deras värden.
-    let count = 0; 
-    // Initiera en räknare för att hålla reda på indexet för monstervärden.
+  // Store the current checkbox state before updating the filters
+  const checkboxState = storeCheckboxState();
+
+  const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
+    const objectsWithValuesToPresentInHtml = [];
+    let count = 0;
     
-    // Loopar genom "editableSliderNames" för att hämta och lagra monsterattribut
-    for (const element of editableSliderNames) { 
-      // För varje element i "editableSliderNames"
-      let monsterAttribute = element; 
-      // Tilldela attributnamnet
-      let attributeValue = monster.monsterValues[count]; 
-      // Hämta motsvarande värde för monstret
-      count++; 
-      // Öka räknaren för att gå till nästa värde
-
-      // Lägga till objektet med attribut och värde i arrayen
+    for (const element of editableSliderNames) {
+      let monsterAttribute = element;
+      let attributeValue = monster.monsterValues[count];
+      count++;
       objectsWithValuesToPresentInHtml.push({
-        attribute: monsterAttribute, 
-        // Attributnamn
-        value: attributeValue, 
-        // Motsvarande värde
+        attribute: monsterAttribute,
+        value: attributeValue,
       });
     }
 
-    // Skapa en HTML-sträng av attributen och deras värden
     const valuesToPresentInHtml = objectsWithValuesToPresentInHtml
-      .map((obj) => { 
-        // Loopar genom varje objekt för att skapa HTML
-        return `<p class="editable-value">${obj.attribute}: ${obj.value}</p>`; 
-        // Skapa en HTML-paragraf för varje attribut
+      .map((obj) => {
+        return `<p class="editable-value">${obj.attribute}: ${obj.value}</p>`;
       })
-      .join(""); 
-      // Sammanfoga alla strängar till en enda sträng
+      .join("");
 
-    // Returnera den fullständiga HTML-strängen för monsterkortet
     return `
-        <div class="monsterCard" tabindex="0"> 
-        <!-- Monsterkortets huvuddiv -->
-          <div class="monsterInfo" tabindex="0"> 
-          <!-- Div för monsterinformation -->
-            <h2 class="monsterName">${monster.name}</h2> 
-            <!-- Monsterets namn -->
-            <p class="monsterColor">Color: ${monster.monsterColor}</p> 
-            <!-- Monsterets färg -->
-            <p class="monsterDiet">Diet: ${monster.monsterDiet}</p> 
-            <!-- Monsterets diet -->
-            <p class="monsterDiet">Type: ${monster.monsterType}</p> 
-            <!-- Monsterets typ -->
-            <p class="monsterColor">Size: ${monster.monsterSize}</p> 
-            <!-- Monsterets storlek -->
-            ${valuesToPresentInHtml} 
-            <!-- Inkludera de genererade attributvärdena -->
-            </div>
-            <div class="monster-info-btns"> 
-            <!-- Div för knappar -->
-            <button class="deleteButton"> Delete </button> 
-            <!-- Knapp för att ta bort monstret -->
-            <button class="editButton"> Edit </button> 
-            <!-- Knapp för att redigera monstret -->
-            </div>
+      <div class="monsterCard" tabindex="0">
+        <div class="monsterInfo" tabindex="0">
+          <h2 class="monsterName">${monster.name}</h2>
+          <p class="monsterColor">Color: ${monster.monsterColor}</p>
+          <p class="monsterDiet">Diet: ${monster.monsterDiet}</p>
+          <p class="monsterDiet">Type: ${monster.monsterType}</p>
+          <p class="monsterColor">Size: ${monster.monsterSize}</p>
+          ${valuesToPresentInHtml}
         </div>
-      `; // Avsluta HTML-strängen
+        <div class="monster-info-btns">
+          <button class="deleteButton"> Delete </button>
+          <button class="editButton"> Edit </button>
+        </div>
+      </div>
+    `;
   });
 
-  monsterGallery.innerHTML = monsterGalleryHtmlArray.join(""); 
-  // Sätt HTML-innehållet i monster-galleriet till den sammanslagna strängen av monsterkort.
+  monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
 
-  const deleteButton = document.querySelectorAll(".deleteButton"); 
-  // Hämta alla knappar med klassen "deleteButton" i dokumentet.
-  deleteButton.forEach((button, index) => { 
-    // Loopar genom varje delete-knapp med dess index.
-    button.addEventListener("click", () => { 
-      // Lägg till en klick-händelse för varje knapp.
-      filteredMonsters[index].removeMonster(); 
-      // När knappen klickas, anropa removeMonster-metoden för det specifika monstret baserat på index.
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  deleteButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      filteredMonsters[index].removeMonster();
     });
   });
-  
 
-  updateMonsterCount();
+  // 15/10 Funktion för att räkna och visa antal monster
+function updateMonsterCount() {
+  const monsterCounter = document.querySelector("#monster-counter");
+  monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
+  console.log(updateMonsterCount);
+}
+ 
+function dietCounter() {
+  const fleshCounter = document.querySelector("#flesh-counter");
+  const leafCounter = document.querySelector("#leaf-counter");
+  const omnivoreCounter = document.querySelector("#omnivore-counter");
+  // Get the right HTML elements
+  const fleshMuncherCount = monsters.filter(monster => monster.monsterDiet === "🥩Flesh-Muncher").length;
+  const leafCruncherCount = monsters.filter(monster => monster.monsterDiet === "🥬Leaf-Cruncher").length;
+  const NonPeskyCount = monsters.filter(monster => monster.monsterDiet === "🗑️Non-Pesky-Omnivore").length;
+  // Fetch diet from the objects "monster.monsterDiet"
+  fleshCounter.textContent = `🥩: ${fleshMuncherCount}`;
+  leafCounter.textContent = `🥬: ${leafCruncherCount}`;
+  omnivoreCounter.textContent = `🗑️: ${NonPeskyCount}`;
+  // Apply right icons to the HTML div
+}
 
+  // Update the filters and restore the checkbox state
   updateColorFilters();
-
-
+  updateMonsterCount();
+  restoreCheckboxState(checkboxState);
+  dietCounter();
 };
 
 ///////////////////////////////////////////////////////
@@ -848,6 +858,8 @@ const updateColorFilters = () => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD FÖR ATT REDIGERA MONSTER         /////////
@@ -936,10 +948,3 @@ const monsters = [
   },
 ];
 
-// 15/10 Funktion för att räkna och visa antal monster
-function updateMonsterCount() {
-  const monsterCounter = document.querySelector("#monster-counter");
-  const monsterCounterText = `Monsters: ${monsters.length}`;
-  monsterCounter.textContent = monsterCounterText;
-  // console.log(monsterCounterText);
-}

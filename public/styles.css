@@ -1,5 +1,5 @@
 * {
-  box-sizing: content-box;
+  box-sizing:border-box;
 
 
 }
@@ -208,7 +208,7 @@ main {
 
 #done-button:hover {
   cursor: pointer;
-  background-color: rgba(255, 145, 0, 0.397);
+  background-color: rgba(105, 105, 105, 0.397);
 }
 
 #slider-container {
@@ -253,9 +253,16 @@ main {
   }
 }
 
+.filter-p {
+  font-size: 1.1rem;
+  font-family: Verdana;
+  margin: 0%;
+}
+
 .color-filters {
   margin-bottom: 20px;
   margin-top: 5px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.384);
   
 }
 .color-filter-boxes {
@@ -271,18 +278,15 @@ main {
   display: flex;
   flex-wrap: wrap;
   text-indent: 5px;
-  width: 100px;
- 
+  width: 120px;
   border-radius: 20px;
- 
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
 }
 #clear-filter-button {
-  width: 95%;
+  width: 95px;
   height: 25px;
- 
   border-radius: 20px;
   border: none;
   background-color: #FFFFFF;
@@ -292,7 +296,7 @@ main {
 
 #clear-filter-button:hover {
   cursor: pointer;
-  background-color: rgba(255, 145, 0, 0.397);
+  background-color: rgba(105, 105, 105, 0.397);
 }
 
 .monsterCard {
@@ -344,16 +348,16 @@ main {
   }
   .monsterInfo:focus {
     overflow-y: scroll;
+    
   } 
 }
+
 
 .monster-info-btns {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-
-
 
 .deleteButton {
   border: none;
@@ -362,15 +366,10 @@ main {
   width: 50px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   align-self: flex-end;
+  visibility: hidden;
 
 }
-
 .deleteButton:hover {
-  cursor: pointer;
-  background-color: #beeeeb;
-}
-
-.editButton:hover {
   cursor: pointer;
   background-color: #beeeeb;
 }
@@ -382,7 +381,17 @@ main {
   width: 50px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   align-self: flex-end;
+  display:none;
 }
+.editButton:hover {
+  cursor: pointer;
+  background-color: #beeeeb;
+}
+.monsterInfo:hover .editButton,
+.monsterInfo:hover .deleteButton {
+  visibility: visible;
+}
+
 
 .monsterName,
 .monsterDiet,
@@ -408,13 +417,14 @@ main {
   display: flex;
   flex-direction: row;
   padding: 10px;
+  gap: 10px 0;
   background-color: #beeeeb;
   border-radius: 20px;
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-
+  
 }
 
 @media (min-width: 600px) {
@@ -422,6 +432,7 @@ main {
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
     gap: 5px;
+    gap: 10px;
     overflow: hidden;
     max-height: 100vh;
   }
@@ -432,6 +443,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     gap: 5px;
+    gap: 10px;
     overflow: hidden;
     
 

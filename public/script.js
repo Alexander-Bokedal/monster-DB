@@ -48,11 +48,11 @@ const colors = [
 const colorsHtml = colors.map(
   (color) =>
     `<div class="color-container">
-      <button class="color-box" 
-      id="${color.name}-button" 
-      style="background-color: ${color.color};"></button>
-      <p>${color.name}</p>
-      </div>`
+  <button class="color-box" 
+  id="${color.name}-button" 
+  style="background-color: ${color.color};"></button>
+  <p>${color.name}</p>
+  </div>`
 );
 
 const colorsNames = colors.map((color) => color.name);
@@ -154,6 +154,7 @@ const initalizeSliders = () => {
   });
 };
 
+
 const colorsToChooseFrom = document.querySelector("#colors-container"); 
 // Hämta HTML-elementet med ID "colors-container" och tilldela det till variabeln "colorsToChooseFrom"
 
@@ -175,6 +176,7 @@ const updateColors = () => {
 
       document.querySelector( 
         // Hämta elementet med klassen "show-color-selection"
+
         ".show-color-selection"
       ).innerHTML = `<div class="show-color-selection" style="background-color: ${colorSelection}"></div>`; 
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
@@ -515,6 +517,9 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   updateMonsterCount();
 
+  updateColorFilters();
+
+
 };
 
 ///////////////////////////////////////////////////////
@@ -766,15 +771,32 @@ dietSelectFilter.addEventListener("change", () => {
   // Anropa funktionen applyFilter för att uppdatera visningen baserat på det valda filtret.
 });
 
+  
 const updateColorFilters = () => { 
+      
+   const colorCounts = {};
+
+  colors.forEach((color) => {
+    colorCounts[color.name.trim().toLowerCase()] = 0;
+  });
+
+  monsters.forEach((monster) => {
+    const monsterColorNormalized = monster.monsterColor.trim().toLowerCase();
+
+    if (colorCounts[monsterColorNormalized] !== undefined) {
+      colorCounts[monsterColorNormalized] += 1;
+    }
+  });
+  
   // Definiera en funktion för att uppdatera färgfiltret.
   const colorFilters = document.querySelector(".color-filters"); 
   // Välj elementet som innehåller färgfiltret.
   const colorFiltersHtml = colors.map((color) => { 
+    const normalizedColorName = color.name.trim().toLowerCase();
+    const count = colorCounts[normalizedColorName];
     // Skapa en HTML-sträng för varje färg i colors-arrayen.
-    return `<span class="color-filter-boxes">
-    <input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}"  >
-    <label for="${color.color}">${color.name}</label> </span>`; 
+    return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}"  >
+    <label for="${color.color}">${color.name} (${count})</label> </span>`;
     // Skapa en checkbox och en label för varje färg.
   });
 
@@ -919,5 +941,5 @@ function updateMonsterCount() {
   const monsterCounter = document.querySelector("#monster-counter");
   const monsterCounterText = `Monsters: ${monsters.length}`;
   monsterCounter.textContent = monsterCounterText;
-  console.log(monsterCounterText);
+  // console.log(monsterCounterText);
 }

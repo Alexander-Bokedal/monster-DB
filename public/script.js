@@ -238,12 +238,14 @@ testButton.addEventListener("click", (e) => { // Lägg till en eventlyssnare fö
       colors[Math.floor(Math.random() * colors.length)].color 
       // Välj en slumpmässig färg från "colors" arrayen och formatera den
     ),
+
     monsterValues: [ 
       // Sätt värden för monstret i en array
-      Math.floor(Math.random() * 6), // Slumptal mellan 0 och 5
-      Math.floor(Math.random() * 6), // Slumptal mellan 0 och 5
-      Math.floor(Math.random() * 6), // Slumptal mellan 0 och 5
-      Math.floor(Math.random() * 6), // Slumptal mellan 0 och 5
+      Math.floor(Math.random() * 7), // Slumptal mellan 0 och 5
+      Math.floor(Math.random() * 7), // Slumptal mellan 0 och 5
+      Math.floor(Math.random() * 7), // Slumptal mellan 0 och 5
+      Math.floor(Math.random() * 7), // Slumptal mellan 0 och 5
+
     ],
     removeMonster() { 
       // Definiera en metod för att ta bort monstret från "monsters" arrayen
@@ -510,6 +512,8 @@ const renderMonsters = (filteredMonsters = monsters) => {
     });
   });
   
+
+  updateMonsterCount();
 
 };
 
@@ -851,10 +855,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[0].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -872,10 +876,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[1].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -894,10 +898,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[3].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -909,3 +913,11 @@ const monsters = [
     },
   },
 ];
+
+// 15/10 Funktion för att räkna och visa antal monster
+function updateMonsterCount() {
+  const monsterCounter = document.querySelector("#monster-counter");
+  const monsterCounterText = `Monsters: ${monsters.length}`;
+  monsterCounter.textContent = monsterCounterText;
+  console.log(monsterCounterText);
+}

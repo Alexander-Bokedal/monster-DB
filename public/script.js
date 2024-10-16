@@ -181,10 +181,10 @@ testButton.addEventListener("click", (e) => {
       colors[Math.floor(Math.random() * colors.length)].color
     ),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -639,10 +639,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[0].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -660,10 +660,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[1].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);
@@ -682,10 +682,10 @@ const monsters = [
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     monsterColor: formatText(colors[3].color),
     monsterValues: [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 7),
     ],
     removeMonster() {
       const index = monsters.indexOf(this);

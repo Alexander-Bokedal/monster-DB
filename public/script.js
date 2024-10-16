@@ -48,11 +48,11 @@ const colors = [
 const colorsHtml = colors.map(
   (color) =>
     `<div class="color-container">
-      <button class="color-box" 
-      id="${color.name}-button" 
-      style="background-color: ${color.color};"></button>
-      <p>${color.name}</p>
-      </div>`
+  <button class="color-box" 
+  id="${color.name}-button" 
+  style="background-color: ${color.color};"></button>
+  <p>${color.name}</p>
+  </div>`
 );
 
 const colorsNames = colors.map((color) => color.name);
@@ -124,6 +124,7 @@ const initalizeSliders = () => {
 };
 
 const colorsToChooseFrom = document.querySelector("#colors-container");
+
 const updateColors = () => {
   colorsToChooseFrom.innerHTML = colorsHtml.join("");
   const colorDivs = document.querySelectorAll(".color-box");
@@ -363,6 +364,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
   // Lägg till editknappar också
   // 15/10 Updaterar hur många monster som är i monster arrayen
   updateMonsterCount();
+  updateColorFilters();
 };
 
 ///////////////////////////////////////////////////////
@@ -569,10 +571,26 @@ dietSelectFilter.addEventListener("change", () => {
 });
 
 const updateColorFilters = () => {
+  const colorCounts = {};
+
+  colors.forEach((color) => {
+    colorCounts[color.name.trim().toLowerCase()] = 0;
+  });
+
+  monsters.forEach((monster) => {
+    const monsterColorNormalized = monster.monsterColor.trim().toLowerCase();
+
+    if (colorCounts[monsterColorNormalized] !== undefined) {
+      colorCounts[monsterColorNormalized] += 1;
+    }
+  });
+
   const colorFilters = document.querySelector(".color-filters");
   const colorFiltersHtml = colors.map((color) => {
+    const normalizedColorName = color.name.trim().toLowerCase();
+    const count = colorCounts[normalizedColorName];
     return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}"  >
-    <label for="${color.color}">${color.name}</label> </span>`;
+    <label for="${color.color}">${color.name} (${count})</label> </span>`;
   });
 
   colorFilters.innerHTML = colorFiltersHtml.join("");
@@ -703,5 +721,5 @@ function updateMonsterCount() {
   const monsterCounter = document.querySelector("#monster-counter");
   const monsterCounterText = `Monsters: ${monsters.length}`;
   monsterCounter.textContent = monsterCounterText;
-  console.log(monsterCounterText);
+  // console.log(monsterCounterText);
 }

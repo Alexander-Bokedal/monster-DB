@@ -415,6 +415,7 @@ main {
 @media screen and (max-width: 600px) {
   .monster-diet,
   .monster-color,
+  .monster-type,
   .editable-value {
     display: none;
   }

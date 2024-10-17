@@ -472,11 +472,14 @@ const renderMonsters = (filteredMonsters = monsters) => {
     for (const element of editableSliderNames) {
       let monsterAttribute = element;
       let attributeValue = monster.monsterValues[count];
+
+      if (monster.monsterValues[count] > 0) {
+        objectsWithValuesToPresentInHtml.push({
+          attribute: monsterAttribute,
+          value: attributeValue,
+        });
+      }
       count++;
-      objectsWithValuesToPresentInHtml.push({
-        attribute: monsterAttribute,
-        value: attributeValue,
-      });
     }
 
     const valuesToPresentInHtml = objectsWithValuesToPresentInHtml

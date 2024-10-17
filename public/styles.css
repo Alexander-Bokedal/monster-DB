@@ -87,10 +87,10 @@ main {
     height: 90%;
     background-color: #e4fcfa;
     border: 2px solid #72727283;
+    overflow: hidden;
   }
 
   #monster-image {
-    display: flex;
     border-radius: 15px;
     height: 450px;
     width: max-content;
@@ -99,6 +99,7 @@ main {
     background-repeat: no-repeat;
     background-position: center;
     filter: drop-shadow(-30px 0px 10px rgba(0, 0, 0, 0.5));
+    overflow: hidden;
   }
   
   #changeMonsterButtons {

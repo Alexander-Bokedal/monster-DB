@@ -28,17 +28,18 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-// Globala arryer för att kunna applicera multipla filter
 let activeFilters = {
   types: "",
   colors: [],
 };
+// Globala arryer för att kunna applicera multipla filter
 
 const monsters = [];
+// Global array för att lagra monster
 
-// Array med färger som går att ändra till valfria färger
-// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "White", color: "#fff""
+monsterNameShow = document.querySelector(".monster-name-main");
+// Global array för att kunna ändra namn i preview
+
 const colors = [
   { name: "Red", color: "red" },
   { name: "Black", color: "black" },
@@ -46,6 +47,9 @@ const colors = [
   { name: "Yellow", color: "yellow" },
   { name: "Green", color: "green" },
 ];
+// Array med färger som går att ändra till valfria färger
+// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
+// exempel "name: "White", color: "#fff""
 
 const colorsHtml = colors.map(
   (color) =>
@@ -291,6 +295,14 @@ monsterNameInputField.addEventListener("input", () => {
     // Rensa meddelandet
     doneButton.disabled = false;
     // Aktivera "doneButton" så att det kan klickas
+  }
+
+  if (monsterNameInputField.value.length > 0) {
+    monsterNameShow.innerHTML = `<h3> ${formatText(
+      monsterNameInputField.value
+    )}</h3>`;
+  } else {
+    monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
   }
 });
 

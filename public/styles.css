@@ -26,7 +26,7 @@ main {
     "monster-gallery-container";
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1024px) {
   main {
     display: grid;
     flex-wrap: wrap;
@@ -264,6 +264,9 @@ main {
 }
 
 .color-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 20px;
   margin-top: 5px;
   border-bottom: 2px solid rgba(128, 128, 128, 0.384);
@@ -444,6 +447,7 @@ main {
     gap: 10px;
     overflow: hidden;
     max-height: 100vh;
+    min-width: 500px;
   }
 }
 

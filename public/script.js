@@ -393,7 +393,7 @@ const addMonsterToArray = (event) => {
   applyFilter();
 
   // Städa upp form
-  document.querySelector("#monsterSettings").reset();
+  document.querySelector(".monster-settings").reset();
   colorSelection = null;
   document.querySelector(".show-color-selection").innerHTML = "";
   initalizeSliders();

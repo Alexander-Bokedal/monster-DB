@@ -20,9 +20,9 @@ main {
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-template-areas:
-    "monsterPreviewMain"
-    "monsterSettings"
-    "monsterFilter"
+    "monster-preview-main"
+    "monster-settings"
+    "monster-filter"
     "monster-gallery-container";
 }
 
@@ -36,17 +36,17 @@ main {
     gap: 10px 10px;
     
     grid-template-areas:
-      "monsterPreviewMain monsterFilter monsterFilter"
-      "monsterPreviewMain monster-gallery-container monster-gallery-container "
-      "monsterSettings  monster-gallery-container monster-gallery-container"
-      "monsterSettings  monster-gallery-container monster-gallery-container"
+      "monster-preview-main monster-filter monster-filter"
+      "monster-preview-main monster-gallery-container monster-gallery-container "
+      "monster-settings  monster-gallery-container monster-gallery-container"
+      "monster-settings  monster-gallery-container monster-gallery-container"
       ;
   }
 }
 
-#monsterPreviewMain {
+.monster-preview-main {
   display: grid;
-  grid-area: monsterPreviewMain;
+  grid-area: monster-preview-main;
   justify-self: star;
   background-color: #beeeeb;
   border-radius: 15px;
@@ -55,8 +55,8 @@ main {
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
-
-  .monsterNameMain {
+ 
+  .monster-name-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,12 +68,14 @@ main {
       #f7a072,
       rgba(255, 255, 255, 0)
     );
+  
   }
-  .monsterTypeIcon {
+  
+  .monster-type-icon {
     align-self: flex-end;
   }
 
-  #monsterImageMain {
+  .monster-image-main {
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -86,7 +88,7 @@ main {
     border: 2px solid #72727283;
   }
 
-  .monsterImage {
+  .monster-image {
     border-radius: 15px;
     height: 100%;
     width: 90%;
@@ -95,6 +97,8 @@ main {
     background-repeat: no-repeat;
     background-position: center;
   }
+
+  
 }
 
 #colors-container {
@@ -145,7 +149,7 @@ main {
     transform: scale(1.3);
   }
 
-#monsterSettings {
+.monster-settings {
   display: grid;
   flex-direction: row;
   flex-wrap: wrap;
@@ -178,9 +182,9 @@ main {
 
 }
 
-#monsterTypeSelect,
-#monsterDietSelect,
-#monsterSizeSelect {
+.monster-type-select,
+.monster-diet-select,
+.monster-size-select {
   display: flex;
   flex-wrap: wrap;
   text-indent: 5px;
@@ -228,8 +232,8 @@ main {
 .slider:hover {
   cursor: pointer;
 }
-#monsterFilter {
-  grid-area: monsterFilter;
+.monster-filter {
+  grid-area: monster-filter;
   display: flex;
  flex-direction: column;
   justify-content: space-around;
@@ -247,7 +251,7 @@ main {
 
 }
 @media (min-width: 600px) {
-  #monsterFilter {
+  .monster-filter {
     margin: 0px;
 
   }
@@ -269,12 +273,12 @@ main {
   margin: 0px 10px;
 }
 
-#monsterDiet {
+.monster-diet-filter-container{
   margin-bottom: 20px;
   margin-top: 5px;
 }
 
-#monsterDietSelectFilter {
+.monster-diet-select-filter {
   display: flex;
   flex-wrap: wrap;
   text-indent: 5px;
@@ -307,7 +311,7 @@ main {
   background-color: rgba(105, 105, 105, 0.397);
 }
 
-.monsterCard {
+.monster-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -322,7 +326,7 @@ main {
 }
 
 @media (min-width: 600px) {
-  .monsterCard {
+  .monster-card {
     grid-template-columns: repeat(2, 1fr);
     display: flex;
     flex-direction: column;
@@ -333,7 +337,7 @@ main {
 
     
   }
-  .monsterCard:hover {
+  .monster-card:hover {
     transition: 0.3s;
     transform: scale(1.05);
     background-color: #ffffff;
@@ -341,20 +345,20 @@ main {
   
 }
 
-.monsterInfo {
+.monster-info {
   width: 100%;
   
  
 }
 
 @media (min-width: 600px) {
-  .monsterInfo {
+  .monster-info {
     width: 100%;
     overflow: scroll;
     overflow: hidden;
    
   }
-  .monsterInfo:focus {
+  .monster-info:focus {
     overflow-y: scroll;
     
   } 
@@ -367,7 +371,7 @@ main {
   justify-content: space-around;
 }
 
-.deleteButton {
+.delete-button {
   border: none;
   border-radius: 20px;
   background-color: white;
@@ -376,12 +380,12 @@ main {
   align-self: flex-end;
 
 }
-.deleteButton:hover {
+.delete-button:hover {
   cursor: pointer;
   background-color: #beeeeb;
 }
 
-.editButton {
+.edit-button {
   border: none;
   border-radius: 20px;
   background-color: white;
@@ -390,27 +394,27 @@ main {
   align-self: flex-end;
   display:none;
 }
-.editButton:hover {
+.edit-button:hover {
   cursor: pointer;
   background-color: #beeeeb;
 }
 
 
 
-.monsterName,
-.monsterDiet,
-.monsterColor,
+.monster-name,
+.monster-diet,
+.monster-color,
 .editable-value {
   color: black;
 }
 
-.monsterName {
+.monster-name {
   text-align: center;
 }
 
 @media screen and (max-width: 600px) {
-  .monsterDiet,
-  .monsterColor,
+  .monster-diet,
+  .monster-color,
   .editable-value {
     display: none;
   }

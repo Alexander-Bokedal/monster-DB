@@ -468,18 +468,18 @@ const renderMonsters = (filteredMonsters = monsters) => {
       .join("");
 
     return `
-      <div class="monsterCard" tabindex="0">
-        <div class="monsterInfo" tabindex="0">
-          <h2 class="monsterName">${monster.name}</h2>
-          <p class="monsterColor">Color: ${monster.monsterColor}</p>
-          <p class="monsterDiet">Diet: ${monster.monsterDiet}</p>
-          <p class="monsterDiet">Type: ${monster.monsterType}</p>
-          <p class="monsterColor">Size: ${monster.monsterSize}</p>
+      <div class="monster-card" tabindex="0">
+        <div class="monster-info" tabindex="0">
+          <h2 class="monster-name">${monster.name}</h2>
+          <p class="monster-color">Color: ${monster.monsterColor}</p>
+          <p class="monster-diet">Diet: ${monster.monsterDiet}</p>
+          <p class="monster-type">Type: ${monster.monsterType}</p>
+          <p class="monster-color">Size: ${monster.monsterSize}</p>
           ${valuesToPresentInHtml}
         </div>
         <div class="monster-info-btns">
-          <button class="deleteButton"> Delete </button>
-          <button class="editButton"> Edit </button>
+          <button class="delete-button"> Delete </button>
+          <button class="edit-button"> Edit </button>
         </div>
       </div>
     `;
@@ -487,7 +487,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
 
-  const deleteButton = document.querySelectorAll(".deleteButton");
+  const deleteButton = document.querySelectorAll(".delete-button");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
       filteredMonsters[index].removeMonster();
@@ -570,17 +570,17 @@ clearFilterButton.addEventListener("click", (e) => {
   // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
 });
 
-const monsterDiet = document.querySelector("#monsterDietSelect");
+const monsterDiet = document.querySelector(".monster-diet-select");
 // Hämta elementet med ID "monsterDietSelect", som är en dropdown för att välja monsterdiet.
-const monsterDietFilter = document.querySelector("#monsterDietSelectFilter");
+const monsterDietFilter = document.querySelector(".monster-diet-select-filter");
 // Hämta elementet med ID "monsterDietSelectFilter", som är en dropdown för att filtrera monster efter diet.
-const monsterType = document.querySelector("#monsterTypeSelect");
+const monsterType = document.querySelector(".monster-type-select");
 // Hämta elementet med ID "monsterTypeSelect", som är en dropdown för att välja monstertyp.
-const monsterTypeFilter = document.querySelector("#monsterTypeSelectFilter");
+const monsterTypeFilter = document.querySelector(".monster-type-select-filter");
 // Hämta elementet med ID "monsterTypeSelectFilter", som är en dropdown för att filtrera monster efter typ.
-const monsterSize = document.querySelector("#monsterSizeSelect");
+const monsterSize = document.querySelector(".monster-size-select");
 // Hämta elementet med ID "monsterSizeSelect", som är en dropdown för att välja monstersize.
-const monsterSizeFilter = document.querySelector("#monsterSizeSelectFilter");
+const monsterSizeFilter = document.querySelector(".monster-size-select-filter");
 // Hämta elementet med ID "monsterSizeSelectFilter", som är en dropdown för att filtrera monster efter storlek.
 
 const monsterDiets = [
@@ -661,7 +661,7 @@ dietDropdown(monsterDietFilter);
 typeDropdown(monsterType);
 sizeDropdown(monsterSize);
 
-const monsterDietIcon = document.querySelector(".monsterDietIcon");
+const monsterDietIcon = document.querySelector(".monster-diet-icon");
 // Optimera om vi har tid
 
 // Fixa så att det inte är en ful if-sats
@@ -676,7 +676,7 @@ monsterDiet.addEventListener("change", () => {
     monsterDietIcon.innerHTML = "🗑️";
   }
 });
-const monsterTypeIcon = document.querySelector(".monsterTypeIcon");
+const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
@@ -691,7 +691,7 @@ monsterType.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🧞‍♂️";
   }
 });
-const monsterSizeIcon = document.querySelector(".monsterSizeIcon");
+const monsterSizeIcon = document.querySelector(".monster-size-icon");
 monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";
   if (monsterSize.value === "🤏Pinky-Small") {
@@ -759,7 +759,7 @@ const applyFilter = () => {
   renderMonsters(filteredMonsters);
 };
 
-const dietSelectFilter = document.querySelector("#monsterDietSelectFilter");
+const dietSelectFilter = document.querySelector(".monster-diet-select-filter");
 // Välj dropdown-elementet för dieter med id "monsterDietSelectFilter".
 
 dietSelectFilter.addEventListener("change", () => {

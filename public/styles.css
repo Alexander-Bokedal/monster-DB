@@ -55,6 +55,7 @@ main {
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
+
  
   .monster-name-main {
     display: flex;
@@ -88,18 +89,43 @@ main {
     border: 2px solid #72727283;
   }
 
-  .monster-image {
+  #monster-image {
+    display: flex;
     border-radius: 15px;
-    height: 100%;
-    width: 90%;
-    background-color: #ffffff6c;
-    background-image: url(/public/images/monsters/1x/theEye.png);
+    height: 450px;
+    width: max-content;
+    padding-top: 20px;
+    margin: 20px;
     background-repeat: no-repeat;
     background-position: center;
+    filter: drop-shadow(-30px 0px 10px rgba(0, 0, 0, 0.5));
   }
+  
+  #changeMonsterButtons {
+    display: flex;
+    flex-direction: row;
+
+    }
+
+    #change-monster-left,
+    #change-monster-right {
+      cursor: pointer;
+      border-radius: 25%;
+      border: none;
+      margin: 8px 50px;
+      box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.5), 
+      0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    #change-monster-left:hover,
+    #change-monster-right:hover {
+      transition: 0.2s;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
 
   
 }
+
 
 #colors-container {
   display: flex;

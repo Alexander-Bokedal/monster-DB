@@ -198,6 +198,8 @@ window.onload = () => {
   updateMonsterSliders();
   updateColors();
   initalizeSliders();
+  updatePreWindow();
+
 };
 
 ///////////////////////////////////////////////////////
@@ -914,3 +916,48 @@ const updateColorFilters = () => {
 
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
+
+const monsterImages = 
+[  
+  "images/Blubberblitz.png",
+  "images/Grumblefluff.png",
+  "images/Snaggletooth.png",
+  "images/Splatzo.png",
+  "images/Wobblefang.png",
+  "images/Octoflurf.png"
+];
+
+let monsterImageIndex = 0;
+
+const monsterPreviewWindow = document.getElementById("monster-image");
+const changemMonsterLeftBtn = document.getElementById("change-monster-left");
+const changemMonsterRightBtn = document.getElementById("change-monster-right");
+
+function updatePreWindow() {
+  monsterPreviewWindow.src = monsterImages[monsterImageIndex];
+
+}
+
+
+updatePreWindow();
+
+changemMonsterLeftBtn.addEventListener("click", () => {
+  console.log(monsterImageIndex)
+  if (monsterImageIndex > 0) {
+    monsterImageIndex--;
+  } else {
+    monsterImageIndex = monsterImages.length - 1;
+  }
+  updatePreWindow();
+});
+
+changemMonsterRightBtn.addEventListener("click", () => {
+  if (monsterImageIndex < monsterImages.length - 1) {
+    monsterImageIndex++;
+  } else {
+    monsterImageIndex = 0;
+  }
+  updatePreWindow();
+})
+
+

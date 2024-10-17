@@ -41,11 +41,11 @@ monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
 const colors = [
-  { name: "Red", color: "red" },
-  { name: "Black", color: "black" },
-  { name: "Blue", color: "blue" },
-  { name: "Yellow", color: "yellow" },
-  { name: "Green", color: "green" },
+  { name: "red", color: "red" },
+  { name: "black", color: "black" },
+  { name: "blue", color: "blue" },
+  { name: "yellow", color: "yellow" },
+  { name: "green", color: "green" },
 ];
 // Array med färger som går att ändra till valfria färger
 // "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
@@ -819,7 +819,7 @@ const updateColorFilters = () => {
   const colorCounts = {};
 
   colors.forEach((color) => {
-    colorCounts[color.name.trim().toLowerCase()] = 0;
+    colorCounts[color.name] = 0;
   });
 
   monsters.forEach((monster) => {
@@ -834,11 +834,15 @@ const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
   // Välj elementet som innehåller färgfiltret.
   const colorFiltersHtml = colors.map((color) => {
-    const normalizedColorName = color.name.trim().toLowerCase();
+    const normalizedColorName = color.name;
     const count = colorCounts[normalizedColorName];
     // Skapa en HTML-sträng för varje färg i colors-arrayen.
-    return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${color.color}" name="filter-${color.color}"  >
-    <label for="${color.color}">${color.name} (${count})</label> </span>`;
+    return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${
+      color.color
+    }" name="filter-${color.color}"  >
+    <label for="${color.color}">${formatText(
+      color.name
+    )} (${count})</label> </span>`;
     // Skapa en checkbox och en label för varje färg.
   });
 

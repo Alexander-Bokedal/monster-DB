@@ -31,6 +31,7 @@
 let activeFilters = {
   types: "",
   colors: [],
+  search: "",
 };
 // Globala arryer för att kunna applicera multipla filter
 
@@ -799,7 +800,17 @@ const applyFilter = () => {
     // Monstret returneras bara om både matchesType och matchesColor är lika med true.
     // I ett fall där det inte finns några filter kommer båda villkoren alltid vara sanna och därför returnera all monster
 
-    return matchesType && matchesColor;
+    /*     const matchesSearch =
+      activeFilters.search === "" ||
+      activeFilters.search.includes(monster.monsterName); */
+    const matchesSearch =
+      activeFilters.search === "" ||
+      (monster.name &&
+        monster.name
+          .toLowerCase()
+          .includes(activeFilters.search.toLowerCase()));
+
+    return matchesType && matchesColor && matchesSearch;
   });
 
   renderMonsters(filteredMonsters);
@@ -958,4 +969,13 @@ changemMonsterRightBtn.addEventListener("click", () => {
     monsterImageIndex = 0;
   }
   updatePreWindow();
+});
+
+const searchInput = document.querySelector("#search-input");
+
+searchInput.addEventListener("input", () => {
+  activeFilters.search = searchInput.value;
+  /*   console.log(searchInput.value); */
+  applyFilter();
+  console.log(activeFilters.search);
 });

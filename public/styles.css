@@ -177,7 +177,7 @@ main {
   justify-content: space-around;
 }
 
-#monster-name {
+.name-input {
   width: 95%;
   height: 25px;
   border-radius: 20px;

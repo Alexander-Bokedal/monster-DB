@@ -36,6 +36,7 @@ let activeFilters = {
   search: "",
 };
 
+const monsters = [];
 // Kod för att formatera namn
 const formatText = (string) => {
   let formattedText = "";
@@ -52,116 +53,14 @@ const formatText = (string) => {
   // Returnera
 };
 
-
-                                                      // ==============================SAVE==============================
-const handleSave = (monsterToEdit, index) => {
-  return (event) => {
-    event.preventDefault();
-
-    // Gather slider values
-    const sliderValuesToAddToMonsterObject = [];
-    // Skapa en tom array för att lagra slidervärden
-    const arrayOfAllSliders = document.querySelectorAll(".slider");
-    // Hämta alla HTML-element med klassen "slider"
-  
-    // Loopar igenom alla sliders för att hämta deras värden
-    for (let i = 0; i < arrayOfAllSliders.length; i++) {
-      // Loopa genom arrayen av sliders
-      sliderValuesToAddToMonsterObject.push(
-        // Lägg till slidervärdet i arrayen
-        document.querySelector(`#slider${i}`).value
-        // Hämta värdet från varje slider baserat på dess ID
-      );
-    }
-  
-
-    console.log(monsterToEdit)
-    console.log(index)
-
-    // Update monster values
-    monsterToEdit.name = monsterNameInputField.value;
-    monsterToEdit.monsterDiet = monsterDiet.value;
-    monsterToEdit.monsterType = monsterType.value;
-    monsterToEdit.monsterSize = monsterSize.value;
-    monsterToEdit.monsterColor = formatText(colorSelection);
-    monsterToEdit.monsterValues = sliderValuesToAddToMonsterObject;
-
-    monsters[index] = monsterToEdit;
-    
-
-    applyFilter(); 
-    // Re-render the monster list
-
-    // Reset the form and UI elements
-    document.querySelector(".monster-settings").reset();
-    colorSelection = null;
-    showColorSelection.innerHTML = "";
-    initalizeSliders();
-
-    // Reset the display for the monster name and other icons
-    monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
-    monsterDietIcon.innerHTML = "";
-    monsterTypeIcon.innerHTML = "";
-    monsterSizeIcon.innerHTML = "";
-
-    // Toggle buttons
-    isEditing = false;
-    saveButton.style.display = 'none';
-    doneButton.style.display = 'block';
-    
-    // Remove the event listener after saving
-    saveButton.removeEventListener("click", handleSave(monsterToEdit, index));
-  };
-};
-
-// Globala funktioner för att kunna applicera multipla filter
-                                                      // ==============================SAVE==============================
-
-const editMonster = (uid) => {
-  const monsterToEdit = monsters.find(monster => monster.uid === uid);
-  const index = monsters.findIndex(monster => monster.uid === uid); 
-
-  console.log(monsterToEdit)
-  console.log(index)
-  isEditing = true;
-  doneButton.style.display = 'none';
-  saveButton.style.display = 'block';
-
-  // Hämta namn från monster tilldelar name input.
-  monsterNameInputField.value = monsterToEdit.name;
-  monsterNameShow.innerHTML = monsterToEdit.name;
-  monsterDiet.value = monsterToEdit.monsterDiet;
-  monsterType.value = monsterToEdit.monsterType;
-  monsterSize.value = monsterToEdit.monsterSize;
-  showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${monsterToEdit.monsterColor}"></div>`
-  colorSelection = monsterToEdit.monsterColor;
-
-  // Tilldela slider med value från monsters
-  let monsterSliderValue = (monsterSliders.value = monsterToEdit.monsterValues);
-  for (let i = 0; i < editableSliders.length; i++) {
-    let slider = document.querySelector(`#slider${i}`);
-    let valueDisplay = document.querySelector(`#value${i}`);
-
-    valueDisplay.textContent = monsterSliderValue[i];
-    slider.value = monsterSliderValue[i];
-  } 
-
-  const saveClickHandler = handleSave(monsterToEdit, index);
-
-  saveButton.addEventListener("click", saveClickHandler);
-
-  saveButton.addEventListener("click", handleSave(monsterToEdit, index));
-
-}
+// ==============================SAVE==============================
 
 // Globala funktioner slutar!
-
 
 // Global array för att lagra monster
 const showColorSelection = document.querySelector(".show-color-selection");
 monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
-
 
 const colors = [
   { name: "red", color: "red" },
@@ -192,7 +91,7 @@ let colorSelection = null;
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
 
-const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];                                     //===========================SLIDERS======================
+const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"]; //===========================SLIDERS======================
 // Gör en array av val som vi kan ändra med sliders.
 const editableSliders = editableSliderNames.map((value, index) => ({
   // Gör en arrowfunction med .map funktion på varje element i editableSliderNames
@@ -293,7 +192,7 @@ const updateColors = () => {
 
       showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${colorSelection}"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
-      console.log(colorSelection);
+
       // Skriv ut den valda färgen i konsolen
     });
   });
@@ -339,7 +238,6 @@ testButton.addEventListener("click", (e) => {
 
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
-    uid: Date.now(),
     name: "Test Monster", // Sätt namnet på monstret till "Test Monster"
     monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
     // Välj en slumpmässig diet från "monsterDiets" arrayen
@@ -374,49 +272,34 @@ testButton.addEventListener("click", (e) => {
         // Anropa "applyFilter" för att uppdatera visningen av monster
       }
     },
-  
 
     editMonster() {
       const monsterIndex = monsters.indexOf(this);
-  
-      if (monsterIndex > -1) {
-        console.log(monsters[monsterIndex].monsterDiet);
-  
-        // Hämta namn från monster tilldelar name input.
-        monsterNameInputField.value = monsters[monsterIndex].name;
-        monsterNameShow.innerHTML = monsters[monsterIndex].name;
-        // Hämtar diet, type och size tilldelar sedan värden.
-        monsterDiet.value = monsters[monsterIndex].monsterDiet;
-        monsterType.value = monsters[monsterIndex].monsterType;
-        monsterSize.value = monsters[monsterIndex].monsterSize;
-        // Hämta color, tilldela sedan dess värde.
-        showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${monsters[monsterIndex].monsterColor}"></div>`
-  
-  
-        
-  
-        let monsterSliderValue = (monsterSliders.value = monsters[monsterIndex].monsterValues); // Alla Värdern
-  
-  
-        for (let i = 0; i < editableSliders.length; i++) {
-          let slider = document.querySelector(`#slider${i}`);
-     
-  
-      let valueDisplay = document.querySelector(`#value${i}`);
-      
-  
-         valueDisplay.textContent = monsterSliderValue[i];
-  
-         slider.value = monsterSliderValue[i];
-        }
-      
-        console.log(monsterSliders);
-        console.log(monsterSliderValue);
-  
-  
-        }    
-      }
-    });
+      const monsterToEdit = monsters[monsterIndex];
+
+      monsterNameInputField.value = monsterToEdit.name;
+      // Hämta värdet från monsterName inputfältet
+      monsterDiet.value = monsterToEdit.monsterDiet;
+      // Hämta valt värde från dietinputfältet
+      monsterType.value = monsterToEdit.monsterType;
+      // Hämta valt värde från typinputfältet
+      monsterSize.value = monsterToEdit.monsterSize;
+      colorSelection = monsterToEdit.monsterColor;
+    },
+    saveMonster() {
+      const monsterIndex = monsters.indexOf(this);
+      const monsterToSave = monsters[monsterIndex];
+
+      monsterToSave.name = monsterNameInputField.value;
+      monsterToSave.monsterDiet = monsterDiet.value;
+      monsterToSave.monsterType = monsterType.value;
+      monsterToSave.monsterSize = monsterSize.value;
+      monsterToSave.monsterColor = colorSelection;
+
+      monsters[monsterIndex] = monsterToSave;
+      applyFilter();
+    },
+  });
 
   console.log(monsters);
   // Skriv ut hela "monsters" arrayen i konsolen
@@ -450,8 +333,6 @@ monsterNameInputField.addEventListener("input", () => {
     monsterNameShow.innerHTML = `<h3></h3>`;
   }
 });
-
-
 
 // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = (event) => {
@@ -525,7 +406,8 @@ const addMonsterToArray = (event) => {
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
 
-  const newMonster = {                                                                          //=============================NEW MONSTER=========================
+  const newMonster = {
+    //=============================NEW MONSTER=========================
     uid: Date.now(),
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
@@ -552,7 +434,6 @@ const addMonsterToArray = (event) => {
         // Anropa "applyFilter" för att uppdatera visningen av monster
       }
     },
-
   };
 
   monsters.push(newMonster);
@@ -614,9 +495,7 @@ const restoreCheckboxState = (state) => {
 //////  SÖKORD: renderMonsters               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-const testFunction = () => {
-  console.log("Hello World");
-};
+
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
@@ -660,6 +539,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monster-info-btns">
           <button class="delete-button"> Delete </button>
           <button class="edit-button"> Edit </button>
+          <button class="save-button"> Save</button>
         </div>
       </div>
     `;
@@ -677,19 +557,21 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const editButton = document.querySelectorAll(".edit-button");
   editButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      const uid = monsters[index].uid;
-      editMonster(uid)
-      
+      filteredMonsters[index].editMonster();
     });
   });
 
-
+  const saveButton = document.querySelectorAll(".save-button");
+  saveButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      filteredMonsters[index].saveMonster();
+    });
+  });
 
   // 15/10 Funktion för att räkna och visa antal monster
   function updateMonsterCount() {
     const monsterCounter = document.querySelector("#monster-counter");
     monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
-    console.log(updateMonsterCount);
   }
 
   function dietCounter() {
@@ -1000,7 +882,7 @@ const updateColorFilters = () => {
         // Om checkboxen är markerad:
         activeFilters.colors.push(formatText(checkbox.id));
         // Lägg till den formaterade färgen i activeFilters.colors.
-        console.log(activeFilters.colors);
+
         // Logga de aktiva färgfiltret i konsolen.
       } else {
         // Om checkboxen inte är markerad:
@@ -1009,7 +891,7 @@ const updateColorFilters = () => {
           (filter) => filter !== formatText(checkbox.id)
           // Håll endast kvar färger som inte matchar den avmarkerade.
         );
-        console.log(activeFilters.colors);
+
         // Logga de uppdaterade aktiva färgfiltret i konsolen.
       }
 
@@ -1019,36 +901,10 @@ const updateColorFilters = () => {
   });
 };
 
-//VAD SOM BEHÖVER GÖRAS:
-// Skriva ut info om hur många av varje typ det finns bredvid checkboxes
-
-// Vi har 5 färger och tre typer
-// Det kan bara vara två unika värden för filtrering
-// En funktion ska ta in värdena och mapa ut en ny lista beroende på värdena.
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
 //////  SÖKORD: filterMonsterList                       //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  KOD FÖR ATT REDIGERA MONSTER         /////////
-//////  SÖKORD: editMonster                 //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-// VAD SOM BEHÖVER GÖRAS:
-// Skapa en eventListener som lyssnar på att man klickar redigera
-// Skapa en funktion som hämtar nya värden från det man redigerat
-// Uppdatera arrayen med det nya monstret och presentera det
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-////// SLUT PÅ KOD FÖR ATT REDIGERA MONSTER /////////
-//////  SÖKORD: editMonster                 //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
@@ -1064,7 +920,7 @@ const monsterImages = [
   "images/Wobblefang.png",
   "images/Octoflurf.png",
 ];
-// 
+//
 let monsterImageIndex = 0;
 
 const monsterPreviewWindow = document.getElementById("monster-image");
@@ -1100,20 +956,6 @@ const searchInput = document.querySelector("#search-input");
 
 searchInput.addEventListener("input", () => {
   activeFilters.search = searchInput.value;
-  /*   console.log(searchInput.value); */
+
   applyFilter();
-  console.log(activeFilters.search);
 });
-
-
-
-
-
-
-const monsters = [ 
-
-  
-];
-
-
-

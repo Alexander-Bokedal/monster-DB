@@ -11,17 +11,16 @@
     <main>
       <div class="monster-preview-main">
         <div class="monster-image-main">
-          <img id="monster-image">
+          <img id="monster-image" />
 
-            <div class="monster-types">
-              <div class="monster-type-icon"></div>
-              <div class="monster-diet-icon"></div>
-              <div class="monster-size-icon"></div>
-              
-              <div class="show-color-selection"></div>
-            </div>
-          </img>
-          
+          <div class="monster-types">
+            <div class="monster-type-icon"></div>
+            <div class="monster-diet-icon"></div>
+            <div class="monster-size-icon"></div>
+
+            <div class="show-color-selection"></div>
+          </div>
+
           <div class="monster-name-main">
             <h3>"Monster Name"</h3>
           </div>
@@ -77,35 +76,37 @@
 
       <!--FILTER STARTS HERE-->
       <div class="monster-filter">
-        <p class="filter-p">Filter By Color</p>
-            <div class="color-filters">
-            </div>
-            <div class="monster-diet-filter-container">
-              
-              <select class="monster-diet-select-filter">
-                <option value=""  selected>Filter by Diet</option>
-              </select>
-            </div>
-            <div id="monster-counter"></div>
-            <br>
-            <div class="diet-counter-container">
-              <div id="flesh-counter"></div>
-              <div id="leaf-counter"></div>
-              <div id="omnivore-counter"></div>
-          </div>
-            <br>
-            <div>
-              <button id="clear-filter-button">Clear</button>
-            </div>
-         
+        <p class="filter-p">Filter</p>
+        <label for="search-input">
+          <input
+            type="text"
+            id="search-input"
+            name="search-input"
+            placeholder="Search"
+          />
+        </label>
+        <div class="color-filters"></div>
+        <div class="monster-diet-filter-container">
+          <select class="monster-diet-select-filter">
+            <option value="" selected>Filter by Diet</option>
+          </select>
+        </div>
+        <div id="monster-counter"></div>
+        <br />
+        <div class="diet-counter-container">
+          <div id="flesh-counter"></div>
+          <div id="leaf-counter"></div>
+          <div id="omnivore-counter"></div>
+        </div>
+        <br />
+        <div>
+          <button id="clear-filter-button">Clear</button>
         </div>
       </div>
 
       <!--FILTER ENDS HERE-->
       <!--ADDED A CONTAINER FOR MONSTER GALLERY-->
-      <div id="monster-gallery-container" tabindex="0">
-        
-    </div>
+      <div id="monster-gallery-container" tabindex="0"></div>
     </main>
   </body>
 </html>

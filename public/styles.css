@@ -1,12 +1,8 @@
 * {
-  box-sizing:border-box;
-
-
+  box-sizing: border-box;
 }
 
-
 body {
-  
   margin: 0%;
   background-color: rgb(172, 172, 172);
   overflow-x: hidden;
@@ -34,13 +30,12 @@ main {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;
-    
+
     grid-template-areas:
       "monster-preview-main monster-filter monster-filter"
       "monster-preview-main monster-gallery-container monster-gallery-container "
       "monster-settings  monster-gallery-container monster-gallery-container"
-      "monster-settings  monster-gallery-container monster-gallery-container"
-      ;
+      "monster-settings  monster-gallery-container monster-gallery-container";
   }
 }
 
@@ -55,8 +50,6 @@ main {
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 
-
- 
   .monster-name-main {
     display: flex;
     justify-content: center;
@@ -69,17 +62,11 @@ main {
       #f7a072,
       rgba(255, 255, 255, 0)
     );
-  
   }
-  
+
   .monster-types {
     display: flex;
     margin: 10px 0px;
-
-  }
-
-  .monster-type-icon {
-    
   }
 
   .monster-image-main {
@@ -107,75 +94,67 @@ main {
     filter: drop-shadow(-30px 0px 10px rgba(0, 0, 0, 0.5));
     overflow: hidden;
   }
-  
+
   #changeMonsterButtons {
     display: flex;
     flex-direction: row;
+  }
 
-    }
-
-    #change-monster-left,
-    #change-monster-right {
-      cursor: pointer;
-      border-radius: 25%;
-      border: none;
-      margin: 8px 50px;
-      box-shadow: 
-      0 1px 3px rgba(0, 0, 0, 0.5), 
-      0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-    #change-monster-left:hover,
-    #change-monster-right:hover {
-      transition: 0.2s;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-
-  
+  #change-monster-left,
+  #change-monster-right {
+    cursor: pointer;
+    border-radius: 25%;
+    border: none;
+    margin: 8px 50px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  #change-monster-left:hover,
+  #change-monster-right:hover {
+    transition: 0.2s;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
-
 
 #colors-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin: 10px 0;
-  
-  }
+}
 
-  .color-box {
-    height: 25px;
-    width: 25px;
-    border: 2px solid #727272;
-    border-radius: 50%;
-    padding: 0; 
-    background-color: transparent; 
-    cursor: pointer; 
-    outline: none; 
-    transition: transform 0.3s; 
-    
-  }
+.color-box {
+  height: 25px;
+  width: 25px;
+  border: 2px solid #727272;
+  border-radius: 50%;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s;
+}
 
-  .color-box {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 10px;
-  }
+.color-box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 10px;
+}
 
-  .show-color-selection {
-    align-self: flex-start;
-  }
+.show-color-selection {
+  align-self: flex-start;
+}
 
-  .color-selection {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-  }
+.color-selection {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
 
-  .color-box:hover, 
-  .color-box:focus {
-    transform: scale(1.3);
-  }
+.color-box:hover,
+.color-box:focus {
+  transform: scale(1.3);
+}
 
 .monster-settings {
   display: grid;
@@ -190,7 +169,6 @@ main {
   justify-self: center;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-
 }
 
 #monster-dropdown-container {
@@ -207,7 +185,6 @@ main {
   margin-top: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   text-indent: 5px;
-
 }
 
 .monster-type-select,
@@ -222,7 +199,6 @@ main {
   margin-right: 5px;
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-
 }
 
 #done-button {
@@ -232,10 +208,8 @@ main {
   margin-bottom: 10px;
   border-radius: 20px;
   border: none;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-  
-
 }
 
 #done-button:hover {
@@ -256,17 +230,16 @@ main {
   }
 }
 
-
 .slider:hover {
   cursor: pointer;
 }
 .monster-filter {
   grid-area: monster-filter;
   display: flex;
- flex-direction: column;
+  flex-direction: column;
   justify-content: space-around;
   flex-wrap: wrap;
- width: 100%;
+  width: 100%;
   margin: 0px 10px;
   padding: 15px 0px;
   align-items: center;
@@ -275,13 +248,10 @@ main {
   background-color: #beeeeb;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
- 
-
 }
 @media (min-width: 600px) {
   .monster-filter {
     margin: 0px;
-
   }
 }
 
@@ -298,13 +268,12 @@ main {
   margin-bottom: 20px;
   margin-top: 5px;
   border-bottom: 2px solid rgba(128, 128, 128, 0.384);
-  
 }
 .color-filter-boxes {
   margin: 0px 10px;
 }
 
-.monster-diet-filter-container{
+.monster-diet-filter-container {
   margin-bottom: 20px;
   margin-top: 5px;
 }
@@ -317,24 +286,22 @@ main {
   border-radius: 20px;
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-
 }
 
-  .diet-counter-container {
-    display: flex;
-    flex-direction: row;
-    transform: scale(1.3);
-    gap: 50px;
-  }
+.diet-counter-container {
+  display: flex;
+  flex-direction: row;
+  transform: scale(1.3);
+  gap: 50px;
+}
 
 #clear-filter-button {
   width: 95px;
   height: 25px;
   border-radius: 20px;
   border: none;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-
 }
 
 #clear-filter-button:hover {
@@ -352,8 +319,6 @@ main {
   border-radius: 20px;
   background-color: #e4fcfa;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-  
-  
 }
 
 @media (min-width: 600px) {
@@ -361,25 +326,20 @@ main {
     grid-template-columns: repeat(2, 1fr);
     display: flex;
     flex-direction: column;
-   justify-content: space-between;
-    width: 20cap;    
-    height: 256px;  
+    justify-content: space-between;
+    width: 20cap;
+    height: 256px;
     padding: 10px;
-
-    
   }
   .monster-card:hover {
     transition: 0.3s;
     transform: scale(1.05);
     background-color: #ffffff;
   }
-  
 }
 
 .monster-info {
   width: 100%;
-  
- 
 }
 
 @media (min-width: 600px) {
@@ -387,14 +347,11 @@ main {
     width: 100%;
     overflow: scroll;
     overflow: hidden;
-   
   }
   .monster-info:focus {
     overflow-y: scroll;
-    
-  } 
+  }
 }
-
 
 .monster-info-btns {
   display: flex;
@@ -409,7 +366,6 @@ main {
   width: 50px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   align-self: flex-end;
-
 }
 .delete-button:hover {
   cursor: pointer;
@@ -423,14 +379,11 @@ main {
   width: 50px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
   align-self: flex-end;
-  
 }
 .edit-button:hover {
   cursor: pointer;
   background-color: #beeeeb;
 }
-
-
 
 .monster-name,
 .monster-diet,
@@ -464,7 +417,6 @@ main {
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
-  
 }
 
 @media (min-width: 600px) {
@@ -486,12 +438,8 @@ main {
     gap: 5px;
     gap: 10px;
     overflow: hidden;
-    
-
-
-    }
-    #monster-gallery-container:hover {
-      overflow-y: scroll;
-    }
   }
-
+  #monster-gallery-container:hover {
+    overflow-y: scroll;
+  }
+}

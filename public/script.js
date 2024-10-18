@@ -645,7 +645,6 @@ const monsterTypes = [
   "🍄Fungal", // Typ för svampmonster.
   "🪨Titan", // Typ för titanmonster.
   "🧌Troll", // Typ för trollmonster.
-  /* "🪳Insectiod", // Typ för insektsmonster. */
 ];
 
 const monsterSizes = [
@@ -653,7 +652,6 @@ const monsterSizes = [
 
   "🤏Pinky-Small", // Storlek för mycket små monster.
   "🦒Long-Legs", // Storlek för monster med långa ben.
-  /*  "🐓Average-bin", // Genomsnittlig storlek för monster. */
   "🌋Crippled-Mountain", // Storlek för stora monster som liknar berg.
   "🌿Tree-Twig", // Storlek för monster som liknar träd.
 ];
@@ -734,9 +732,7 @@ monsterType.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🪨";
   } else if ((monsterType.value = "🧌Troll")) {
     monsterTypeIcon.innerHTML = "🧌";
-  } /* else if ((monsterType.value = "🪳Insectiod")) {
-    monsterTypeIcon.innerHTML = "🪳";
-  } */
+  }
 });
 const monsterSizeIcon = document.querySelector(".monster-size-icon");
 monsterSize.addEventListener("change", () => {
@@ -745,9 +741,7 @@ monsterSize.addEventListener("change", () => {
     monsterSizeIcon.innerHTML = "🤏";
   } else if (monsterSize.value === "🦒Long-Legs") {
     monsterSizeIcon.innerHTML = "🦒";
-  } /* else if (monsterSize.value === "🐓Average-Bin") {
-    monsterSizeIcon.innerHTML = "🐓";
-  } */ else if (monsterSize.value === "🌋Crippled-Mountain") {
+  } else if (monsterSize.value === "🌋Crippled-Mountain") {
     monsterSizeIcon.innerHTML = "🌋";
   } else if (monsterSize.value === "🌿Tree-Twig") {
     monsterSizeIcon.innerHTML = "🌿";

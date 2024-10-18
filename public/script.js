@@ -187,7 +187,7 @@ const updateColors = () => {
 
       showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${colorSelection}"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
-      console.log(colorSelection);
+
       // Skriv ut den valda färgen i konsolen
     });
   });
@@ -269,10 +269,29 @@ testButton.addEventListener("click", (e) => {
     },
     editMonster() {
       const monsterIndex = monsters.indexOf(this);
+      const monsterToEdit = monsters[monsterIndex];
 
-      if (monsterIndex > -1) {
-        console.log(monsters[monsterIndex].monsterDiet);
-      }
+      monsterNameInputField.value = monsterToEdit.name;
+      // Hämta värdet från monsterName inputfältet
+      monsterDiet.value = monsterToEdit.monsterDiet;
+      // Hämta valt värde från dietinputfältet
+      monsterType.value = monsterToEdit.monsterType;
+      // Hämta valt värde från typinputfältet
+      monsterSize.value = monsterToEdit.monsterSize;
+      colorSelection = monsterToEdit.monsterColor;
+    },
+    saveMonster() {
+      const monsterIndex = monsters.indexOf(this);
+      const monsterToSave = monsters[monsterIndex];
+
+      monsterToSave.name = monsterNameInputField.value;
+      monsterToSave.monsterDiet = monsterDiet.value;
+      monsterToSave.monsterType = monsterType.value;
+      monsterToSave.monsterSize = monsterSize.value;
+      monsterToSave.monsterColor = colorSelection;
+
+      monsters[monsterIndex] = monsterToSave;
+      applyFilter();
     },
   });
 
@@ -410,7 +429,6 @@ const addMonsterToArray = (event) => {
       const monsterIndex = monsters.indexOf(this);
 
       if (monsterIndex > -1) {
-        console.log(monsterIndex);
       }
     },
   };
@@ -474,9 +492,7 @@ const restoreCheckboxState = (state) => {
 //////  SÖKORD: renderMonsters               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-const testFunction = () => {
-  console.log("Hello World");
-};
+
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
@@ -520,6 +536,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
         <div class="monster-info-btns">
           <button class="delete-button"> Delete </button>
           <button class="edit-button"> Edit </button>
+          <button class="save-button"> Save</button>
         </div>
       </div>
     `;
@@ -541,11 +558,17 @@ const renderMonsters = (filteredMonsters = monsters) => {
     });
   });
 
+  const saveButton = document.querySelectorAll(".save-button");
+  saveButton.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      filteredMonsters[index].saveMonster();
+    });
+  });
+
   // 15/10 Funktion för att räkna och visa antal monster
   function updateMonsterCount() {
     const monsterCounter = document.querySelector("#monster-counter");
     monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
-    console.log(updateMonsterCount);
   }
 
   function dietCounter() {
@@ -870,7 +893,7 @@ const updateColorFilters = () => {
         // Om checkboxen är markerad:
         activeFilters.colors.push(formatText(checkbox.id));
         // Lägg till den formaterade färgen i activeFilters.colors.
-        console.log(activeFilters.colors);
+
         // Logga de aktiva färgfiltret i konsolen.
       } else {
         // Om checkboxen inte är markerad:
@@ -879,7 +902,7 @@ const updateColorFilters = () => {
           (filter) => filter !== formatText(checkbox.id)
           // Håll endast kvar färger som inte matchar den avmarkerade.
         );
-        console.log(activeFilters.colors);
+
         // Logga de uppdaterade aktiva färgfiltret i konsolen.
       }
 
@@ -889,36 +912,10 @@ const updateColorFilters = () => {
   });
 };
 
-//VAD SOM BEHÖVER GÖRAS:
-// Skriva ut info om hur många av varje typ det finns bredvid checkboxes
-
-// Vi har 5 färger och tre typer
-// Det kan bara vara två unika värden för filtrering
-// En funktion ska ta in värdena och mapa ut en ny lista beroende på värdena.
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
 //////  SÖKORD: filterMonsterList                       //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  KOD FÖR ATT REDIGERA MONSTER         /////////
-//////  SÖKORD: editMonster                 //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-// VAD SOM BEHÖVER GÖRAS:
-// Skapa en eventListener som lyssnar på att man klickar redigera
-// Skapa en funktion som hämtar nya värden från det man redigerat
-// Uppdatera arrayen med det nya monstret och presentera det
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-////// SLUT PÅ KOD FÖR ATT REDIGERA MONSTER /////////
-//////  SÖKORD: editMonster                 //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
@@ -969,7 +966,6 @@ const searchInput = document.querySelector("#search-input");
 
 searchInput.addEventListener("input", () => {
   activeFilters.search = searchInput.value;
-  /*   console.log(searchInput.value); */
+
   applyFilter();
-  console.log(activeFilters.search);
 });

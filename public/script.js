@@ -290,7 +290,7 @@ testButton.addEventListener("click", (e) => {
       const monsterIndex = monsters.indexOf(this);
       const monsterToSave = monsters[monsterIndex];
 
-      monsterToSave.name = monsterNameInputField.value;
+      monsterToSave.name = formatText(monsterNameInputField.value);
       monsterToSave.monsterDiet = monsterDiet.value;
       monsterToSave.monsterType = monsterType.value;
       monsterToSave.monsterSize = monsterSize.value;
@@ -408,7 +408,7 @@ const addMonsterToArray = (event) => {
 
   const newMonster = {
     //=============================NEW MONSTER=========================
-    uid: Date.now(),
+
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
@@ -433,6 +433,32 @@ const addMonsterToArray = (event) => {
         applyFilter();
         // Anropa "applyFilter" för att uppdatera visningen av monster
       }
+    },
+    editMonster() {
+      const monsterIndex = monsters.indexOf(this);
+      const monsterToEdit = monsters[monsterIndex];
+
+      monsterNameInputField.value = monsterToEdit.name;
+      // Hämta värdet från monsterName inputfältet
+      monsterDiet.value = monsterToEdit.monsterDiet;
+      // Hämta valt värde från dietinputfältet
+      monsterType.value = monsterToEdit.monsterType;
+      // Hämta valt värde från typinputfältet
+      monsterSize.value = monsterToEdit.monsterSize;
+      colorSelection = monsterToEdit.monsterColor;
+    },
+    saveMonster() {
+      const monsterIndex = monsters.indexOf(this);
+      const monsterToSave = monsters[monsterIndex];
+
+      monsterToSave.name = formatText(monsterNameInputField.value);
+      monsterToSave.monsterDiet = monsterDiet.value;
+      monsterToSave.monsterType = monsterType.value;
+      monsterToSave.monsterSize = monsterSize.value;
+      monsterToSave.monsterColor = colorSelection;
+
+      monsters[monsterIndex] = monsterToSave;
+      applyFilter();
     },
   };
 

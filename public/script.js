@@ -1,3 +1,5 @@
+const saveButton = document.querySelector("#save-button");
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 /////// KOMMENTERA RUNT KODSTYCKEN SÅHÄR  ///////////
@@ -33,13 +35,6 @@ let activeFilters = {
   colors: [],
   search: "",
 };
-// Globala arryer för att kunna applicera multipla filter
-
-const monsters = [];
-// Global array för att lagra monster
-
-monsterNameShow = document.querySelector(".monster-name-main");
-// Global array för att kunna ändra namn i preview
 
 // Kod för att formatera namn
 const formatText = (string) => {
@@ -50,12 +45,123 @@ const formatText = (string) => {
   // Funktionen split(" ") används för att dela upp den ursprungliga strängen i en array av ord
   for (const element of splitArray) {
     // Loop itererar över varje element (ord) i arrayen
-    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
+    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + "";
     // För varje element (ord) i arrayen blir index 0 stor bokstav, fr o m index [1] splice
   }
   return formattedText;
   // Returnera
 };
+
+
+                                                      // ==============================SAVE==============================
+const handleSave = (monsterToEdit, index) => {
+  return (event) => {
+    event.preventDefault();
+
+    // Gather slider values
+    const sliderValuesToAddToMonsterObject = [];
+    // Skapa en tom array för att lagra slidervärden
+    const arrayOfAllSliders = document.querySelectorAll(".slider");
+    // Hämta alla HTML-element med klassen "slider"
+  
+    // Loopar igenom alla sliders för att hämta deras värden
+    for (let i = 0; i < arrayOfAllSliders.length; i++) {
+      // Loopa genom arrayen av sliders
+      sliderValuesToAddToMonsterObject.push(
+        // Lägg till slidervärdet i arrayen
+        document.querySelector(`#slider${i}`).value
+        // Hämta värdet från varje slider baserat på dess ID
+      );
+    }
+  
+
+    console.log(monsterToEdit)
+    console.log(index)
+
+    // Update monster values
+    monsterToEdit.name = monsterNameInputField.value;
+    monsterToEdit.monsterDiet = monsterDiet.value;
+    monsterToEdit.monsterType = monsterType.value;
+    monsterToEdit.monsterSize = monsterSize.value;
+    monsterToEdit.monsterColor = formatText(colorSelection);
+    monsterToEdit.monsterValues = sliderValuesToAddToMonsterObject;
+
+    monsters[index] = monsterToEdit;
+    
+
+    applyFilter(); 
+    // Re-render the monster list
+
+    // Reset the form and UI elements
+    document.querySelector(".monster-settings").reset();
+    colorSelection = null;
+    showColorSelection.innerHTML = "";
+    initalizeSliders();
+
+    // Reset the display for the monster name and other icons
+    monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
+    monsterDietIcon.innerHTML = "";
+    monsterTypeIcon.innerHTML = "";
+    monsterSizeIcon.innerHTML = "";
+
+    // Toggle buttons
+    isEditing = false;
+    saveButton.style.display = 'none';
+    doneButton.style.display = 'block';
+    
+    // Remove the event listener after saving
+    saveButton.removeEventListener("click", handleSave(monsterToEdit, index));
+  };
+};
+
+// Globala funktioner för att kunna applicera multipla filter
+                                                      // ==============================SAVE==============================
+
+const editMonster = (uid) => {
+  const monsterToEdit = monsters.find(monster => monster.uid === uid);
+  const index = monsters.findIndex(monster => monster.uid === uid); 
+
+  console.log(monsterToEdit)
+  console.log(index)
+  isEditing = true;
+  doneButton.style.display = 'none';
+  saveButton.style.display = 'block';
+
+  // Hämta namn från monster tilldelar name input.
+  monsterNameInputField.value = monsterToEdit.name;
+  monsterNameShow.innerHTML = monsterToEdit.name;
+  monsterDiet.value = monsterToEdit.monsterDiet;
+  monsterType.value = monsterToEdit.monsterType;
+  monsterSize.value = monsterToEdit.monsterSize;
+  showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${monsterToEdit.monsterColor}"></div>`
+  colorSelection = monsterToEdit.monsterColor;
+
+  // Tilldela slider med value från monsters
+  let monsterSliderValue = (monsterSliders.value = monsterToEdit.monsterValues);
+  for (let i = 0; i < editableSliders.length; i++) {
+    let slider = document.querySelector(`#slider${i}`);
+    let valueDisplay = document.querySelector(`#value${i}`);
+
+    valueDisplay.textContent = monsterSliderValue[i];
+    slider.value = monsterSliderValue[i];
+  } 
+
+  const saveClickHandler = handleSave(monsterToEdit, index);
+
+  saveButton.addEventListener("click", saveClickHandler);
+
+  saveButton.addEventListener("click", handleSave(monsterToEdit, index));
+
+}
+
+// Globala funktioner slutar!
+
+
+// Global array för att lagra monster
+const showColorSelection = document.querySelector(".show-color-selection");
+monsterNameShow = document.querySelector(".monster-name-main");
+// Global array för att kunna ändra namn i preview
+
 
 const colors = [
   { name: "red", color: "red" },
@@ -86,7 +192,7 @@ let colorSelection = null;
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
 // Kommentera ut det här om du vill ha bort listan med monster
 
-const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
+const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];                                     //===========================SLIDERS======================
 // Gör en array av val som vi kan ändra med sliders.
 const editableSliders = editableSliderNames.map((value, index) => ({
   // Gör en arrowfunction med .map funktion på varje element i editableSliderNames
@@ -233,6 +339,7 @@ testButton.addEventListener("click", (e) => {
 
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
+    uid: Date.now(),
     name: "Test Monster", // Sätt namnet på monstret till "Test Monster"
     monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
     // Välj en slumpmässig diet från "monsterDiets" arrayen
@@ -267,14 +374,49 @@ testButton.addEventListener("click", (e) => {
         // Anropa "applyFilter" för att uppdatera visningen av monster
       }
     },
+  
+
     editMonster() {
       const monsterIndex = monsters.indexOf(this);
-
+  
       if (monsterIndex > -1) {
         console.log(monsters[monsterIndex].monsterDiet);
+  
+        // Hämta namn från monster tilldelar name input.
+        monsterNameInputField.value = monsters[monsterIndex].name;
+        monsterNameShow.innerHTML = monsters[monsterIndex].name;
+        // Hämtar diet, type och size tilldelar sedan värden.
+        monsterDiet.value = monsters[monsterIndex].monsterDiet;
+        monsterType.value = monsters[monsterIndex].monsterType;
+        monsterSize.value = monsters[monsterIndex].monsterSize;
+        // Hämta color, tilldela sedan dess värde.
+        showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${monsters[monsterIndex].monsterColor}"></div>`
+  
+  
+        
+  
+        let monsterSliderValue = (monsterSliders.value = monsters[monsterIndex].monsterValues); // Alla Värdern
+  
+  
+        for (let i = 0; i < editableSliders.length; i++) {
+          let slider = document.querySelector(`#slider${i}`);
+     
+  
+      let valueDisplay = document.querySelector(`#value${i}`);
+      
+  
+         valueDisplay.textContent = monsterSliderValue[i];
+  
+         slider.value = monsterSliderValue[i];
+        }
+      
+        console.log(monsterSliders);
+        console.log(monsterSliderValue);
+  
+  
+        }    
       }
-    },
-  });
+    });
 
   console.log(monsters);
   // Skriv ut hela "monsters" arrayen i konsolen
@@ -308,6 +450,8 @@ monsterNameInputField.addEventListener("input", () => {
     monsterNameShow.innerHTML = `<h3></h3>`;
   }
 });
+
+
 
 // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = (event) => {
@@ -380,7 +524,9 @@ const addMonsterToArray = (event) => {
   }
 
   // SKAPA ETT MONSTER SOM ETT OBJEKT
-  const newMonster = {
+
+  const newMonster = {                                                                          //=============================NEW MONSTER=========================
+    uid: Date.now(),
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
@@ -406,13 +552,7 @@ const addMonsterToArray = (event) => {
         // Anropa "applyFilter" för att uppdatera visningen av monster
       }
     },
-    editMonster() {
-      const monsterIndex = monsters.indexOf(this);
 
-      if (monsterIndex > -1) {
-        console.log(monsterIndex);
-      }
-    },
   };
 
   monsters.push(newMonster);
@@ -537,9 +677,13 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const editButton = document.querySelectorAll(".edit-button");
   editButton.forEach((button, index) => {
     button.addEventListener("click", () => {
-      filteredMonsters[index].editMonster();
+      const uid = monsters[index].uid;
+      editMonster(uid)
+      
     });
   });
+
+
 
   // 15/10 Funktion för att räkna och visa antal monster
   function updateMonsterCount() {
@@ -756,20 +900,6 @@ monsterSize.addEventListener("change", () => {
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-//////  KOD för att visa MONSTERSLIDER        /////////
-//////  SÖKORD: monsterSliders               //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD för att visa MONSTERSLIDER/////////
-//////  SÖKORD: monsterSliders               //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
 //////  KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
 //////  SÖKORD: filterMonsterList          //////////
 ///////////////////////////////////////////////////////
@@ -925,6 +1055,7 @@ const updateColorFilters = () => {
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
 
+// Skapa en array men bilder på monsnter
 const monsterImages = [
   "images/Blubberblitz.png",
   "images/Grumblefluff.png",
@@ -933,7 +1064,7 @@ const monsterImages = [
   "images/Wobblefang.png",
   "images/Octoflurf.png",
 ];
-
+// 
 let monsterImageIndex = 0;
 
 const monsterPreviewWindow = document.getElementById("monster-image");
@@ -973,3 +1104,16 @@ searchInput.addEventListener("input", () => {
   applyFilter();
   console.log(activeFilters.search);
 });
+
+
+
+
+
+
+const monsters = [ 
+
+  
+];
+
+
+

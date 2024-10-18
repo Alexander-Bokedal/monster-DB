@@ -640,12 +640,11 @@ const monsterDiets = [
 
 const monsterTypes = [
   // Skapa en array som innehåller olika typer av monster.
-
   "🐒Humanoid", // Typ för humanoida monster.
   "🍄Fungal", // Typ för svampmonster.
   "🪨Titan", // Typ för titanmonster.
-  "🪳Insectiod", // Typ för insektsmonster.
   "🧌Troll", // Typ för trollmonster.
+  /* "🪳Insectiod", // Typ för insektsmonster. */
 ];
 
 const monsterSizes = [
@@ -653,7 +652,7 @@ const monsterSizes = [
 
   "🤏Pinky-Small", // Storlek för mycket små monster.
   "🦒Long-Legs", // Storlek för monster med långa ben.
-  "🐓Average-bin", // Genomsnittlig storlek för monster.
+  /*  "🐓Average-bin", // Genomsnittlig storlek för monster. */
   "🌋Crippled-Mountain", // Storlek för stora monster som liknar berg.
   "🌿Tree-Twig", // Storlek för monster som liknar träd.
 ];
@@ -694,7 +693,7 @@ function sizeDropdown(sizeSelect) {
     // Loopar igenom varje storlek i monsterSizes-arrayen.
     const newMonsterSize = document.createElement("option");
     // Skapa ett nytt option-element för dropdown.
-    newMonsterSize.text = size;
+    newMonsterSize.innerHTML = size;
     // Sätt textinnehåll i option-elementet till aktuell storlek.
     newMonsterSize.value = size;
     // Sätt värdet för option-elementet till aktuell storlek.
@@ -730,13 +729,13 @@ monsterType.addEventListener("change", () => {
     monsterTypeIcon.innerHTML = "🐒";
   } else if (monsterType.value === "🍄Fungal") {
     monsterTypeIcon.innerHTML = "🍄";
-  } else if (monsterType.value === "💪Titan") {
-    monsterTypeIcon.innerHTML = "💪";
-  } else if ((monsterType.value = "🕷Insectiod")) {
-    monsterTypeIcon.innerHTML = "🕷";
-  } else if ((monsterType.value = "🧞‍♂️Troll")) {
-    monsterTypeIcon.innerHTML = "🧞‍♂️";
-  }
+  } else if (monsterType.value === "🪨Titan") {
+    monsterTypeIcon.innerHTML = "🪨";
+  } else if ((monsterType.value = "🧌Troll")) {
+    monsterTypeIcon.innerHTML = "🧌";
+  } /* else if ((monsterType.value = "🪳Insectiod")) {
+    monsterTypeIcon.innerHTML = "🪳";
+  } */
 });
 const monsterSizeIcon = document.querySelector(".monster-size-icon");
 monsterSize.addEventListener("change", () => {
@@ -745,9 +744,9 @@ monsterSize.addEventListener("change", () => {
     monsterSizeIcon.innerHTML = "🤏";
   } else if (monsterSize.value === "🦒Long-Legs") {
     monsterSizeIcon.innerHTML = "🦒";
-  } else if (monsterSize.value === "🐓Average-Bin") {
+  } /* else if (monsterSize.value === "🐓Average-Bin") {
     monsterSizeIcon.innerHTML = "🐓";
-  } else if (monsterSize.value === "🌋Crippled-Mountain") {
+  } */ else if (monsterSize.value === "🌋Crippled-Mountain") {
     monsterSizeIcon.innerHTML = "🌋";
   } else if (monsterSize.value === "🌿Tree-Twig") {
     monsterSizeIcon.innerHTML = "🌿";

@@ -305,7 +305,7 @@ monsterNameInputField.addEventListener("input", () => {
       monsterNameInputField.value
     )}</h3>`;
   } else {
-    monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
+    monsterNameShow.innerHTML = `<h3></h3>`;
   }
 });
 

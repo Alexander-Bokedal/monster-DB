@@ -72,8 +72,14 @@ main {
   
   }
   
+  .monster-types {
+    display: flex;
+    margin: 10px 0px;
+
+  }
+
   .monster-type-icon {
-    align-self: flex-end;
+    
   }
 
   .monster-image-main {
@@ -154,21 +160,16 @@ main {
     flex-direction: column;
     text-align: center;
     margin: 10px;
-
-
   }
 
   .show-color-selection {
-    margin-top: 25px;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    padding: 0; 
-    background-color: transparent; 
-    cursor: pointer; 
-    outline: none; 
-    transition: transform 0.3s; 
+    align-self: flex-start;
+  }
 
+  .color-selection {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
   }
 
   .color-box:hover, 

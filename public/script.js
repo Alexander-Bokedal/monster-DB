@@ -40,6 +40,22 @@ const monsters = [];
 monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
+// Kod för att formatera namn
+const formatText = (string) => {
+  let formattedText = "";
+  lowerCaseString = string.toLowerCase();
+  // Skap tom "" variabel för den omgjorda strängen
+  const splitArray = lowerCaseString.split(" ");
+  // Funktionen split(" ") används för att dela upp den ursprungliga strängen i en array av ord
+  for (const element of splitArray) {
+    // Loop itererar över varje element (ord) i arrayen
+    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
+    // För varje element (ord) i arrayen blir index 0 stor bokstav, fr o m index [1] splice
+  }
+  return formattedText;
+  // Returnera
+};
+
 const colors = [
   { name: "red", color: "red" },
   { name: "black", color: "black" },
@@ -57,29 +73,13 @@ const colorsHtml = colors.map(
   <button class="color-box" 
   id="${color.name}-button" 
   style="background-color: ${color.color};"></button>
-  <p>${color.name}</p>
+  <p>${formatText(color.name)}</p>
   </div>`
 );
 
 const colorsNames = colors.map((color) => color.name);
 
 let colorSelection = null;
-
-// Kod för att formatera namn
-const formatText = (string) => {
-  let formattedText = "";
-  lowerCaseString = string.toLowerCase();
-  // Skap tom "" variabel för den omgjorda strängen
-  const splitArray = lowerCaseString.split(" ");
-  // Funktionen split(" ") används för att dela upp den ursprungliga strängen i en array av ord
-  for (const element of splitArray) {
-    // Loop itererar över varje element (ord) i arrayen
-    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
-    // För varje element (ord) i arrayen blir index 0 stor bokstav, fr o m index [1] splice
-  }
-  return formattedText;
-  // Returnera
-};
 
 // Lista med förutbestämda monster
 // Den här är till för att lättare kunna arbeta med innehållet på hemsidan
@@ -179,11 +179,12 @@ const updateColors = () => {
       colorSelection = button.style.backgroundColor;
       // Tilldela variabeln "colorSelection" den bakgrundsfärg som är inställd för knappen som klickades
 
-      document.querySelector(
-        // Hämta elementet med klassen "show-color-selection"
-
+      const showColorSelection = document.querySelector(
         ".show-color-selection"
-      ).innerHTML = `<div class="show-color-selection" style="background-color: ${colorSelection}"></div>`;
+      );
+      // Hämta elementet med klassen "show-color-selection"
+
+      showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${colorSelection}"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
       console.log(colorSelection);
       // Skriv ut den valda färgen i konsolen
@@ -199,7 +200,6 @@ window.onload = () => {
   updateColors();
   initalizeSliders();
   updatePreWindow();
-
 };
 
 ///////////////////////////////////////////////////////
@@ -428,6 +428,10 @@ const addMonsterToArray = (event) => {
   document.querySelector(".show-color-selection").innerHTML = "";
   initalizeSliders();
   checkIfFormFilled.innerHTML = "";
+  monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
+  monsterDietIcon.innerHTML = "";
+  monsterTypeIcon.innerHTML = "";
+  monsterSizeIcon.innerHTML = "";
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
@@ -917,14 +921,13 @@ const updateColorFilters = () => {
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
 
-const monsterImages = 
-[  
+const monsterImages = [
   "images/Blubberblitz.png",
   "images/Grumblefluff.png",
   "images/Snaggletooth.png",
   "images/Splatzo.png",
   "images/Wobblefang.png",
-  "images/Octoflurf.png"
+  "images/Octoflurf.png",
 ];
 
 let monsterImageIndex = 0;
@@ -935,14 +938,12 @@ const changemMonsterRightBtn = document.getElementById("change-monster-right");
 
 function updatePreWindow() {
   monsterPreviewWindow.src = monsterImages[monsterImageIndex];
-
 }
-
 
 updatePreWindow();
 
 changemMonsterLeftBtn.addEventListener("click", () => {
-  console.log(monsterImageIndex)
+  console.log(monsterImageIndex);
   if (monsterImageIndex > 0) {
     monsterImageIndex--;
   } else {
@@ -958,6 +959,4 @@ changemMonsterRightBtn.addEventListener("click", () => {
     monsterImageIndex = 0;
   }
   updatePreWindow();
-})
-
-
+});

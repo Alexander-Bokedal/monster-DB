@@ -3,21 +3,18 @@
 }
 
 ::-webkit-scrollbar {
-  width: 3px; /* Width of the scrollbar */
+  width: 3px;
 }
 
-/* Track (the background of the scrollbar) */
 ::-webkit-scrollbar-track {
   background: none;
 }
 
-/* Handle (the draggable part of the scrollbar) */
 ::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 10px; /* Rounded corners for the scrollbar handle */
+  border-radius: 10px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
@@ -221,7 +218,8 @@ main {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-#done-button, #save-button {
+#done-button,
+#save-button {
   width: 95%;
   height: 25px;
   margin-top: 10px;
@@ -232,11 +230,16 @@ main {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-#done-button:hover, #save-button:hover {
+.hidden {
+  display: none;
+  /* Klass för att kunna gömma buttons */
+}
+
+#done-button:hover,
+#save-button:hover {
   cursor: pointer;
   background-color: rgba(105, 105, 105, 0.397);
 }
-
 
 #slider-container {
   display: flex;

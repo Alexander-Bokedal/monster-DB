@@ -69,11 +69,11 @@ const formatText = (string) => {
   // Funktionen split(" ") används för att dela upp den ursprungliga strängen i en array av ord
   for (const element of splitArray) {
     // Loop itererar över varje element (ord) i arrayen
-    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + "";
+    formattedText += element.charAt(0).toUpperCase() + element.slice(1) + " ";
     // För varje element (ord) i arrayen blir index 0 stor bokstav, fr o m index [1] splice
   }
-  return formattedText;
-  // Returnera
+  return formattedText.trimEnd();
+  // Ta bort whitespace från slutet av ordet och returna
 };
 
 // ==============================SAVE==============================
@@ -136,7 +136,7 @@ const editableSliders = editableSliderNames.map((value, index) => ({
   </div>`,
   // Avsluta HTML-strukturen för slidern
 
-  updateSliderValue() {
+  updateSliderValue(value = 3) {
     // Definiera en metod för att uppdatera sliderns värde
 
     let slider = document.querySelector(`#slider${index}`);
@@ -144,8 +144,8 @@ const editableSliders = editableSliderNames.map((value, index) => ({
 
     let valueDisplay = document.querySelector(`#value${index}`);
     // Hämta span-elementet med ID baserat på "index" för att visa värdet
-
-    valueDisplay.textContent = slider.value;
+    slider.value = value;
+    valueDisplay.textContent = value;
     // Sätt textinnehållet i span-elementet till det nuvarande värdet av slidern
 
     slider.addEventListener("input", (event) => {
@@ -156,6 +156,9 @@ const editableSliders = editableSliderNames.map((value, index) => ({
     });
   },
 }));
+
+const monsterSliders = document.querySelector("#sliders");
+// Hämta HTML-elementet med ID "sliders" och tilldela det till variabeln "monsterSliders"
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -170,9 +173,6 @@ const editableSliders = editableSliderNames.map((value, index) => ({
 /////   SÖKORD: onLoad                       //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-
-const monsterSliders = document.querySelector("#sliders");
-// Hämta HTML-elementet med ID "sliders" och tilldela det till variabeln "monsterSliders"
 
 const updateMonsterSliders = () => {
   // Definiera en funktion för att uppdatera monster-sliders
@@ -227,6 +227,8 @@ const updateColors = () => {
 
 // Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
+  saveButton.classList.add("hidden");
+  // Gömmer savebutton på load
   renderMonsters();
   updateColorFilters();
   updateMonsterSliders();
@@ -310,11 +312,19 @@ testButton.addEventListener("click", (e) => {
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
 
+      let indexOfMonsterValues = 0;
+      editableSliders.forEach((slider) => {
+        slider.updateSliderValue(this.monsterValues[indexOfMonsterValues]);
+        indexOfMonsterValues++;
+      });
+
       monsterToEditIndex = monsters.indexOf(this);
       // Global variabel för att saveknappen ska veta vems funktion den ska kalla
 
-      saveButton.style.display = "block";
-      doneButton.style.display = "none";
+      saveButton.classList.remove("hidden");
+      // Visar saveButton
+      doneButton.classList.add("hidden");
+      // Gömmer doneButton
     },
     saveMonster() {
       const monsterIndex = monsters.indexOf(this);
@@ -328,12 +338,32 @@ testButton.addEventListener("click", (e) => {
       monsterToSave.monsterSize = monsterSize.value;
       monsterToSave.monsterColor = formatText(colorSelection);
 
-      monsters[monsterIndex] = monsterToSave;
+      const sliderValuesToAddToMonsterObject = [];
+      // Skapa en tom array för att lagra slidervärden
+      const arrayOfAllSliders = document.querySelectorAll(".slider");
+      // Hämta alla HTML-element med klassen "slider"
 
-      saveButton.style.display = "none";
-      doneButton.style.display = "block";
+      // Loopar igenom alla sliders för att hämta deras värden
+      for (let i = 0; i < arrayOfAllSliders.length; i++) {
+        // Loopa genom arrayen av sliders
+        sliderValuesToAddToMonsterObject.push(
+          // Lägg till slidervärdet i arrayen
+          document.querySelector(`#slider${i}`).value
+          // Hämta värdet från varje slider baserat på dess ID
+        );
+      }
+
+      monsterToSave.monsterValues = sliderValuesToAddToMonsterObject;
+
+      monsters[monsterIndex] = monsterToSave;
+      saveButton.classList.add("hidden");
+      // Visar saveButton
+      doneButton.classList.remove("hidden");
+      // Gömmer doneButton
       applyFilter();
       cleanForm();
+      monsterToEditIndex = null;
+      // Global variabel för att saveknappen ska veta vems funktion den ska kalla
     },
   });
 
@@ -471,10 +501,6 @@ const addMonsterToArray = (event) => {
       }
     },
     editMonster() {
-      const monsterNameShow = document.querySelector(".monster-name-main");
-
-      monsterNameShow.innerHTML = this.name;
-
       monsterNameInputField.value = this.name;
       // Hämta värdet från monsterName inputfältet
       monsterDiet.value = this.monsterDiet;
@@ -483,21 +509,60 @@ const addMonsterToArray = (event) => {
       // Hämta valt värde från typinputfältet
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
+
+      let indexOfMonsterValues = 0;
+      editableSliders.forEach((slider) => {
+        slider.updateSliderValue(this.monsterValues[indexOfMonsterValues]);
+        indexOfMonsterValues++;
+      });
+
+      monsterToEditIndex = monsters.indexOf(this);
+      // Global variabel för att saveknappen ska veta vems funktion den ska kalla
+
+      saveButton.classList.remove("hidden");
+      // Visar saveButton
+      doneButton.classList.add("hidden");
+      // Gömmer doneButton
     },
     saveMonster() {
       const monsterIndex = monsters.indexOf(this);
       const monsterToSave = monsters[monsterIndex];
-      console.log(monsterName);
 
-      monsterToSave.name = formatText(monsterNameInputField.value);
+      if (monsterNameInputField.value !== "") {
+        monsterToSave.name = formatText(monsterNameInputField.value);
+      }
       monsterToSave.monsterDiet = monsterDiet.value;
       monsterToSave.monsterType = monsterType.value;
       monsterToSave.monsterSize = monsterSize.value;
-      monsterToSave.monsterColor = colorSelection;
-      console.log(formatText(colorSelection));
+      monsterToSave.monsterColor = formatText(colorSelection);
+
+      const sliderValuesToAddToMonsterObject = [];
+      // Skapa en tom array för att lagra slidervärden
+      const arrayOfAllSliders = document.querySelectorAll(".slider");
+      // Hämta alla HTML-element med klassen "slider"
+
+      // Loopar igenom alla sliders för att hämta deras värden
+      for (let i = 0; i < arrayOfAllSliders.length; i++) {
+        // Loopa genom arrayen av sliders
+        sliderValuesToAddToMonsterObject.push(
+          // Lägg till slidervärdet i arrayen
+          document.querySelector(`#slider${i}`).value
+          // Hämta värdet från varje slider baserat på dess ID
+        );
+      }
+
+      monsterToSave.monsterValues = sliderValuesToAddToMonsterObject;
 
       monsters[monsterIndex] = monsterToSave;
+
+      saveButton.classList.add("hidden");
+      // Visar saveButton
+      doneButton.classList.remove("hidden");
+      // Gömmer doneButton
       applyFilter();
+      cleanForm();
+      monsterToEditIndex = null;
+      // Global variabel för att saveknappen ska veta vems funktion den ska kalla
     },
   };
 
@@ -693,6 +758,10 @@ clearFilterButton.addEventListener("click", (e) => {
   // Rensa arrayen för aktiva färgfilter.
   activeFilters.types = "";
   // Återställ typen av aktiva filter till en tom sträng.
+  activeFilters.search = "";
+  // Åsterställ till tom sträng i aktiva filter
+  searchInput.value = "";
+  // Rensa search rutan
 
   applyFilter();
   // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.

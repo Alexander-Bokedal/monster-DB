@@ -193,6 +193,11 @@ const updateColors = () => {
       showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${colorSelection}"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
 
+
+      playEffect(colorSelection.toLowerCase());
+      // Hämta namnet på den specifika fäger i lowerCase
+      // Logiken blir playEffect(red); vilket är precis vad vi vill!
+
       // Skriv ut den valda färgen i konsolen
     });
   });
@@ -584,6 +589,8 @@ const renderMonsters = (filteredMonsters = monsters) => {
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
       filteredMonsters[index].removeMonster();
+      console.log('Deleted!')
+      randomDeleteSound();
     });
   });
 
@@ -653,6 +660,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
 const clearFilterButton = document.querySelector("#clear-filter-button");
 // Hämta knappen för att rensa filter med dess ID.
 clearFilterButton.addEventListener("click", (e) => {
+  playEffect('changeValue');
   // Lägg till en klick-händelse för knappen.
   e.preventDefault();
   // Förhindra standardbeteendet för knappen, t.ex. att skicka ett formulär.
@@ -771,12 +779,14 @@ const monsterDietIcon = document.querySelector(".monster-diet-icon");
 // Fixa så att det inte är en ful if-sats
 monsterDiet.addEventListener("change", () => {
   monsterDietIcon.innerHTML = "";
-
   if (monsterDiet.value === "🥩Flesh-Muncher") {
+    playEffect('meat');
     monsterDietIcon.innerHTML = "🥩";
   } else if (monsterDiet.value === "🥬Leaf-Cruncher") {
+    playEffect('leaf');
     monsterDietIcon.innerHTML = "🥬";
   } else if (monsterDiet.value === "🗑️Non-Pesky-Omnivore") {
+    playEffect('omni');
     monsterDietIcon.innerHTML = "🗑️";
   }
 });
@@ -784,12 +794,17 @@ const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
+    playEffect('humanoids');
     monsterTypeIcon.innerHTML = "🐒";
+    playEffect('changeColor');
   } else if (monsterType.value === "🍄Fungal") {
+    playEffect('fungal');
     monsterTypeIcon.innerHTML = "🍄";
   } else if (monsterType.value === "🪨Titan") {
+    playEffect('titan');
     monsterTypeIcon.innerHTML = "🪨";
   } else if ((monsterType.value = "🧌Troll")) {
+    playEffect('shrek');
     monsterTypeIcon.innerHTML = "🧌";
   }
 });
@@ -797,12 +812,16 @@ const monsterSizeIcon = document.querySelector(".monster-size-icon");
 monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";
   if (monsterSize.value === "🤏Pinky-Small") {
+    playEffect('pinkySmall');
     monsterSizeIcon.innerHTML = "🤏";
   } else if (monsterSize.value === "🦒Long-Legs") {
+    playEffect('longLegs');
     monsterSizeIcon.innerHTML = "🦒";
   } else if (monsterSize.value === "🌋Crippled-Mountain") {
+    playEffect('crippledMountain');
     monsterSizeIcon.innerHTML = "🌋";
   } else if (monsterSize.value === "🌿Tree-Twig") {
+    playEffect('treeTwig');
     monsterSizeIcon.innerHTML = "🌿";
   }
 });
@@ -859,6 +878,7 @@ const dietSelectFilter = document.querySelector(".monster-diet-select-filter");
 // Välj dropdown-elementet för dieter med id "monsterDietSelectFilter".
 
 dietSelectFilter.addEventListener("change", () => {
+  playEffect('changeValue');
   // Lägg till en eventlyssnare för när värdet ändras i dietSelectFilter.
   activeFilters.types = dietSelectFilter.value;
   // Sätt det aktiva filtret för typer till det valda värdet från dropdown-menyn.
@@ -910,6 +930,7 @@ const updateColorFilters = () => {
   colorFilterDivs.forEach((checkbox) => {
     // Loopar igenom varje checkbox.
     checkbox.addEventListener("change", () => {
+      playEffect('changeColor');
       // Lägg till en eventlyssnare för när checkboxen ändras.
       if (checkbox.checked) {
         // Om checkboxen är markerad:
@@ -963,21 +984,93 @@ const monsterIntros = {
   5: new Audio('sounds/octoflurf.mp3')
 };
 
-let monsterImageIndex = 0;
-let currentSound = null;
+// Random fraser som spelas vid "delete"
+const randomDeleteSounds = [
+  new Audio('sounds/Bye.mp3'),
+  new Audio('sounds/Service.mp3'),
+  new Audio('sounds/BringBack.mp3'),
+  new Audio('sounds/NoMiss.mp3')
+];
 
+const randomDeleteSound = () => {
+  // Skapa en variabel som slumpmässigt får en indexplats från vår array.
+  const randomIndex = Math.floor(Math.random() * randomDeleteSounds.length);
+  randomDeleteSounds.forEach((sound) => {
+    sound.pause();
+    sound.currentTime = 0;
+  });
+  randomDeleteSounds[randomIndex].play();
+};
+
+// Samla alla effektljud i obj. 
+const effectSounds = {
+  //Settings
+  changeMonster: new Audio('sounds/changeMonster.mp3'),
+  dropDown: new Audio('sounds/dropDown.mp3'),
+  changeValue: new Audio('sounds/changeValue.mp3'),
+  changeColor: new Audio('sounds/changeColor.mp3'),
+  //Colors
+  red: new Audio('sounds/Red.mp3'),
+  black: new Audio('sounds/Black.mp3'),
+  yellow: new Audio('sounds/Yellow.mp3'),
+  blue: new Audio('sounds/Blue.mp3'),
+  green: new Audio('sounds/Green.mp3'),
+  // Diets
+  meat: new Audio('sounds/Meat.mp3'),
+  leaf: new Audio('sounds/Leafs.mp3'),
+  omni: new Audio('sounds/Omni.mp3'),
+  //Sizes
+  pinkySmall: new Audio('sounds/PinkySmall.mp3'),
+  longLegs: new Audio('sounds/LongLegs.mp3'),
+  crippledMountain: new Audio('sounds/CrippledMountain.mp3'),
+  treeTwig: new Audio('sounds/TreeTwig.mp3'),
+  //Types
+  humanoids: new Audio('sounds/Humanoids.mp3'),
+  fungal: new Audio('sounds/Fungal.mp3'),
+  titan: new Audio('sounds/Titan.mp3'),
+  shrek: new Audio('sounds/Troll.mp3')
+};
+
+const playEffect = (soundKey) => {
+  if (effectSounds[soundKey]) {
+    // Stoppa alla andra ljud innan vi spelar upp ett nytt
+    Object.keys(effectSounds).forEach(key => {
+      // Gå igenom alla nyklar var för sig, loopa igenom med forEach.
+      if (!effectSounds[key].paused) {
+        // Kolla om det aktuella ljude INTE är pausat
+        effectSounds[key].pause();
+        // Om ljud spelas Pausa det.
+        effectSounds[key].currentTime = 0;
+        // Resetta det pausade ljudet.
+      }
+    });
+
+    // Spela upp ljud! PLAY!
+    effectSounds[soundKey].play();
+  } else {
+    console.warn(`Soundkey with "${soundKey}" does not exist. Please check obj @ row 966`);
+  }
+};
+
+
+let monsterImageIndex = 0;
+let currentIntroSound = null;
+
+
+//Ljud spelas från index av intros
 const playSoundForIndex = (index) => {
-  if (currentSound) {
-    currentSound.pause();
-    currentSound.currentTime = 0;
+  if (currentIntroSound) {
+    currentIntroSound.pause();
+    currentIntroSound.currentTime = 0;
   }
 
   if (monsterIntros[index]) {
-    currentSound = monsterIntros[index];
-    currentSound.play();
+    currentIntroSound = monsterIntros[index];
+    currentIntroSound.play();
   }
 
 }
+
 
 const monsterPreviewWindow = document.getElementById("monster-image");
 const changemMonsterLeftBtn = document.getElementById("change-monster-left");
@@ -989,13 +1082,10 @@ function updatePreWindow() {
 
 updatePreWindow();
 
-const changeMonsterClickSound = new Audio('sounds/changeMonster.mp3');
-changeMonsterClickSound.volume = 0.5;
 
 changemMonsterLeftBtn.addEventListener("click", () => {
   console.log(monsterImageIndex);
-  changeMonsterClickSound.play();
-
+  playEffect('changeMonster');
   if (monsterImageIndex > 0) {
     monsterImageIndex--;
   } else {
@@ -1003,21 +1093,22 @@ changemMonsterLeftBtn.addEventListener("click", () => {
   }
   updatePreWindow();
 
-  playSoundForIndex(monsterImageIndex).volume = 0.5;
+  playSoundForIndex(monsterImageIndex);
 
 });
 
 
 changemMonsterRightBtn.addEventListener("click", () => {
-  changeMonsterClickSound.play();
   if (monsterImageIndex < monsterImages.length - 1) {
+    playEffect('changeMonster');
+
     monsterImageIndex++;
   } else {
     monsterImageIndex = 0;
   }
   updatePreWindow();
 
-  playSoundForIndex(monsterImageIndex).volume = 0.5;
+  playSoundForIndex(monsterImageIndex);
 
 
 });

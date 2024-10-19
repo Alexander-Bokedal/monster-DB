@@ -437,6 +437,10 @@ const addMonsterToArray = (event) => {
     editMonster() {
       const monsterIndex = monsters.indexOf(this);
       const monsterToEdit = monsters[monsterIndex];
+      const monsterNameShow = document.querySelector(".monster-name-main")
+
+      monsterNameShow.innerHTML = monsterToEdit.name;
+      console.log(monsterToEdit.name);
 
       monsterNameInputField.value = monsterToEdit.name;
       // Hämta värdet från monsterName inputfältet
@@ -450,6 +454,7 @@ const addMonsterToArray = (event) => {
     saveMonster() {
       const monsterIndex = monsters.indexOf(this);
       const monsterToSave = monsters[monsterIndex];
+      console.log(monsterName)
 
       monsterToSave.name = formatText(monsterNameInputField.value);
       monsterToSave.monsterDiet = monsterDiet.value;
@@ -463,7 +468,7 @@ const addMonsterToArray = (event) => {
   };
 
   monsters.push(newMonster);
-  console.log(newMonster);
+
   // VAD SOM BEHÖVER GÖRAS:
   // EN FUNKTION FÖR ATT RENSA FORMULÄRET
 
@@ -476,10 +481,12 @@ const addMonsterToArray = (event) => {
   document.querySelector(".show-color-selection").innerHTML = "";
   initalizeSliders();
   checkIfFormFilled.innerHTML = "";
-  monsterNameShow.innerHTML = `<h3>"Monster Name"</h3>`;
+  monsterName.innerHTML = `<h3>""</h3>`;
   monsterDietIcon.innerHTML = "";
   monsterTypeIcon.innerHTML = "";
   monsterSizeIcon.innerHTML = "";
+  monsterNameShow.innerHTML = "";
+
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
@@ -946,8 +953,31 @@ const monsterImages = [
   "images/Wobblefang.png",
   "images/Octoflurf.png",
 ];
-//
+
+const monsterIntros = {
+  0: new Audio('sounds/blubberblitz.mp3'),
+  1: new Audio('sounds/grumblefluff.mp3'),
+  2: new Audio('sounds/snaggletooth.mp3'),
+  3: new Audio('sounds/splatzo.mp3'),
+  4: new Audio('sounds/wobblefang.mp3'),
+  5: new Audio('sounds/octoflurf.mp3')
+};
+
 let monsterImageIndex = 0;
+let currentSound = null;
+
+const playSoundForIndex = (index) => {
+  if (currentSound) {
+    currentSound.pause();
+    currentSound.currentTime = 0;
+  }
+
+  if (monsterIntros[index]) {
+    currentSound = monsterIntros[index];
+    currentSound.play();
+  }
+
+}
 
 const monsterPreviewWindow = document.getElementById("monster-image");
 const changemMonsterLeftBtn = document.getElementById("change-monster-left");
@@ -959,23 +989,37 @@ function updatePreWindow() {
 
 updatePreWindow();
 
+const changeMonsterClickSound = new Audio('sounds/changeMonster.mp3');
+changeMonsterClickSound.volume = 0.5;
+
 changemMonsterLeftBtn.addEventListener("click", () => {
   console.log(monsterImageIndex);
+  changeMonsterClickSound.play();
+
   if (monsterImageIndex > 0) {
     monsterImageIndex--;
   } else {
     monsterImageIndex = monsterImages.length - 1;
   }
   updatePreWindow();
+
+  playSoundForIndex(monsterImageIndex).volume = 0.5;
+
 });
 
+
 changemMonsterRightBtn.addEventListener("click", () => {
+  changeMonsterClickSound.play();
   if (monsterImageIndex < monsterImages.length - 1) {
     monsterImageIndex++;
   } else {
     monsterImageIndex = 0;
   }
   updatePreWindow();
+
+  playSoundForIndex(monsterImageIndex).volume = 0.5;
+
+
 });
 
 const searchInput = document.querySelector("#search-input");
@@ -984,4 +1028,12 @@ searchInput.addEventListener("input", () => {
   activeFilters.search = searchInput.value;
 
   applyFilter();
+});
+
+const backgroundMusic = new Audio('sounds/bgMusic.mp3');
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+
+window.addEventListener("load", () => {
+  backgroundMusic.play();
 });

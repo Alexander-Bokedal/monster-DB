@@ -60,6 +60,8 @@ let monsterToEditIndex = null;
 // Variable för att veta vilket index save ska spara till
 
 const monsters = [];
+//Global array för att lagra monster
+
 // Kod för att formatera namn
 const formatText = (string) => {
   let formattedText = "";
@@ -80,8 +82,9 @@ const formatText = (string) => {
 
 // Globala funktioner slutar!
 
-// Global array för att lagra monster
 const showColorSelection = document.querySelector(".show-color-selection");
+// Global variabel för att kunna fixa vilken färg man valt till sitt monster
+
 monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
@@ -92,9 +95,9 @@ const colors = [
   { name: "yellow", color: "yellow" },
   { name: "green", color: "green" },
 ];
-// Array med färger som går att ändra till valfria färger
+// GLobal array med färger som går att ändra till valfria färger
 // "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "White", color: "#fff""
+// exempel "name: "white", color: "#fff""
 
 const colorsHtml = colors.map(
   (color) =>

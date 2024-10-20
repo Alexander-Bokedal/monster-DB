@@ -98,6 +98,7 @@ const colors = [
 // GLobal array med färger som går att ändra till valfria färger
 // "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
 // exempel "name: "white", color: "#fff""
+// OBS den här funkar inte riktigt som den ska än OBS
 
 const colorsHtml = colors.map(
   (color) =>
@@ -1040,10 +1041,18 @@ const updateColorFilters = () => {
   });
 };
 
+const searchInput = document.querySelector("#search-input");
+
+searchInput.addEventListener("input", () => {
+  activeFilters.search = searchInput.value;
+
+  applyFilter();
+});
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
-//////  SÖKORD: filterMonsterList                       //////////
+//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
+//////  SÖKORD: filterMonsterList             //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
@@ -1189,14 +1198,6 @@ changemMonsterRightBtn.addEventListener("click", () => {
   updatePreWindow();
 
   playSoundForIndex(monsterImageIndex);
-});
-
-const searchInput = document.querySelector("#search-input");
-
-searchInput.addEventListener("input", () => {
-  activeFilters.search = searchInput.value;
-
-  applyFilter();
 });
 
 const backgroundMusic = new Audio("sounds/bgMusic.mp3");

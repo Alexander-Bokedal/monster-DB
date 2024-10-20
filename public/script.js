@@ -882,7 +882,6 @@ monsterType.addEventListener("change", () => {
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
     monsterTypeIcon.innerHTML = "🐒";
-    playEffect("changeColor");
   } else if (monsterType.value === "🍄Fungal") {
     playEffect("fungal");
     monsterTypeIcon.innerHTML = "🍄";

@@ -34,6 +34,9 @@ let activeFilters = {
   search: "",
 };
 
+let monsterToEditIndex = null;
+// Variable för att veta vilket index save ska spara till
+
 const saveButton = document.querySelector("#save-button");
 // Global savebutton
 // Den här knappen används för att på ett lätt sätt kunna ha en knapp för alla monster
@@ -55,9 +58,6 @@ const cleanForm = () => {
   monsterSizeIcon.innerHTML = "";
   monsterNameShow.innerHTML = "";
 };
-
-let monsterToEditIndex = null;
-// Variable för att veta vilket index save ska spara till
 
 const monsters = [];
 //Global array för att lagra monster
@@ -109,14 +109,10 @@ const colorsHtml = colors.map(
   <p>${formatText(color.name)}</p>
   </div>`
 );
-
-const colorsNames = colors.map((color) => color.name);
+// Skapar html för våra knappar som väljer färg
 
 let colorSelection = null;
-
-// Lista med förutbestämda monster
-// Den här är till för att lättare kunna arbeta med innehållet på hemsidan
-// Kommentera ut det här om du vill ha bort listan med monster
+// Global variabel för att välja färg
 
 const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"]; //===========================SLIDERS======================
 // Gör en array av val som vi kan ändra med sliders.
@@ -127,7 +123,7 @@ const editableSliders = editableSliderNames.map((value, index) => ({
   html: `<div class="slider"> 
     <!--Starta HTML-strukturen för slidern-->
 
-    <label for="${value}">${value}</label> 
+    <label for="slider${index}">${value}</label> 
     <!--Skapa en etikett för slidern kopplad till "value"-->
 
     <br/>
@@ -331,8 +327,7 @@ testButton.addEventListener("click", (e) => {
       // Gömmer doneButton
     },
     saveMonster() {
-      const monsterIndex = monsters.indexOf(this);
-      const monsterToSave = monsters[monsterIndex];
+      const monsterToSave = monsters[monsterToEditIndex];
 
       if (monsterNameInputField.value !== "") {
         monsterToSave.name = formatText(monsterNameInputField.value);
@@ -359,7 +354,7 @@ testButton.addEventListener("click", (e) => {
 
       monsterToSave.monsterValues = sliderValuesToAddToMonsterObject;
 
-      monsters[monsterIndex] = monsterToSave;
+      monsters[monsterToEditIndex] = monsterToSave;
       saveButton.classList.add("hidden");
       // Visar saveButton
       doneButton.classList.remove("hidden");
@@ -379,7 +374,7 @@ testButton.addEventListener("click", (e) => {
 
 monsterNameInputField.addEventListener("input", () => {
   // Lägg till en eventlyssnare för "input"-händelsen på "monsterNameInputField"
-  if (monsterNameInputField.value.length > 28) {
+  if (monsterNameInputField.value.length >= 28) {
     // Kontrollera om längden på värdet i inputfältet är längre än 28 tecken
     checkNameLength.innerHTML = "";
     // Rensa tidigare meddelande
@@ -632,8 +627,8 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
     const objectsWithValuesToPresentInHtml = [];
-    let count = 0;
 
+    let count = 0;
     for (const element of editableSliderNames) {
       let monsterAttribute = element;
       let attributeValue = monster.monsterValues[count];
@@ -660,7 +655,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
           <p class="monster-color">Color: ${monster.monsterColor}</p>
           <p class="monster-diet">Diet: ${monster.monsterDiet}</p>
           <p class="monster-type">Type: ${monster.monsterType}</p>
-          <p class="monster-color">Size: ${monster.monsterSize}</p>
+          <p class="monster-size">Size: ${monster.monsterSize}</p>
           ${valuesToPresentInHtml}
         </div>
         <div class="monster-info-btns">
@@ -930,22 +925,16 @@ monsterSize.addEventListener("change", () => {
 const applyFilter = () => {
   const filteredMonsters = monsters.filter((monster) => {
     const matchesType =
-      // Om "types" är lika med 0 så finns det inga filter, och det här villkoret blir sant
-      // Om "types" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
       activeFilters.types === "" || activeFilters.types === monster.monsterDiet;
+    // Om "types" är lika med 0 så finns det inga filter, och det här villkoret blir sant
+    // Om "types" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
 
-    // Om "colors" är lika med 0 så finns det inga filter, och det här villkoret blir sant
-    // Om "color" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
     const matchesColor =
       activeFilters.colors.length === 0 ||
       activeFilters.colors.includes(monster.monsterColor);
+    // Om "colors" är lika med 0 så finns det inga filter, och det här villkoret blir sant
+    // Om "color" har filter i sig returneras monstret bara om dess monsterDiet matchar det som finns i flitret.
 
-    // Monstret returneras bara om både matchesType och matchesColor är lika med true.
-    // I ett fall där det inte finns några filter kommer båda villkoren alltid vara sanna och därför returnera all monster
-
-    /*     const matchesSearch =
-      activeFilters.search === "" ||
-      activeFilters.search.includes(monster.monsterName); */
     const matchesSearch =
       activeFilters.search === "" ||
       (monster.name &&
@@ -954,6 +943,8 @@ const applyFilter = () => {
           .includes(activeFilters.search.toLowerCase()));
 
     return matchesType && matchesColor && matchesSearch;
+    // Monstret returneras bara om både matchesType och matchesColor och matchesSearch är lika med true.
+    // I ett fall där det inte finns några filter kommer båda villkoren alltid vara sanna och därför returnera all monster
   });
 
   renderMonsters(filteredMonsters);
@@ -967,10 +958,6 @@ dietSelectFilter.addEventListener("change", () => {
   // Lägg till en eventlyssnare för när värdet ändras i dietSelectFilter.
   activeFilters.types = dietSelectFilter.value;
   // Sätt det aktiva filtret för typer till det valda värdet från dropdown-menyn.
-  console.log(dietSelectFilter.value);
-  // Logga det valda värdet från dropdown-menyn i konsolen.
-  console.log(activeFilters.types);
-  // Logga det aktiva filtret för typer i konsolen.
   applyFilter();
   // Anropa funktionen applyFilter för att uppdatera visningen baserat på det valda filtret.
 });
@@ -994,8 +981,7 @@ const updateColorFilters = () => {
   const colorFilters = document.querySelector(".color-filters");
   // Välj elementet som innehåller färgfiltret.
   const colorFiltersHtml = colors.map((color) => {
-    const normalizedColorName = color.name;
-    const count = colorCounts[normalizedColorName];
+    const count = colorCounts[color.name];
     // Skapa en HTML-sträng för varje färg i colors-arrayen.
     return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${
       color.color

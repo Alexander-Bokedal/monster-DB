@@ -424,6 +424,7 @@ main {
   .monster-diet,
   .monster-color,
   .monster-type,
+  .monster-size,
   .editable-value {
     display: none;
   }

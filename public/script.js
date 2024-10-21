@@ -415,6 +415,7 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
+  const newMonsterImage = monsterImages[monsterImageIndex];
 
   const newMonsterDiet = monsterDiet.value;
   // Hämta valt värde från dietinputfältet
@@ -481,6 +482,7 @@ const addMonsterToArray = (event) => {
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
+    monsterImage: newMonsterImage,
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),

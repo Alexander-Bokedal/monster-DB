@@ -30,6 +30,8 @@
 
 import { randomNames } from "./randomNames.js";
 
+const monsterCardPreviewImage = document.querySelector(".monster-card-preview")
+
 let activeFilters = {
   types: "",
   colors: [],
@@ -182,7 +184,6 @@ const colors = [
   { name: "green", color: "green" },
 ];
 
-const colorsNames = colors.map((color) => color.name);
 
 const colorsHtml = colors.map(
   (color) =>
@@ -273,14 +274,13 @@ testButton.addEventListener("click", (e) => {
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
-    monsterDiet:
-      monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
+    monsterDiet:monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
     monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
     // Välj en slumpmässig typ från "monsterTypes" arrayen
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
-    monsterImage: monsterImages[Math.floor(Math.random() * monsterImages.index)],
+    monsterImage: monsterImages[Math.floor(Math.random() * monsterImages.length)],
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret
@@ -418,8 +418,8 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
-  const newMonsterImage = monsterImage.index
-  // Hämta valt värde från monster bildval
+  const newMonsterImage = monsterPreviewWindow.src;
+  
   const newMonsterDiet = monsterDiet.value;
   // Hämta valt värde från dietinputfältet
   const newMonsterType = monsterType.value;
@@ -486,8 +486,6 @@ const addMonsterToArray = (event) => {
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
-    monsterImage: newMonsterImage,
-    // Sätt ny bild på kortet i galleriet
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),
@@ -586,7 +584,6 @@ const addMonsterToArray = (event) => {
 
   cleanForm();
   checkIfFormFilled.innerHTML = "";
-  monsterName.innerHTML = `<h3>""</h3>`;
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
@@ -673,7 +670,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
           </div>
           
 
-          <div id="monster-card-preview">${monsterPreviewWindow}</div>
+          <img id="monster-card-preview" src="${monster.monsterImage}" alt="Monster Preview" />
         <div class="monster-info" tabindex="0">
           <p class="monster-color">${monster.monsterColor}</p>
           <p class="monster-diet">${monster.monsterDiet}</p>
@@ -808,12 +805,8 @@ const monsterDietFilter = document.querySelector(".monster-diet-select-filter");
 // Hämta elementet med ID "monsterDietSelectFilter", som är en dropdown för att filtrera monster efter diet.
 const monsterType = document.querySelector(".monster-type-select");
 // Hämta elementet med ID "monsterTypeSelect", som är en dropdown för att välja monstertyp.
-const monsterTypeFilter = document.querySelector(".monster-type-select-filter");
-// Hämta elementet med ID "monsterTypeSelectFilter", som är en dropdown för att filtrera monster efter typ.
 const monsterSize = document.querySelector(".monster-size-select");
 // Hämta elementet med ID "monsterSizeSelect", som är en dropdown för att välja monstersize.
-const monsterSizeFilter = document.querySelector(".monster-size-select-filter");
-// Hämta elementet med ID "monsterSizeSelectFilter", som är en dropdown för att filtrera monster efter storlek.
 
 // Skapa en array som innehåller olika typer av monsterdieter.
 const monsterDiets = [
@@ -1075,6 +1068,17 @@ searchInput.addEventListener("input", () => {
 //////  SÖKORD: filterMonsterList             //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
+//////  SÖKORD: filterMonsterList             //////////
+///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
+//////  SÖKORD: filterMonsterList             //////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 // Allmänt
 // VAD SOM BEHÖVER GÖRAS:
@@ -1087,16 +1091,15 @@ const monsterImages = [
   "images/Grumblefluff.png",
   "images/Snaggletooth.png",
   "images/Splatzo.png",
-  "images/Wobblefang.png",
   "images/Octoflurf.png",
 ];
-let monsterCardImage = monsterImages[monsterImageIndex];
+
+
 const monsterIntros = {
   0: new Audio("sounds/blubberblitz.mp3"),
   1: new Audio("sounds/grumblefluff.mp3"),
   2: new Audio("sounds/snaggletooth.mp3"),
   3: new Audio("sounds/splatzo.mp3"),
-  4: new Audio("sounds/wobblefang.mp3"),
   5: new Audio("sounds/octoflurf.mp3"),
 };
 
@@ -1194,12 +1197,13 @@ const changeMonsterRightBtn = document.getElementById("change-monster-right");
 
 function updatePreWindow() {
   monsterPreviewWindow.src = monsterImages[monsterImageIndex];
+
+  console.log(`HERE: ${ monsterPreviewWindow.src}`);
 }
 
 updatePreWindow();
 
 changeMonsterLeftBtn.addEventListener("click", () => {
-  console.log(`HERE: ${monsterCardImage}`);
   playEffect("changeMonster");
   if (monsterImageIndex > 0) {
     monsterImageIndex--;

@@ -33,29 +33,28 @@
       </svg>
     </button>
     <main>
-      <div class="monster-preview-main">
-        <div class="monster-image-main">
+      <section class="monster-preview-main">
+        <figure class="monster-image-main">
           <img id="monster-image" />
 
           <div class="monster-types">
             <div class="monster-type-icon"></div>
             <div class="monster-diet-icon"></div>
             <div class="monster-size-icon"></div>
-
             <div class="show-color-selection"></div>
           </div>
 
-          <div class="monster-name-main">
-            <h3></h3>
-          </div>
-          <div id="change-monster-buttons">
+          
+          <nav id="change-monster-buttons">
             <button id="change-monster-left">◀</button>
             <button id="change-monster-right">▶</button>
-          </div>
-        </div>
-      </div>
+          </nav>
+          <div class="monster-name-main"></div>
+          
+        </figure>
+      </section>
       <!--MONSTER MAIN WINDOW ENDS HERE-->
-
+      
       <!--MONSTER SETTINGS STARTS HERE-->
       <form class="monster-settings">
         <label for="monster-name">
@@ -64,6 +63,7 @@
             placeholder="Monster Name"
             type="text"
             class="name-input"
+            maxlength="28" 
           />
         </label>
         <div class="check-name-length"></div>
@@ -107,7 +107,7 @@
       <!--MONSTER SETTINGS ENDS HERE-->
 
       <!--FILTER STARTS HERE-->
-      <div class="monster-filter">
+      <section class="monster-filter">
         <p class="filter-p">Filter</p>
         <label for="search-input">
           <input
@@ -131,11 +131,13 @@
         <div>
           <button id="clear-filter-button">Clear</button>
         </div>
-      </div>
+      </section>
 
       <!--FILTER ENDS HERE-->
       <!--ADDED A CONTAINER FOR MONSTER GALLERY-->
-      <div id="monster-gallery-container" tabindex="0"></div>
+      <section id="monster-gallery-container" tabindex="0">
+
+      </section>
     </main>
   </body>
 </html>

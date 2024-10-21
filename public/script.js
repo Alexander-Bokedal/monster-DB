@@ -278,7 +278,8 @@ testButton.addEventListener("click", (e) => {
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
-    monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
+    monsterDiet:
+      monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
     monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
     // Välj en slumpmässig typ från "monsterTypes" arrayen
@@ -701,7 +702,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
     monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
   }
 
-  function dietCounter() {
+  /*  function dietCounter() {
     const fleshCounter = document.querySelector("#flesh-counter");
     const leafCounter = document.querySelector("#leaf-counter");
     const omnivoreCounter = document.querySelector("#omnivore-counter");
@@ -720,7 +721,23 @@ const renderMonsters = (filteredMonsters = monsters) => {
     leafCounter.textContent = `🥬: ${leafCruncherCount}`;
     omnivoreCounter.textContent = `🗑️: ${NonPeskyCount}`;
     // Apply right icons to the HTML div
-  }
+  } */
+  const dietCounterHtml = document.querySelector(".diet-counter-container");
+  const dietCounter = () => {
+    const dietCounts = {};
+
+    monsterDiets.forEach((diet) => {
+      dietCounts[diet.diet] = monsters.filter(
+        (monster) => monster.monsterDiet === diet.diet
+      ).length;
+    });
+
+    dietCounterHtml.innerHTML = monsterDiets
+      .map((diet) => {
+        return `<div>${diet.icon}: ${dietCounts[diet.diet]}</div>`;
+      })
+      .join("");
+  };
 
   // Update the filters and restore the checkbox state
 
@@ -789,12 +806,11 @@ const monsterSize = document.querySelector(".monster-size-select");
 const monsterSizeFilter = document.querySelector(".monster-size-select-filter");
 // Hämta elementet med ID "monsterSizeSelectFilter", som är en dropdown för att filtrera monster efter storlek.
 
+// Skapa en array som innehåller olika typer av monsterdieter.
 const monsterDiets = [
-  // Skapa en array som innehåller olika typer av monsterdieter.
-
-  "🥩Flesh-Muncher", // Diet för köttätande monster.
-  "🥬Leaf-Cruncher", // Diet för växtätande monster.
-  "🗑️Non-Pesky-Omnivore", // Diet för allätande monster som inte är så kräsna.
+  { icon: "🥩", diet: "🥩Flesh-Muncher" },
+  { icon: "🥬", diet: "🥬Leaf-Cruncher" },
+  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore" },
 ];
 
 const monsterTypes = [
@@ -820,9 +836,9 @@ function dietDropdown(dietSelect) {
     // Loopar igenom varje diet i monsterDiets-arrayen.
     const newMonsterDiet = document.createElement("option");
     // Skapa ett nytt option-element för dropdown.
-    newMonsterDiet.innerHTML = diet;
+    newMonsterDiet.innerHTML = diet.diet;
     // Sätt innhåll i option-elementet till aktuell diet.
-    newMonsterDiet.value = diet;
+    newMonsterDiet.value = diet.diet;
     // Sätt värdet för option-elementet till aktuell diet.
     dietSelect.appendChild(newMonsterDiet);
     // Lägg till det nya option-elementet i dietSelect dropdown-menyn.

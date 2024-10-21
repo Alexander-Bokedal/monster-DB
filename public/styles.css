@@ -463,6 +463,8 @@ main {
 
 .monster-name,
 .monster-diet,
+.monster-type,
+.monster-size,
 .monster-color,
 .editable-value {
   color: black;

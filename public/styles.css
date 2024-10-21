@@ -133,7 +133,7 @@ main {
       #beeeeb,
       rgba(255, 255, 255, 0)
     );
-  
+
     border-top: 2px solid #aeebe7;
     border-bottom: 2px solid #aeebe7;
   }
@@ -207,7 +207,6 @@ main {
   cursor: pointer;
   outline: none;
   transition: transform 0.3s;
-
 }
 
 .color-box {
@@ -225,7 +224,6 @@ main {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  
 }
 
 .color-box:hover,
@@ -393,7 +391,6 @@ main {
   background-color: rgba(105, 105, 105, 0.397);
 }
 
-
 .monster-card {
   display: flex;
   flex-direction: column;
@@ -415,17 +412,16 @@ main {
   background-size: contain;
 }
 
-
 .monster-name {
-    align-items: center;
-    text-align: center;
+  align-items: center;
+  text-align: center;
 
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0),
-      #beeeeb,
-      rgba(255, 255, 255, 0)
-    );
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
   margin: 2px;
   text-align: center;
   border-bottom: 1px solid #333;
@@ -479,23 +475,31 @@ main {
 .delete-icon {
   width: 20px;
   height: 20px;
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 @keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(25deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-15deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .delete-button:hover {
   cursor: pointer;
   animation: shake 0.5s ease-out;
-
 }
-
 
 .edit-button {
   border: none;
@@ -507,7 +511,7 @@ main {
 .edit-icon {
   width: 20px;
   height: 20px;
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 .edit-button:hover {
@@ -515,8 +519,6 @@ main {
   transform: scale(1.2) rotate(360deg);
   transition: transform 1s ease-in-out;
 }
-
-
 
 .monster-name,
 .monster-diet,
@@ -526,8 +528,6 @@ main {
 .editable-value {
   color: #333;
 }
-
-
 
 @media screen and (max-width: 600px) {
   .monster-diet,
@@ -576,4 +576,14 @@ main {
   #monster-gallery-container:hover {
     overflow-y: scroll;
   }
+}
+
+.rare {
+  box-shadow: 0 0 20px gold; /* Example shadow for rare */
+}
+.uncommon {
+  box-shadow: 0 0 10px blue; /* Example shadow for uncommon */
+}
+.common {
+  box-shadow: 0 0 5px rgb(255, 0, 0); /* Example shadow for common */
 }

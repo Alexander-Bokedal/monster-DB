@@ -30,7 +30,7 @@
 
 import { randomNames } from "./randomNames.js";
 
-const monsterCardPreviewImage = document.querySelector(".monster-card-preview")
+const monsterCardPreviewImage = document.querySelector(".monster-card-preview");
 
 let activeFilters = {
   types: "",
@@ -80,8 +80,6 @@ const formatText = (string) => {
   // Ta bort whitespace från slutet av ordet och returna
 };
 
-
-
 // Globala funktioner slutar!
 
 // Global array för att lagra monster
@@ -89,10 +87,8 @@ const formatText = (string) => {
 
 // Global array för att kunna ändra namn i preview
 
-
 const monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
-
 
 let colorSelection = null;
 // Global variabel för att välja färg
@@ -184,7 +180,6 @@ const colors = [
   { name: "green", color: "green" },
 ];
 
-
 const colorsHtml = colors.map(
   (color) =>
     `<div class="color-container">
@@ -274,20 +269,22 @@ testButton.addEventListener("click", (e) => {
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
-    monsterDiet:monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
+    monsterDiet:
+      monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
     monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
     // Välj en slumpmässig typ från "monsterTypes" arrayen
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
-    monsterImage: monsterImages[Math.floor(Math.random() * monsterImages.length)],
+    monsterImage:
+      monsterImages[Math.floor(Math.random() * monsterImages.length)],
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret
       colors[Math.floor(Math.random() * colors.length)].color
       // Välj en slumpmässig färg från "colors" arrayen och formatera den
     ),
-
+    rarity: Math.floor(Math.random() * 10) + 1,
     monsterValues: [
       // Sätt värden för monstret i en array
       Math.floor(Math.random() * 7), // Slumptal mellan 0 och 6
@@ -418,8 +415,7 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
-  const newMonsterImage = monsterPreviewWindow.src;
-  
+
   const newMonsterDiet = monsterDiet.value;
   // Hämta valt värde från dietinputfältet
   const newMonsterType = monsterType.value;
@@ -430,7 +426,6 @@ const addMonsterToArray = (event) => {
   // Skapa en tom array för att lagra slidervärden
   const arrayOfAllSliders = document.querySelectorAll(".slider");
   // Hämta alla HTML-element med klassen "slider"
-
   // Loopar igenom alla sliders för att hämta deras värden
   for (let i = 0; i < arrayOfAllSliders.length; i++) {
     // Loopa genom arrayen av sliders
@@ -496,6 +491,7 @@ const addMonsterToArray = (event) => {
     // Sätt storlek på monstret till det valda storleksvärdet
     monsterValues: sliderValuesToAddToMonsterObject,
     // Sätt värdena för monstret till arrayen med slidervärden
+    rarity: Math.floor(Math.random() * 10) + 1,
     removeMonster() {
       // Definiera en metod för att ta bort monstret från listan
       const monsterIndex = monsters.indexOf(this);
@@ -584,6 +580,23 @@ const addMonsterToArray = (event) => {
 
   cleanForm();
   checkIfFormFilled.innerHTML = "";
+
+  const monsterCards = document.querySelectorAll(".monster-card");
+  const lastMonsterCard = monsterCards[monsterCards.length - 1];
+
+  const rarity = newMonster.rarity;
+  lastMonsterCard.classList.remove("rare", "uncommon", "common");
+
+  if (rarity === 1) {
+    lastMonsterCard.classList.add("rare");
+    console.log(`Rare class added to the new monster card`);
+  } else if (rarity > 1 && rarity < 5) {
+    lastMonsterCard.classList.add("uncommon");
+    console.log(`Uncommon class added to the new monster card`);
+  } else {
+    lastMonsterCard.classList.add("common");
+    console.log(`Common class added to the new monster card`);
+  }
 };
 
 // KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
@@ -625,6 +638,22 @@ const restoreCheckboxState = (state) => {
 //////  SÖKORD: renderMonsters               //////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
+
+const applyBoxShadow = (monsterCards) => {
+  monsterCards.forEach((monsterCard, index) => {
+    const rarity = monsters[index].rarity;
+
+    monsterCard.classList.remove("rare", "uncommon", "common");
+
+    if (rarity === 1) {
+      monsterCard.classList.add("rare");
+    } else if (rarity > 1 && rarity < 5) {
+      monsterCard.classList.add("uncommon");
+    } else {
+      monsterCard.classList.add("common");
+    }
+  });
+};
 
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
@@ -686,6 +715,10 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   monsterGallery.innerHTML = monsterGalleryHtmlArray.join("");
 
+  let monsterCards = document.querySelectorAll(".monster-card");
+
+  applyBoxShadow(monsterCards);
+
   const deleteButton = document.querySelectorAll(".delete-button");
   deleteButton.forEach((button, index) => {
     button.addEventListener("click", () => {
@@ -707,27 +740,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
     monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
   }
 
-  /*  function dietCounter() {
-    const fleshCounter = document.querySelector("#flesh-counter");
-    const leafCounter = document.querySelector("#leaf-counter");
-    const omnivoreCounter = document.querySelector("#omnivore-counter");
-    const fleshMuncherCount = monsters.filter(
-      (monster) => monster.monsterDiet === "🥩Flesh-Muncher"
-    ).length;
-    const leafCruncherCount = monsters.filter(
-      (monster) => monster.monsterDiet === "🥬Leaf-Cruncher"
-    ).length;
-    const NonPeskyCount = monsters.filter(
-      (monster) => monster.monsterDiet === "🗑️Non-Pesky-Omnivore"
-    ).length;
-    fleshCounter.textContent = `🥩: ${fleshMuncherCount}`;
-    leafCounter.textContent = `🥬: ${leafCruncherCount}`;
-    omnivoreCounter.textContent = `🗑️: ${NonPeskyCount}`;
-
-  }
-
-    // Apply right icons to the HTML div
-  } */
   const dietCounterHtml = document.querySelector(".diet-counter-container");
   const dietCounter = () => {
     const dietCounts = {};
@@ -744,8 +756,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
       })
       .join("");
   };
-
-
 
   updateColorFilters();
   updateMonsterCount();
@@ -1094,7 +1104,6 @@ const monsterImages = [
   "images/Octoflurf.png",
 ];
 
-
 const monsterIntros = {
   0: new Audio("sounds/blubberblitz.mp3"),
   1: new Audio("sounds/grumblefluff.mp3"),
@@ -1173,10 +1182,7 @@ const playEffect = (soundKey) => {
   }
 };
 
-
 let currentIntroSound = null;
-
-
 
 //Ljud spelas från index av intros
 const playSoundForIndex = (index) => {
@@ -1197,8 +1203,6 @@ const changeMonsterRightBtn = document.getElementById("change-monster-right");
 
 function updatePreWindow() {
   monsterPreviewWindow.src = monsterImages[monsterImageIndex];
-
-  console.log(`HERE: ${ monsterPreviewWindow.src}`);
 }
 
 updatePreWindow();
@@ -1232,9 +1236,9 @@ const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 
-window.addEventListener("load", () => {
+/* window.addEventListener("load", () => {
   backgroundMusic.play();
-});
+}); */
 
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.querySelector("#theme-switch");

@@ -447,7 +447,7 @@ main {
 @media (min-width: 600px) {
   #monster-gallery-container {
     grid-template-columns: repeat(2, 1fr);
-    justify-content: space-between;
+    justify-content: center;
     gap: 5px;
     gap: 10px;
     overflow: hidden;

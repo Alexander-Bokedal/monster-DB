@@ -62,6 +62,16 @@ const cleanForm = () => {
 const monsters = [];
 //Global array för att lagra monster
 
+const randomNames = [
+  "Alex Boke",
+  "Fredrik Härvi",
+  "Markus Larsson",
+  "Sabina Mail",
+  "Emil Pemil",
+  "Hunden McHund",
+  "Niklas",
+];
+
 // Kod för att formatera namn
 const formatText = (string) => {
   let formattedText = "";
@@ -267,7 +277,7 @@ testButton.addEventListener("click", (e) => {
 
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
-    name: "Test Monster", // Sätt namnet på monstret till "Test Monster"
+    name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
     monsterDiet: monsterDiets[Math.floor(Math.random() * monsterDiets.length)],
     // Välj en slumpmässig diet från "monsterDiets" arrayen
     monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],

@@ -398,7 +398,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: start;
-
   min-height: 320px;
   width: 48%;
   font-size: 1em;
@@ -410,7 +409,7 @@ main {
 
 #monster-card-preview {
   height: 250px;
-  background-image: url(images/Blubberblitz.png);
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -473,9 +472,7 @@ main {
 .delete-button {
   border: none;
   border-radius: 20px;
-  background-color: white;
-  width: 50px;
-  box-shadow: 0 1px 3px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  width: 20px;
   align-self: flex-end;
 }
 
@@ -503,9 +500,7 @@ main {
 .edit-button {
   border: none;
   border-radius: 20px;
-  background-color: white;
-  width: 50px;
-  box-shadow: 0 1px 3px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  width: 20px;
   align-self: flex-end;
 }
 

@@ -84,39 +84,12 @@ const formatText = (string) => {
 
 // Global array för att lagra monster
 //==============================SAVE==============================
-monsterNameShow = document.querySelector(".monster-name-main");
+
 // Global array för att kunna ändra namn i preview
 
-
-
-const showColorSelection = document.querySelector(".show-color-selection");
-// Global variabel för att kunna fixa vilken färg man valt till sitt monster
 
 const monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
-
-const colors = [
-  { name: "red", color: "red" },
-  { name: "black", color: "black" },
-  { name: "blue", color: "blue" },
-  { name: "yellow", color: "yellow" },
-  { name: "green", color: "green" },
-];
-// GLobal array med färger som går att ändra till valfria färger
-// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "white", color: "#fff""
-// OBS den här funkar inte riktigt som den ska än OBS
-
-const colorsHtml = colors.map(
-  (color) =>
-    `<div class="color-container">
-  <button class="color-box" 
-  id="${color.name}-button" 
-  style="background-color: ${color.color};"></button>
-  <p>${formatText(color.name)}</p>
-  </div>`
-);
-// Skapar html för våra knappar som väljer färg
 
 
 let colorSelection = null;
@@ -201,7 +174,6 @@ const initalizeSliders = () => {
 // "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
 // exempel "name: "White", color: "#fff""
 
-const showColorSelection = document.querySelector(".show-color-selection");
 const colors = [
   { name: "red", color: "red" },
   { name: "black", color: "black" },
@@ -308,6 +280,7 @@ testButton.addEventListener("click", (e) => {
     // Välj en slumpmässig typ från "monsterTypes" arrayen
     monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
+    monsterImage: monsterImages[Math.floor(Math.random() * monsterImages.index)],
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret
@@ -445,6 +418,8 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
+  const newMonsterImage = monsterImage.index
+  // Hämta valt värde från monster bildval
   const newMonsterDiet = monsterDiet.value;
   // Hämta valt värde från dietinputfältet
   const newMonsterType = monsterType.value;
@@ -511,6 +486,8 @@ const addMonsterToArray = (event) => {
     // Definiera ett nytt monsterobjekt
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
+    monsterImage: newMonsterImage,
+    // Sätt ny bild på kortet i galleriet
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),
@@ -696,9 +673,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
           </div>
           
 
-          <div id="monster-card-preview">    
-          
-          </div>
+          <div id="monster-card-preview">${monsterPreviewWindow}</div>
         <div class="monster-info" tabindex="0">
           <p class="monster-color">${monster.monsterColor}</p>
           <p class="monster-diet">${monster.monsterDiet}</p>
@@ -1105,6 +1080,8 @@ searchInput.addEventListener("input", () => {
 // VAD SOM BEHÖVER GÖRAS:
 
 // Skapa en array men bilder på monsnter
+
+let monsterImageIndex = 0;
 const monsterImages = [
   "images/Blubberblitz.png",
   "images/Grumblefluff.png",
@@ -1113,7 +1090,7 @@ const monsterImages = [
   "images/Wobblefang.png",
   "images/Octoflurf.png",
 ];
-
+let monsterCardImage = monsterImages[monsterImageIndex];
 const monsterIntros = {
   0: new Audio("sounds/blubberblitz.mp3"),
   1: new Audio("sounds/grumblefluff.mp3"),
@@ -1193,8 +1170,10 @@ const playEffect = (soundKey) => {
   }
 };
 
-let monsterImageIndex = 0;
+
 let currentIntroSound = null;
+
+
 
 //Ljud spelas från index av intros
 const playSoundForIndex = (index) => {
@@ -1210,8 +1189,8 @@ const playSoundForIndex = (index) => {
 };
 
 const monsterPreviewWindow = document.getElementById("monster-image");
-const changemMonsterLeftBtn = document.getElementById("change-monster-left");
-const changemMonsterRightBtn = document.getElementById("change-monster-right");
+const changeMonsterLeftBtn = document.getElementById("change-monster-left");
+const changeMonsterRightBtn = document.getElementById("change-monster-right");
 
 function updatePreWindow() {
   monsterPreviewWindow.src = monsterImages[monsterImageIndex];
@@ -1219,8 +1198,8 @@ function updatePreWindow() {
 
 updatePreWindow();
 
-changemMonsterLeftBtn.addEventListener("click", () => {
-  console.log(monsterImageIndex);
+changeMonsterLeftBtn.addEventListener("click", () => {
+  console.log(`HERE: ${monsterCardImage}`);
   playEffect("changeMonster");
   if (monsterImageIndex > 0) {
     monsterImageIndex--;
@@ -1232,7 +1211,7 @@ changemMonsterLeftBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
-changemMonsterRightBtn.addEventListener("click", () => {
+changeMonsterRightBtn.addEventListener("click", () => {
   if (monsterImageIndex < monsterImages.length - 1) {
     playEffect("changeMonster");
 

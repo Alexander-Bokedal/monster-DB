@@ -28,6 +28,8 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
+import { randomNames } from "./randomNames.js";
+
 let activeFilters = {
   types: "",
   colors: [],
@@ -62,20 +64,10 @@ const cleanForm = () => {
 const monsters = [];
 //Global array för att lagra monster
 
-const randomNames = [
-  "Alex Boke",
-  "Fredrik Härvi",
-  "Markus Larsson",
-  "Sabina Mail",
-  "Emil Pemil",
-  "Hunden McHund",
-  "Niklas",
-];
-
 // Kod för att formatera namn
 const formatText = (string) => {
   let formattedText = "";
-  lowerCaseString = string.toLowerCase();
+  let lowerCaseString = string.toLowerCase();
   // Skap tom "" variabel för den omgjorda strängen
   const splitArray = lowerCaseString.split(" ");
   // Funktionen split(" ") används för att dela upp den ursprungliga strängen i en array av ord
@@ -95,7 +87,7 @@ const formatText = (string) => {
 const showColorSelection = document.querySelector(".show-color-selection");
 // Global variabel för att kunna fixa vilken färg man valt till sitt monster
 
-monsterNameShow = document.querySelector(".monster-name-main");
+const monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
 const colors = [

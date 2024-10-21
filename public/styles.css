@@ -44,10 +44,37 @@
   background: var(--scrollhover-color);
 }
 
+#theme-switch {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--base-backgroundcolor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#theme-switch svg {
+  fill: #2b1449;
+}
+
+#theme-switch svg:last-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+  display: block;
+}
+
 body {
   margin: 0%;
   background-color: var(--base-backgroundcolor);
   overflow-x: hidden;
+  color: var(--text-color);
 }
 
 main {

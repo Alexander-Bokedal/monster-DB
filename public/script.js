@@ -60,7 +60,7 @@ let monsterToEditIndex = null;
 // Variable för att veta vilket index save ska spara till
 
 const monsters = [];
-// Kod för att formatera namn
+
 const formatText = (string) => {
   let formattedText = "";
   lowerCaseString = string.toLowerCase();
@@ -76,37 +76,16 @@ const formatText = (string) => {
   // Ta bort whitespace från slutet av ordet och returna
 };
 
-// ==============================SAVE==============================
+
 
 // Globala funktioner slutar!
 
 // Global array för att lagra monster
-const showColorSelection = document.querySelector(".show-color-selection");
+//==============================SAVE==============================
 monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
-const colors = [
-  { name: "red", color: "red" },
-  { name: "black", color: "black" },
-  { name: "blue", color: "blue" },
-  { name: "yellow", color: "yellow" },
-  { name: "green", color: "green" },
-];
-// Array med färger som går att ändra till valfria färger
-// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "White", color: "#fff""
 
-const colorsHtml = colors.map(
-  (color) =>
-    `<div class="color-container">
-  <button class="color-box" 
-  id="${color.name}-button" 
-  style="background-color: ${color.color};"></button>
-  <p>${formatText(color.name)}</p>
-  </div>`
-);
-
-const colorsNames = colors.map((color) => color.name);
 
 let colorSelection = null;
 
@@ -141,9 +120,9 @@ const editableSliders = editableSliderNames.map((value, index) => ({
 
     let slider = document.querySelector(`#slider${index}`);
     // Hämta input-elementet för slidern med ID baserat på "index"
-
     let valueDisplay = document.querySelector(`#value${index}`);
     // Hämta span-elementet med ID baserat på "index" för att visa värdet
+
     slider.value = value;
     valueDisplay.textContent = value;
     // Sätt textinnehållet i span-elementet till det nuvarande värdet av slidern
@@ -188,6 +167,31 @@ const initalizeSliders = () => {
     // Anropa metoden "updateSliderValue" för att sätta upp eventlyssnare och visa initialvärdet för varje slider
   });
 };
+
+// Array med färger som går att ändra till valfria färger
+// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
+// exempel "name: "White", color: "#fff""
+
+const showColorSelection = document.querySelector(".show-color-selection");
+const colors = [
+  { name: "red", color: "red" },
+  { name: "black", color: "black" },
+  { name: "blue", color: "blue" },
+  { name: "yellow", color: "yellow" },
+  { name: "green", color: "green" },
+];
+
+const colorsNames = colors.map((color) => color.name);
+
+const colorsHtml = colors.map(
+  (color) =>
+    `<div class="color-container">
+  <button class="color-box" 
+  id="${color.name}-button" 
+  style="background-color: ${color.color};"></button>
+  <p>${formatText(color.name)}</p>
+  </div>`
+);
 
 const colorsToChooseFrom = document.querySelector("#colors-container");
 // Hämta HTML-elementet med ID "colors-container" och tilldela det till variabeln "colorsToChooseFrom"
@@ -623,7 +627,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
 
-  // Store the current checkbox state before updating the filters
   const checkboxState = storeCheckboxState();
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
@@ -651,20 +654,32 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
     return `
       <div class="monster-card" tabindex="0">
-        <div class="monster-info" tabindex="0">
-          <h2 class="monster-name">${monster.name}</h2>
-          <p class="monster-color">Color: ${monster.monsterColor}</p>
-          <p class="monster-diet">Diet: ${monster.monsterDiet}</p>
-          <p class="monster-type">Type: ${monster.monsterType}</p>
-          <p class="monster-color">Size: ${monster.monsterSize}</p>
-          ${valuesToPresentInHtml}
+          <div class="monster-info-btns">
+
+          <div class="edit-button">
+          <img src="images/settings.png" alt="Edit" class="edit-icon" />
         </div>
-        <div class="monster-info-btns">
-          <button class="delete-button"> Delete </button>
-          <button class="edit-button"> Edit </button>
+          <h3 class="monster-name">${monster.name}</h3>
+          <div class="delete-button">
+          <img src="images/delete.png" alt="Delete"
+          class="delete-icon" />
+          </div>
+          </div>
           
+
+          <div id="monster-card-preview">    
+          
+          </div>
+        <div class="monster-info" tabindex="0">
+          <p class="monster-color">${monster.monsterColor}</p>
+          <p class="monster-diet">${monster.monsterDiet}</p>
+          <p class="monster-type">${monster.monsterType}</p>
+          <p class="monster-color">${monster.monsterSize}</p>
+          ${valuesToPresentInHtml}
+        </div>     
+    
         </div>
-      </div>
+      
     `;
   });
 
@@ -686,7 +701,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
     });
   });
 
-  // 15/10 Funktion för att räkna och visa antal monster
   function updateMonsterCount() {
     const monsterCounter = document.querySelector("#monster-counter");
     monsterCounter.textContent = `Total Monsters: ${monsters.length}`;
@@ -696,7 +710,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
     const fleshCounter = document.querySelector("#flesh-counter");
     const leafCounter = document.querySelector("#leaf-counter");
     const omnivoreCounter = document.querySelector("#omnivore-counter");
-    // Get the right HTML elements
     const fleshMuncherCount = monsters.filter(
       (monster) => monster.monsterDiet === "🥩Flesh-Muncher"
     ).length;
@@ -706,14 +719,11 @@ const renderMonsters = (filteredMonsters = monsters) => {
     const NonPeskyCount = monsters.filter(
       (monster) => monster.monsterDiet === "🗑️Non-Pesky-Omnivore"
     ).length;
-    // Fetch diet from the objects "monster.monsterDiet"
     fleshCounter.textContent = `🥩: ${fleshMuncherCount}`;
     leafCounter.textContent = `🥬: ${leafCruncherCount}`;
     omnivoreCounter.textContent = `🗑️: ${NonPeskyCount}`;
-    // Apply right icons to the HTML div
   }
 
-  // Update the filters and restore the checkbox state
 
   updateColorFilters();
   updateMonsterCount();
@@ -878,7 +888,6 @@ monsterType.addEventListener("change", () => {
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
     monsterTypeIcon.innerHTML = "🐒";
-    playEffect("changeColor");
   } else if (monsterType.value === "🍄Fungal") {
     playEffect("fungal");
     monsterTypeIcon.innerHTML = "🍄";

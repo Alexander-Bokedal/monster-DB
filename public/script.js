@@ -619,22 +619,6 @@ doneButton.addEventListener("click", (event) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const applyBoxShadow = (monsterCards) => {
-  monsterCards.forEach((monsterCard, index) => {
-    const rarity = monsters[index].rarity;
-
-    monsterCard.classList.remove("rare", "uncommon", "common");
-
-    if (rarity === 1) {
-      monsterCard.classList.add("rare");
-    } else if (rarity > 1 && rarity < 5) {
-      monsterCard.classList.add("uncommon");
-    } else {
-      monsterCard.classList.add("common");
-    }
-  });
-};
-
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
@@ -697,7 +681,19 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   let monsterCards = document.querySelectorAll(".monster-card");
 
-  applyBoxShadow(monsterCards);
+  monsterCards.forEach((monsterCard, index) => {
+    const rarity = monsters[index].rarity;
+
+    monsterCard.classList.remove("rare", "uncommon", "common");
+
+    if (rarity === 1) {
+      monsterCard.classList.add("rare");
+    } else if (rarity > 1 && rarity < 5) {
+      monsterCard.classList.add("uncommon");
+    } else {
+      monsterCard.classList.add("common");
+    }
+  });
 
   const deleteButton = document.querySelectorAll(".delete-button");
   deleteButton.forEach((button, index) => {

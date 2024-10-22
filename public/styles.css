@@ -1,6 +1,6 @@
 :root {
-  --base-backgroundcolor: #736b60;
-  --base-color: #c5dfd7;
+  --base-backgroundcolor: #736B60;
+  --base-color: #C5DFD7;
   --text-color: #111145;
   --scroll-color: #888;
   --scrollhover-color: #555;
@@ -44,10 +44,34 @@
   background: var(--scrollhover-color);
 }
 
-body {
-  margin: 0%;
+#theme-switch {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--base-backgroundcolor);
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+#theme-switch svg {
+  fill: #2b1449;
+}
+
+#theme-switch svg:last-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+  display: block;
+}
+
+body {
+  margin: 0%;
   background-color: var(--base-backgroundcolor);
   overflow-x: hidden;
   color: var(--text-color);
@@ -64,22 +88,23 @@ main {
     "monster-settings"
     "monster-filter"
     "monster-gallery-container";
-  box-shadow: 0 4px 60px var(--boxshadow-color),
-    0 1px 3px var(--boxshadow-color);
+
 }
 
 @media (min-width: 1024px) {
   main {
     display: grid;
-    max-width: 1200px;
+    flex-wrap: wrap;
+    margin: 10px 15%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;
+
     grid-template-areas:
       "monster-preview-main monster-filter monster-filter"
-      "monster-preview-main monster-gallery-container monster-gallery-container"
-      "monster-settings monster-gallery-container monster-gallery-container"
-      "monster-settings monster-gallery-container monster-gallery-container";
+      "monster-preview-main monster-gallery-container monster-gallery-container "
+      "monster-settings  monster-gallery-container monster-gallery-container"
+      "monster-settings  monster-gallery-container monster-gallery-container";
   }
 }
 
@@ -91,7 +116,7 @@ main {
   width: 100%;
   height: 55dvh;
   align-items: center;
-  box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  box-shadow: 0px -5px 25px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
   border-top: 3px solid white;
   border-bottom: 2px solid white;
   border-radius: 20px 20px;
@@ -125,7 +150,23 @@ main {
     margin: 10px 0px;
   }
 
+
+#sound-button {
+  justify-self: end;
+  margin-right: 20px;
+  height: 32px;
+  width: 32px;
+}
+#mute-icon {
+  justify-self: end;
+  margin-right: 20px;
+  height: 32px;
+  width: 32px;
+  border: solid;
+}
+
   .monster-image-main {
+    
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -140,6 +181,7 @@ main {
   }
 
   #monster-image {
+    
     border-radius: 15px;
     height: 450px;
     width: max-content;
@@ -225,7 +267,7 @@ main {
   align-items: center;
   justify-self: center;
   text-align: center;
-  box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  box-shadow: 0px -5px 25px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
   border-top: 3px solid white;
   border-bottom: 2px solid white;
   border-radius: 20px 20px;
@@ -337,7 +379,7 @@ main {
   text-align: center;
   background-color: var(--base-color);
   border-radius: 15px;
-  box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  box-shadow: 0px -5px 25px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
   border-top: 3px solid white;
   border-bottom: 2px solid white;
   border-radius: 20px 20px;
@@ -417,8 +459,9 @@ main {
   width: 48%;
   font-size: 1em;
   padding: 10px;
+  border: 3px solid #c4cfcc;
   border-radius: 5px;
-  background-color: #6a7b76;
+  background-color: #6A7B76;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
 }
 
@@ -445,8 +488,8 @@ main {
   width: 150px;
   border-radius: 50%;
   border: 2px solid white;
-  box-shadow: 0 8px 20px var(--boxshadow-color),
-    0 1px 3px var(--boxshadow-color);
+  box-shadow: 0 8px 20px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+
 }
 
 .monster-name {
@@ -463,6 +506,7 @@ main {
   margin: 2px;
   text-align: center;
   border-bottom: 1px solid #333;
+ 
 }
 
 @media (min-width: 600px) {
@@ -575,6 +619,7 @@ main {
   filter: invert();
 }
 
+
 .edit-icon {
   width: 20px;
   height: 20px;
@@ -598,7 +643,6 @@ main {
 
 @media screen and (max-width: 600px) {
   .monster-diet,
-  .monster-color,
   .monster-type,
   .monster-size,
   .editable-value {
@@ -617,7 +661,7 @@ main {
   flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
-  box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  box-shadow: 0px -5px 25px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
   border-top: 3px solid white;
   border-bottom: 2px solid white;
   border-radius: 20px 20px;
@@ -664,6 +708,7 @@ main {
   box-shadow: 0 0 5px rgb(255, 0, 0); /* Example shadow for common */
 }
 
+
 #sound-icon {
   display: flex;
   justify-content: space-between;
@@ -699,3 +744,5 @@ main {
 .mutemode #mute-switch img:last-child {
   display: block;
 }
+
+

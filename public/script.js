@@ -416,6 +416,7 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
+  
   const newMonsterImage = monsterImages[monsterImageIndex];
 
   const newMonsterDiet = monsterDiet.value;
@@ -484,6 +485,9 @@ const addMonsterToArray = (event) => {
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
     monsterImage: newMonsterImage,
+
+    monsterImageIndex: monsterImageIndex,
+
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),
@@ -510,6 +514,7 @@ const addMonsterToArray = (event) => {
     editMonster() {
       monsterNameInputField.value = this.name;
       // Hämta värdet från monsterName inputfältet
+
       monsterDiet.value = this.monsterDiet;
       // Hämta valt värde från dietinputfältet
       monsterType.value = this.monsterType;
@@ -818,25 +823,56 @@ const monsterSize = document.querySelector(".monster-size-select");
 
 // Skapa en array som innehåller olika typer av monsterdieter.
 const monsterDiets = [
-  { icon: "🥩", diet: "🥩Flesh-Muncher" },
-  { icon: "🥬", diet: "🥬Leaf-Cruncher" },
-  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore" },
+  { icon: "🥩", diet: "🥩Flesh-Muncher", sound: "meat" },
+  { icon: "🥬", diet: "🥬Leaf-Cruncher", sound: "leaf" },
+  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore", sound: "omni" },
 ];
 
 const monsterTypes = [
-  { icon: "🐒", type: "🐒Humanoid" },
-  { icon: "🍄", type: "🍄Fungal" },
-  { icon: "💥", type: "💥Titan" },
-  { icon: "🧟", type: "🧟Troll" },
+
+  { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
+  { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
+  { icon: "💥", type: "💥Titan", sound: "titan" },
+  { icon: "🧟", type: "🧟Troll", sound: "troll" },
 ];
 
 const monsterSizes = [
-  // Skapa en array som innehåller olika storlekar av monster.
-  { icon: "🤏", size: "🤏Pinky-Small" },
-  { icon: "🦒", size: "🦒Long-Legs" },
-  { icon: "🌋", size: "🌋Crippled-Mountain" },
-  { icon: "🌿", size: "🌿Tree-Twig" },
+  { icon: "🤏", size: "🤏Pinky-Small", sound: "pinkysmall" },
+  { icon: "🦒", size: "🦒Long-Legs", sound: "longlegs" },
+  { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
+  { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
+
 ];
+
+
+// Lyssna efter en förändring  
+monsterType.addEventListener("change", () => {
+  monsterTypes.forEach(type => {
+    if (type.icon === monsterType.value) { 
+      monsterTypeIcon.innerHTML = type.icon; 
+      playEffect(type.sound); 
+    }
+  });
+});
+
+monsterDiet.addEventListener("change", () => {
+  monsterDiets.forEach(diet => {
+    if (diet.icon === monsterDiet.value) {
+      monsterDietIcon.innerHTML = diet.icon;
+      playEffect(diet.sound);
+    }
+  });
+});
+
+monsterSize.addEventListener("change", () => {
+  monsterSizes.forEach(size => {
+    if (size.icon === monsterSize.value) {
+    monsterSizeIcon.innerHTML = size.icon;
+    playEffect(size.sound);
+    }
+  })
+})
+
 
 function dietDropdown(dietSelect) {
   // Definiera en funktion som tar en parameter dietSelect (en dropdown för dieter).
@@ -1090,6 +1126,7 @@ const monsterImages = [
   "images/Octoflurf.png",
 ];
 
+
 const monsterIntros = {
   0: new Audio("sounds/blubberblitz.mp3"),
   1: new Audio("sounds/grumblefluff.mp3"),
@@ -1134,8 +1171,8 @@ const effectSounds = {
   leaf: new Audio("sounds/Leafs.mp3"),
   omni: new Audio("sounds/Omni.mp3"),
   //Sizes
-  pinkySmall: new Audio("sounds/PinkySmall.mp3"),
-  longLegs: new Audio("sounds/LongLegs.mp3"),
+  pinkysmall: new Audio("sounds/pinky-small.mp3"),
+  longlegs: new Audio("sounds/LongLegs.mp3"),
   crippledMountain: new Audio("sounds/CrippledMountain.mp3"),
   treeTwig: new Audio("sounds/TreeTwig.mp3"),
   //Types
@@ -1218,9 +1255,35 @@ changeMonsterRightBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
+const soundIcons = [
+  "images/sound.png",
+  "images/mute.png"
+];
+
 const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
+ let isMuted = true;
+
+ const muteButton = document.querySelector("#sound-button");
+ const muteIcon = document.querySelector("#mute-icon");
+
+ muteButton.addEventListener("click", () =>{
+  if(isMuted) {
+    backgroundMusic.muted = false;
+    backgroundMusic.play();
+    console.log("MUTE!")
+    muteIcon.src = soundIcons[0];
+  } else {
+    backgroundMusic.muted = true;
+    backgroundMusic.pause();
+    console.log("PLAY YAY!")
+    muteIcon.src = soundIcons[1];
+  }
+  isMuted = !isMuted;
+ });
+
+
 
 const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 

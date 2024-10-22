@@ -416,7 +416,7 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
-  
+
   const newMonsterImage = monsterImages[monsterImageIndex];
 
   const newMonsterDiet = monsterDiet.value;
@@ -829,7 +829,6 @@ const monsterDiets = [
 ];
 
 const monsterTypes = [
-
   { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
   { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
   { icon: "💥", type: "💥Titan", sound: "titan" },
@@ -841,22 +840,20 @@ const monsterSizes = [
   { icon: "🦒", size: "🦒Long-Legs", sound: "longlegs" },
   { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
   { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
-
 ];
 
-
-// Lyssna efter en förändring  
+// Lyssna efter en förändring
 monsterType.addEventListener("change", () => {
-  monsterTypes.forEach(type => {
-    if (type.icon === monsterType.value) { 
-      monsterTypeIcon.innerHTML = type.icon; 
-      playEffect(type.sound); 
+  monsterTypes.forEach((type) => {
+    if (type.icon === monsterType.value) {
+      monsterTypeIcon.innerHTML = type.icon;
+      playEffect(type.sound);
     }
   });
 });
 
 monsterDiet.addEventListener("change", () => {
-  monsterDiets.forEach(diet => {
+  monsterDiets.forEach((diet) => {
     if (diet.icon === monsterDiet.value) {
       monsterDietIcon.innerHTML = diet.icon;
       playEffect(diet.sound);
@@ -865,14 +862,13 @@ monsterDiet.addEventListener("change", () => {
 });
 
 monsterSize.addEventListener("change", () => {
-  monsterSizes.forEach(size => {
+  monsterSizes.forEach((size) => {
     if (size.icon === monsterSize.value) {
-    monsterSizeIcon.innerHTML = size.icon;
-    playEffect(size.sound);
+      monsterSizeIcon.innerHTML = size.icon;
+      playEffect(size.sound);
     }
-  })
-})
-
+  });
+});
 
 function dietDropdown(dietSelect) {
   // Definiera en funktion som tar en parameter dietSelect (en dropdown för dieter).
@@ -1126,7 +1122,6 @@ const monsterImages = [
   "images/Octoflurf.png",
 ];
 
-
 const monsterIntros = {
   0: new Audio("sounds/blubberblitz.mp3"),
   1: new Audio("sounds/grumblefluff.mp3"),
@@ -1255,35 +1250,9 @@ changeMonsterRightBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
-const soundIcons = [
-  "images/sound.png",
-  "images/mute.png"
-];
-
 const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
- let isMuted = true;
-
- const muteButton = document.querySelector("#sound-button");
- const muteIcon = document.querySelector("#mute-icon");
-
- muteButton.addEventListener("click", () =>{
-  if(isMuted) {
-    backgroundMusic.muted = false;
-    backgroundMusic.play();
-    console.log("MUTE!")
-    muteIcon.src = soundIcons[0];
-  } else {
-    backgroundMusic.muted = true;
-    backgroundMusic.pause();
-    console.log("PLAY YAY!")
-    muteIcon.src = soundIcons[1];
-  }
-  isMuted = !isMuted;
- });
-
-
 
 const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 
@@ -1316,9 +1285,9 @@ themeSwitch.addEventListener("click", () => {
   darkmode !== "active" ? enableDarkmode() : disableDarkmode();
 });
 
+let isMuted = true;
 const soundmutemode = ["images/mute.png", "images/sound.png"];
 
-let mutemode = localStorage.getItem("mutemode");
 const muteswitch = document.querySelector("#mute-switch");
 
 const muteImg = document.createElement("img");
@@ -1330,19 +1299,15 @@ soundImg.src = soundmutemode[1];
 muteswitch.appendChild(muteImg);
 muteswitch.appendChild(soundImg);
 
-const enableMutemode = () => {
-  document.body.classList.add("mutemode");
-  localStorage.setItem("mutemode", "active");
-};
-
-const disableMutemode = () => {
-  document.body.classList.remove("mutemode");
-  localStorage.setItem("mutemode", null);
-};
-
-if (mutemode === "active") enableMutemode();
-
 muteswitch.addEventListener("click", () => {
-  darkmode = localStorage.getItem("mutemode");
-  darkmode !== "active" ? enableMutemode() : disableMutemode();
+  if (isMuted) {
+    backgroundMusic.muted = false;
+    backgroundMusic.play();
+    document.body.classList.add("mutemode");
+  } else {
+    backgroundMusic.muted = true;
+    backgroundMusic.pause();
+    document.body.classList.remove("mutemode");
+  }
+  isMuted = !isMuted;
 });

@@ -30,7 +30,6 @@
 
 import { randomNames } from "./randomNames.js";
 
-
 let activeFilters = {
   types: "",
   colors: [],
@@ -182,10 +181,10 @@ const colors = [
 const colorsHtml = colors.map(
   (color) =>
     `<div class="color-container">
+  <p>${formatText(color.name)}</p>
   <button class="color-box" 
   id="${color.name}-button" 
   style="background-color: ${color.color};"></button>
-  <p>${formatText(color.name)}</p>
   </div>`
 );
 
@@ -213,7 +212,7 @@ const updateColors = () => {
       );
       // Hämta elementet med klassen "show-color-selection"
 
-      showColorSelection.innerHTML = `<div class="color-selection" style="background: radial-gradient(circle, ${colorSelection} 10%, rgba(255, 255, 255, 0) 90%);"></div>`
+      showColorSelection.innerHTML = `<div class="color-selection" style="background: radial-gradient(circle, ${colorSelection} 10%, rgba(255, 255, 255, 0) 90%);"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
 
       playEffect(colorSelection.toLowerCase());
@@ -620,22 +619,6 @@ doneButton.addEventListener("click", (event) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const applyBoxShadow = (monsterCards) => {
-  monsterCards.forEach((monsterCard, index) => {
-    const rarity = monsters[index].rarity;
-
-    monsterCard.classList.remove("rare", "uncommon", "common");
-
-    if (rarity === 1) {
-      monsterCard.classList.add("rare");
-    } else if (rarity > 1 && rarity < 5) {
-      monsterCard.classList.add("uncommon");
-    } else {
-      monsterCard.classList.add("common");
-    }
-  });
-};
-
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
@@ -702,7 +685,19 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
   let monsterCards = document.querySelectorAll(".monster-card");
 
-  applyBoxShadow(monsterCards);
+  monsterCards.forEach((monsterCard, index) => {
+    const rarity = monsters[index].rarity;
+
+    monsterCard.classList.remove("rare", "uncommon", "common");
+
+    if (rarity === 1) {
+      monsterCard.classList.add("rare");
+    } else if (rarity > 1 && rarity < 5) {
+      monsterCard.classList.add("uncommon");
+    } else {
+      monsterCard.classList.add("common");
+    }
+  });
 
   const deleteButton = document.querySelectorAll(".delete-button");
   deleteButton.forEach((button, index) => {

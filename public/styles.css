@@ -70,7 +70,6 @@ main {
   main {
     display: grid;
     flex-wrap: wrap;
-    margin: 10px 15%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;

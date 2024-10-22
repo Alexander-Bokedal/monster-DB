@@ -232,6 +232,7 @@ window.onload = () => {
   // Gömmer savebutton på load
   renderMonsters();
   updateColorFilters();
+
   updateMonsterSliders();
   updateColors();
   initalizeSliders();
@@ -613,27 +614,6 @@ doneButton.addEventListener("click", (event) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const storeCheckboxState = () => {
-  const state = {};
-  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
-
-  colorFilterDivs.forEach((checkbox) => {
-    state[checkbox.id] = checkbox.checked;
-  });
-
-  return state;
-};
-
-const restoreCheckboxState = (state) => {
-  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
-
-  colorFilterDivs.forEach((checkbox) => {
-    if (state.hasOwnProperty(checkbox.id)) {
-      checkbox.checked = state[checkbox.id];
-    }
-  });
-};
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  KOD för att visa MONSTER             /////////
@@ -660,8 +640,6 @@ const applyBoxShadow = (monsterCards) => {
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
   monsterGallery.innerHTML = "";
-
-  const checkboxState = storeCheckboxState();
 
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
     const objectsWithValuesToPresentInHtml = [];
@@ -759,9 +737,25 @@ const renderMonsters = (filteredMonsters = monsters) => {
       .join("");
   };
 
-  updateColorFilters();
+  const colorCountHtml = document.querySelectorAll(".color-count-container");
+  const colorCounter = () => {
+    const colorCounts = {};
+
+    colors.forEach((color) => {
+      colorCounts[`${color.color}-count`] = monsters.filter(
+        (monster) => monster.monsterColor.toLowerCase() === color.color
+      ).length;
+      console.log(colorCounts[`${color.color}-count`]);
+    });
+
+    colorCountHtml.forEach((colorCount) => {
+      let key = colorCount.id;
+      colorCount.innerHTML = `(${colorCounts[key]})`;
+    });
+  };
+
   updateMonsterCount();
-  restoreCheckboxState(checkboxState);
+  colorCounter();
   dietCounter();
 };
 
@@ -1003,32 +997,20 @@ dietSelectFilter.addEventListener("change", () => {
 });
 
 const updateColorFilters = () => {
-  const colorCounts = {};
-
-  colors.forEach((color) => {
-    colorCounts[color.name] = 0;
-  });
-
-  monsters.forEach((monster) => {
-    const monsterColorNormalized = monster.monsterColor.trim().toLowerCase();
-
-    if (colorCounts[monsterColorNormalized] !== undefined) {
-      colorCounts[monsterColorNormalized] += 1;
-    }
-  });
-
   // Definiera en funktion för att uppdatera färgfiltret.
   const colorFilters = document.querySelector(".color-filters");
   // Välj elementet som innehåller färgfiltret.
   const colorFiltersHtml = colors.map((color) => {
-    const count = colorCounts[color.name];
+    /* const count = colorCounts[color.name]; */
     // Skapa en HTML-sträng för varje färg i colors-arrayen.
     return `<span class="color-filter-boxes"><input type="checkbox" class="color-to-filter-by" id="${
       color.color
     }" name="filter-${color.color}"  >
     <label for="${color.color}">${formatText(
       color.name
-    )} (${count})</label> </span>`;
+    )}  <span class="color-count-container" id="${
+      color.color
+    }-count">(0)</span></label></span>`;
     // Skapa en checkbox och en label för varje färg.
   });
 

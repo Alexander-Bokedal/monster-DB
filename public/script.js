@@ -278,7 +278,7 @@ testButton.addEventListener("click", (e) => {
       monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
     monsterImage: monsterImages[randomNumber],
-    monsterObjectImageIndex: [randomNumber],
+    monsterImageIndex: [randomNumber],
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret
@@ -316,7 +316,7 @@ testButton.addEventListener("click", (e) => {
       // Hämta valt värde från typinputfältet
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
-      monsterImageIndex = this.monsterObjectImageIndex;
+      monsterImageIndex = this.monsterImageIndex;
       //Sätt globalt monsterImageIndex till samma som monstret
       updatePreWindow();
       //Uppdatera bilden i preview window
@@ -346,7 +346,7 @@ testButton.addEventListener("click", (e) => {
       monsterToSave.monsterSize = monsterSize.value;
       monsterToSave.monsterColor = formatText(colorSelection);
       monsterToSave.monsterImage = monsterImages[monsterImageIndex];
-      monsterToSave.monsterObjectImageIndex = monsterImageIndex;
+      monsterToSave.monsterImageIndex = monsterImageIndex;
       const sliderValuesToAddToMonsterObject = [];
       // Skapa en tom array för att lagra slidervärden
       const arrayOfAllSliders = document.querySelectorAll(".slider");
@@ -426,6 +426,7 @@ const addMonsterToArray = (event) => {
   // 9/10 - Nya värden som funkar bra
   const monsterName = monsterNameInputField.value;
   // Hämta värdet från monsterName inputfältet
+
   const newMonsterImage = monsterImages[monsterImageIndex];
 
   const newMonsterDiet = monsterDiet.value;
@@ -494,7 +495,9 @@ const addMonsterToArray = (event) => {
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
     monsterImage: newMonsterImage,
-    monsterObjectImageIndex: monsterImageIndex,
+
+    monsterImageIndex: monsterImageIndex,
+
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),
@@ -521,13 +524,14 @@ const addMonsterToArray = (event) => {
     editMonster() {
       monsterNameInputField.value = this.name;
       // Hämta värdet från monsterName inputfältet
+
       monsterDiet.value = this.monsterDiet;
       // Hämta valt värde från dietinputfältet
       monsterType.value = this.monsterType;
       // Hämta valt värde från typinputfältet
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
-      monsterImageIndex = this.monsterObjectImageIndex;
+      monsterImageIndex = this.monsterImageIndex;
       //Sätt globalt monsterImageIndex till samma som monstret
       updatePreWindow();
       //Uppdatera bilden i preview window
@@ -557,7 +561,7 @@ const addMonsterToArray = (event) => {
       monsterToSave.monsterSize = monsterSize.value;
       monsterToSave.monsterColor = formatText(colorSelection);
       monsterToSave.monsterImage = monsterImages[monsterImageIndex];
-      monsterToSave.monsterObjectImageIndex = monsterImageIndex;
+      monsterToSave.monsterImageIndex = monsterImageIndex;
       const sliderValuesToAddToMonsterObject = [];
       // Skapa en tom array för att lagra slidervärden
       const arrayOfAllSliders = document.querySelectorAll(".slider");
@@ -592,8 +596,7 @@ const addMonsterToArray = (event) => {
   };
 
   monsters.push(newMonster);
-  console.log("This is an inded:" + monsterImageIndex);
-  console.log("This is also an index:" + newMonster.monsterObjectImageIndex);
+
   // VAD SOM BEHÖVER GÖRAS:
   // EN FUNKTION FÖR ATT RENSA FORMULÄRET
 
@@ -837,25 +840,52 @@ const monsterSize = document.querySelector(".monster-size-select");
 
 // Skapa en array som innehåller olika typer av monsterdieter.
 const monsterDiets = [
-  { icon: "🥩", diet: "🥩Flesh-Muncher" },
-  { icon: "🥬", diet: "🥬Leaf-Cruncher" },
-  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore" },
+  { icon: "🥩", diet: "🥩Flesh-Muncher", sound: "meat" },
+  { icon: "🥬", diet: "🥬Leaf-Cruncher", sound: "leaf" },
+  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore", sound: "omni" },
 ];
 
 const monsterTypes = [
-  { icon: "🐒", type: "🐒Humanoid" },
-  { icon: "🍄", type: "🍄Fungal" },
-  { icon: "💥", type: "💥Titan" },
-  { icon: "🧟", type: "🧟Troll" },
+  { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
+  { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
+  { icon: "💥", type: "💥Titan", sound: "titan" },
+  { icon: "🧟", type: "🧟Troll", sound: "troll" },
 ];
 
 const monsterSizes = [
-  // Skapa en array som innehåller olika storlekar av monster.
-  { icon: "🤏", size: "🤏Pinky-Small" },
-  { icon: "🦒", size: "🦒Long-Legs" },
-  { icon: "🌋", size: "🌋Crippled-Mountain" },
-  { icon: "🌿", size: "🌿Tree-Twig" },
+  { icon: "🤏", size: "🤏Pinky-Small", sound: "pinkysmall" },
+  { icon: "🦒", size: "🦒Long-Legs", sound: "longlegs" },
+  { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
+  { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
 ];
+
+// Lyssna efter en förändring
+monsterType.addEventListener("change", () => {
+  monsterTypes.forEach((type) => {
+    if (type.icon === monsterType.value) {
+      monsterTypeIcon.innerHTML = type.icon;
+      playEffect(type.sound);
+    }
+  });
+});
+
+monsterDiet.addEventListener("change", () => {
+  monsterDiets.forEach((diet) => {
+    if (diet.icon === monsterDiet.value) {
+      monsterDietIcon.innerHTML = diet.icon;
+      playEffect(diet.sound);
+    }
+  });
+});
+
+monsterSize.addEventListener("change", () => {
+  monsterSizes.forEach((size) => {
+    if (size.icon === monsterSize.value) {
+      monsterSizeIcon.innerHTML = size.icon;
+      playEffect(size.sound);
+    }
+  });
+});
 
 function dietDropdown(dietSelect) {
   // Definiera en funktion som tar en parameter dietSelect (en dropdown för dieter).
@@ -1153,8 +1183,8 @@ const effectSounds = {
   leaf: new Audio("sounds/Leafs.mp3"),
   omni: new Audio("sounds/Omni.mp3"),
   //Sizes
-  pinkySmall: new Audio("sounds/PinkySmall.mp3"),
-  longLegs: new Audio("sounds/LongLegs.mp3"),
+  pinkysmall: new Audio("sounds/pinky-small.mp3"),
+  longlegs: new Audio("sounds/LongLegs.mp3"),
   crippledMountain: new Audio("sounds/CrippledMountain.mp3"),
   treeTwig: new Audio("sounds/TreeTwig.mp3"),
   //Types
@@ -1241,12 +1271,19 @@ const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 
-/* window.addEventListener("load", () => {
-  backgroundMusic.play();
-}); */
+const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.querySelector("#theme-switch");
+
+const lightImg = document.createElement("img");
+lightImg.src = darklightmode[0];
+
+const darkImg = document.createElement("img");
+darkImg.src = darklightmode[1];
+
+themeSwitch.appendChild(darkImg);
+themeSwitch.appendChild(lightImg);
 
 const enableDarkmode = () => {
   document.body.classList.add("darkmode");
@@ -1263,4 +1300,31 @@ if (darkmode === "active") enableDarkmode();
 themeSwitch.addEventListener("click", () => {
   darkmode = localStorage.getItem("darkmode");
   darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+});
+
+let isMuted = true;
+const soundmutemode = ["images/mute.png", "images/sound.png"];
+
+const muteswitch = document.querySelector("#mute-switch");
+
+const muteImg = document.createElement("img");
+muteImg.src = soundmutemode[0];
+
+const soundImg = document.createElement("img");
+soundImg.src = soundmutemode[1];
+
+muteswitch.appendChild(muteImg);
+muteswitch.appendChild(soundImg);
+
+muteswitch.addEventListener("click", () => {
+  if (isMuted) {
+    backgroundMusic.muted = false;
+    backgroundMusic.play();
+    document.body.classList.add("mutemode");
+  } else {
+    backgroundMusic.muted = true;
+    backgroundMusic.pause();
+    document.body.classList.remove("mutemode");
+  }
+  isMuted = !isMuted;
 });

@@ -1,7 +1,7 @@
 :root {
-  --base-backgroundcolor: #b4b4b4;
-  --base-color: #beeeeb;
-  --text-color: #333;
+  --base-backgroundcolor: #736B60;
+  --base-color: #C5DFD7;
+  --text-color: #111145;
   --scroll-color: #888;
   --scrollhover-color: #555;
   --boxshadow-color: rgba(0, 0, 0, 0.5);
@@ -88,6 +88,8 @@ main {
     "monster-settings"
     "monster-filter"
     "monster-gallery-container";
+    box-shadow: 0 4px 60px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+
 }
 
 @media (min-width: 1024px) {
@@ -116,6 +118,15 @@ main {
   height: 55dvh;
   align-items: center;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  border-top: 3px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 20px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
 
   .monster-name-main {
     display: flex;
@@ -131,7 +142,6 @@ main {
       #beeeeb,
       rgba(255, 255, 255, 0)
     );
-
     border-top: 2px solid #aeebe7;
     border-bottom: 2px solid #aeebe7;
   }
@@ -141,7 +151,16 @@ main {
     margin: 10px 0px;
   }
 
+#sound-icon {
+  justify-self: end;
+  margin-right: 20px;
+  height: 32px;
+  width: 32px;
+  border: solid;
+}
+
   .monster-image-main {
+    
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -156,6 +175,7 @@ main {
   }
 
   #monster-image {
+    
     border-radius: 15px;
     height: 450px;
     width: max-content;
@@ -242,6 +262,15 @@ main {
   justify-self: center;
   text-align: center;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  border-top: 3px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 20px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
 }
 
 #monster-dropdown-container {
@@ -328,7 +357,17 @@ main {
   background-color: var(--base-color);
   border-radius: 15px;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  border-top: 3px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 20px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
 }
+
 @media (min-width: 600px) {
   .monster-filter {
     margin: 0px;
@@ -397,8 +436,8 @@ main {
   width: 48%;
   font-size: 1em;
   padding: 10px;
-  border-radius: 20px;
-  background-color: var(--monster-card-color);
+  border-radius: 5px;
+  background-color: #6A7B76;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
 }
 
@@ -425,16 +464,15 @@ main {
   width: 150px;
   border-radius: 50%;
   border: 2px solid white;
+  box-shadow: 0 8px 20px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+
 }
-
-
-
-
 
 .monster-name {
   align-items: center;
   text-align: center;
-
+  font-weight: bold;
+  letter-spacing: 2px;
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0),
@@ -444,6 +482,7 @@ main {
   margin: 2px;
   text-align: center;
   border-bottom: 1px solid #333;
+ 
 }
 
 @media (min-width: 600px) {
@@ -459,14 +498,39 @@ main {
   .monster-card:hover {
     transition: 0.3s;
     transform: scale(1.05);
-    background-color: var(--monster-cardhover-color);
   }
 }
 
 .monster-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
+  box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  border-top: 3px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 2px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.values-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 10px;
+  p {
+    margin: 0px;
+    text-align: center;
+  }
 }
 
 @media (min-width: 600px) {
@@ -490,6 +554,7 @@ main {
   border: none;
   border-radius: 20px;
   width: 20px;
+  filter: invert();
   align-self: flex-end;
 }
 
@@ -527,7 +592,9 @@ main {
   border-radius: 20px;
   width: 20px;
   align-self: flex-end;
+  filter: invert();
 }
+
 
 .edit-icon {
   width: 20px;
@@ -572,6 +639,15 @@ main {
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+  border-top: 3px solid white;
+  border-bottom: 2px solid white;
+  border-radius: 20px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #beeeeb,
+    rgba(255, 255, 255, 0)
+  );
 }
 
 @media (min-width: 600px) {

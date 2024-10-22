@@ -5,7 +5,7 @@
   --scroll-color: #888;
   --scrollhover-color: #555;
   --boxshadow-color: rgba(0, 0, 0, 0.5);
-  --monster-background-color: #e4fcfa;
+  --monster-background-color: #a8dad5;
   --border-color: #72727283;
   --monster-card-color: #e4fcfa;
   --monster-cardhover-color: #ffffff;
@@ -110,8 +110,10 @@ p {
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-size: 1.3rem;
+    margin-top: 20px;
     height: 35px;
-    width: 30cap;
+    width: 15cap;
     color: #333;
     background: linear-gradient(
       to right,
@@ -151,14 +153,22 @@ p {
     border-radius: 15px;
     width: 90%;
     height: 90%;
-    background-color: var(--monster-background-color);
-    border: 2px solid var(--border-color);
+    background-image: url(images/mainViewImage.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: ccover;
+    border-top: 6px solid #3f3f3f;
+    border-left: 5px solid #3f3f3f;
+    border-right: 5px solid #a1a1a1;
+    border-bottom: 5px solid #d6d6d6;
+    filter: drop-shadow(10px 10px 10px var(--boxshadow-color));
+    filter:brightness(90%);
     overflow: hidden;
   }
 
   #monster-image {
     border-radius: 15px;
-    height: 450px;
+    height: 350px;
     width: max-content;
     padding-top: 20px;
     margin: 20px;

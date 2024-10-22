@@ -270,11 +270,11 @@ testButton.addEventListener("click", (e) => {
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
     monsterDiet:
-      monsterDiets[Math.floor(Math.random() * monsterDiets.length)].diet,
+      monsterDiets[Math.floor(Math.random() * monsterDiets.length)].icon,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
-    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)],
+    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
     // Välj en slumpmässig typ från "monsterTypes" arrayen
-    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)],
+    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
     monsterImage:
       monsterImages[Math.floor(Math.random() * monsterImages.length)],
@@ -643,18 +643,18 @@ const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGalleryHtmlArray = filteredMonsters.map((monster) => {
     const objectsWithValuesToPresentInHtml = [];
 
-    let count = 0;
+    let monsterValuesIndex = 0;
     for (const element of editableSliderNames) {
       let monsterAttribute = element;
-      let attributeValue = monster.monsterValues[count];
+      let attributeValue = monster.monsterValues[monsterValuesIndex];
 
-      if (monster.monsterValues[count] > 0) {
+      if (monster.monsterValues[monsterValuesIndex] > 0) {
         objectsWithValuesToPresentInHtml.push({
           attribute: monsterAttribute,
           value: attributeValue,
         });
       }
-      count++;
+      monsterValuesIndex++;
     }
 
     const valuesToPresentInHtml = objectsWithValuesToPresentInHtml
@@ -680,15 +680,19 @@ const renderMonsters = (filteredMonsters = monsters) => {
           <div id="card-image-container">
           
           <img id="monster-card-preview" src="${monster.monsterImage}" alt="Monster Preview" />
-          <div class="monster-color" style="background: radial-gradient(circle, ${monster.monsterColor} 10%, rgba(255, 255, 255, 0) 90%);"></div>
+          <div class="monster-color" style="background: radial-gradient(circle, ${monster.monsterColor} 30%, rgba(255, 255, 255, 0) 90%);"></div>
           </div>
         <div class="monster-info" tabindex="0">
+          <div class="icon-container">
           <p class="monster-diet">${monster.monsterDiet}</p>
           <p class="monster-type">${monster.monsterType}</p>
           <p class="monster-size">${monster.monsterSize}</p>
+          </div>
+          <div class="values-container">
           ${valuesToPresentInHtml}
+          </div>
+
         </div>     
-    
         </div>
       
     `;
@@ -823,20 +827,18 @@ const monsterDiets = [
 ];
 
 const monsterTypes = [
-  // Skapa en array som innehåller olika typer av monster.
-  "🐒Humanoid", // Typ för humanoida monster.
-  "🍄Fungal", // Typ för svampmonster.
-  "🪨Titan", // Typ för titanmonster.
-  "🧌Troll", // Typ för trollmonster.
+  {icon: "🐒", type: "🐒Humanoid"},
+  {icon: "🍄", type: "🍄Fungal"},
+  {icon: "💥", type: "💥Titan"},
+  {icon: "🧟", type: "🧟Troll"},
 ];
 
 const monsterSizes = [
   // Skapa en array som innehåller olika storlekar av monster.
-
-  "🤏Pinky-Small", // Storlek för mycket små monster.
-  "🦒Long-Legs", // Storlek för monster med långa ben.
-  "🌋Crippled-Mountain", // Storlek för stora monster som liknar berg.
-  "🌿Tree-Twig", // Storlek för monster som liknar träd.
+  {icon: "🤏", size: "🤏Pinky-Small"},
+  {icon: "🦒", size: "🦒Long-Legs"},
+  {icon: "🌋", size: "🌋Crippled-Mountain"},
+  {icon: "🌿", size: "🌿Tree-Twig"},
 ];
 
 function dietDropdown(dietSelect) {
@@ -847,7 +849,7 @@ function dietDropdown(dietSelect) {
     // Skapa ett nytt option-element för dropdown.
     newMonsterDiet.innerHTML = diet.diet;
     // Sätt innhåll i option-elementet till aktuell diet.
-    newMonsterDiet.value = diet.diet;
+    newMonsterDiet.value = diet.icon;
     // Sätt värdet för option-elementet till aktuell diet.
     dietSelect.appendChild(newMonsterDiet);
     // Lägg till det nya option-elementet i dietSelect dropdown-menyn.
@@ -855,17 +857,17 @@ function dietDropdown(dietSelect) {
 }
 
 function typeDropdown(typeSelect) {
-  // Definiera en funktion som tar en parameter typeSelect (en dropdown för typer).
+  // Definiera en funktion som tar en parameter dietSelect (en dropdown för dieter).
   for (const type of monsterTypes) {
-    // Loopar igenom varje typ i monsterTypes-arrayen.
+    // Loopar igenom varje diet i monsterDiets-arrayen.
     const newMonsterType = document.createElement("option");
     // Skapa ett nytt option-element för dropdown.
-    newMonsterType.innerHTML = type;
-    // Sätt innhåll i option-elementet till aktuell typ.
-    newMonsterType.value = type;
-    // Sätt värdet för option-elementet till aktuell typ.
+    newMonsterType.innerHTML = type.type;
+    // Sätt innhåll i option-elementet till aktuell diet.
+    newMonsterType.value = type.icon;
+    // Sätt värdet för option-elementet till aktuell diet.
     typeSelect.appendChild(newMonsterType);
-    // Lägg till det nya option-elementet i typeSelect dropdown-menyn.
+    // Lägg till det nya option-elementet i dietSelect dropdown-menyn.
   }
 }
 
@@ -875,9 +877,9 @@ function sizeDropdown(sizeSelect) {
     // Loopar igenom varje storlek i monsterSizes-arrayen.
     const newMonsterSize = document.createElement("option");
     // Skapa ett nytt option-element för dropdown.
-    newMonsterSize.innerHTML = size;
+    newMonsterSize.innerHTML = size.size;
     // Sätt textinnehåll i option-elementet till aktuell storlek.
-    newMonsterSize.value = size;
+    newMonsterSize.value = size.icon;
     // Sätt värdet för option-elementet till aktuell storlek.
     sizeSelect.appendChild(newMonsterSize);
     // Lägg till det nya option-elementet i sizeSelect dropdown-menyn.
@@ -906,8 +908,10 @@ monsterDiet.addEventListener("change", () => {
     monsterDietIcon.innerHTML = "🗑️";
   }
 });
+
 const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
+
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
@@ -915,14 +919,15 @@ monsterType.addEventListener("change", () => {
   } else if (monsterType.value === "🍄Fungal") {
     playEffect("fungal");
     monsterTypeIcon.innerHTML = "🍄";
-  } else if (monsterType.value === "🪨Titan") {
+  } else if (monsterType.value === "💥Titan") {
     playEffect("titan");
-    monsterTypeIcon.innerHTML = "🪨";
-  } else if ((monsterType.value = "🧌Troll")) {
+    monsterTypeIcon.innerHTML = "💥";
+  } else if ((monsterType.value === "🧟Troll")) {
     playEffect("shrek");
-    monsterTypeIcon.innerHTML = "🧌";
+    monsterTypeIcon.innerHTML = "🧟";
   }
 });
+
 const monsterSizeIcon = document.querySelector(".monster-size-icon");
 monsterSize.addEventListener("change", () => {
   monsterSizeIcon.innerHTML = "";

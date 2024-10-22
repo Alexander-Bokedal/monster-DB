@@ -271,9 +271,11 @@ testButton.addEventListener("click", (e) => {
     monsterDiet:
       monsterDiets[Math.floor(Math.random() * monsterDiets.length)].icon,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
-    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
+    monsterType:
+      monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
     // Välj en slumpmässig typ från "monsterTypes" arrayen
-    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
+    monsterSize:
+      monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
     monsterImage:
       monsterImages[Math.floor(Math.random() * monsterImages.length)],
@@ -822,18 +824,18 @@ const monsterDiets = [
 ];
 
 const monsterTypes = [
-  {icon: "🐒", type: "🐒Humanoid"},
-  {icon: "🍄", type: "🍄Fungal"},
-  {icon: "💥", type: "💥Titan"},
-  {icon: "🧟", type: "🧟Troll"},
+  { icon: "🐒", type: "🐒Humanoid" },
+  { icon: "🍄", type: "🍄Fungal" },
+  { icon: "💥", type: "💥Titan" },
+  { icon: "🧟", type: "🧟Troll" },
 ];
 
 const monsterSizes = [
   // Skapa en array som innehåller olika storlekar av monster.
-  {icon: "🤏", size: "🤏Pinky-Small"},
-  {icon: "🦒", size: "🦒Long-Legs"},
-  {icon: "🌋", size: "🌋Crippled-Mountain"},
-  {icon: "🌿", size: "🌿Tree-Twig"},
+  { icon: "🤏", size: "🤏Pinky-Small" },
+  { icon: "🦒", size: "🦒Long-Legs" },
+  { icon: "🌋", size: "🌋Crippled-Mountain" },
+  { icon: "🌿", size: "🌿Tree-Twig" },
 ];
 
 function dietDropdown(dietSelect) {
@@ -906,7 +908,6 @@ monsterDiet.addEventListener("change", () => {
 
 const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
-
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
@@ -917,7 +918,7 @@ monsterType.addEventListener("change", () => {
   } else if (monsterType.value === "💥Titan") {
     playEffect("titan");
     monsterTypeIcon.innerHTML = "💥";
-  } else if ((monsterType.value === "🧟Troll")) {
+  } else if (monsterType.value === "🧟Troll") {
     playEffect("shrek");
     monsterTypeIcon.innerHTML = "🧟";
   }
@@ -1221,12 +1222,19 @@ const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 
-/* window.addEventListener("load", () => {
-  backgroundMusic.play();
-}); */
+const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.querySelector("#theme-switch");
+
+const lightImg = document.createElement("img");
+lightImg.src = darklightmode[0];
+
+const darkImg = document.createElement("img");
+darkImg.src = darklightmode[1];
+
+themeSwitch.appendChild(darkImg);
+themeSwitch.appendChild(lightImg);
 
 const enableDarkmode = () => {
   document.body.classList.add("darkmode");

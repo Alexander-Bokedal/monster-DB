@@ -1,6 +1,6 @@
 :root {
-  --base-backgroundcolor: #736B60;
-  --base-color: #C5DFD7;
+  --base-backgroundcolor: #736b60;
+  --base-color: #c5dfd7;
   --text-color: #111145;
   --scroll-color: #888;
   --scrollhover-color: #555;
@@ -44,34 +44,10 @@
   background: var(--scrollhover-color);
 }
 
-#theme-switch {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: var(--base-backgroundcolor);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#theme-switch svg {
-  fill: #2b1449;
-}
-
-#theme-switch svg:last-child {
-  display: none;
-}
-
-.darkmode #theme-switch svg:first-child {
-  display: none;
-}
-
-.darkmode #theme-switch svg:last-child {
-  display: block;
-}
-
 body {
   margin: 0%;
+  display: flex;
+  justify-content: center;
   background-color: var(--base-backgroundcolor);
   overflow-x: hidden;
   color: var(--text-color);
@@ -88,24 +64,22 @@ main {
     "monster-settings"
     "monster-filter"
     "monster-gallery-container";
-    box-shadow: 0 4px 60px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
-
+  box-shadow: 0 4px 60px var(--boxshadow-color),
+    0 1px 3px var(--boxshadow-color);
 }
 
 @media (min-width: 1024px) {
   main {
     display: grid;
-    flex-wrap: wrap;
-    margin: 10px 15%;
+    max-width: 1200px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;
-
     grid-template-areas:
       "monster-preview-main monster-filter monster-filter"
-      "monster-preview-main monster-gallery-container monster-gallery-container "
-      "monster-settings  monster-gallery-container monster-gallery-container"
-      "monster-settings  monster-gallery-container monster-gallery-container";
+      "monster-preview-main monster-gallery-container monster-gallery-container"
+      "monster-settings monster-gallery-container monster-gallery-container"
+      "monster-settings monster-gallery-container monster-gallery-container";
   }
 }
 
@@ -151,16 +125,15 @@ main {
     margin: 10px 0px;
   }
 
-#sound-icon {
-  justify-self: end;
-  margin-right: 20px;
-  height: 32px;
-  width: 32px;
-  border: solid;
-}
+  #sound-icon {
+    justify-self: end;
+    margin-right: 20px;
+    height: 32px;
+    width: 32px;
+    border: solid;
+  }
 
   .monster-image-main {
-    
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -175,7 +148,6 @@ main {
   }
 
   #monster-image {
-    
     border-radius: 15px;
     height: 450px;
     width: max-content;
@@ -454,7 +426,7 @@ main {
   font-size: 1em;
   padding: 10px;
   border-radius: 5px;
-  background-color: #6A7B76;
+  background-color: #6a7b76;
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
 }
 
@@ -481,8 +453,8 @@ main {
   width: 150px;
   border-radius: 50%;
   border: 2px solid white;
-  box-shadow: 0 8px 20px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
-
+  box-shadow: 0 8px 20px var(--boxshadow-color),
+    0 1px 3px var(--boxshadow-color);
 }
 
 .monster-name {
@@ -499,7 +471,6 @@ main {
   margin: 2px;
   text-align: center;
   border-bottom: 1px solid #333;
- 
 }
 
 @media (min-width: 600px) {
@@ -612,7 +583,6 @@ main {
   filter: invert();
 }
 
-
 .edit-icon {
   width: 20px;
   height: 20px;
@@ -700,4 +670,29 @@ main {
 }
 .common {
   box-shadow: 0 0 5px rgb(255, 0, 0); /* Example shadow for common */
+}
+
+#theme-switch {
+  display: flex;
+  height: 50px;
+  width: 50px;
+  background-color: var(--base-backgroundcolor);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+#theme-switch img {
+  width: 24px;
+  height: 24px;
+}
+#theme-switch img:last-child {
+  display: none;
+}
+.darkmode #theme-switch img:first-child {
+  display: none;
+}
+.darkmode #theme-switch img:last-child {
+  display: block;
 }

@@ -236,6 +236,7 @@ main {
   background-color: var(--base-color);
   border-radius: 15px;
   width: 100%;
+  padding: 10px;
   justify-content: space-evenly;
   align-items: center;
   justify-self: center;
@@ -247,6 +248,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-left: 5px;
 }
 
 .name-input {
@@ -287,7 +289,6 @@ main {
 
 .hidden {
   display: none;
-  /* Klass för att kunna gömma buttons */
 }
 
 #done-button:hover,
@@ -401,13 +402,34 @@ main {
   box-shadow: 0 4px 6px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
 }
 
-#monster-card-preview {
-  height: 250px;
-
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+#card-image-container {
+  position:relative;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#monster-card-preview {
+  position: absolute;
+  z-index: 10;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.monster-color {
+  z-index: 5;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+
+
+
 
 .monster-name {
   align-items: center;
@@ -442,6 +464,8 @@ main {
 }
 
 .monster-info {
+  display: flex;
+  flex-direction: row;
   width: 100%;
 }
 

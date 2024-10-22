@@ -30,7 +30,6 @@
 
 import { randomNames } from "./randomNames.js";
 
-const monsterCardPreviewImage = document.querySelector(".monster-card-preview");
 
 let activeFilters = {
   types: "",
@@ -214,7 +213,7 @@ const updateColors = () => {
       );
       // Hämta elementet med klassen "show-color-selection"
 
-      showColorSelection.innerHTML = `<div class="color-selection" style="background-color: ${colorSelection}"></div>`;
+      showColorSelection.innerHTML = `<div class="color-selection" style="background: radial-gradient(circle, ${colorSelection} 10%, rgba(255, 255, 255, 0) 90%);"></div>`
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
 
       playEffect(colorSelection.toLowerCase());
@@ -678,13 +677,15 @@ const renderMonsters = (filteredMonsters = monsters) => {
           </div>
           </div>
           
-
+          <div id="card-image-container">
+          
           <img id="monster-card-preview" src="${monster.monsterImage}" alt="Monster Preview" />
+          <div class="monster-color" style="background: radial-gradient(circle, ${monster.monsterColor} 10%, rgba(255, 255, 255, 0) 90%);"></div>
+          </div>
         <div class="monster-info" tabindex="0">
-          <p class="monster-color">${monster.monsterColor}</p>
           <p class="monster-diet">${monster.monsterDiet}</p>
           <p class="monster-type">${monster.monsterType}</p>
-          <p class="monster-color">${monster.monsterSize}</p>
+          <p class="monster-size">${monster.monsterSize}</p>
           ${valuesToPresentInHtml}
         </div>     
     

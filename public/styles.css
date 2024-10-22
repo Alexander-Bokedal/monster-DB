@@ -744,6 +744,12 @@ p {
 #icon-container {
   display: flex;
   justify-content: space-between;
+  border: 2px gray solid;
+  background-color: #504e4e;
+  border-radius: 50px;
+  margin: 5px;
+  box-shadow: 0 1px 3px var(--boxshadow-color), 0 1px 3px var(--boxshadow-color);
+
 }
 
 #theme-switch,

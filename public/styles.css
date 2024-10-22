@@ -310,9 +310,26 @@ main {
   }
 }
 
+.slider input[type="range"] {
+  -webkit-appearance: none;
+  height: 10px;
+  background: #292929;
+  border-radius: 5px;
+}
+
 .slider:hover {
+  opacity: 1;
+}
+
+.slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #555;
+  width: 15px;
+  height: 15px;
+  border-radius: 8px;
   cursor: pointer;
 }
+
 .monster-filter {
   grid-area: monster-filter;
   display: flex;
@@ -403,7 +420,7 @@ main {
 }
 
 #card-image-container {
-  position:relative;
+  position: relative;
   width: 100%;
   height: 150px;
   display: flex;
@@ -426,10 +443,6 @@ main {
   border-radius: 50%;
   border: 2px solid white;
 }
-
-
-
-
 
 .monster-name {
   align-items: center;

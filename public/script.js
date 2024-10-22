@@ -166,17 +166,18 @@ const initalizeSliders = () => {
   });
 };
 
-// Array med färger som går att ändra till valfria färger
-// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "White", color: "#fff""
-
 const colors = [
-  { name: "red", color: "red" },
+  { name: "red", color: "#880808" },
   { name: "black", color: "black" },
   { name: "blue", color: "blue" },
   { name: "yellow", color: "yellow" },
   { name: "green", color: "green" },
 ];
+
+// Array med färger som går att ändra till valfria färger
+// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
+// exempel "name: "White", color: "#fff""
+// OBS EJ FUNKTIONELLT ÄN! BÅDA MÅSTE VARA T.EX "red" OCH "red" OBS
 
 const colorsHtml = colors.map(
   (color) =>

@@ -264,19 +264,21 @@ const checkNameLength = document.querySelector(".check-name-length");
 testButton.addEventListener("click", (e) => {
   // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
   e.preventDefault(); // Förhindra standardbeteendet för händelsen (t.ex. att formuläret skickas)
-
+  let randomNumber = Math.floor(Math.random() * monsterImages.length);
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
     monsterDiet:
       monsterDiets[Math.floor(Math.random() * monsterDiets.length)].icon,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
-    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
+    monsterType:
+      monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
     // Välj en slumpmässig typ från "monsterTypes" arrayen
-    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
+    monsterSize:
+      monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
-    monsterImage:
-      monsterImages[Math.floor(Math.random() * monsterImages.length)],
+    monsterImage: monsterImages[randomNumber],
+    monsterObjectImageIndex: [randomNumber],
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret
@@ -314,6 +316,10 @@ testButton.addEventListener("click", (e) => {
       // Hämta valt värde från typinputfältet
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
+      monsterImageIndex = this.monsterObjectImageIndex;
+      //Sätt globalt monsterImageIndex till samma som monstret
+      updatePreWindow();
+      //Uppdatera bilden i preview window
 
       let indexOfMonsterValues = 0;
       editableSliders.forEach((slider) => {
@@ -339,7 +345,8 @@ testButton.addEventListener("click", (e) => {
       monsterToSave.monsterType = monsterType.value;
       monsterToSave.monsterSize = monsterSize.value;
       monsterToSave.monsterColor = formatText(colorSelection);
-
+      monsterToSave.monsterImage = monsterImages[monsterImageIndex];
+      monsterToSave.monsterObjectImageIndex = monsterImageIndex;
       const sliderValuesToAddToMonsterObject = [];
       // Skapa en tom array för att lagra slidervärden
       const arrayOfAllSliders = document.querySelectorAll(".slider");
@@ -366,10 +373,15 @@ testButton.addEventListener("click", (e) => {
       cleanForm();
       monsterToEditIndex = null;
       // Global variabel för att saveknappen ska veta vems funktion den ska kalla
+      monsterImageIndex = 0;
+      // Global variabel för att välja monster image
+      updatePreWindow();
+      // Uppdatera bilden i preview window
     },
   });
 
   console.log(monsters);
+
   // Skriv ut hela "monsters" arrayen i konsolen
   applyFilter();
   // Anropa "applyFilter" för att uppdatera visningen av monster
@@ -482,6 +494,7 @@ const addMonsterToArray = (event) => {
     name: formatText(monsterName),
     // Sätt namnet på monstret till det formaterade namnet från inputfältet
     monsterImage: newMonsterImage,
+    monsterObjectImageIndex: monsterImageIndex,
     monsterType: newMonsterType,
     // Sätt typ av monster till värdet från inputfältet
     monsterColor: formatText(colorSelection),
@@ -514,6 +527,10 @@ const addMonsterToArray = (event) => {
       // Hämta valt värde från typinputfältet
       monsterSize.value = this.monsterSize;
       colorSelection = this.monsterColor;
+      monsterImageIndex = this.monsterObjectImageIndex;
+      //Sätt globalt monsterImageIndex till samma som monstret
+      updatePreWindow();
+      //Uppdatera bilden i preview window
 
       let indexOfMonsterValues = 0;
       editableSliders.forEach((slider) => {
@@ -530,8 +547,7 @@ const addMonsterToArray = (event) => {
       // Gömmer doneButton
     },
     saveMonster() {
-      const monsterIndex = monsters.indexOf(this);
-      const monsterToSave = monsters[monsterIndex];
+      const monsterToSave = monsters[monsterToEditIndex];
 
       if (monsterNameInputField.value !== "") {
         monsterToSave.name = formatText(monsterNameInputField.value);
@@ -540,7 +556,8 @@ const addMonsterToArray = (event) => {
       monsterToSave.monsterType = monsterType.value;
       monsterToSave.monsterSize = monsterSize.value;
       monsterToSave.monsterColor = formatText(colorSelection);
-
+      monsterToSave.monsterImage = monsterImages[monsterImageIndex];
+      monsterToSave.monsterObjectImageIndex = monsterImageIndex;
       const sliderValuesToAddToMonsterObject = [];
       // Skapa en tom array för att lagra slidervärden
       const arrayOfAllSliders = document.querySelectorAll(".slider");
@@ -558,8 +575,7 @@ const addMonsterToArray = (event) => {
 
       monsterToSave.monsterValues = sliderValuesToAddToMonsterObject;
 
-      monsters[monsterIndex] = monsterToSave;
-
+      monsters[monsterToEditIndex] = monsterToSave;
       saveButton.classList.add("hidden");
       // Visar saveButton
       doneButton.classList.remove("hidden");
@@ -568,11 +584,16 @@ const addMonsterToArray = (event) => {
       cleanForm();
       monsterToEditIndex = null;
       // Global variabel för att saveknappen ska veta vems funktion den ska kalla
+      monsterImageIndex = 0;
+      // Global variabel för att välja monster image
+      updatePreWindow();
+      // Uppdatera bilden i preview window
     },
   };
 
   monsters.push(newMonster);
-
+  console.log("This is an inded:" + monsterImageIndex);
+  console.log("This is also an index:" + newMonster.monsterObjectImageIndex);
   // VAD SOM BEHÖVER GÖRAS:
   // EN FUNKTION FÖR ATT RENSA FORMULÄRET
 
@@ -822,18 +843,18 @@ const monsterDiets = [
 ];
 
 const monsterTypes = [
-  {icon: "🐒", type: "🐒Humanoid"},
-  {icon: "🍄", type: "🍄Fungal"},
-  {icon: "💥", type: "💥Titan"},
-  {icon: "🧟", type: "🧟Troll"},
+  { icon: "🐒", type: "🐒Humanoid" },
+  { icon: "🍄", type: "🍄Fungal" },
+  { icon: "💥", type: "💥Titan" },
+  { icon: "🧟", type: "🧟Troll" },
 ];
 
 const monsterSizes = [
   // Skapa en array som innehåller olika storlekar av monster.
-  {icon: "🤏", size: "🤏Pinky-Small"},
-  {icon: "🦒", size: "🦒Long-Legs"},
-  {icon: "🌋", size: "🌋Crippled-Mountain"},
-  {icon: "🌿", size: "🌿Tree-Twig"},
+  { icon: "🤏", size: "🤏Pinky-Small" },
+  { icon: "🦒", size: "🦒Long-Legs" },
+  { icon: "🌋", size: "🌋Crippled-Mountain" },
+  { icon: "🌿", size: "🌿Tree-Twig" },
 ];
 
 function dietDropdown(dietSelect) {
@@ -906,7 +927,6 @@ monsterDiet.addEventListener("change", () => {
 
 const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
-
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
@@ -917,7 +937,7 @@ monsterType.addEventListener("change", () => {
   } else if (monsterType.value === "💥Titan") {
     playEffect("titan");
     monsterTypeIcon.innerHTML = "💥";
-  } else if ((monsterType.value === "🧟Troll")) {
+  } else if (monsterType.value === "🧟Troll") {
     playEffect("shrek");
     monsterTypeIcon.innerHTML = "🧟";
   }

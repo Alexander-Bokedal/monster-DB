@@ -860,6 +860,10 @@ const monsterSizes = [
   { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
 ];
 
+const monsterDietIcon = document.querySelector(".monster-diet-icon");
+const monsterTypeIcon = document.querySelector(".monster-type-icon");
+const monsterSizeIcon = document.querySelector(".monster-size-icon");
+
 // Lyssna efter en förändring
 monsterType.addEventListener("change", () => {
   monsterTypes.forEach((type) => {
@@ -938,59 +942,6 @@ dietDropdown(monsterDietFilter);
 typeDropdown(monsterType);
 sizeDropdown(monsterSize);
 
-const monsterDietIcon = document.querySelector(".monster-diet-icon");
-// Optimera om vi har tid
-
-// Fixa så att det inte är en ful if-sats
-monsterDiet.addEventListener("change", () => {
-  monsterDietIcon.innerHTML = "";
-  if (monsterDiet.value === "🥩Flesh-Muncher") {
-    playEffect("meat");
-    monsterDietIcon.innerHTML = "🥩";
-  } else if (monsterDiet.value === "🥬Leaf-Cruncher") {
-    playEffect("leaf");
-    monsterDietIcon.innerHTML = "🥬";
-  } else if (monsterDiet.value === "🗑️Non-Pesky-Omnivore") {
-    playEffect("omni");
-    monsterDietIcon.innerHTML = "🗑️";
-  }
-});
-
-const monsterTypeIcon = document.querySelector(".monster-type-icon");
-monsterType.addEventListener("change", () => {
-  monsterTypeIcon.innerHTML = "";
-  if (monsterType.value === "🐒Humanoid") {
-    playEffect("humanoids");
-    monsterTypeIcon.innerHTML = "🐒";
-  } else if (monsterType.value === "🍄Fungal") {
-    playEffect("fungal");
-    monsterTypeIcon.innerHTML = "🍄";
-  } else if (monsterType.value === "💥Titan") {
-    playEffect("titan");
-    monsterTypeIcon.innerHTML = "💥";
-  } else if (monsterType.value === "🧟Troll") {
-    playEffect("shrek");
-    monsterTypeIcon.innerHTML = "🧟";
-  }
-});
-
-const monsterSizeIcon = document.querySelector(".monster-size-icon");
-monsterSize.addEventListener("change", () => {
-  monsterSizeIcon.innerHTML = "";
-  if (monsterSize.value === "🤏Pinky-Small") {
-    playEffect("pinkySmall");
-    monsterSizeIcon.innerHTML = "🤏";
-  } else if (monsterSize.value === "🦒Long-Legs") {
-    playEffect("longLegs");
-    monsterSizeIcon.innerHTML = "🦒";
-  } else if (monsterSize.value === "🌋Crippled-Mountain") {
-    playEffect("crippledMountain");
-    monsterSizeIcon.innerHTML = "🌋";
-  } else if (monsterSize.value === "🌿Tree-Twig") {
-    playEffect("treeTwig");
-    monsterSizeIcon.innerHTML = "🌿";
-  }
-});
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //////  SLUT PÅ KOD för att visa MONSTERYPES /////////

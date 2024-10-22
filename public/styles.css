@@ -44,33 +44,9 @@
   background: var(--scrollhover-color);
 }
 
-#theme-switch {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: var(--base-backgroundcolor);
+body {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-#theme-switch svg {
-  fill: #2b1449;
-}
-
-#theme-switch svg:last-child {
-  display: none;
-}
-
-.darkmode #theme-switch svg:first-child {
-  display: none;
-}
-
-.darkmode #theme-switch svg:last-child {
-  display: block;
-}
-
-body {
   margin: 0%;
   background-color: var(--base-backgroundcolor);
   overflow-x: hidden;
@@ -98,7 +74,7 @@ main {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 10px 10px;
-
+    max-width: 1200px;
     grid-template-areas:
       "monster-preview-main monster-filter monster-filter"
       "monster-preview-main monster-gallery-container monster-gallery-container "

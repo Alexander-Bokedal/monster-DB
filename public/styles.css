@@ -150,6 +150,7 @@ main {
     margin: 10px 0px;
   }
 
+
 #sound-button {
   justify-self: end;
   margin-right: 20px;
@@ -706,3 +707,42 @@ main {
 .common {
   box-shadow: 0 0 5px rgb(255, 0, 0); /* Example shadow for common */
 }
+
+
+#sound-icon {
+  display: flex;
+  justify-content: space-between;
+}
+
+#theme-switch,
+#mute-switch {
+  display: flex;
+  height: 50px;
+  width: 50px;
+  background-color: var(--base-backgroundcolor);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+#theme-switch img,
+#mute-switch img {
+  width: 24px;
+  height: 24px;
+}
+
+#theme-switch img:last-child,
+#mute-switch img:last-child {
+  display: none;
+}
+.darkmode #theme-switch img:first-child,
+.mutemode #mute-switch img:first-child {
+  display: none;
+}
+.darkmode #theme-switch img:last-child,
+.mutemode #mute-switch img:last-child {
+  display: block;
+}
+
+

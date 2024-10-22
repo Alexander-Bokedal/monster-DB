@@ -850,7 +850,7 @@ const monsterTypes = [
   { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
   { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
   { icon: "💥", type: "💥Titan", sound: "titan" },
-  { icon: "🧟", type: "🧟Troll", sound: "troll" },
+  { icon: "🧟", type: "🧟Troll", sound: "shrek" },
 ];
 
 const monsterSizes = [

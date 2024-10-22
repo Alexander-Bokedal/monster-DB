@@ -751,7 +751,7 @@ const renderMonsters = (filteredMonsters = monsters) => {
 
     monsterDiets.forEach((diet) => {
       dietCounts[diet.diet] = monsters.filter(
-        (monster) => monster.monsterDiet === diet.diet
+        (monster) => monster.monsterDiet === diet.icon
       ).length;
     });
 

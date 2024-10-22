@@ -81,7 +81,10 @@ main {
       "monster-settings  monster-gallery-container monster-gallery-container";
   }
 }
-
+p {
+  font-family: Verdana;
+  font-size: 0.8rem;
+}
 .monster-preview-main {
   display: grid;
   grid-area: monster-preview-main;
@@ -479,7 +482,10 @@ main {
   );
   margin: 2px;
   text-align: center;
-  border-bottom: 1px solid #333;
+  border-top: 2px solid #e7e7e7;
+  border-bottom: 2px solid #5c5c5c;
+  border-radius: 10px;
+ 
 }
 
 @media (min-width: 600px) {
@@ -671,14 +677,58 @@ main {
   }
 }
 
+
+@keyframes fade {
+  0% {
+    box-shadow: 0 0 15px gold; 
+  }
+  25% {
+    box-shadow: 0 0 10px gold; 
+  }
+  50% {
+    box-shadow: 0 0 15px gold;
+  }
+  75% {
+    box-shadow: 0 0 20px gold;
+  }
+  100% {
+    box-shadow: 0 0 25px gold; 
+  }
+  75% {
+    box-shadow: 0 0 20px gold;
+  }
+  50% {
+    box-shadow: 0 0 35px gold;
+  }
+  25% {
+    box-shadow: 0 0 10px gold;
+  }
+  0% {
+    box-shadow: 0 0 15px gold;
+  }
+}
+
 .rare {
-  box-shadow: 0 0 20px gold; /* Example shadow for rare */
+  box-shadow: 0 0 20px gold;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    #a77d0b,
+    rgba(255, 255, 255, 0)
+  );
+  filter: contrast(130%);
+  border: 2px solid #a77d0b;
+  animation: fade 1.5s infinite;
+
 }
 .uncommon {
-  box-shadow: 0 0 10px blue; /* Example shadow for uncommon */
+  box-shadow: 0 0 15px rgb(0, 0, 173); 
+  border: 4px solid rgba(25, 0, 255, 0.425);
+
 }
 .common {
-  box-shadow: 0 0 5px rgb(255, 0, 0); /* Example shadow for common */
+  box-shadow: 0px 0px 5px rgb(255, 255, 255); 
+
 }
 
 #icon-container {

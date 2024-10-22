@@ -1252,3 +1252,34 @@ themeSwitch.addEventListener("click", () => {
   darkmode = localStorage.getItem("darkmode");
   darkmode !== "active" ? enableDarkmode() : disableDarkmode();
 });
+
+const soundmutemode = ["images/mute.png", "images/sound.png"];
+
+let mutemode = localStorage.getItem("mutemode");
+const muteswitch = document.querySelector("#mute-switch");
+
+const muteImg = document.createElement("img");
+muteImg.src = soundmutemode[0];
+
+const soundImg = document.createElement("img");
+soundImg.src = soundmutemode[1];
+
+muteswitch.appendChild(muteImg);
+muteswitch.appendChild(soundImg);
+
+const enableMutemode = () => {
+  document.body.classList.add("mutemode");
+  localStorage.setItem("mutemode", "active");
+};
+
+const disableMutemode = () => {
+  document.body.classList.remove("mutemode");
+  localStorage.setItem("mutemode", null);
+};
+
+if (mutemode === "active") enableMutemode();
+
+muteswitch.addEventListener("click", () => {
+  darkmode = localStorage.getItem("mutemode");
+  darkmode !== "active" ? enableMutemode() : disableMutemode();
+});

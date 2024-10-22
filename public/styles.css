@@ -161,6 +161,7 @@ main {
   margin-right: 20px;
   height: 32px;
   width: 32px;
+  border: solid;
 }
 
   .monster-image-main {

@@ -271,9 +271,11 @@ testButton.addEventListener("click", (e) => {
     monsterDiet:
       monsterDiets[Math.floor(Math.random() * monsterDiets.length)].icon,
     // Välj en slumpmässig diet från "monsterDiets" arrayen
-    monsterType: monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
+    monsterType:
+      monsterTypes[Math.floor(Math.random() * monsterTypes.length)].icon,
     // Välj en slumpmässig typ från "monsterTypes" arrayen
-    monsterSize: monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
+    monsterSize:
+      monsterSizes[Math.floor(Math.random() * monsterSizes.length)].icon,
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
     monsterImage:
       monsterImages[Math.floor(Math.random() * monsterImages.length)],
@@ -827,6 +829,7 @@ const monsterDiets = [
 ];
 
 const monsterTypes = [
+
   { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
   { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
   { icon: "💥", type: "💥Titan", sound: "titan" },
@@ -838,7 +841,9 @@ const monsterSizes = [
   { icon: "🦒", size: "🦒Long-Legs", sound: "longlegs" },
   { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
   { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
+
 ];
+
 
 // Lyssna efter en förändring  
 monsterType.addEventListener("change", () => {
@@ -939,7 +944,6 @@ monsterDiet.addEventListener("change", () => {
 
 const monsterTypeIcon = document.querySelector(".monster-type-icon");
 monsterType.addEventListener("change", () => {
-
   monsterTypeIcon.innerHTML = "";
   if (monsterType.value === "🐒Humanoid") {
     playEffect("humanoids");
@@ -950,7 +954,7 @@ monsterType.addEventListener("change", () => {
   } else if (monsterType.value === "💥Titan") {
     playEffect("titan");
     monsterTypeIcon.innerHTML = "💥";
-  } else if ((monsterType.value === "🧟Troll")) {
+  } else if (monsterType.value === "🧟Troll") {
     playEffect("shrek");
     monsterTypeIcon.innerHTML = "🧟";
   }
@@ -1281,8 +1285,19 @@ backgroundMusic.volume = 0.5;
 
 
 
+const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
+
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.querySelector("#theme-switch");
+
+const lightImg = document.createElement("img");
+lightImg.src = darklightmode[0];
+
+const darkImg = document.createElement("img");
+darkImg.src = darklightmode[1];
+
+themeSwitch.appendChild(darkImg);
+themeSwitch.appendChild(lightImg);
 
 const enableDarkmode = () => {
   document.body.classList.add("darkmode");

@@ -49,6 +49,43 @@ export const monsterIntros = {
   5: new Audio("sounds/octoflurf.mp3"),
 };
 
+// Random fraser som spelas vid "delete"
+export const randomDeleteSounds = [
+  new Audio("sounds/Bye.mp3"),
+  new Audio("sounds/Service.mp3"),
+  new Audio("sounds/BringBack.mp3"),
+  new Audio("sounds/NoMiss.mp3"),
+];
+
+// Samla alla effektljud i obj.
+export const effectSounds = {
+  //Settings
+  changeMonster: new Audio("sounds/changeMonster.mp3"),
+  dropDown: new Audio("sounds/dropDown.mp3"),
+  changeValue: new Audio("sounds/changeValue.mp3"),
+  changeColor: new Audio("sounds/changeColor.mp3"),
+  //Colors
+  red: new Audio("sounds/Red.mp3"),
+  black: new Audio("sounds/Black.mp3"),
+  yellow: new Audio("sounds/Yellow.mp3"),
+  blue: new Audio("sounds/Blue.mp3"),
+  green: new Audio("sounds/Green.mp3"),
+  // Diets
+  meat: new Audio("sounds/Meat.mp3"),
+  leaf: new Audio("sounds/Leafs.mp3"),
+  omni: new Audio("sounds/Omni.mp3"),
+  //Sizes
+  pinkysmall: new Audio("sounds/pinky-small.mp3"),
+  longlegs: new Audio("sounds/LongLegs.mp3"),
+  crippledMountain: new Audio("sounds/CrippledMountain.mp3"),
+  treeTwig: new Audio("sounds/TreeTwig.mp3"),
+  //Types
+  humanoids: new Audio("sounds/Humanoids.mp3"),
+  fungal: new Audio("sounds/Fungal.mp3"),
+  titan: new Audio("sounds/Titan.mp3"),
+  shrek: new Audio("sounds/Troll.mp3"),
+};
+
 export const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 
 export const soundmutemode = ["images/mute.png", "images/sound.png"];

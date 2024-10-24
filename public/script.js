@@ -28,7 +28,32 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-import { randomNames } from "./randomNames.js";
+import { randomNames } from "./variables.js";
+import {
+  saveButton,
+  monsterNameShow,
+  monsterSliders,
+  colorsToChooseFrom,
+  doneButton,
+  testButton,
+  monsterNameInputField,
+  checkNameLength,
+  clearFilterButton,
+  dietSelectFilter,
+  monsterDiet,
+  monsterDietFilter,
+  monsterType,
+  monsterSize,
+  monsterDietIcon,
+  monsterTypeIcon,
+  monsterSizeIcon,
+  searchInput,
+  monsterPreviewWindow,
+  changeMonsterLeftBtn,
+  changeMonsterRightBtn,
+  themeSwitch,
+  muteswitch,
+} from "./dom.js";
 
 let activeFilters = {
   types: "",
@@ -39,9 +64,6 @@ let activeFilters = {
 let monsterToEditIndex = null;
 // Variable för att veta vilket index save ska spara till
 
-const saveButton = document.querySelector("#save-button");
-// Global savebutton
-// Den här knappen används för att på ett lätt sätt kunna ha en knapp för alla monster
 saveButton.addEventListener("click", (event) => {
   event.preventDefault();
   monsters[monsterToEditIndex].saveMonster();
@@ -83,9 +105,6 @@ const formatText = (string) => {
 // Global array för att lagra monster
 //==============================SAVE==============================
 
-// Global array för att kunna ändra namn i preview
-
-const monsterNameShow = document.querySelector(".monster-name-main");
 // Global array för att kunna ändra namn i preview
 
 let colorSelection = null;
@@ -133,9 +152,6 @@ const editableSliders = editableSliderNames.map((value, index) => ({
     });
   },
 }));
-
-const monsterSliders = document.querySelector("#sliders");
-// Hämta HTML-elementet med ID "sliders" och tilldela det till variabeln "monsterSliders"
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -188,9 +204,6 @@ const colorsHtml = colors.map(
   style="background-color: ${color.color};"></button>
   </div>`
 );
-
-const colorsToChooseFrom = document.querySelector("#colors-container");
-// Hämta HTML-elementet med ID "colors-container" och tilldela det till variabeln "colorsToChooseFrom"
 
 const updateColors = () => {
   // Definiera en funktion för att uppdatera färger
@@ -249,18 +262,6 @@ window.onload = () => {
 //////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
 //////  SÖKORD: addMonster                        ////
 ///////////////////////////////////////////////////////
-
-const doneButton = document.getElementById("done-button");
-// Hämta HTML-elementet med ID "done-button" och tilldela det till variabeln "doneButton"
-
-const testButton = document.getElementById("test-button");
-// Hämta HTML-elementet med ID "test-button" och tilldela det till variabeln "testButton"
-
-const monsterNameInputField = document.getElementById("monster-name");
-// Hämta HTML-elementet med ID "monster-name" och tilldela det till variabeln "monsterNameInputField"
-
-const checkNameLength = document.querySelector(".check-name-length");
-// Hämta det första HTML-elementet med klassen "check-name-length" och tilldela det till variabeln "checkNameLength"
 
 testButton.addEventListener("click", (e) => {
   // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
@@ -798,8 +799,6 @@ const renderMonsters = (filteredMonsters = monsters) => {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-const clearFilterButton = document.querySelector("#clear-filter-button");
-// Hämta knappen för att rensa filter med dess ID.
 clearFilterButton.addEventListener("click", (e) => {
   playEffect("changeValue");
   // Lägg till en klick-händelse för knappen.
@@ -830,15 +829,6 @@ clearFilterButton.addEventListener("click", (e) => {
   // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
 });
 
-const monsterDiet = document.querySelector(".monster-diet-select");
-// Hämta elementet med ID "monsterDietSelect", som är en dropdown för att välja monsterdiet.
-const monsterDietFilter = document.querySelector(".monster-diet-select-filter");
-// Hämta elementet med ID "monsterDietSelectFilter", som är en dropdown för att filtrera monster efter diet.
-const monsterType = document.querySelector(".monster-type-select");
-// Hämta elementet med ID "monsterTypeSelect", som är en dropdown för att välja monstertyp.
-const monsterSize = document.querySelector(".monster-size-select");
-// Hämta elementet med ID "monsterSizeSelect", som är en dropdown för att välja monstersize.
-
 // Skapa en array som innehåller olika typer av monsterdieter.
 const monsterDiets = [
   { icon: "🥩", diet: "🥩Flesh-Muncher", sound: "meat" },
@@ -859,10 +849,6 @@ const monsterSizes = [
   { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
   { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
 ];
-
-const monsterDietIcon = document.querySelector(".monster-diet-icon");
-const monsterTypeIcon = document.querySelector(".monster-type-icon");
-const monsterSizeIcon = document.querySelector(".monster-size-icon");
 
 // Lyssna efter en förändring
 monsterType.addEventListener("change", () => {
@@ -987,9 +973,6 @@ const applyFilter = () => {
   renderMonsters(filteredMonsters);
 };
 
-const dietSelectFilter = document.querySelector(".monster-diet-select-filter");
-// Välj dropdown-elementet för dieter med id "monsterDietSelectFilter".
-
 dietSelectFilter.addEventListener("change", () => {
   playEffect("changeValue");
   // Lägg till en eventlyssnare för när värdet ändras i dietSelectFilter.
@@ -1050,8 +1033,6 @@ const updateColorFilters = () => {
     });
   });
 };
-
-const searchInput = document.querySelector("#search-input");
 
 searchInput.addEventListener("input", () => {
   activeFilters.search = searchInput.value;
@@ -1184,10 +1165,6 @@ const playSoundForIndex = (index) => {
   }
 };
 
-const monsterPreviewWindow = document.getElementById("monster-image");
-const changeMonsterLeftBtn = document.getElementById("change-monster-left");
-const changeMonsterRightBtn = document.getElementById("change-monster-right");
-
 function updatePreWindow() {
   monsterPreviewWindow.src = monsterImages[monsterImageIndex];
 }
@@ -1226,7 +1203,6 @@ backgroundMusic.volume = 0.5;
 const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 
 let darkmode = localStorage.getItem("darkmode");
-const themeSwitch = document.querySelector("#theme-switch");
 
 const lightImg = document.createElement("img");
 lightImg.src = darklightmode[0];
@@ -1256,8 +1232,6 @@ themeSwitch.addEventListener("click", () => {
 
 let isMuted = true;
 const soundmutemode = ["images/mute.png", "images/sound.png"];
-
-const muteswitch = document.querySelector("#mute-switch");
 
 const muteImg = document.createElement("img");
 muteImg.src = soundmutemode[0];

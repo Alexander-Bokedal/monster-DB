@@ -71,6 +71,7 @@ import {
 } from "./variables.js";
 
 import { formatText } from "./formatting.js";
+import { dropdown } from "./dropdown.js";
 
 let activeFilters = {
   types: "",
@@ -839,55 +840,11 @@ monsterSize.addEventListener("change", () => {
   });
 });
 
-function dietDropdown(dietSelect) {
-  // Definiera en funktion som tar en parameter dietSelect (en dropdown för dieter).
-  for (const diet of monsterDiets) {
-    // Loopar igenom varje diet i monsterDiets-arrayen.
-    const newMonsterDiet = document.createElement("option");
-    // Skapa ett nytt option-element för dropdown.
-    newMonsterDiet.innerHTML = diet.diet;
-    // Sätt innhåll i option-elementet till aktuell diet.
-    newMonsterDiet.value = diet.icon;
-    // Sätt värdet för option-elementet till aktuell diet.
-    dietSelect.appendChild(newMonsterDiet);
-    // Lägg till det nya option-elementet i dietSelect dropdown-menyn.
-  }
-}
-
-function typeDropdown(typeSelect) {
-  // Definiera en funktion som tar en parameter typeSelect (en dropdown för dieter).
-  for (const type of monsterTypes) {
-    // Loopar igenom varje diet i monstertype-arrayen.
-    const newMonsterType = document.createElement("option");
-    // Skapa ett nytt option-element för dropdown.
-    newMonsterType.innerHTML = type.type;
-    // Sätt innhåll i option-elementet till aktuell diet.
-    newMonsterType.value = type.icon;
-    // Sätt värdet för option-elementet till aktuell diet.
-    typeSelect.appendChild(newMonsterType);
-    // Lägg till det nya option-elementet i typeSelect dropdown-menyn.
-  }
-}
-
-function sizeDropdown(sizeSelect) {
-  // Definiera en funktion som tar en parameter sizeSelect (en dropdown för storlekar).
-  for (const size of monsterSizes) {
-    // Loopar igenom varje storlek i monsterSizes-arrayen.
-    const newMonsterSize = document.createElement("option");
-    // Skapa ett nytt option-element för dropdown.
-    newMonsterSize.innerHTML = size.size;
-    // Sätt textinnehåll i option-elementet till aktuell storlek.
-    newMonsterSize.value = size.icon;
-    // Sätt värdet för option-elementet till aktuell storlek.
-    sizeSelect.appendChild(newMonsterSize);
-    // Lägg till det nya option-elementet i sizeSelect dropdown-menyn.
-  }
-}
-
-dietDropdown(monsterDiet);
-dietDropdown(monsterDietFilter);
-typeDropdown(monsterType);
-sizeDropdown(monsterSize);
+// Anropar functionen och lägger in rätt argument på rätt plats. Element, Array, text, värde.
+dropdown(monsterDiet, monsterDiets, "diet", "icon");
+dropdown(monsterDietFilter, monsterDiets, "diet", "icon");
+dropdown(monsterType, monsterTypes, "type", "icon");
+dropdown(monsterSize, monsterSizes, "size", "icon");
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////

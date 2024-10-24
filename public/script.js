@@ -51,7 +51,7 @@ import {
   changeMonsterLeftBtn,
   changeMonsterRightBtn,
   themeSwitch,
-  muteswitch,
+  muteSwitch,
 } from "./dom.js";
 
 import {
@@ -64,14 +64,15 @@ import {
   monsterImages,
   monsterIntros,
   backgroundMusic,
-  soundmutemode,
+  soundmodeImgArray,
   effectSounds,
   randomDeleteSounds,
-  darklightmode,
+  darkmodeImgArray,
 } from "./variables.js";
 
 import { formatText } from "./formatting.js";
 import { dropdown } from "./dropdown.js";
+import { darkmode, mutemode } from "./darkmode.js";
 
 let activeFilters = {
   types: "",
@@ -107,7 +108,7 @@ const cleanForm = () => {
 // Global array för att lagra monster
 //==============================SAVE==============================
 
-// Global array för att kunna ändra namn i preview //===========================SLIDERS======================
+// Global array för att kunna ändra namn i preview                                                                    //===========================SLIDERS======================
 
 const editableSliders = editableSliderNames.map((value, index) => ({
   // Gör en arrowfunction med .map funktion på varje element i editableSliderNames
@@ -1062,57 +1063,8 @@ changeMonsterRightBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.5;
+// Anropa funktion darkmode
+darkmode(themeSwitch, darkmodeImgArray);
 
-let darkmode = localStorage.getItem("darkmode");
-
-const lightImg = document.createElement("img");
-lightImg.src = darklightmode[0];
-
-const darkImg = document.createElement("img");
-darkImg.src = darklightmode[1];
-
-themeSwitch.appendChild(darkImg);
-themeSwitch.appendChild(lightImg);
-
-const enableDarkmode = () => {
-  document.body.classList.add("darkmode");
-  localStorage.setItem("darkmode", "active");
-};
-
-const disableDarkmode = () => {
-  document.body.classList.remove("darkmode");
-  localStorage.setItem("darkmode", null);
-};
-
-if (darkmode === "active") enableDarkmode();
-
-themeSwitch.addEventListener("click", () => {
-  darkmode = localStorage.getItem("darkmode");
-  darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-});
-
-let isMuted = true;
-
-const muteImg = document.createElement("img");
-muteImg.src = soundmutemode[0];
-
-const soundImg = document.createElement("img");
-soundImg.src = soundmutemode[1];
-
-muteswitch.appendChild(muteImg);
-muteswitch.appendChild(soundImg);
-
-muteswitch.addEventListener("click", () => {
-  if (isMuted) {
-    backgroundMusic.muted = false;
-    backgroundMusic.play();
-    document.body.classList.add("mutemode");
-  } else {
-    backgroundMusic.muted = true;
-    backgroundMusic.pause();
-    document.body.classList.remove("mutemode");
-  }
-  isMuted = !isMuted;
-});
+// Anropa funktionen mutemode
+mutemode(muteSwitch, soundmodeImgArray, backgroundMusic);

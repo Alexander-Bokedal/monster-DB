@@ -88,9 +88,9 @@ export const effectSounds = {
 
 export const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 
-export const soundmutemode = ["images/mute.png", "images/sound.png"];
+export const soundmodeImgArray = ["images/mute.png", "images/sound.png"];
 
-export const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
+export const darkmodeImgArray = ["images/darkmode.png", "images/lightmode.png"];
 
 export const randomNames = [
   "Aldorin",

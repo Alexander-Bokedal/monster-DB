@@ -67,11 +67,12 @@ import {
   soundmutemode,
   effectSounds,
   randomDeleteSounds,
-  darklightmode,
+  darkmodeImgArray,
 } from "./variables.js";
 
 import { formatText } from "./formatting.js";
 import { dropdown } from "./dropdown.js";
+import { darkmode } from "./darkmode.js";
 
 let activeFilters = {
   types: "",
@@ -107,7 +108,7 @@ const cleanForm = () => {
 // Global array för att lagra monster
 //==============================SAVE==============================
 
-// Global array för att kunna ändra namn i preview //===========================SLIDERS======================
+// Global array för att kunna ändra namn i preview                                                                    //===========================SLIDERS======================
 
 const editableSliders = editableSliderNames.map((value, index) => ({
   // Gör en arrowfunction med .map funktion på varje element i editableSliderNames
@@ -1065,33 +1066,8 @@ changeMonsterRightBtn.addEventListener("click", () => {
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 
-let darkmode = localStorage.getItem("darkmode");
-
-const lightImg = document.createElement("img");
-lightImg.src = darklightmode[0];
-
-const darkImg = document.createElement("img");
-darkImg.src = darklightmode[1];
-
-themeSwitch.appendChild(darkImg);
-themeSwitch.appendChild(lightImg);
-
-const enableDarkmode = () => {
-  document.body.classList.add("darkmode");
-  localStorage.setItem("darkmode", "active");
-};
-
-const disableDarkmode = () => {
-  document.body.classList.remove("darkmode");
-  localStorage.setItem("darkmode", null);
-};
-
-if (darkmode === "active") enableDarkmode();
-
-themeSwitch.addEventListener("click", () => {
-  darkmode = localStorage.getItem("darkmode");
-  darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-});
+//Kalla på funktion darkmode
+darkmode(themeSwitch, darkmodeImgArray);
 
 let isMuted = true;
 

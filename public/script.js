@@ -28,7 +28,6 @@
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-import { randomNames } from "./variables.js";
 import {
   saveButton,
   monsterNameShow,
@@ -55,6 +54,20 @@ import {
   muteswitch,
 } from "./dom.js";
 
+import {
+  randomNames,
+  editableSliderNames,
+  colors,
+  monsterDiets,
+  monsterTypes,
+  monsterSizes,
+  monsterImages,
+  monsterIntros,
+  backgroundMusic,
+  soundmutemode,
+  darklightmode,
+} from "./variables.js";
+
 let activeFilters = {
   types: "",
   colors: [],
@@ -62,7 +75,10 @@ let activeFilters = {
 };
 
 let monsterToEditIndex = null;
-// Variable för att veta vilket index save ska spara till
+
+const monsters = [];
+
+let colorSelection = null;
 
 saveButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -82,8 +98,6 @@ const cleanForm = () => {
   monsterSizeIcon.innerHTML = "";
   monsterNameShow.innerHTML = "";
 };
-
-const monsters = [];
 
 const formatText = (string) => {
   let formattedText = "";
@@ -105,13 +119,8 @@ const formatText = (string) => {
 // Global array för att lagra monster
 //==============================SAVE==============================
 
-// Global array för att kunna ändra namn i preview
+// Global array för att kunna ändra namn i preview //===========================SLIDERS======================
 
-let colorSelection = null;
-// Global variabel för att välja färg
-
-const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"]; //===========================SLIDERS======================
-// Gör en array av val som vi kan ändra med sliders.
 const editableSliders = editableSliderNames.map((value, index) => ({
   // Gör en arrowfunction med .map funktion på varje element i editableSliderNames
   name: value,
@@ -181,19 +190,6 @@ const initalizeSliders = () => {
     // Anropa metoden "updateSliderValue" för att sätta upp eventlyssnare och visa initialvärdet för varje slider
   });
 };
-
-const colors = [
-  { name: "red", color: "#880808" },
-  { name: "black", color: "black" },
-  { name: "blue", color: "blue" },
-  { name: "yellow", color: "yellow" },
-  { name: "green", color: "green" },
-];
-
-// Array med färger som går att ändra till valfria färger
-// "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
-// exempel "name: "White", color: "#fff""
-// OBS EJ FUNKTIONELLT ÄN! BÅDA MÅSTE VARA T.EX "red" OCH "red" OBS
 
 const colorsHtml = colors.map(
   (color) =>
@@ -829,27 +825,6 @@ clearFilterButton.addEventListener("click", (e) => {
   // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
 });
 
-// Skapa en array som innehåller olika typer av monsterdieter.
-const monsterDiets = [
-  { icon: "🥩", diet: "🥩Flesh-Muncher", sound: "meat" },
-  { icon: "🥬", diet: "🥬Leaf-Cruncher", sound: "leaf" },
-  { icon: "🗑️", diet: "🗑️Non-Pesky-Omnivore", sound: "omni" },
-];
-
-const monsterTypes = [
-  { icon: "🐒", type: "🐒Humanoid", sound: "humanoids" },
-  { icon: "🍄", type: "🍄Fungal", sound: "fungal" },
-  { icon: "💥", type: "💥Titan", sound: "titan" },
-  { icon: "🧟", type: "🧟Troll", sound: "shrek" },
-];
-
-const monsterSizes = [
-  { icon: "🤏", size: "🤏Pinky-Small", sound: "pinkysmall" },
-  { icon: "🦒", size: "🦒Long-Legs", sound: "longlegs" },
-  { icon: "🌋", size: "🌋Crippled-Mountain", sound: "crippledMountain" },
-  { icon: "🌿", size: "🌿Tree-Twig", sound: "treeTwig" },
-];
-
 // Lyssna efter en förändring
 monsterType.addEventListener("change", () => {
   monsterTypes.forEach((type) => {
@@ -1064,21 +1039,6 @@ searchInput.addEventListener("input", () => {
 // Skapa en array men bilder på monsnter
 
 let monsterImageIndex = 0;
-const monsterImages = [
-  "images/Blubberblitz.png",
-  "images/Grumblefluff.png",
-  "images/Snaggletooth.png",
-  "images/Splatzo.png",
-  "images/Octoflurf.png",
-];
-
-const monsterIntros = {
-  0: new Audio("sounds/blubberblitz.mp3"),
-  1: new Audio("sounds/grumblefluff.mp3"),
-  2: new Audio("sounds/snaggletooth.mp3"),
-  3: new Audio("sounds/splatzo.mp3"),
-  5: new Audio("sounds/octoflurf.mp3"),
-};
 
 // Random fraser som spelas vid "delete"
 const randomDeleteSounds = [
@@ -1196,11 +1156,8 @@ changeMonsterRightBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
-const backgroundMusic = new Audio("sounds/bgMusic.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
-
-const darklightmode = ["images/darkmode.png", "images/lightmode.png"];
 
 let darkmode = localStorage.getItem("darkmode");
 
@@ -1231,7 +1188,6 @@ themeSwitch.addEventListener("click", () => {
 });
 
 let isMuted = true;
-const soundmutemode = ["images/mute.png", "images/sound.png"];
 
 const muteImg = document.createElement("img");
 muteImg.src = soundmutemode[0];

@@ -2,13 +2,16 @@
 export function darkmode(themeSwitch, darkmodeImgArray) {
   // Deklarerar en variable och hämtar ett värde i det lokala minnet och ger den nyckeln "darkmode"
   let darkmode = localStorage.getItem("darkmode");
+
   // Deklarerar variabler och skapar elementen img under dem
   const lightImg = document.createElement("img");
   const darkImg = document.createElement("img");
-  // Deklarerar att variablen ska anta samma värden som index 0/1 i darkmodeimg arrayen
+
+  // Deklarerar att variablen ska anta samma värden som index 0/1 i darkmodeImgArray arrayen
   lightImg.src = darkmodeImgArray[0];
   darkImg.src = darkmodeImgArray[1];
-  // Variablerna med bilder tilldelas en plats i html under knappen themeswitch
+
+  // Variablerna med bilder tilldelas en plats i dommen under knappen themeswitch
   themeSwitch.appendChild(darkImg);
   themeSwitch.appendChild(lightImg);
 
@@ -36,5 +39,38 @@ export function darkmode(themeSwitch, darkmodeImgArray) {
     } else {
       enableDarkmode();
     }
+  });
+}
+
+// mutemode funktion med olika parametrar som agerar som "placeholders" för olika värden
+export function mutemode(muteSwitch, soundmodeImgArray, backgroundMusic) {
+  let isMuted = true;
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.1;
+
+  // // Deklarerar variabler och skapar elementen img under dem
+  const muteImg = document.createElement("img");
+  const soundImg = document.createElement("img");
+
+  // Deklarerar att variablen ska anta samma värden som index 0/1 i soundmodeImgArray arrayen
+  muteImg.src = soundmodeImgArray[0];
+  soundImg.src = soundmodeImgArray[1];
+
+  // Variablerna med bilder tilldelas en plats i dommen under knappen muteSwitch
+  muteSwitch.appendChild(muteImg);
+  muteSwitch.appendChild(soundImg);
+
+  // När man klickar på "muteSwitch" knappen så byter den mode
+  muteSwitch.addEventListener("click", () => {
+    if (isMuted) {
+      backgroundMusic.muted = false;
+      backgroundMusic.play();
+      document.body.classList.add("mutemode");
+    } else {
+      backgroundMusic.muted = true;
+      backgroundMusic.pause();
+      document.body.classList.remove("mutemode");
+    }
+    isMuted = !isMuted;
   });
 }

@@ -28,4 +28,4 @@ export const changeMonsterRightBtn = document.querySelector(
   "#change-monster-right"
 );
 export const themeSwitch = document.querySelector("#theme-switch");
-export const muteswitch = document.querySelector("#mute-switch");
+export const muteSwitch = document.querySelector("#mute-switch");

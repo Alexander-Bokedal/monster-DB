@@ -51,7 +51,7 @@ import {
   changeMonsterLeftBtn,
   changeMonsterRightBtn,
   themeSwitch,
-  muteswitch,
+  muteSwitch,
 } from "./dom.js";
 
 import {
@@ -64,7 +64,7 @@ import {
   monsterImages,
   monsterIntros,
   backgroundMusic,
-  soundmutemode,
+  soundmodeImgArray,
   effectSounds,
   randomDeleteSounds,
   darkmodeImgArray,
@@ -72,7 +72,7 @@ import {
 
 import { formatText } from "./formatting.js";
 import { dropdown } from "./dropdown.js";
-import { darkmode } from "./darkmode.js";
+import { darkmode, mutemode } from "./darkmode.js";
 
 let activeFilters = {
   types: "",
@@ -1063,32 +1063,8 @@ changeMonsterRightBtn.addEventListener("click", () => {
   playSoundForIndex(monsterImageIndex);
 });
 
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.5;
-
-//Kalla på funktion darkmode
+// Anropa funktion darkmode
 darkmode(themeSwitch, darkmodeImgArray);
 
-let isMuted = true;
-
-const muteImg = document.createElement("img");
-muteImg.src = soundmutemode[0];
-
-const soundImg = document.createElement("img");
-soundImg.src = soundmutemode[1];
-
-muteswitch.appendChild(muteImg);
-muteswitch.appendChild(soundImg);
-
-muteswitch.addEventListener("click", () => {
-  if (isMuted) {
-    backgroundMusic.muted = false;
-    backgroundMusic.play();
-    document.body.classList.add("mutemode");
-  } else {
-    backgroundMusic.muted = true;
-    backgroundMusic.pause();
-    document.body.classList.remove("mutemode");
-  }
-  isMuted = !isMuted;
-});
+// Anropa funktionen mutemode
+mutemode(muteSwitch, soundmodeImgArray, backgroundMusic);

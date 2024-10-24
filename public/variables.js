@@ -1,5 +1,5 @@
 // Gör en array av val som vi kan ändra med sliders.
-export const editableSliderNames = ["Tentacles", "Horns", "Eyes", "Legs"];
+export const attributes = ["Tentacles", "Horns", "Eyes", "Legs"];
 // Array med färger som går att ändra till valfria färger
 // "name:" är det som kommer skrivas ut, "color:" är den faktiska färgen
 // exempel "name: "White", color: "#fff""

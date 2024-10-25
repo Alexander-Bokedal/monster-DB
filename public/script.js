@@ -117,7 +117,6 @@ const updateMonsterSliders = () => {
     .join("");
 
   // Generera HTML från varje objekt i "editableSliders" och sätt den som inre HTML av "monsterSliders"
-  monsterSliders.innerHTML = editableSliders.map((obj) => obj.html).join("");
 };
 
 // Definiera en funktion för att initiera sliders
@@ -147,7 +146,6 @@ const updateColors = () => {
   dom.colorsToChooseFrom.innerHTML = colorsHtml.join("");
 
   // Sätt den inre HTML av "colorsToChooseFrom" till sammanfogad HTML-sträng från "colorsHtml"
-  colorsToChooseFrom.innerHTML = colorsHtml.join("");
   // Hämta alla HTML-element med klassen "color-box" och tilldela dem till variabeln "colorDivs"
   const colorDivs = document.querySelectorAll(".color-box");
 
@@ -203,7 +201,7 @@ dom.testButton.addEventListener("click", (e) => {
   });
 
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
-  let randomNumber = Math.floor(Math.random() * monsterImages.length);
+  let randomNumber = Math.floor(Math.random() * variable.monsterImages.length);
   monsters.push({
     name: variable.randomNames[
       Math.floor(Math.random() * variable.randomNames.length)

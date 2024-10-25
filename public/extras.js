@@ -42,13 +42,13 @@ export function darkmode(themeSwitch, darkmodeImgArray) {
   });
 }
 
-// mutemode funktion med olika parametrar som agerar som "placeholders" för olika värden
+// Mutemode funktion med olika parametrar som agerar som "placeholders" för olika värden
 export function mutemode(muteSwitch, soundmodeImgArray, backgroundMusic) {
   let isMuted = true;
   backgroundMusic.loop = true;
   backgroundMusic.volume = 0.1;
 
-  // // Deklarerar variabler och skapar elementen img under dem
+  // Deklarerar variabler och skapar elementen img under dem
   const muteImg = document.createElement("img");
   const soundImg = document.createElement("img");
 
@@ -60,7 +60,7 @@ export function mutemode(muteSwitch, soundmodeImgArray, backgroundMusic) {
   muteSwitch.appendChild(muteImg);
   muteSwitch.appendChild(soundImg);
 
-  // När man klickar på "muteSwitch" knappen så byter den mode
+  // När man klickar på "muteSwitch" knappen så byter den mode och musiken spelar eller stängs av
   muteSwitch.addEventListener("click", () => {
     if (isMuted) {
       backgroundMusic.muted = false;

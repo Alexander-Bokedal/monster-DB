@@ -211,6 +211,14 @@ window.onload = () => {
 dom.testButton.addEventListener("click", (e) => {
   // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
   e.preventDefault(); // Förhindra standardbeteendet för händelsen (t.ex. att formuläret skickas)
+
+  const monsterAttributes = {};
+  // Tomt objekt för attributes
+
+  variable.attributes.forEach((attribute) => {
+    monsterAttributes[attribute] = Math.floor(Math.random() * 7);
+  });
+
   let randomNumber = Math.floor(Math.random() * variable.monsterImages.length);
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({

@@ -72,7 +72,7 @@ import {
 
 import { formatText } from "./formatting.js";
 import { dropdown } from "./dropdown.js";
-import { darkmode, mutemode } from "./darkmode.js";
+import { darkmode, mutemode } from "./extras.js";
 
 let activeFilters = {
   types: "",

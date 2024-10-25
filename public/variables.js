@@ -5,7 +5,7 @@ export const attributes = ["Tentacles", "Horns", "Eyes", "Legs"];
 // exempel "name: "White", color: "#fff""
 // OBS EJ FUNKTIONELLT ÄN! BÅDA MÅSTE VARA T.EX "red" OCH "red" OBS
 export const colors = [
-  { name: "red", color: "#880808" },
+  { name: "red", color: "red" },
   { name: "black", color: "black" },
   { name: "blue", color: "blue" },
   { name: "yellow", color: "yellow" },

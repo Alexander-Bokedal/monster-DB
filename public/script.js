@@ -31,7 +31,7 @@ import * as dom from "./dom.js";
 import * as variable from "./variables.js";
 
 import { formatText } from "./formatting.js";
-import { dropdown, monsterAttribute } from "./functions.js";
+import { dropdown } from "./functions.js";
 import { darkmode, mutemode } from "./extras.js";
 
 let monsterToEditIndex = null;
@@ -40,14 +40,13 @@ const monsters = [];
 //===========================SAVE===========================//
 
 // När saveknappen trycks ska alla värden sparas
-
 dom.saveButton.addEventListener("click", (event) => {
   event.preventDefault();
   // Kör monstrets lokala function för att spara sig själv
   monsters[monsterToEditIndex].saveMonster();
 });
 
-// KNAPP FÖR ATT LÄGGA TILL MONSTER I LISTAN
+// När doneknappen trycks ska alla värden sparas
 dom.doneButton.addEventListener("click", (event) => {
   addMonsterToArray(event);
 });
@@ -704,7 +703,23 @@ dom.clearFilterButton.addEventListener("click", (e) => {
   // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
 });
 
-// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Element, Array.
+// Dropdown funktion med olika parametrar som agerar som "placeholders" för olika värden
+function monsterAttribute(selectElement, iconElement, attributeArray) {
+  // När SelectElement ändras ska eventet köras
+  selectElement.addEventListener("change", () => {
+    // Använder find funktion som letar igenom arrayen och ser om värdet för icon är samma som den nuvarande dropdown värdet
+    const selected = attributeArray.find(
+      (attr) => attr.icon === selectElement.value
+    );
+    // Om den är samma så sätter den texten som det hittade värdet och spelar upp valt ljud
+    if (selected) {
+      iconElement.innerHTML = selected.icon;
+      playEffect(selected.sound);
+    }
+  });
+}
+
+// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Element, värde.
 monsterAttribute(dom.monsterType, dom.monsterTypeIcon, variable.monsterTypes);
 monsterAttribute(dom.monsterDiet, dom.monsterDietIcon, variable.monsterDiets);
 monsterAttribute(dom.monsterSize, dom.monsterSizeIcon, variable.monsterSizes);
@@ -714,20 +729,6 @@ dropdown(dom.monsterDiet, variable.monsterDiets, "diet", "icon");
 dropdown(dom.monsterDietFilter, variable.monsterDiets, "diet", "icon");
 dropdown(dom.monsterType, variable.monsterTypes, "type", "icon");
 dropdown(dom.monsterSize, variable.monsterSizes, "size", "icon");
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD för att visa MONSTERYPES /////////
-//////  SÖKORD: monsterType                  //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  KOD FÖR ATT FILTRERA UTIFRÅN CHECKBOXES /////////
-//////  SÖKORD: filterMonsterList          //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
 
 // Applyfilter kollar om det finns aktiva filter och returnerar monster utifrån de filtrerna
 // Finns det inga aktiva filter kommer alla monster att returneras och därför mapas ut med renderMonsters()
@@ -827,28 +828,7 @@ dom.searchInput.addEventListener("input", () => {
   applyFilter();
 });
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
-//////  SÖKORD: filterMonsterList             //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
-//////  SÖKORD: filterMonsterList             //////////
-///////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ KOD FÖR ATT FILTRERA           /////////
-//////  SÖKORD: filterMonsterList             //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-// Allmänt
-// VAD SOM BEHÖVER GÖRAS:
-
-// Skapa en array men bilder på monsnter
+//===========================Extra===========================//
 
 let monsterImageIndex = 0;
 
@@ -929,7 +909,6 @@ dom.changeMonsterRightBtn.addEventListener("click", () => {
     monsterImageIndex = 0;
   }
   updatePreWindow();
-
   playSoundForIndex(monsterImageIndex);
 });
 

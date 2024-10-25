@@ -250,6 +250,13 @@ window.onload = () => {
 testButton.addEventListener("click", (e) => {
   // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
   e.preventDefault(); // Förhindra standardbeteendet för händelsen (t.ex. att formuläret skickas)
+  const monsterAttributes = {};
+  // Tomt objekt för attributes
+
+  attributes.forEach((attribute) => {
+    monsterAttributes[attribute] = Math.floor(Math.random() * 7);
+  });
+
   let randomNumber = Math.floor(Math.random() * monsterImages.length);
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   monsters.push({
@@ -265,6 +272,7 @@ testButton.addEventListener("click", (e) => {
     // Välj en slumpmässig storlek från "monsterSizes" arrayen
     monsterImage: monsterImages[randomNumber],
     monsterImageIndex: [randomNumber],
+    ...monsterAttributes,
 
     monsterColor: formatText(
       // Formatera och sätt färgen på monstret

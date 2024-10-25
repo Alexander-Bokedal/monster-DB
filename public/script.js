@@ -45,13 +45,11 @@ let colorSelection = null;
 let monsterToEditIndex = null;
 const monsters = [];
 
-
 //===========================SAVE===========================//
 
 // När saveknappen trycks ska alla värden sparas
 
 dom.saveButton.addEventListener("click", (event) => {
-
   event.preventDefault();
   // Kör monstrets lokala function för att spara sig själv
   monsters[monsterToEditIndex].saveMonster();
@@ -71,12 +69,9 @@ const cleanForm = () => {
 
 //===========================SLIDERS===========================//
 
-
 // Gör en arrowfunction med .map funktion på varje element i attributes
 
 const editableSliders = variable.attributes.map((attribute) => ({
-
-
   // Tilldela egenskapen "name" med värdet av variabeln "value"
   name: attribute,
 
@@ -116,7 +111,6 @@ const editableSliders = variable.attributes.map((attribute) => ({
 
 // Definiera en funktion för att uppdatera monster-sliders
 const updateMonsterSliders = () => {
-
   // Definiera en funktion för att uppdatera monster-sliders
   dom.monsterSliders.innerHTML = editableSliders
     .map((obj) => obj.html)
@@ -149,7 +143,6 @@ const colorsHtml = variable.colors.map(
 
 // Definiera en funktion för att uppdatera färger
 const updateColors = () => {
-
   // Definiera en funktion för att uppdatera färger
   dom.colorsToChooseFrom.innerHTML = colorsHtml.join("");
 
@@ -184,7 +177,6 @@ const updateColors = () => {
 
 // Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
-
   dom.saveButton.classList.add("hidden");
   // Gömmer savebutton på load
 
@@ -198,11 +190,9 @@ window.onload = () => {
 
 //===========================Testknapp===========================//
 
-
 // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
 
 dom.testButton.addEventListener("click", (e) => {
- 
   e.preventDefault(); // Förhindra standardbeteendet för händelsen (t.ex. att formuläret skickas)
 
   const monsterAttributes = {};
@@ -211,8 +201,6 @@ dom.testButton.addEventListener("click", (e) => {
   variable.attributes.forEach((attribute) => {
     monsterAttributes[attribute] = Math.floor(Math.random() * 7);
   });
-
-  let randomNumber = Math.floor(Math.random() * variable.monsterImages.length);
 
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
   let randomNumber = Math.floor(Math.random() * monsterImages.length);

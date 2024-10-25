@@ -975,7 +975,7 @@ const playEffect = (soundKey) => {
     effectSounds[soundKey].play();
   } else {
     console.warn(
-      `Soundkey with "${soundKey}" does not exist. Please check obj @ row 966`
+      `Soundkey with "${soundKey}" does not exist in the array of available sounds.`
     );
   }
 };

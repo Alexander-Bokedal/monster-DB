@@ -1,37 +1,8 @@
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-/////// KOMMENTERA RUNT KODSTYCKEN SÅHÄR  ///////////
-////// T.EX "KOD FÖR ATT LÄGGA TILL MONSTER"/////////
-//////  SÖKORD: addMonster                //////////
-////// "SLUT PÅ KOD FÖR ATT LÄGGA TILL MONSTER" //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-//SÖKORD:
-// addMonster
-// renderMonsters
-// monsterType
-// monsterSettings
-// filterMonsterList
-// editMonster
-// Allmänt
-// removeMonster
-// Optimera
-// Globala
-
-// Det här är sökordet om man vill hitta saker att jobba med i koden
-// VAD SOM BEHÖVER GÖRAS:
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  GLOBALA VARIABLER                    //////////
-/////   SÖKORD: Globala                      //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
 import * as dom from "./dom.js";
 import * as variable from "./variables.js";
 
-import { formatText } from "./formatting.js";
-import { dropdown } from "./functions.js";
+import { formatText } from "./forms.js";
+import { dropdown } from "./dropdown.js";
 import { darkmode, mutemode } from "./extras.js";
 
 let monsterToEditIndex = null;
@@ -50,18 +21,6 @@ dom.saveButton.addEventListener("click", (event) => {
 dom.doneButton.addEventListener("click", (event) => {
   addMonsterToArray(event);
 });
-
-// Funktion för att städa upp formen
-const cleanForm = () => {
-  document.querySelector(".monster-settings").reset();
-  colorSelection = null;
-  document.querySelector(".show-color-selection").innerHTML = "";
-  initalizeSliders();
-  dom.monsterDietIcon.innerHTML = "";
-  dom.monsterTypeIcon.innerHTML = "";
-  dom.monsterSizeIcon.innerHTML = "";
-  dom.monsterNameShow.innerHTML = "";
-};
 
 //===========================SLIDERS===========================//
 
@@ -733,6 +692,21 @@ dropdown(dom.monsterSize, variable.monsterSizes, "size", "icon");
 // Applyfilter kollar om det finns aktiva filter och returnerar monster utifrån de filtrerna
 // Finns det inga aktiva filter kommer alla monster att returneras och därför mapas ut med renderMonsters()
 // Koden är gjord för att man ska kunna filtrera på flera sätt åt gången, dvs typ och färg
+
+//===========================Filter===========================//
+
+// Funktion för att städa upp formen
+const cleanForm = () => {
+  document.querySelector(".monster-settings").reset();
+  colorSelection = null;
+  document.querySelector(".show-color-selection").innerHTML = "";
+  initalizeSliders();
+  dom.monsterDietIcon.innerHTML = "";
+  dom.monsterTypeIcon.innerHTML = "";
+  dom.monsterSizeIcon.innerHTML = "";
+  dom.monsterNameShow.innerHTML = "";
+};
+
 const applyFilter = () => {
   const filteredMonsters = monsters.filter((monster) => {
     const matchesType =

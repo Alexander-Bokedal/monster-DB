@@ -85,14 +85,17 @@ let colorSelection = null;
 let monsterToEditIndex = null;
 const monsters = [];
 
+//===========================SAVE===========================//
+
+// När saveknappen trycks ska alla värden sparas
 saveButton.addEventListener("click", (event) => {
   event.preventDefault();
-  monsters[monsterToEditIndex].saveMonster();
   // Kör monstrets lokala function för att spara sig själv
+  monsters[monsterToEditIndex].saveMonster();
 });
 
+// Funktion för att städa upp formen
 const cleanForm = () => {
-  // Städa upp form
   document.querySelector(".monster-settings").reset();
   colorSelection = null;
   document.querySelector(".show-color-selection").innerHTML = "";
@@ -103,82 +106,63 @@ const cleanForm = () => {
   monsterNameShow.innerHTML = "";
 };
 
-// Globala funktioner slutar!
+//===========================SLIDERS===========================//
 
-// Global array för att lagra monster
-//==============================SAVE==============================
-
-// Global array för att kunna ändra namn i preview                                                                    //===========================SLIDERS======================
-
+// Gör en arrowfunction med .map funktion på varje element i attributes
 const editableSliders = attributes.map((attribute, index) => ({
-  // Gör en arrowfunction med .map funktion på varje element i attributes
-  name: attribute,
   // Tilldela egenskapen "name" med värdet av variabeln "value"
+  name: attribute,
+
+  // Starta HTML-strukturen för slidern
   html: `<div class="slider"> 
-    <!--Starta HTML-strukturen för slidern-->
 
-    <label for="${attribute}slider">${attribute}</label> 
     <!--Skapa en etikett för slidern kopplad till "value"-->
-
+    <label for="${attribute}slider">${attribute}</label> 
+    
     <br/>
-    <input type="range" id="${attribute}slider" min="0" max="6" /> 
     <!--Skapa en slider med ett unikt ID baserat på "index" och sätt min- och max-värden-->
+    <input type="range" id="${attribute}slider" min="0" max="6" /> 
 
-    <span id="value${attribute}"></span> 
     <!--Skapa ett span-element för att visa sliderns aktuella värde, med unikt ID-->
-
+    <span id="value${attribute}"></span> 
+    
   </div>`,
   // Avsluta HTML-strukturen för slidern
 
+  // Definiera en metod för att uppdatera sliderns värde
   updateSliderValue(input = 3) {
-    // Definiera en metod för att uppdatera sliderns värde
-
+    // Hämta elementet för slidern med ID baserat på "index" för att ta och visa värde
     let slider = document.querySelector(`#${attribute}slider`);
-    // Hämta input-elementet för slidern med ID baserat på "index"
     let valueDisplay = document.querySelector(`#value${attribute}`);
-    // Hämta span-elementet med ID baserat på "index" för att visa värdet
 
+    // Sätt textinnehållet i elementet till det nuvarande värdet av slidern
     slider.value = input;
     valueDisplay.textContent = input;
-    // Sätt textinnehållet i span-elementet till det nuvarande värdet av slidern
 
+    // Lägg till en eventlyssnare för "input"-händelsen på slidern
     slider.addEventListener("input", (event) => {
-      // Lägg till en eventlyssnare för "input"-händelsen på slidern
-
-      valueDisplay.textContent = event.target.value;
       // Uppdatera textinnehållet i span-elementet med det aktuella värdet av slidern
+      valueDisplay.textContent = event.target.value;
     });
   },
 }));
 
+// Definiera en funktion för att uppdatera monster-sliders
 const updateMonsterSliders = () => {
-  // Definiera en funktion för att uppdatera monster-sliders
-  monsterSliders.innerHTML = editableSliders.map((obj) => obj.html).join("");
   // Generera HTML från varje objekt i "editableSliders" och sätt den som inre HTML av "monsterSliders"
+  monsterSliders.innerHTML = editableSliders.map((obj) => obj.html).join("");
 };
 
+// Definiera en funktion för att initiera sliders
 const initalizeSliders = () => {
-  // Definiera en funktion för att initiera sliders
+  // Loopar igenom varje "slider" i "editableSliders"
   editableSliders.forEach((slider) => {
-    // Loopar igenom varje "slider" i "editableSliders"
-    slider.updateSliderValue();
     // Anropa metoden "updateSliderValue" för att sätta upp eventlyssnare och visa initialvärdet för varje slider
+    slider.updateSliderValue();
   });
 };
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ GLOBALA VARIABLER             //////////
-/////   SÖKORD: Globala                      //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  FUNKTIONER ON LOAD                    //////////
-/////   SÖKORD: onLoad                       //////////
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
+//===========================Colors===========================//
 
 const colorsHtml = colors.map(
   (color) =>
@@ -190,35 +174,33 @@ const colorsHtml = colors.map(
   </div>`
 );
 
+// Definiera en funktion för att uppdatera färger
 const updateColors = () => {
-  // Definiera en funktion för att uppdatera färger
-  colorsToChooseFrom.innerHTML = colorsHtml.join("");
   // Sätt den inre HTML av "colorsToChooseFrom" till sammanfogad HTML-sträng från "colorsHtml"
-  const colorDivs = document.querySelectorAll(".color-box");
+  colorsToChooseFrom.innerHTML = colorsHtml.join("");
   // Hämta alla HTML-element med klassen "color-box" och tilldela dem till variabeln "colorDivs"
+  const colorDivs = document.querySelectorAll(".color-box");
 
+  // Loopar igenom varje "button" i "colorDivs"
   colorDivs.forEach((button) => {
-    // Loopar igenom varje "button" i "colorDivs"
+    // Lägg till en eventlyssnare för "click"-händelsen på varje "button"
     button.addEventListener("click", (event) => {
-      // Lägg till en eventlyssnare för "click"-händelsen på varje "button"
-      event.preventDefault();
       // Förhindra standardbeteendet för händelsen
-      colorSelection = button.style.backgroundColor;
+      event.preventDefault();
       // Tilldela variabeln "colorSelection" den bakgrundsfärg som är inställd för knappen som klickades
-
+      colorSelection = button.style.backgroundColor;
+      // Hämta elementet med klassen "show-color-selection"
       const showColorSelection = document.querySelector(
         ".show-color-selection"
       );
-      // Hämta elementet med klassen "show-color-selection"
 
-      showColorSelection.innerHTML = `<div class="color-selection" style="background: radial-gradient(circle, ${colorSelection} 10%, rgba(255, 255, 255, 0) 90%);"></div>`;
       // Uppdatera den inre HTML av "show-color-selection" för att visa den valda färgen
+      showColorSelection.innerHTML = `<div class="color-selection" style="background: radial-gradient(circle, ${colorSelection} 10%, rgba(255, 255, 255, 0) 90%);"></div>`;
 
-      playEffect(colorSelection.toLowerCase());
       // Hämta namnet på den specifika fäger i lowerCase
-      // Logiken blir playEffect(red); vilket är precis vad vi vill!
+      playEffect(colorSelection.toLowerCase());
 
-      // Skriv ut den valda färgen i konsolen
+      // Logiken blir playEffect(red); vilket är precis vad vi vill!
     });
   });
 };
@@ -226,7 +208,6 @@ const updateColors = () => {
 // Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
   saveButton.classList.add("hidden");
-  // Gömmer savebutton på load
   renderMonsters();
   updateColorFilters();
   updateMonsterSliders();
@@ -235,23 +216,13 @@ window.onload = () => {
   updatePreWindow();
 };
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  SLUT PÅ FUNKTIONER ON LOAD           //////////
-/////   SÖKORD: onLoad                       //////////
-///////////////////////////////////////////////////////
+//===========================Testknapp===========================//
 
-///////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-//////  KOD FÖR ATT LÄGGA TILL MONSTER       /////////
-//////  SÖKORD: addMonster                        ////
-///////////////////////////////////////////////////////
-
+// Lägg till en eventlyssnare för "click"-händelsen på "testButton"
 testButton.addEventListener("click", (e) => {
-  // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
-  e.preventDefault(); // Förhindra standardbeteendet för händelsen (t.ex. att formuläret skickas)
-  let randomNumber = Math.floor(Math.random() * monsterImages.length);
+  e.preventDefault();
   // Lägg till ett nytt monsterobjekt i "monsters" arrayen
+  let randomNumber = Math.floor(Math.random() * monsterImages.length);
   monsters.push({
     name: randomNames[Math.floor(Math.random() * randomNames.length)], // Sätt namnet på monstret till "Test Monster"
     monsterDiet:

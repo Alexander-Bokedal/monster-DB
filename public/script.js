@@ -8,7 +8,7 @@ import { darkmode, mutemode } from "./extras.js";
 let monsterToEditIndex = null;
 const monsters = [];
 
-//===========================SAVE===========================//
+//#region===========================Buttons===========================//
 
 // När saveknappen trycks ska alla värden sparas
 dom.saveButton.addEventListener("click", (event) => {
@@ -21,11 +21,41 @@ dom.saveButton.addEventListener("click", (event) => {
 dom.doneButton.addEventListener("click", (event) => {
   addMonsterToArray(event);
 });
+//#endregion
 
-//===========================SLIDERS===========================//
+//#region===========================Dropdowns===========================//
+
+// Dropdown funktion med olika parametrar som agerar som "placeholders" för olika värden
+function monsterAttribute(selectElement, iconElement, attributeArray) {
+  // När SelectElement ändras ska eventet köras
+  selectElement.addEventListener("change", () => {
+    // Använder find funktion som letar igenom arrayen och ser om värdet för icon är samma som den nuvarande dropdown värdet
+    const selected = attributeArray.find(
+      (attr) => attr.icon === selectElement.value
+    );
+    // Om den är samma så sätter den texten som det hittade värdet och spelar upp valt ljud
+    if (selected) {
+      iconElement.innerHTML = selected.icon;
+      playEffect(selected.sound);
+    }
+  });
+}
+
+// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Element, värde.
+monsterAttribute(dom.monsterType, dom.monsterTypeIcon, variable.monsterTypes);
+monsterAttribute(dom.monsterDiet, dom.monsterDietIcon, variable.monsterDiets);
+monsterAttribute(dom.monsterSize, dom.monsterSizeIcon, variable.monsterSizes);
+
+// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Array, text, värde.
+dropdown(dom.monsterDiet, variable.monsterDiets, "diet", "icon");
+dropdown(dom.monsterDietFilter, variable.monsterDiets, "diet", "icon");
+dropdown(dom.monsterType, variable.monsterTypes, "type", "icon");
+dropdown(dom.monsterSize, variable.monsterSizes, "size", "icon");
+//#endregion
+
+//#region===========================SLIDERS===========================//
 
 // Gör en arrowfunction med .map funktion på varje element i attributes
-
 const editableSliders = variable.attributes.map((attribute) => ({
   // Tilldela egenskapen "name" med värdet av variabeln "value"
   name: attribute,
@@ -82,14 +112,9 @@ const initalizeSliders = () => {
     slider.updateSliderValue();
   });
 };
+//#endregion
 
-//===========================Colors===========================//
-
-let activeFilters = {
-  types: "",
-  colors: [],
-  search: "",
-};
+//#region===========================Colors===========================//
 
 let colorSelection = null;
 
@@ -135,6 +160,9 @@ const updateColors = () => {
     });
   });
 };
+//#endregion
+
+//#region===========================Window.onload===========================//
 
 // Alla funktioner som behöver köras när man laddar sidan första gången
 window.onload = () => {
@@ -146,8 +174,9 @@ window.onload = () => {
   initalizeSliders();
   updatePreWindow();
 };
+//#endregion
 
-//===========================Testknapp===========================//
+//#region===========================Testknapp===========================//
 
 // Lägg till en eventlyssnare för "click"-händelsen på "testButton"
 dom.testButton.addEventListener("click", (e) => {
@@ -280,6 +309,9 @@ dom.testButton.addEventListener("click", (e) => {
   applyFilter();
   // Anropa "applyFilter" för att uppdatera visningen av monster
 });
+//#endregion
+
+//#region===========================Monster input Field===========================//
 
 dom.monsterNameInputField.addEventListener("input", () => {
   // Lägg till en eventlyssnare för "input"-händelsen på "monsterNameInputField"
@@ -307,6 +339,9 @@ dom.monsterNameInputField.addEventListener("input", () => {
     dom.monsterNameShow.innerHTML = `<h3></h3>`;
   }
 });
+//#endregion
+
+//#region===========================Add monster to Array===========================//
 
 // FUNKTION FÖR ATT LÄGGA TILL MONSTER I LISTAN
 const addMonsterToArray = (event) => {
@@ -508,6 +543,9 @@ const addMonsterToArray = (event) => {
     console.log(`Common class added to the new monster card`);
   }
 };
+//#endregion
+
+//#region===========================Render Monsters===========================//
 
 const renderMonsters = (filteredMonsters = monsters) => {
   const monsterGallery = document.getElementById("monster-gallery-container");
@@ -631,69 +669,19 @@ const renderMonsters = (filteredMonsters = monsters) => {
   colorCounter();
   dietCounter();
 };
+//#endregion
 
-dom.clearFilterButton.addEventListener("click", (e) => {
-  playEffect("changeValue");
-  // Lägg till en klick-händelse för knappen.
-  e.preventDefault();
-  // Förhindra standardbeteendet för knappen, t.ex. att skicka ett formulär.
-
-  dom.monsterDietFilter.value = "";
-  // Återställ värdet för dietfilter till en tom sträng.
-
-  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
-  // Hämta alla checkboxar för att filtrera färger.
-  colorFilterDivs.forEach((checkbox) => {
-    // Loopar genom varje checkbox.
-    checkbox.checked = false;
-    // Avmarkera varje checkbox.
-  });
-
-  activeFilters.colors = [];
-  // Rensa arrayen för aktiva färgfilter.
-  activeFilters.types = "";
-  // Återställ typen av aktiva filter till en tom sträng.
-  activeFilters.search = "";
-  // Åsterställ till tom sträng i aktiva filter
-  dom.searchInput.value = "";
-  // Rensa search rutan
-
-  applyFilter();
-  // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
-});
-
-// Dropdown funktion med olika parametrar som agerar som "placeholders" för olika värden
-function monsterAttribute(selectElement, iconElement, attributeArray) {
-  // När SelectElement ändras ska eventet köras
-  selectElement.addEventListener("change", () => {
-    // Använder find funktion som letar igenom arrayen och ser om värdet för icon är samma som den nuvarande dropdown värdet
-    const selected = attributeArray.find(
-      (attr) => attr.icon === selectElement.value
-    );
-    // Om den är samma så sätter den texten som det hittade värdet och spelar upp valt ljud
-    if (selected) {
-      iconElement.innerHTML = selected.icon;
-      playEffect(selected.sound);
-    }
-  });
-}
-
-// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Element, värde.
-monsterAttribute(dom.monsterType, dom.monsterTypeIcon, variable.monsterTypes);
-monsterAttribute(dom.monsterDiet, dom.monsterDietIcon, variable.monsterDiets);
-monsterAttribute(dom.monsterSize, dom.monsterSizeIcon, variable.monsterSizes);
-
-// Anropar funktionen och lägger in rätt argument på rätt plats. Element, Array, text, värde.
-dropdown(dom.monsterDiet, variable.monsterDiets, "diet", "icon");
-dropdown(dom.monsterDietFilter, variable.monsterDiets, "diet", "icon");
-dropdown(dom.monsterType, variable.monsterTypes, "type", "icon");
-dropdown(dom.monsterSize, variable.monsterSizes, "size", "icon");
+//#region===========================Filter===========================//
 
 // Applyfilter kollar om det finns aktiva filter och returnerar monster utifrån de filtrerna
 // Finns det inga aktiva filter kommer alla monster att returneras och därför mapas ut med renderMonsters()
 // Koden är gjord för att man ska kunna filtrera på flera sätt åt gången, dvs typ och färg
 
-//===========================Filter===========================//
+let activeFilters = {
+  types: "",
+  colors: [],
+  search: "",
+};
 
 // Funktion för att städa upp formen
 const cleanForm = () => {
@@ -802,9 +790,41 @@ dom.searchInput.addEventListener("input", () => {
   applyFilter();
 });
 
-//===========================Extra===========================//
+dom.clearFilterButton.addEventListener("click", (e) => {
+  playEffect("changeValue");
+  // Lägg till en klick-händelse för knappen.
+  e.preventDefault();
+  // Förhindra standardbeteendet för knappen, t.ex. att skicka ett formulär.
+
+  dom.monsterDietFilter.value = "";
+  // Återställ värdet för dietfilter till en tom sträng.
+
+  const colorFilterDivs = document.querySelectorAll(".color-to-filter-by");
+  // Hämta alla checkboxar för att filtrera färger.
+  colorFilterDivs.forEach((checkbox) => {
+    // Loopar genom varje checkbox.
+    checkbox.checked = false;
+    // Avmarkera varje checkbox.
+  });
+
+  activeFilters.colors = [];
+  // Rensa arrayen för aktiva färgfilter.
+  activeFilters.types = "";
+  // Återställ typen av aktiva filter till en tom sträng.
+  activeFilters.search = "";
+  // Åsterställ till tom sträng i aktiva filter
+  dom.searchInput.value = "";
+  // Rensa search rutan
+
+  applyFilter();
+  // Anropa funktionen för att tillämpa filter och uppdatera visningen av monster.
+});
+//#endregion
+
+//#region===========================Extra===========================//
 
 let monsterImageIndex = 0;
+let currentIntroSound = null;
 
 const randomDeleteSound = () => {
   // Skapa en variabel som slumpmässigt får en indexplats från vår array.
@@ -841,8 +861,6 @@ const playEffect = (soundKey) => {
   }
 };
 
-let currentIntroSound = null;
-
 //Ljud spelas från index av intros
 const playSoundForIndex = (index) => {
   if (currentIntroSound) {
@@ -863,8 +881,8 @@ function updatePreWindow() {
 updatePreWindow();
 
 dom.changeMonsterLeftBtn.addEventListener("click", () => {
-  playEffect("changeMonster");
   if (monsterImageIndex > 0) {
+    playEffect("changeMonster");
     monsterImageIndex--;
   } else {
     monsterImageIndex = variable.monsterImages.length - 1;
@@ -877,7 +895,6 @@ dom.changeMonsterLeftBtn.addEventListener("click", () => {
 dom.changeMonsterRightBtn.addEventListener("click", () => {
   if (monsterImageIndex < variable.monsterImages.length - 1) {
     playEffect("changeMonster");
-
     monsterImageIndex++;
   } else {
     monsterImageIndex = 0;
@@ -891,3 +908,4 @@ darkmode(dom.themeSwitch, variable.darkmodeImgArray);
 
 // Anropa funktionen mutemode
 mutemode(dom.muteSwitch, variable.soundmodeImgArray, variable.backgroundMusic);
+// #endregion
